@@ -26,12 +26,23 @@ export const defaultMetadata: Metadata = {
     "GNM nursing",
     "B.Sc Nursing",
     "B.Tech admissions",
+    "free counselling",
   ],
   authors: [{ name: "Brainzima Innovation Institute" }],
   creator: "Brainzima Innovation Institute",
   publisher: "Brainzima Innovation Institute",
+  manifest: "/manifest.json",
+  icons: {
+    icon: [
+      { url: "/images/faviconLogo.png", type: "image/png" },
+      { url: "/faviconLogo.png", type: "image/png" },
+    ],
+    shortcut: "/images/faviconLogo.png",
+    apple: "/images/faviconLogo.png",
+  },
   openGraph: {
     type: "website",
+    locale: "en_IN",
     siteName: SITE_NAME,
     title: `${SITE_NAME} — Your College. Our Assurance.`,
     description: SITE_DESCRIPTION,
@@ -49,6 +60,7 @@ export const defaultMetadata: Metadata = {
     card: "summary_large_image",
     title: `${SITE_NAME} — Your College. Our Assurance.`,
     description: SITE_DESCRIPTION,
+    creator: "@brainzima",
     images: ["/og-image.png"],
   },
   robots: {
@@ -64,6 +76,9 @@ export const defaultMetadata: Metadata = {
   },
   alternates: {
     canonical: SITE_URL,
+    types: {
+      "application/rss+xml": `${SITE_URL}/rss.xml`,
+    },
   },
 };
 
@@ -81,6 +96,8 @@ export function generatePageMetadata(
       description,
       url,
       type: "website",
+      siteName: SITE_NAME,
+      locale: "en_IN",
       images: [
         {
           url: "/og-image.png",
@@ -98,6 +115,9 @@ export function generatePageMetadata(
     },
     alternates: {
       canonical: url,
+      types: {
+        "application/rss+xml": `${SITE_URL}/rss.xml`,
+      },
     },
   };
 }

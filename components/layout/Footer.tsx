@@ -22,6 +22,7 @@ const courseLinks = [
 
 const quickLinks = [
   { label: "Home", href: "/" },
+  { label: "Free Counselling", href: "/free-counselling" },
   { label: "Universities", href: "/universities" },
   { label: "Admission Process", href: "/admission-process" },
   { label: "About Us", href: "/about" },
@@ -222,7 +223,7 @@ export default function Footer() {
                   transition={{ type: "spring", stiffness: 400, damping: 15 }}
                 >
                   <Link
-                    href="/contact"
+                    href="/free-counselling"
                     className="inline-flex items-center gap-2 bg-[#B30F66] hover:bg-[#591084] shadow-lg shadow-[#B30F66]/20 text-white text-sm font-bold px-5 py-3 rounded-xl transition-all duration-300 w-full justify-center group relative overflow-hidden"
                   >
                     <span className="relative z-10 flex items-center gap-2">

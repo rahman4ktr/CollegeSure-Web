@@ -720,53 +720,59 @@ export default function FreeCounsellingPage() {
         </Container>
       </section>
 
-      {/* ── 8. FINAL CTA SECTION ─────────────────────────────────────────── */}
-      <section className="relative py-16 sm:py-24 bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084] text-white text-center overflow-hidden">
+      {/* ── 8. FINAL CTA SECTION — COMPACT ATTRACTIVE (~200px HEIGHT) ─────── */}
+      <section className="relative py-8 sm:py-10 bg-gradient-to-r from-[#04164B] via-[#040943] to-[#591084] text-white overflow-hidden shadow-2xl border-t border-white/10">
+        {/* Ambient Glow Orbs */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#159447]/15 blur-3xl" />
+          <div className="absolute top-1/2 -left-20 -translate-y-1/2 w-64 h-64 rounded-full bg-[#159447]/25 blur-3xl" />
+          <div className="absolute top-1/2 -right-20 -translate-y-1/2 w-64 h-64 rounded-full bg-[#B30F66]/25 blur-3xl" />
         </div>
 
         <Container className="relative z-10">
-          <div className="max-w-3xl mx-auto space-y-6">
-            <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
-              Your Next Step Starts With One Conversation.
-            </h2>
-            <p className="text-base sm:text-lg text-white/80 leading-relaxed font-medium">
-              Don&apos;t guess your future. Get clear guidance from our counselling team — completely free.
-            </p>
+          <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 sm:p-8 border border-white/20 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-6">
+            {/* Left Info */}
+            <div className="text-center lg:text-left space-y-2 max-w-xl">
+              <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight leading-snug">
+                Your Next Step Starts With One Conversation.
+              </h2>
+              <p className="text-xs sm:text-sm text-white/80 font-medium">
+                Don&apos;t guess your future. Get clear guidance from our counselling team — completely free.
+              </p>
 
-            {/* Action buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+              {/* Micro badges */}
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 pt-2 text-[11px] font-semibold text-white/90">
+                <span className="inline-flex items-center gap-1.5 bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full border border-emerald-400/30">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  Counsellors available
+                </span>
+                <span className="inline-flex items-center gap-1 bg-white/10 px-3 py-1 rounded-full border border-white/15 text-amber-300">
+                  ⚡ Fast response
+                </span>
+                <span className="inline-flex items-center gap-1 bg-white/10 px-3 py-1 rounded-full border border-white/15 text-pink-300">
+                  ₹0 Free counselling
+                </span>
+              </div>
+            </div>
+
+            {/* Right CTAs */}
+            <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto flex-shrink-0">
               <button
                 onClick={() => formRef.current?.scrollIntoView({ behavior: "smooth" })}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#B30F66] hover:bg-[#591084] text-white font-bold px-8 py-4 rounded-2xl shadow-xl shadow-[#B30F66]/30 transition-all hover:scale-105 text-base"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#B30F66] hover:bg-[#591084] text-white font-extrabold px-6 py-3.5 rounded-xl shadow-lg shadow-[#B30F66]/30 transition-all hover:scale-105 text-sm cursor-pointer"
               >
                 <span>Talk to a Counsellor</span>
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-4 h-4" />
               </button>
 
               <a
                 href={WA_HREF}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-7 py-4 rounded-2xl shadow-lg transition-all hover:scale-105 text-base"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-6 py-3.5 rounded-xl shadow-lg transition-all hover:scale-105 text-sm"
               >
-                <MessageCircle className="w-5 h-5" />
+                <MessageCircle className="w-4 h-4" />
                 <span>WhatsApp Now</span>
               </a>
-            </div>
-
-            {/* Micro badges */}
-            <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-semibold text-white/90 pt-6">
-              <span className="flex items-center gap-1 bg-white/10 px-3.5 py-1.5 rounded-full border border-white/15">
-                🟢 Counsellors available
-              </span>
-              <span className="flex items-center gap-1 bg-white/10 px-3.5 py-1.5 rounded-full border border-white/15">
-                ⚡ Fast response
-              </span>
-              <span className="flex items-center gap-1 bg-white/10 px-3.5 py-1.5 rounded-full border border-white/15">
-                ₹0 Free counselling
-              </span>
             </div>
           </div>
         </Container>

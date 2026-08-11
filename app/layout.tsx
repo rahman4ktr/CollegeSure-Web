@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { defaultMetadata, SITE_NAME, SITE_URL } from "@/lib/seo";
@@ -15,6 +15,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = defaultMetadata;
+
+export const viewport: Viewport = {
+  themeColor: "#04164B",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -55,6 +62,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} h-full`}>
       <head>
+        <link rel="icon" href="/images/faviconLogo.png" type="image/png" sizes="any" />
+        <link rel="shortcut icon" href="/images/faviconLogo.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/images/faviconLogo.png" />
+        <link rel="alternate" type="application/rss+xml" title={`${SITE_NAME} RSS Feed`} href="/rss.xml" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
