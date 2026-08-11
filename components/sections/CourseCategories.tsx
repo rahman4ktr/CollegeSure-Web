@@ -147,7 +147,7 @@ export default function CourseCategories() {
                 <div className="h-full group">
                   <Card3DTilt glowColor={`${cat.accentColor}25`} className="h-full">
                     <article
-                      className="relative flex flex-col justify-between h-full overflow-hidden bg-white rounded-2xl border transition-all duration-300 border-[#E2E8F0] shadow-sm hover:shadow-xl hover:-translate-y-1.5 hover:border-[#B30F66]/30"
+                      className="relative flex flex-col justify-between h-full overflow-hidden bg-white rounded-2xl border border-[#E2E8F0] shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
                     >
                       {/* Top Accent Bar */}
                       <div className="h-1.5 w-full flex-shrink-0" style={{ backgroundColor: cat.accentColor }} />
