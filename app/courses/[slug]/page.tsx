@@ -78,22 +78,22 @@ const categoryBadge: Record<string, "teal" | "navy" | "orange"> = {
 
 const categoryColors: Record<string, { bg: string; text: string; border: string; light: string }> = {
   medical: {
-    bg: "bg-[#0D9488]",
-    text: "text-[#0D9488]",
-    border: "border-[#0D9488]/20",
-    light: "bg-[#0D9488]/10",
+    bg: "bg-[#159447]",
+    text: "text-[#159447]",
+    border: "border-[#159447]/20",
+    light: "bg-[#159447]/10",
   },
   engineering: {
-    bg: "bg-[#3B82F6]",
-    text: "text-[#3B82F6]",
-    border: "border-[#3B82F6]/20",
-    light: "bg-[#3B82F6]/10",
+    bg: "bg-[#147CC1]",
+    text: "text-[#147CC1]",
+    border: "border-[#147CC1]/20",
+    light: "bg-[#147CC1]/10",
   },
   graduation: {
-    bg: "bg-[#F97316]",
-    text: "text-[#F97316]",
-    border: "border-[#F97316]/20",
-    light: "bg-[#F97316]/10",
+    bg: "bg-[#F36C21]",
+    text: "text-[#F36C21]",
+    border: "border-[#F36C21]/20",
+    light: "bg-[#F36C21]/10",
   },
 };
 
@@ -123,19 +123,18 @@ export default async function CourseDetailPage({ params }: Props) {
   };
 
   return (
-    <div className="relative overflow-hidden bg-[#F8FAFC]">
+    <div className="relative overflow-hidden bg-[#FDFDFD]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }}
       />
 
       {/* Enhanced Hero Section */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-[#0B3C5D] via-[#082d45] to-[#1a5276] pt-8 pb-16 sm:pt-12 sm:pb-20">
+      <div className="relative overflow-hidden bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084] pt-8 pb-16 sm:pt-12 sm:pb-20">
         {/* Decorative Background */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
-          <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#0D9488]/20 blur-3xl" />
-          <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#3B82F6]/15 blur-3xl" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#F97316]/10 blur-3xl" />
+          <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#B30F66]/20 blur-3xl" />
+          <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#147CC1]/20 blur-3xl" />
         </div>
 
         <Container className="relative z-10">
@@ -169,25 +168,25 @@ export default async function CourseDetailPage({ params }: Props) {
                     {course.duration}
                   </Badge>
                 </div>
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight mb-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-tight mb-4">
                   {course.name}
                 </h1>
-                <p className="text-white/80 text-base sm:text-lg leading-relaxed max-w-3xl">
+                <p className="text-white/80 text-base sm:text-lg leading-relaxed max-w-3xl font-medium">
                   {course.description}
                 </p>
 
                 {/* Quick Stats - Enhanced */}
                 <div className="flex flex-wrap gap-3 mt-6">
                   <div className="flex items-center gap-2 text-sm text-white/90 font-medium bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/10">
-                    <GraduationCap size={16} className="text-[#0D9488]" />
+                    <GraduationCap size={16} className="text-[#147CC1]" />
                     {course.eligibility}
                   </div>
                   <div className="flex items-center gap-2 text-sm text-white/90 font-medium bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/10">
-                    <MapPin size={16} className="text-[#F97316]" />
+                    <MapPin size={16} className="text-[#F36C21]" />
                     {course.location}
                   </div>
                   <div className="flex items-center gap-2 text-sm text-white/90 font-medium bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/10">
-                    <Building2 size={16} className="text-[#3B82F6]" />
+                    <Building2 size={16} className="text-[#159447]" />
                     {course.availableColleges.length} Colleges
                   </div>
                 </div>
@@ -199,7 +198,7 @@ export default async function CourseDetailPage({ params }: Props) {
               <div className="flex flex-col sm:flex-row lg:flex-col gap-3">
                 <Link
                   href={`/contact?course=${encodeURIComponent(course.name)}`}
-                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#0D9488] to-[#0a7a6f] hover:from-[#0a7a6f] hover:to-[#086b61] text-white font-bold px-8 py-4 rounded-2xl shadow-[0_4px_24px_rgba(13,148,136,0.35)] transition-all duration-200 hover:scale-[1.03] hover:shadow-[0_8px_32px_rgba(13,148,136,0.45)]"
+                  className="inline-flex items-center justify-center gap-2 bg-[#B30F66] hover:bg-[#591084] text-white font-bold px-8 py-4 rounded-2xl shadow-xl shadow-[#B30F66]/30 transition-all duration-200 hover:scale-[1.03]"
                 >
                   <MessageCircle size={18} />
                   <span>Get Free Guidance</span>
@@ -242,7 +241,7 @@ export default async function CourseDetailPage({ params }: Props) {
                     </div>
                     <h2
                       id="overview-heading"
-                      className="text-2xl font-bold text-[#0B3C5D]"
+                      className="text-2xl font-bold text-[#04164B]"
                     >
                       Course Overview
                     </h2>
@@ -266,7 +265,7 @@ export default async function CourseDetailPage({ params }: Props) {
                     </div>
                     <h2
                       id="eligibility-heading"
-                      className="text-xl font-bold text-[#0B3C5D]"
+                      className="text-xl font-bold text-[#04164B]"
                     >
                       Eligibility Criteria
                     </h2>
@@ -290,7 +289,7 @@ export default async function CourseDetailPage({ params }: Props) {
                     </div>
                     <h2
                       id="career-heading"
-                      className="text-2xl font-bold text-[#0B3C5D]"
+                      className="text-2xl font-bold text-[#04164B]"
                     >
                       Career Opportunities
                     </h2>
@@ -320,7 +319,7 @@ export default async function CourseDetailPage({ params }: Props) {
                     </div>
                     <h2
                       id="admission-steps-heading"
-                      className="text-2xl font-bold text-[#0B3C5D]"
+                      className="text-2xl font-bold text-[#04164B]"
                     >
                       Admission Process
                     </h2>
@@ -350,7 +349,7 @@ export default async function CourseDetailPage({ params }: Props) {
                     </div>
                     <h2
                       id="colleges-heading"
-                      className="text-2xl font-bold text-[#0B3C5D]"
+                      className="text-2xl font-bold text-[#04164B]"
                     >
                       Available Colleges
                     </h2>
@@ -364,7 +363,7 @@ export default async function CourseDetailPage({ params }: Props) {
                         <div className={`w-8 h-8 rounded-lg ${colors.light} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform`}>
                           <Building2 size={14} className={colors.text} />
                         </div>
-                        <span className="text-sm font-semibold text-[#475569] group-hover:text-[#0B3C5D] transition-colors">
+                        <span className="text-sm font-semibold text-[#475569] group-hover:text-[#04164B] transition-colors">
                           {college}
                         </span>
                       </div>
@@ -414,7 +413,7 @@ export default async function CourseDetailPage({ params }: Props) {
                           <div className={`w-10 h-10 rounded-xl ${colors.light} flex items-center justify-center`}>
                             <MessageCircle size={18} className={colors.text} />
                           </div>
-                          <h3 className="text-lg font-bold text-[#0B3C5D]">
+                          <h3 className="text-lg font-bold text-[#04164B]">
                             Enquire Now
                           </h3>
                         </div>
@@ -462,7 +461,7 @@ export default async function CourseDetailPage({ params }: Props) {
                       </div>
                       <div>
                         <p className="text-[10px] font-bold uppercase text-[#94A3B8]">Call</p>
-                        <p className="text-xs font-semibold text-[#0B3C5D]">+91 79798 64304</p>
+                        <p className="text-xs font-semibold text-[#04164B]">+91 79798 64304</p>
                       </div>
                     </a>
                     <a
@@ -474,7 +473,7 @@ export default async function CourseDetailPage({ params }: Props) {
                       </div>
                       <div>
                         <p className="text-[10px] font-bold uppercase text-[#94A3B8]">Email</p>
-                        <p className="text-xs font-semibold text-[#0B3C5D] truncate">contact@brainzima.com</p>
+                        <p className="text-xs font-semibold text-[#04164B] truncate">contact@brainzima.com</p>
                       </div>
                     </a>
                   </div>
@@ -496,7 +495,7 @@ export default async function CourseDetailPage({ params }: Props) {
                     <div className="w-10 h-10 rounded-xl bg-[#0D9488]/10 flex items-center justify-center">
                       <Award size={20} className="text-[#0D9488]" />
                     </div>
-                    <h2 className="text-2xl font-bold text-[#0B3C5D]">
+                    <h2 className="text-2xl font-bold text-[#04164B]">
                       Related Courses
                     </h2>
                   </div>

@@ -30,10 +30,10 @@ import Link from "next/link";
 
 // Stats Data
 const stats = [
-  { label: "Engineering Courses", value: "15+", icon: BookOpen, color: "#3B82F6" },
-  { label: "Partner Colleges", value: "50+", icon: Building2, color: "#0D9488" },
-  { label: "Students Placed", value: "8,000+", icon: Users, color: "#F97316" },
-  { label: "Success Rate", value: "94%", icon: TrendingUp, color: "#EC4899" },
+  { label: "Engineering Courses", value: "15+", icon: BookOpen, color: "#147CC1" },
+  { label: "Partner Colleges", value: "50+", icon: Building2, color: "#159447" },
+  { label: "Students Placed", value: "8,000+", icon: Users, color: "#F36C21" },
+  { label: "Success Rate", value: "94%", icon: TrendingUp, color: "#B30F66" },
 ];
 
 // Specializations
@@ -59,16 +59,16 @@ export default function EngineeringCoursesPage() {
   const courses = getCoursesByCategory("engineering");
 
   return (
-    <div ref={containerRef} className="relative overflow-hidden bg-[#F8FAFC]">
+    <div ref={containerRef} className="relative overflow-hidden bg-[#FDFDFD]">
       {/* Enhanced Hero Section */}
       <motion.div
-        className="relative overflow-hidden bg-gradient-to-br from-[#0B3C5D] via-[#082d45] to-[#1a5276] pt-8 pb-16 sm:pt-12 sm:pb-20"
+        className="relative overflow-hidden bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084] pt-8 pb-16 sm:pt-12 sm:pb-20"
         style={{ opacity: heroOpacity, y: heroY }}
       >
         {/* Animated Background */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
           <motion.div
-            className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#3B82F6]/20 blur-3xl"
+            className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#147CC1]/20 blur-3xl"
             animate={{
               x: [0, -30, 20, 0],
               y: [0, 20, -30, 0],
@@ -80,7 +80,7 @@ export default function EngineeringCoursesPage() {
             }}
           />
           <motion.div
-            className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#0D9488]/15 blur-3xl"
+            className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#B30F66]/20 blur-3xl"
             animate={{
               x: [0, 30, -20, 0],
               y: [0, -20, 30, 0],
@@ -90,18 +90,6 @@ export default function EngineeringCoursesPage() {
               repeat: Infinity,
               ease: "easeInOut",
               delay: 2,
-            }}
-          />
-          <motion.div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#F97316]/10 blur-3xl"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.5, 0.3],
-            }}
-            transition={{
-              duration: 18,
-              repeat: Infinity,
-              ease: "easeInOut",
             }}
           />
 
@@ -155,7 +143,7 @@ export default function EngineeringCoursesPage() {
                   <Badge
                     variant="blue"
                     icon={<Sparkles size={12} />}
-                    className="bg-white/10 backdrop-blur-sm border-white/20 text-white"
+                    className="bg-[#147CC1]/20 border-[#147CC1]/40 text-white"
                   >
                     Technology Programs
                   </Badge>
@@ -164,14 +152,14 @@ export default function EngineeringCoursesPage() {
                     B.Tech & Diplomas
                   </Badge>
                 </div>
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight mb-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-tight mb-4">
                   Engineering
                   <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3B82F6] via-[#0D9488] to-[#F97316]">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#147CC1] via-[#B30F66] to-[#F7D51A]">
                     Courses
                   </span>
                 </h1>
-                <p className="text-white/80 text-base sm:text-lg leading-relaxed max-w-3xl">
+                <p className="text-white/80 text-base sm:text-lg leading-relaxed max-w-3xl font-medium">
                   B.Tech programs across Computer Science, Mechanical, Civil and other disciplines.
                   We help you find the right engineering college.
                 </p>
@@ -179,15 +167,15 @@ export default function EngineeringCoursesPage() {
                 {/* Quick Stats */}
                 <div className="flex flex-wrap gap-3 mt-6">
                   <div className="flex items-center gap-2 text-sm text-white/90 font-medium bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/10">
-                    <Clock size={16} className="text-[#3B82F6]" />
+                    <Clock size={16} className="text-[#147CC1]" />
                     4 Years
                   </div>
                   <div className="flex items-center gap-2 text-sm text-white/90 font-medium bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/10">
-                    <GraduationCap size={16} className="text-[#0D9488]" />
+                    <GraduationCap size={16} className="text-[#B30F66]" />
                     10+2 with PCM
                   </div>
                   <div className="flex items-center gap-2 text-sm text-white/90 font-medium bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/10">
-                    <MapPin size={16} className="text-[#F97316]" />
+                    <MapPin size={16} className="text-[#F36C21]" />
                     Multiple Cities
                   </div>
                 </div>
@@ -199,7 +187,7 @@ export default function EngineeringCoursesPage() {
               <div className="flex flex-col sm:flex-row lg:flex-col gap-3">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#3B82F6] to-[#2563EB] hover:from-[#2563EB] hover:to-[#1d4ed8] text-white font-bold px-8 py-4 rounded-2xl shadow-[0_4px_24px_rgba(59,130,246,0.35)] transition-all duration-200 hover:scale-[1.03] hover:shadow-[0_8px_32px_rgba(59,130,246,0.45)]"
+                  className="inline-flex items-center justify-center gap-2 bg-[#B30F66] hover:bg-[#591084] text-white font-bold px-8 py-4 rounded-2xl shadow-xl shadow-[#B30F66]/30 transition-all duration-200 hover:scale-[1.03]"
                 >
                   <MessageCircle size={18} />
                   <span>Get Free Guidance</span>

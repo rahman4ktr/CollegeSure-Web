@@ -65,11 +65,11 @@ const alignStyles = {
 };
 
 const badgeVariantStyles = {
-  teal: "bg-[#0D9488]/10 text-[#0D9488] border-[#0D9488]/20",
-  navy: "bg-[#0B3C5D]/10 text-[#0B3C5D] border-[#0B3C5D]/20",
-  orange: "bg-[#F97316]/10 text-[#F97316] border-[#F97316]/20",
+  teal: "bg-[#FEF2F7] text-[#B30F66] border-[#B30F66]/20",
+  navy: "bg-[#04164B]/10 text-[#04164B] border-[#04164B]/20",
+  orange: "bg-[#FEF7F3] text-[#F36C21] border-[#F36C21]/20",
   gray: "bg-[#F1F5F9] text-[#475569] border-[#E2E8F0]",
-  gradient: "bg-gradient-to-r from-[#0D9488] to-[#0B3C5D] text-white border-transparent",
+  gradient: "bg-gradient-to-r from-[#B30F66] to-[#591084] text-white border-transparent",
 };
 
 export default function SectionHeading({
@@ -172,7 +172,7 @@ export default function SectionHeading({
       ${variant === 'gradient' ? 'bg-gradient-to-r from-[#0B3C5D] via-[#0D9488] to-[#F97316] text-transparent bg-clip-text' : ''}
       ${variant === 'underlined' ? 'relative inline-block' : ''}
       ${variant === 'bordered' ? 'border-b-4 border-[#0D9488] pb-2' : ''}
-      ${titleColor ? `text-[${titleColor}]` : `text-[#0B3C5D]`}
+      ${titleColor ? `text-[${titleColor}]` : `text-[#04164B]`}
     `.trim();
 
     const titleContent = (

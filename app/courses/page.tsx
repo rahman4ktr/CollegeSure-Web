@@ -32,28 +32,28 @@ const categoryConfig = {
     icon: Stethoscope,
     label: "Medical & Paramedical",
     description: "Nursing, Radiology, Allied Healthcare Programs",
-    color: "#0D9488",
+    color: "#159447",
   },
   engineering: {
     icon: Cpu,
     label: "Engineering",
     description: "B.Tech CSE, Mechanical, Civil & Diplomas",
-    color: "#3B82F6",
+    color: "#147CC1",
   },
   graduation: {
     icon: GraduationCap,
     label: "Graduation Programs",
     description: "BCA, BBA, B.Com & Versatile Bachelor Degrees",
-    color: "#F97316",
+    color: "#F36C21",
   }
 };
 
 // Stats Data
 const stats = [
-  { label: "Courses Available", value: "50+", icon: BookOpen, color: "#0D9488" },
-  { label: "Partner Colleges", value: "50+", icon: Award, color: "#3B82F6" },
-  { label: "Students Placed", value: "15,000+", icon: TrendingUp, color: "#F97316" },
-  { label: "Success Rate", value: "92%", icon: Zap, color: "#EC4899" },
+  { label: "Courses Available", value: "50+", icon: BookOpen, color: "#159447" },
+  { label: "Partner Colleges", value: "50+", icon: Award, color: "#147CC1" },
+  { label: "Students Placed", value: "15,000+", icon: TrendingUp, color: "#F36C21" },
+  { label: "Success Rate", value: "92%", icon: Zap, color: "#B30F66" },
 ];
 
 // Filter categories
@@ -93,16 +93,16 @@ export default function CoursesPage() {
   const filteredCourses = getFilteredCourses();
 
   return (
-    <div ref={containerRef} className="relative overflow-hidden bg-[#F8FAFC]">
+    <div ref={containerRef} className="relative overflow-hidden bg-[#FDFDFD]">
       {/* Hero Section */}
       <motion.div
-        className="relative overflow-hidden bg-gradient-to-br from-[#0B3C5D] via-[#082d45] to-[#1a5276] pt-20 pb-16 sm:pt-28 sm:pb-20"
+        className="relative overflow-hidden bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084] pt-20 pb-16 sm:pt-28 sm:pb-20"
         style={{ opacity: heroOpacity, y: heroY }}
       >
         {/* Animated Background Elements */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
           <motion.div
-            className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#0D9488]/20 blur-3xl"
+            className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#B30F66]/20 blur-3xl"
             animate={{
               x: [0, -30, 20, 0],
               y: [0, 20, -30, 0],
@@ -114,7 +114,7 @@ export default function CoursesPage() {
             }}
           />
           <motion.div
-            className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#3B82F6]/15 blur-3xl"
+            className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#147CC1]/20 blur-3xl"
             animate={{
               x: [0, 30, -20, 0],
               y: [0, -20, 30, 0],
@@ -124,18 +124,6 @@ export default function CoursesPage() {
               repeat: Infinity,
               ease: "easeInOut",
               delay: 2,
-            }}
-          />
-          <motion.div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#F97316]/10 blur-3xl"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.5, 0.3],
-            }}
-            transition={{
-              duration: 18,
-              repeat: Infinity,
-              ease: "easeInOut",
             }}
           />
 
@@ -175,35 +163,30 @@ export default function CoursesPage() {
           <ScrollReveal direction="up">
             <div className="text-center max-w-4xl mx-auto">
               <motion.div
-                className="inline-flex items-center gap-2 text-[#0D9488] text-xs font-bold uppercase tracking-widest bg-white/10 backdrop-blur-md px-4 py-2 rounded-full mb-6 border border-white/10"
+                className="inline-flex items-center gap-2 text-[#FEF2F7] text-xs font-bold uppercase tracking-widest bg-white/10 backdrop-blur-md px-4 py-2 rounded-full mb-6 border border-white/10"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 400 }}
               >
-                <Sparkles size={14} />
+                <Sparkles size={14} className="text-[#F7D51A]" />
                 Discover Your Future
-                <motion.span
-                  className="w-1.5 h-1.5 rounded-full bg-[#0D9488]"
-                  animate={{ scale: [1, 1.5, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
               </motion.div>
 
               <motion.h1
-                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight mb-6"
+                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-tight mb-6"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.6 }}
               >
                 Explore Our
                 <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0D9488] via-[#3B82F6] to-[#F97316]">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B30F66] via-[#147CC1] to-[#F7D51A]">
                   Premium Courses
                 </span>
               </motion.h1>
 
               <motion.p
-                className="text-white/80 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto"
+                className="text-white/80 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto font-medium"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
@@ -220,7 +203,7 @@ export default function CoursesPage() {
               >
                 <Link
                   href="#courses"
-                  className="group inline-flex items-center gap-2 px-6 py-3 bg-white text-[#0B3C5D] font-semibold rounded-xl hover:shadow-xl transition-all duration-300 hover:scale-105"
+                  className="group inline-flex items-center gap-2 px-6 py-3 bg-[#B30F66] hover:bg-[#591084] text-white font-bold rounded-xl shadow-lg shadow-[#B30F66]/20 transition-all duration-300 hover:scale-105"
                 >
                   Browse Courses
                   <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />

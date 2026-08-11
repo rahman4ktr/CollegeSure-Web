@@ -31,20 +31,20 @@ import Link from "next/link";
 
 // Stats Data
 const stats = [
-  { label: "Graduation Programs", value: "12+", icon: BookOpen, color: "#F97316" },
-  { label: "Partner Colleges", value: "50+", icon: Building2, color: "#0D9488" },
-  { label: "Students Enrolled", value: "5,000+", icon: Users, color: "#3B82F6" },
-  { label: "Career Success Rate", value: "90%", icon: TrendingUp, color: "#EC4899" },
+  { label: "Graduation Programs", value: "12+", icon: BookOpen, color: "#F36C21" },
+  { label: "Partner Colleges", value: "50+", icon: Building2, color: "#159447" },
+  { label: "Students Enrolled", value: "5,000+", icon: Users, color: "#147CC1" },
+  { label: "Career Success Rate", value: "90%", icon: TrendingUp, color: "#B30F66" },
 ];
 
 // Popular Programs
 const popularPrograms = [
-  { name: "Bachelor of Computer Applications", icon: FileText, color: "#3B82F6" },
-  { name: "Bachelor of Business Administration", icon: Briefcase, color: "#F97316" },
-  { name: "Bachelor of Commerce", icon: BarChart, color: "#0D9488" },
-  { name: "Bachelor of Arts", icon: GraduationCap, color: "#8B5CF6" },
-  { name: "Bachelor of Science", icon: BookOpen, color: "#EC4899" },
-  { name: "Bachelor of Education", icon: Award, color: "#F59E0B" },
+  { name: "Bachelor of Computer Applications", icon: FileText, color: "#147CC1" },
+  { name: "Bachelor of Business Administration", icon: Briefcase, color: "#F36C21" },
+  { name: "Bachelor of Commerce", icon: BarChart, color: "#159447" },
+  { name: "Bachelor of Arts", icon: GraduationCap, color: "#591084" },
+  { name: "Bachelor of Science", icon: BookOpen, color: "#B30F66" },
+  { name: "Bachelor of Education", icon: Award, color: "#F7D51A" },
 ];
 
 export default function GraduationCoursesPage() {
@@ -60,16 +60,16 @@ export default function GraduationCoursesPage() {
   const courses = getCoursesByCategory("graduation");
 
   return (
-    <div ref={containerRef} className="relative overflow-hidden bg-[#F8FAFC]">
+    <div ref={containerRef} className="relative overflow-hidden bg-[#FDFDFD]">
       {/* Enhanced Hero Section */}
       <motion.div
-        className="relative overflow-hidden bg-gradient-to-br from-[#0B3C5D] via-[#082d45] to-[#1a5276] pt-8 pb-16 sm:pt-12 sm:pb-20"
+        className="relative overflow-hidden bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084] pt-8 pb-16 sm:pt-12 sm:pb-20"
         style={{ opacity: heroOpacity, y: heroY }}
       >
         {/* Animated Background */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
           <motion.div
-            className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#F97316]/20 blur-3xl"
+            className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#F36C21]/20 blur-3xl"
             animate={{
               x: [0, -30, 20, 0],
               y: [0, 20, -30, 0],
@@ -81,7 +81,7 @@ export default function GraduationCoursesPage() {
             }}
           />
           <motion.div
-            className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#0D9488]/15 blur-3xl"
+            className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#B30F66]/20 blur-3xl"
             animate={{
               x: [0, 30, -20, 0],
               y: [0, -20, 30, 0],
@@ -91,18 +91,6 @@ export default function GraduationCoursesPage() {
               repeat: Infinity,
               ease: "easeInOut",
               delay: 2,
-            }}
-          />
-          <motion.div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#3B82F6]/10 blur-3xl"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.5, 0.3],
-            }}
-            transition={{
-              duration: 18,
-              repeat: Infinity,
-              ease: "easeInOut",
             }}
           />
 
@@ -156,7 +144,7 @@ export default function GraduationCoursesPage() {
                   <Badge 
                     variant="orange" 
                     icon={<Sparkles size={12} />}
-                    className="bg-white/10 backdrop-blur-sm border-white/20 text-white"
+                    className="bg-[#F36C21]/20 border-[#F36C21]/40 text-white"
                   >
                     Commerce & IT Programs
                   </Badge>
@@ -165,14 +153,14 @@ export default function GraduationCoursesPage() {
                     UG Programs
                   </Badge>
                 </div>
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight mb-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-tight mb-4">
                   Graduation
                   <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F97316] via-[#0D9488] to-[#3B82F6]">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F36C21] via-[#B30F66] to-[#F7D51A]">
                     Programs
                   </span>
                 </h1>
-                <p className="text-white/80 text-base sm:text-lg leading-relaxed max-w-3xl">
+                <p className="text-white/80 text-base sm:text-lg leading-relaxed max-w-3xl font-medium">
                   BCA, BBA, B.Com and other undergraduate programs — diverse options 
                   for students looking for versatile and rewarding careers.
                 </p>
@@ -180,15 +168,15 @@ export default function GraduationCoursesPage() {
                 {/* Quick Stats */}
                 <div className="flex flex-wrap gap-3 mt-6">
                   <div className="flex items-center gap-2 text-sm text-white/90 font-medium bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/10">
-                    <Clock size={16} className="text-[#F97316]" />
+                    <Clock size={16} className="text-[#F36C21]" />
                     3 Years
                   </div>
                   <div className="flex items-center gap-2 text-sm text-white/90 font-medium bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/10">
-                    <GraduationCap size={16} className="text-[#0D9488]" />
+                    <GraduationCap size={16} className="text-[#B30F66]" />
                     10+2 in Any Stream
                   </div>
                   <div className="flex items-center gap-2 text-sm text-white/90 font-medium bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/10">
-                    <MapPin size={16} className="text-[#3B82F6]" />
+                    <MapPin size={16} className="text-[#147CC1]" />
                     Multiple Cities
                   </div>
                 </div>
@@ -200,7 +188,7 @@ export default function GraduationCoursesPage() {
               <div className="flex flex-col sm:flex-row lg:flex-col gap-3">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#F97316] to-[#EA580C] hover:from-[#EA580C] hover:to-[#C2410C] text-white font-bold px-8 py-4 rounded-2xl shadow-[0_4px_24px_rgba(249,115,22,0.35)] transition-all duration-200 hover:scale-[1.03] hover:shadow-[0_8px_32px_rgba(249,115,22,0.45)]"
+                  className="inline-flex items-center justify-center gap-2 bg-[#B30F66] hover:bg-[#591084] text-white font-bold px-8 py-4 rounded-2xl shadow-xl shadow-[#B30F66]/30 transition-all duration-200 hover:scale-[1.03]"
                 >
                   <MessageCircle size={18} />
                   <span>Talk to a Counsellor</span>
@@ -220,7 +208,7 @@ export default function GraduationCoursesPage() {
 
         {/* Decorative Shape */}
         <div
-          className="absolute bottom-0 left-0 right-0 h-16 bg-[#F8FAFC]"
+          className="absolute bottom-0 left-0 right-0 h-16 bg-[#FDFDFD]"
           style={{
             clipPath: "polygon(0 100%, 100% 100%, 100% 30%, 0 100%)",
           }}
@@ -235,14 +223,14 @@ export default function GraduationCoursesPage() {
             {stats.map((stat, idx) => (
               <ScrollReveal key={stat.label} delay={idx * 0.08} direction="up">
                 <motion.div
-                  className="text-center p-4 rounded-2xl bg-[#F8FAFC] hover:bg-white hover:shadow-md transition-all duration-300 border border-transparent hover:border-[#E2E8F0]"
+                  className="text-center p-4 rounded-2xl bg-[#FEF7F3] hover:bg-white hover:shadow-md transition-all duration-300 border border-transparent hover:border-[#E2E8F0]"
                   whileHover={{ y: -4 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
                 >
                   <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: `${stat.color}15` }}>
                     <stat.icon size={20} style={{ color: stat.color }} />
                   </div>
-                  <div className="text-2xl font-bold text-[#0B3C5D]">{stat.value}</div>
+                  <div className="text-2xl font-bold text-[#04164B]">{stat.value}</div>
                   <div className="text-xs text-[#94A3B8] font-medium">{stat.label}</div>
                 </motion.div>
               </ScrollReveal>
@@ -252,15 +240,15 @@ export default function GraduationCoursesPage() {
       </div>
 
       {/* Popular Programs Section */}
-      <div id="programs" className="bg-[#F8FAFC] border-b border-[#E2E8F0] py-12">
+      <div id="programs" className="bg-[#FEF7F3]/50 border-b border-[#E2E8F0] py-12">
         <Container>
           <ScrollReveal direction="up">
             <div className="text-center mb-10">
               <Badge variant="orange" className="mb-3">Popular Programs</Badge>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#0B3C5D] mb-3">
-                Most Popular <span className="text-[#F97316]">Graduation</span> Programs
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#04164B] mb-3">
+                Most Popular <span className="text-[#F36C21]">Graduation</span> Programs
               </h2>
-              <p className="text-[#475569] max-w-2xl mx-auto">
+              <p className="text-[#475569] max-w-2xl mx-auto font-medium">
                 Choose from a variety of undergraduate programs offered at top colleges.
               </p>
             </div>
@@ -271,7 +259,7 @@ export default function GraduationCoursesPage() {
                 return (
                   <motion.div
                     key={idx}
-                    className="flex items-center gap-3 p-4 bg-white rounded-xl border border-[#E2E8F0] hover:shadow-md hover:border-[#F97316]/30 transition-all duration-300 group"
+                    className="flex items-center gap-3 p-4 bg-white rounded-xl border border-[#E2E8F0] hover:shadow-md hover:border-[#F36C21]/40 transition-all duration-300 group"
                     whileHover={{ x: 4, scale: 1.02 }}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -283,7 +271,7 @@ export default function GraduationCoursesPage() {
                     >
                       <Icon size={14} style={{ color: program.color }} />
                     </div>
-                    <span className="text-sm font-medium text-[#475569] group-hover:text-[#0B3C5D] transition-colors">
+                    <span className="text-sm font-semibold text-[#475569] group-hover:text-[#04164B] transition-colors">
                       {program.name}
                     </span>
                   </motion.div>
@@ -295,15 +283,15 @@ export default function GraduationCoursesPage() {
       </div>
 
       {/* Main Grid */}
-      <div className="bg-[#F8FAFC] section-py">
+      <div className="bg-[#FDFDFD] section-py">
         <Container>
           <div className="flex items-center justify-between mb-8">
             <div>
               <div className="flex items-center gap-3 mb-1">
-                <div className="w-10 h-10 rounded-xl bg-[#F97316]/10 flex items-center justify-center">
-                  <GraduationCap size={20} className="text-[#F97316]" />
+                <div className="w-10 h-10 rounded-xl bg-[#F36C21]/10 flex items-center justify-center">
+                  <GraduationCap size={20} className="text-[#F36C21]" />
                 </div>
-                <h2 className="text-2xl font-bold text-[#0B3C5D]">
+                <h2 className="text-2xl font-extrabold text-[#04164B]">
                   All Graduation Courses
                 </h2>
               </div>

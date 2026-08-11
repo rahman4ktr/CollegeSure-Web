@@ -1,51 +1,81 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
-  Shield,
-  Users,
+  PlayCircle,
   BookOpen,
-  HeartHandshake,
-  Sparkles,
-  GraduationCap,
-  Award,
-  Clock,
-  ChevronRight,
-  Play,
+  Landmark,
+  Users,
+  Code2,
   Star,
-  TrendingUp,
+  Headphones,
+  Stethoscope,
+  Activity,
+  Cpu,
+  GraduationCap,
 } from "lucide-react";
 import { gsap } from "gsap";
 import Button from "@/components/ui/Button";
-import Hero3DCanvas from "@/components/sections/Hero3DCanvas";
-import Card3DTilt from "@/components/ui/Card3DTilt";
 
-const trustIndicators = [
-  { icon: Shield, text: "Transparent Guidance", color: "#0D9488" },
-  { icon: Users, text: "Student & Parent Friendly", color: "#F97316" },
-  { icon: BookOpen, text: "Multiple Course Options", color: "#6366F1" },
-  { icon: HeartHandshake, text: "Personalized Counselling", color: "#EC4899" },
+const heroStats = [
+  { icon: BookOpen, value: "1000+", label: "Courses", color: "#591084", bg: "#FEF2F7" },
+  { icon: Landmark, value: "500+", label: "Colleges", color: "#B30F66", bg: "#FEE8F5" },
+  { icon: Users, value: "50K+", label: "Students", color: "#159447", bg: "#E6F4EA" },
+  { icon: Headphones, value: "24/7", label: "Support", color: "#F36C21", bg: "#FEF7F3" },
 ];
 
-const floatingStats = [
-  { label: "Students Placed", value: "5,000+", icon: Award, trend: "+12%" },
-  { label: "Success Rate", value: "98%", icon: TrendingUp, trend: "+5%" },
-  { label: "Partner Universities", value: "50+", icon: GraduationCap, trend: "+8%" },
+const collegeBadges = [
+  { name: "DU", bg: "bg-[#147CC1]" },
+  { name: "JI", bg: "bg-[#159447]" },
+  { name: "CU", bg: "bg-[#F36C21]" },
+  { name: "VIT", bg: "bg-[#591084]" },
+  { name: "LPU", bg: "bg-[#B30F66]" },
+];
+
+const uniAvatars = [
+  { name: "Riya M.", initials: "RM", bg: "bg-[#591084]" },
+  { name: "Aman K.", initials: "AK", bg: "bg-[#147CC1]" },
+  { name: "Sneha P.", initials: "SP", bg: "bg-[#B30F66]" },
+  { name: "Rahul S.", initials: "RS", bg: "bg-[#159447]" },
+];
+
+const popularStreams = [
+  {
+    title: "Medical",
+    subtitle: "MBBS, BDS, BAMS, BHMS & More",
+    icon: Stethoscope,
+    color: "#159447",
+    href: "/courses/medical",
+  },
+  {
+    title: "Paramedical",
+    subtitle: "Nursing, Pharmacy, BPT, GNM & More",
+    icon: Activity,
+    color: "#F36C21",
+    href: "/courses/paramedical",
+  },
+  {
+    title: "Engineering",
+    subtitle: "B.Tech, Diploma, BCA, MCA & More",
+    icon: Cpu,
+    color: "#147CC1",
+    href: "/courses/engineering",
+  },
 ];
 
 function fadeUpProps(delay: number) {
   return {
-    initial: { opacity: 0, y: 30 },
+    initial: { opacity: 0, y: 24 },
     animate: { opacity: 1, y: 0 },
-    transition: { delay, duration: 0.7, ease: [0.215, 0.61, 0.355, 1] as any },
+    transition: { delay, duration: 0.6, ease: [0.215, 0.61, 0.355, 1] as any },
   };
 }
 
 export default function Hero() {
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -54,24 +84,22 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
   const springY = useSpring(y, { damping: 30, stiffness: 200 });
 
   useEffect(() => {
     if (headlineRef.current) {
-      const words = headlineRef.current.querySelectorAll('.word');
+      const lines = headlineRef.current.querySelectorAll(".line");
       gsap.fromTo(
-        words,
-        { opacity: 0, y: 40, rotateX: 20 },
+        lines,
+        { opacity: 0, y: 30 },
         {
           opacity: 1,
           y: 0,
-          rotateX: 0,
-          duration: 0.8,
-          stagger: 0.08,
-          delay: 0.2,
+          duration: 0.7,
+          stagger: 0.1,
+          delay: 0.15,
           ease: "power3.out",
         }
       );
@@ -81,437 +109,296 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-gradient-to-b from-white via-white to-[#F8FAFC] min-h-[90vh] flex items-center"
-      aria-label="Hero section"
+      className="relative overflow-hidden bg-[#FDFDFD] pt-4"
+      aria-label="CollegeSure Hero section"
     >
-      {/* Animated Background */}
-      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden" aria-hidden>
-        {/* Gradient Orbs */}
-        <motion.div
-          className="absolute -top-40 -right-40 w-[800px] h-[800px] rounded-full bg-gradient-to-br from-[#0D9488]/15 to-[#0B3C5D]/5 blur-3xl"
-          animate={{
-            x: [0, 30, -20, 0],
-            y: [0, -20, 30, 0],
-            scale: [1, 1.1, 0.9, 1],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute -bottom-40 -left-40 w-[700px] h-[700px] rounded-full bg-gradient-to-tr from-[#F97316]/10 to-[#0D9488]/5 blur-3xl"
-          animate={{
-            x: [0, -30, 20, 0],
-            y: [0, 30, -20, 0],
-            scale: [1, 0.9, 1.1, 1],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2,
-          }}
-        />
-        <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full bg-[#6366F1]/5 blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.6, 0.3],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-
-        {/* Floating Particles */}
-        <div className="absolute inset-0 overflow-hidden">
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 bg-[#0D9488]/20 rounded-full"
-              initial={{
-                x: Math.random() * 100 + "%",
-                y: Math.random() * 100 + "%",
-              }}
-              animate={{
-                x: [
-                  Math.random() * 100 + "%",
-                  Math.random() * 100 + "%",
-                  Math.random() * 100 + "%",
-                ],
-                y: [
-                  Math.random() * 100 + "%",
-                  Math.random() * 100 + "%",
-                  Math.random() * 100 + "%",
-                ],
-              }}
-              transition={{
-                duration: 20 + Math.random() * 20,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Grid Pattern */}
-        <svg
-          className="absolute inset-0 w-full h-full opacity-[0.03]"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <pattern
-              id="hero-grid"
-              width="60"
-              height="60"
-              patternUnits="userSpaceOnUse"
-            >
-              <path
-                d="M 60 0 L 0 0 0 60"
-                fill="none"
-                stroke="#0B3C5D"
-                strokeWidth="1"
-              />
-              <circle cx="60" cy="60" r="1" fill="#0B3C5D" opacity="0.5" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#hero-grid)" />
-        </svg>
+      {/* Top Banner Ribbon */}
+      <div className="bg-[#040943] text-white text-xs py-2 px-4 flex justify-between items-center max-w-7xl mx-auto rounded-full mb-6 font-medium">
+        <span className="flex items-center gap-2">
+          <GraduationCap size={14} className="text-[#F7D51A]" />
+          Guiding Your Career Journey Since Day One
+        </span>
+        <span className="flex items-center gap-2 text-[#FEF2F7]">
+          <Users size={14} className="text-[#F7D51A]" />
+          Trusted by 50K+ Students
+        </span>
       </div>
 
-      {/* Main Content */}
-      <motion.div
-        style={{ y: springY, opacity, scale }}
-        className="relative z-10 w-full"
-      >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Left Column */}
-            <div>
-              {/* Eyebrow with animated dot */}
-              <motion.div
-                {...fadeUpProps(0.05)}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0D9488]/10 to-[#0B3C5D]/10 text-[#0D9488] text-xs font-semibold px-4 py-2 rounded-full mb-6 border border-[#0D9488]/20 backdrop-blur-sm"
-              >
-                <motion.span
-                  className="w-2 h-2 rounded-full bg-[#0D9488]"
-                  animate={{ scale: [1, 1.5, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-                CollegeSure by Brainzima
-                <motion.div
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  <ChevronRight size={12} />
-                </motion.div>
-              </motion.div>
+      {/* Ambient background glows */}
+      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden" aria-hidden>
+        <div className="absolute -top-24 right-10 w-[640px] h-[640px] rounded-full bg-gradient-to-br from-[#FEF2F7] to-[#FEE8F5] blur-3xl opacity-70" />
+        <div className="absolute bottom-10 -left-20 w-[480px] h-[480px] rounded-full bg-gradient-to-tr from-[#FEF7F3] to-transparent blur-3xl opacity-60" />
+      </div>
 
-              {/* Headline with word-by-word animation */}
+      <motion.div style={{ y: springY, opacity }} className="relative z-10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-4 pb-12">
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Left column — message */}
+            <div className="lg:col-span-6">
+              <motion.p
+                {...fadeUpProps(0.05)}
+                className="text-sm font-bold text-[#591084] tracking-wide mb-3 uppercase flex items-center gap-2"
+              >
+                <span className="w-2 h-2 rounded-full bg-[#B30F66] animate-ping" />
+                Your Future, Our Priority
+              </motion.p>
+
               <h1
                 ref={headlineRef}
-                className="text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-[4rem] font-bold text-[#0B3C5D] leading-[1.1] tracking-tight mb-6"
+                className="text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-[3.85rem] font-extrabold text-[#04164B] leading-[1.1] tracking-tight mb-6"
               >
-                <span className="word block">Find the Right College</span>
-                <span className="word block relative">
-                  <span className="relative inline-block">
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B3C5D] via-[#0D9488] to-[#F97316]">
-                      with Complete
-                    </span>
-                    <motion.svg
-                      className="absolute -bottom-2 left-0 w-full"
-                      viewBox="0 0 300 12"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      initial={{ pathLength: 0, opacity: 0 }}
-                      animate={{ pathLength: 1, opacity: 1 }}
-                      transition={{ duration: 1.5, delay: 0.8, ease: "easeInOut" }}
-                    >
-                      <path
-                        d="M2 9C50 3 100 1 150 4C200 7 250 9 298 6"
-                        stroke="url(#underlineGradient)"
-                        strokeWidth="4"
-                        strokeLinecap="round"
-                      />
-                      <defs>
-                        <linearGradient id="underlineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                          <stop offset="0%" stopColor="#0B3C5D" />
-                          <stop offset="50%" stopColor="#0D9488" />
-                          <stop offset="100%" stopColor="#F97316" />
-                        </linearGradient>
-                      </defs>
-                    </motion.svg>
-                  </span>
+                <span className="line block">Discover Courses.</span>
+                <span className="line block">Choose Colleges.</span>
+                <span className="line block">
+                  <span className="text-[#B30F66]">Build</span> Your Future.
                 </span>
-                <span className="word block">Assurance</span>
               </h1>
 
-              {/* Sub-headline */}
               <motion.p
-                {...fadeUpProps(0.24)}
-                className="text-lg sm:text-xl text-[#475569] leading-relaxed mb-4 font-medium flex items-center gap-2"
+                {...fadeUpProps(0.32)}
+                className="text-base sm:text-lg text-[#475569] leading-relaxed mb-8 max-w-lg font-medium"
               >
-                <Sparkles size={18} className="text-[#0D9488]" />
-                Medical, Engineering & Graduation Admissions Made Simple
+                Explore 1,000+ courses from top colleges across India. Find the perfect path to achieve your dreams.
               </motion.p>
 
-              <motion.p
-                {...fadeUpProps(0.34)}
-                className="text-base text-[#475569] leading-relaxed mb-8 max-w-lg"
-              >
-                We help students and parents navigate college admissions with honest
-                guidance, personalized counselling, and genuine support — from
-                course selection to admission confirmation.
-              </motion.p>
-
-              {/* CTAs with enhanced animations */}
               <motion.div
-                {...fadeUpProps(0.44)}
-                className="flex flex-col sm:flex-row gap-4 mb-10"
+                {...fadeUpProps(0.42)}
+                className="flex flex-wrap items-center gap-4 mb-10"
               >
                 <motion.div
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                >
-                  <Button
-                    as="link"
-                    href="/contact"
-                    variant="primary"
-                    size="lg"
-                    rightIcon={<ArrowRight size={18} />}
-                    className="group relative overflow-hidden"
-                  >
-                    <span className="relative z-10 flex items-center gap-2">
-                      <Sparkles size={16} />
-                      Get Free Counselling
-                    </span>
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-[#0B3C5D] via-[#0D9488] to-[#F97316] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                      style={{ backgroundSize: "200% 100%" }}
-                      animate={{
-                        backgroundPosition: ["0% 0%", "100% 0%"],
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "linear",
-                      }}
-                    />
-                  </Button>
-                </motion.div>
-
-                <motion.div
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileTap={{ scale: 0.96 }}
                   transition={{ type: "spring", stiffness: 400, damping: 15 }}
                 >
                   <Button
                     as="link"
                     href="/courses"
-                    variant="outline"
+                    variant="primary"
                     size="lg"
-                    className="group"
+                    rounded="full"
+                    className="bg-[#B30F66] hover:bg-[#591084] text-white px-8 py-4 text-base font-bold shadow-lg shadow-[#B30F66]/25"
+                    rightIcon={<ArrowRight size={18} />}
                   >
                     Explore Courses
-                    <motion.span
-                      className="inline-block ml-2"
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
-                      <ChevronRight size={16} />
-                    </motion.span>
                   </Button>
                 </motion.div>
+
+                <Link
+                  href="/how-it-works"
+                  className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-full border border-[#04164B]/15 bg-white text-sm font-bold text-[#04164B] hover:bg-[#FEF2F7] hover:border-[#B30F66]/30 transition-all duration-300 shadow-sm"
+                >
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#FEF2F7] text-[#591084] group-hover:bg-[#B30F66] group-hover:text-white transition-colors">
+                    <PlayCircle size={16} />
+                  </span>
+                  How It Works
+                </Link>
               </motion.div>
 
-              {/* Trust indicators with enhanced styling */}
+              {/* Stat strip card */}
               <motion.div
-                {...fadeUpProps(0.54)}
-                className="flex flex-wrap gap-x-6 gap-y-3"
+                {...fadeUpProps(0.52)}
+                className="grid grid-cols-2 sm:grid-cols-4 gap-4 rounded-3xl border border-[#E2E8F0] bg-white p-5 shadow-xl shadow-[#04164B]/5"
               >
-                {trustIndicators.map(({ icon: Icon, text, color }, index) => (
-                  <motion.div
-                    key={text}
-                    className="flex items-center gap-2.5 text-sm text-[#475569] group cursor-default"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.6 + index * 0.08, duration: 0.5 }}
-                    whileHover={{ x: 5 }}
-                  >
-                    <motion.div
-                      className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300"
-                      style={{ backgroundColor: `${color}15` }}
-                      whileHover={{ scale: 1.2, rotate: -5 }}
+                {heroStats.map((stat) => (
+                  <div key={stat.label} className="flex items-center gap-3">
+                    <span
+                      className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-2xl shadow-sm transition-transform hover:scale-110"
+                      style={{ backgroundColor: stat.bg, color: stat.color }}
                     >
-                      <Icon size={12} style={{ color }} />
-                    </motion.div>
-                    {text}
-                  </motion.div>
-                ))}
-              </motion.div>
-
-              {/* Floating Stats */}
-              <motion.div
-                {...fadeUpProps(0.64)}
-                className="mt-10 grid grid-cols-3 gap-4"
-              >
-                {floatingStats.map((stat, index) => (
-                  <motion.div
-                    key={stat.label}
-                    className="bg-white/70 backdrop-blur-sm rounded-xl p-3 border border-[#E2E8F0] shadow-sm"
-                    whileHover={{ y: -5, boxShadow: "0 10px 30px rgba(0,0,0,0.1)" }}
-                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                  >
-                    <div className="flex items-center justify-between mb-1">
-                      <stat.icon size={14} className="text-[#0D9488]" />
-                      <span className="text-[10px] font-semibold text-[#0D9488]">
-                        {stat.trend}
-                      </span>
+                      <stat.icon size={20} />
+                    </span>
+                    <div>
+                      <div className="text-lg font-bold text-[#04164B] leading-none">
+                        {stat.value}
+                      </div>
+                      <div className="text-xs text-[#94A3B8] font-medium mt-1">
+                        {stat.label}
+                      </div>
                     </div>
-                    <div className="text-lg font-bold text-[#0B3C5D]">
-                      {stat.value}
-                    </div>
-                    <div className="text-[10px] text-[#94A3B8]">
-                      {stat.label}
-                    </div>
-                  </motion.div>
+                  </div>
                 ))}
               </motion.div>
             </div>
 
-            {/* Right Column - 3D Visual */}
+            {/* Right column — Photo + Floating Cards */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, rotateY: -15 }}
-              animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-              transition={{ duration: 1, delay: 0.3, type: "spring", stiffness: 100 }}
-              className="relative"
-              style={{ perspective: 1200 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="lg:col-span-6 relative mx-auto w-full max-w-xl lg:max-w-none"
             >
-              <Card3DTilt glowColor="rgba(13, 148, 136, 0.3)">
-                <div className="relative rounded-2xl bg-gradient-to-br from-[#0B3C5D]/95 to-[#1a5276]/90 p-3 shadow-2xl backdrop-blur-md border border-white/20 overflow-hidden">
-                  {/* Animated border glow */}
-                  <motion.div
-                    className="absolute inset-0 rounded-2xl"
-                    style={{
-                      background: "linear-gradient(135deg, #0D9488, #F97316, #0D9488)",
-                      padding: "2px",
-                      mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                      WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                      WebkitMaskComposite: "xor",
-                      maskComposite: "exclude",
-                    }}
-                    animate={{
-                      background: [
-                        "linear-gradient(135deg, #0D9488, #F97316, #0D9488)",
-                        "linear-gradient(135deg, #F97316, #0D9488, #F97316)",
-                        "linear-gradient(135deg, #0D9488, #F97316, #0D9488)",
-                      ],
-                    }}
-                    transition={{
-                      duration: 6,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                  />
+              {/* Background Backdrop Shape */}
+              <div
+                className="absolute inset-0 -z-10 rounded-[3rem] bg-gradient-to-tr from-[#FEF2F7] via-[#FEE8F5] to-[#FEF7F3] transform rotate-1 scale-105 shadow-inner"
+                aria-hidden
+              />
 
-                  <div className="relative z-10">
-                    <Hero3DCanvas />
-                  </div>
-                </div>
-              </Card3DTilt>
+              {/* Main Photo Frame */}
+              <div className="relative overflow-hidden rounded-[2.5rem] border-4 border-white bg-white shadow-2xl shadow-[#591084]/15">
+                <Image
+                  src="/images/heroSection1.png"
+                  alt="Students ready for college admissions"
+                  width={900}
+                  height={920}
+                  priority
+                  className="h-[440px] w-full object-cover object-top sm:h-[500px] lg:h-[540px] transition-transform duration-700 hover:scale-103"
+                />
+              </div>
 
-              {/* Floating WhatsApp Card */}
+              {/* Floating Pill 1: Top Universities (Top-Left) */}
               <motion.div
-                animate={{
-                  y: [0, -12, 0],
-                  rotate: [-2, 2, -2],
-                }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 4,
-                  ease: "easeInOut",
-                }}
-                className="absolute -bottom-6 -left-6 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-[#E2E8F0] p-4 flex items-center gap-3 z-20 hover:shadow-[#25D366]/20 transition-shadow duration-300"
-                whileHover={{ scale: 1.05, y: -8 }}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+                className="absolute top-4 -left-4 sm:left-4 rounded-2xl border border-white bg-white/95 p-3 shadow-xl backdrop-blur-md flex items-center gap-3"
               >
-                <motion.div
-                  className="w-10 h-10 bg-gradient-to-br from-[#25D366] to-[#128C7E] rounded-full flex items-center justify-center flex-shrink-0 shadow-lg"
-                  whileHover={{ scale: 1.1, rotate: -5 }}
-                >
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="white">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
-                  </svg>
-                </motion.div>
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#591084] text-white shadow-md">
+                  <GraduationCap size={20} />
+                </div>
                 <div>
-                  <p className="text-xs font-bold text-[#0F172A] flex items-center gap-1">
-                    Chat with Counsellor
-                    <motion.span
-                      className="w-1.5 h-1.5 rounded-full bg-[#25D366]"
-                      animate={{ scale: [1, 1.5, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    />
-                  </p>
-                  <p className="text-xs text-[#0D9488] font-medium">
-                    Available now
-                  </p>
+                  <p className="text-xs font-bold text-[#04164B]">Top Universities</p>
+                  <div className="flex items-center gap-1 mt-1">
+                    <div className="flex -space-x-1.5">
+                      {uniAvatars.map((u) => (
+                        <span
+                          key={u.initials}
+                          className={`flex h-5 w-5 items-center justify-center rounded-full text-[8px] font-bold text-white ring-1 ring-white ${u.bg}`}
+                        >
+                          {u.initials}
+                        </span>
+                      ))}
+                    </div>
+                    <span className="text-[10px] font-semibold text-[#475569] bg-[#F1F5F9] px-1.5 py-0.5 rounded-full">
+                      +99
+                    </span>
+                  </div>
                 </div>
               </motion.div>
 
-              {/* Floating Rating Badge */}
+              {/* Floating Pill 2: Top Rated Colleges (Top-Right) */}
               <motion.div
-                animate={{
-                  y: [0, -8, 0],
-                }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 3.5,
-                  ease: "easeInOut",
-                  delay: 0.5,
-                }}
-                className="absolute -top-4 -right-4 bg-white/95 backdrop-blur-xl rounded-xl shadow-xl border border-[#E2E8F0] px-3 py-2 flex items-center gap-2 z-20"
-                whileHover={{ scale: 1.05, rotate: 3 }}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.65, duration: 0.5 }}
+                className="absolute top-4 -right-4 hidden sm:flex flex-col rounded-2xl border border-white bg-white/95 p-3.5 shadow-xl backdrop-blur-md w-48"
               >
-                <div className="flex items-center gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      size={12}
-                      className="fill-[#F97316] text-[#F97316]"
-                    />
+                <p className="text-[11px] font-medium text-[#94A3B8]">Top Rated Colleges</p>
+                <p className="text-2xl font-black text-[#B30F66] leading-none my-1">500+</p>
+                <div className="flex items-center gap-1 mt-1">
+                  {collegeBadges.map((b) => (
+                    <span
+                      key={b.name}
+                      className={`h-5 w-5 rounded-full text-[9px] font-bold text-white flex items-center justify-center shadow-xs ${b.bg}`}
+                    >
+                      {b.name}
+                    </span>
                   ))}
+                  <span className="text-[9px] font-bold text-[#591084] bg-[#FEF2F7] px-1 py-0.5 rounded-full">
+                    +99
+                  </span>
                 </div>
-                <span className="text-xs font-semibold text-[#0B3C5D]">4.9/5</span>
+              </motion.div>
+
+              {/* Floating Pill 3: 1000+ Courses (Center-Left) */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.75, duration: 0.5 }}
+                className="absolute bottom-24 -left-6 hidden sm:flex items-center gap-3 rounded-2xl border border-white bg-white/95 p-3 shadow-xl backdrop-blur-md"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#B30F66] text-white shadow-md">
+                  <BookOpen size={18} />
+                </div>
+                <div>
+                  <p className="text-base font-black text-[#04164B] leading-none">1000+</p>
+                  <p className="text-xs font-semibold text-[#94A3B8]">Courses</p>
+                </div>
+              </motion.div>
+
+              {/* Floating Pill 4: Course Info Card (Bottom-Right) */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.85, duration: 0.5 }}
+                className="absolute -bottom-6 -right-2 sm:right-2 w-60 rounded-2xl border border-white bg-white/95 p-4 shadow-2xl backdrop-blur-md"
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#147CC1] text-white shadow-sm">
+                    <Code2 size={16} />
+                  </span>
+                  <div>
+                    <p className="text-xs font-bold text-[#04164B]">B.Tech Computer Science</p>
+                    <p className="text-[10px] text-[#94A3B8]">4 Years &middot; Full Time</p>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between pt-2 border-t border-[#F1F5F9]">
+                  <div className="flex items-center gap-1">
+                    <Star size={12} className="fill-[#F7D51A] text-[#F7D51A]" />
+                    <span className="text-xs font-bold text-[#04164B]">4.8</span>
+                    <span className="text-[10px] text-[#94A3B8]">(2.4k reviews)</span>
+                  </div>
+                  <Link
+                    href="/courses/btech-computer-science"
+                    className="text-[11px] font-bold text-[#591084] hover:text-[#B30F66] flex items-center gap-0.5"
+                  >
+                    Details <ArrowRight size={10} />
+                  </Link>
+                </div>
               </motion.div>
             </motion.div>
           </div>
-        </div>
-      </motion.div>
 
-      {/* Wave Separator */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-16 bg-[#F8FAFC]"
-        style={{
-          clipPath: "polygon(0 100%, 100% 100%, 100% 30%, 0 100%)",
-        }}
-        aria-hidden
-      />
+          {/* Bottom Stream Banner Container */}
+          <motion.div
+            {...fadeUpProps(0.95)}
+            className="mt-16 sm:mt-20 rounded-3xl bg-gradient-to-r from-[#040943] via-[#04164B] to-[#591084] p-6 sm:p-8 text-white shadow-2xl relative overflow-hidden"
+          >
+            <div className="grid lg:grid-cols-12 gap-6 items-center">
+              {/* Banner Left Info */}
+              <div className="lg:col-span-4">
+                <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight mb-1">
+                  Popular Courses
+                </h3>
+                <p className="text-xs sm:text-sm text-[#FEF2F7]/80 font-medium">
+                  Choose from top streams and build your career
+                </p>
+              </div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 hidden lg:block"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
-        <div className="flex flex-col items-center gap-2 opacity-40">
-          <span className="text-xs text-[#94A3B8] uppercase tracking-widest">
-            Scroll
-          </span>
-          <div className="w-[1px] h-12 bg-gradient-to-b from-[#94A3B8] to-transparent" />
+              {/* Stream Cards Grid */}
+              <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {popularStreams.map((stream) => (
+                  <Link
+                    key={stream.title}
+                    href={stream.href}
+                    className="group bg-white rounded-2xl p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex items-center justify-between"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span
+                        className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl text-white shadow-md transition-transform group-hover:scale-110"
+                        style={{ backgroundColor: stream.color }}
+                      >
+                        <stream.icon size={20} />
+                      </span>
+                      <div>
+                        <h4 className="text-sm font-bold text-[#04164B] leading-tight">
+                          {stream.title}
+                        </h4>
+                        <p className="text-[10px] text-[#94A3B8] font-semibold mt-0.5">
+                          {stream.subtitle}
+                        </p>
+                      </div>
+                    </div>
+                    <span
+                      className="flex h-7 w-7 items-center justify-center rounded-full text-white transition-transform group-hover:translate-x-1"
+                      style={{ backgroundColor: stream.color }}
+                    >
+                      <ArrowRight size={14} />
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </motion.div>
         </div>
       </motion.div>
     </section>

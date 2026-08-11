@@ -118,7 +118,6 @@ const floatingStats = [
 
 export default function Testimonials() {
   const [currentPage, setCurrentPage] = useState(0);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const testimonialsPerPage = 3;
   const totalPages = Math.ceil(enhancedTestimonials.length / testimonialsPerPage);
 
@@ -140,64 +139,25 @@ export default function Testimonials() {
       className="relative overflow-hidden py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#F8FAFC] via-white to-[#F8FAFC]"
       aria-labelledby="testimonials-heading"
     >
-      {/* Ambient Background */}
+      {/* Ambient Background — CSS */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
-        <motion.div
-          className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#0D9488]/5 blur-3xl"
-          animate={{
-            x: [0, -30, 20, 0],
-            y: [0, 20, -30, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#0D9488]/5 blur-3xl animate-ambient-slow" />
+        <div
+          className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#F97316]/5 blur-3xl animate-ambient-slow-reverse"
+          style={{ animationDelay: "2s" }}
         />
-        <motion.div
-          className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#F97316]/5 blur-3xl"
-          animate={{
-            x: [0, 30, -20, 0],
-            y: [0, -20, 30, 0],
-          }}
-          transition={{
-            duration: 22,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2,
-          }}
-        />
-        <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#6366F1]/5 blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.6, 0.3],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#6366F1]/5 blur-3xl animate-ambient-center" />
 
-        {/* Floating Stats Background */}
+        {/* Floating Stats Background — CSS */}
         {floatingStats.map((stat, idx) => (
-          <motion.div
+          <div
             key={stat.label}
-            className="absolute hidden xl:block"
+            className="absolute hidden xl:block animate-fade-float"
             style={{
               top: `${15 + idx * 35}%`,
               right: `${5 + idx * 10}%`,
-            }}
-            animate={{
-              y: [0, -15, 0],
-              opacity: [0.3, 0.6, 0.3],
-            }}
-            transition={{
-              duration: 4 + idx * 1.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: idx * 0.5,
+              animationDelay: `${idx * 0.5}s`,
+              animationDuration: `${4 + idx * 1.5}s`,
             }}
           >
             <div className="bg-white/60 backdrop-blur-sm rounded-xl px-4 py-3 border border-[#E2E8F0] shadow-sm">
@@ -211,39 +171,19 @@ export default function Testimonials() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         ))}
 
-        {/* Decorative Quote Icons */}
-        <motion.div
-          className="absolute top-20 left-20 hidden lg:block text-8xl opacity-5"
-          animate={{
-            scale: [1, 1.1, 1],
-            rotate: [-5, 5, -5],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+        {/* Decorative Quote Icons — CSS */}
+        <div className="absolute top-20 left-20 hidden lg:block text-8xl opacity-5 animate-quote-float">
+          "
+        </div>
+        <div
+          className="absolute bottom-20 right-20 hidden lg:block text-8xl opacity-5 animate-quote-float"
+          style={{ animationDelay: "2s" }}
         >
           "
-        </motion.div>
-        <motion.div
-          className="absolute bottom-20 right-20 hidden lg:block text-8xl opacity-5"
-          animate={{
-            scale: [1, 1.1, 1],
-            rotate: [5, -5, 5],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2,
-          }}
-        >
-          "
-        </motion.div>
+        </div>
       </div>
 
       <Container>
@@ -285,12 +225,9 @@ export default function Testimonials() {
                 aria-label="View all success stories"
               >
                 <span>All Stories</span>
-                <motion.span
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
+                <span className="animate-bounce-x">
                   <ArrowRight size={16} />
-                </motion.span>
+                </span>
               </Link>
             </motion.div>
           </div>
@@ -306,125 +243,92 @@ export default function Testimonials() {
             transition={{ duration: 0.4 }}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
           >
-            {displayedTestimonials.map((testimonial, idx) => {
-              const isHovered = hoveredIndex === idx;
+            {displayedTestimonials.map((testimonial, idx) => (
+              <ScrollReveal key={testimonial.id} delay={idx * 0.08} direction="up">
+                <div className="relative group h-full">
+                  {/* Glow Effect — CSS */}
+                  <div className="absolute -inset-0.5 blur-2xl rounded-2xl transition-opacity duration-500 bg-[#0D9488] opacity-0 group-hover:opacity-15" />
 
-              return (
-                <motion.div
-                  key={testimonial.id}
-                  onHoverStart={() => setHoveredIndex(idx)}
-                  onHoverEnd={() => setHoveredIndex(null)}
-                  className="h-full"
-                >
-                  <ScrollReveal delay={idx * 0.08} direction="up">
-                    <div className="relative group h-full">
-                      {/* Glow Effect */}
-                      <motion.div
-                        className="absolute -inset-0.5 blur-2xl rounded-2xl transition-opacity duration-500"
-                        style={{
-                          background: '#0D9488',
-                          opacity: isHovered ? 0.15 : 0,
-                        }}
-                      />
+                  <div className="relative bg-white rounded-2xl border transition-all duration-500 h-full flex flex-col border-[#E2E8F0] shadow-sm group-hover:shadow-2xl group-hover:border-transparent">
+                    {/* Quote Icon */}
+                    <div className="absolute top-4 right-4 opacity-10">
+                      <Quote size={32} className="text-[#0B3C5D]" />
+                    </div>
 
-                      <div className={`
-                        relative bg-white rounded-2xl border transition-all duration-500 h-full flex flex-col
-                        ${isHovered ? 'shadow-2xl border-transparent' : 'border-[#E2E8F0] shadow-sm hover:shadow-xl'}
-                      `}>
-                        {/* Quote Icon */}
-                        <div className="absolute top-4 right-4 opacity-10">
-                          <Quote size={32} className="text-[#0B3C5D]" />
+                    <div className="p-6 flex flex-col flex-1">
+                      {/* Rating */}
+                      <div className="flex items-center gap-1 mb-3">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            size={14}
+                            className={`
+                              ${i < testimonial.rating
+                                ? 'fill-[#F97316] text-[#F97316]'
+                                : 'fill-[#E2E8F0] text-[#E2E8F0]'
+                              }
+                            `}
+                          />
+                        ))}
+                        <span className="text-xs text-[#94A3B8] ml-1">
+                          {testimonial.date}
+                        </span>
+                      </div>
+
+                      {/* Content */}
+                      <p className="text-sm text-[#475569] leading-relaxed flex-grow opacity-85 group-hover:opacity-100 transition-opacity duration-300">
+                        "{testimonial.content}"
+                      </p>
+
+                      {/* User Info */}
+                      <div className="mt-4 pt-4 border-t border-[#E2E8F0] flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0D9488]/10 to-[#0B3C5D]/10 flex items-center justify-center text-lg">
+                          {testimonial.name.charAt(0)}
                         </div>
-
-                        <div className="p-6 flex flex-col flex-1">
-                          {/* Rating */}
-                          <div className="flex items-center gap-1 mb-3">
-                            {[...Array(5)].map((_, i) => (
-                              <Star
-                                key={i}
-                                size={14}
-                                className={`
-                                  ${i < testimonial.rating
-                                    ? 'fill-[#F97316] text-[#F97316]'
-                                    : 'fill-[#E2E8F0] text-[#E2E8F0]'
-                                  }
-                                `}
-                              />
-                            ))}
-                            <span className="text-xs text-[#94A3B8] ml-1">
-                              {testimonial.date}
-                            </span>
+                        <div>
+                          <div className="text-sm font-bold text-[#0F172A]">
+                            {testimonial.name}
                           </div>
-
-                          {/* Content */}
-                          <motion.p
-                            className="text-sm text-[#475569] leading-relaxed flex-grow"
-                            animate={{
-                              opacity: isHovered ? 1 : 0.85,
-                            }}
-                          >
-                            "{testimonial.content}"
-                          </motion.p>
-
-                          {/* User Info */}
-                          <div className="mt-4 pt-4 border-t border-[#E2E8F0] flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0D9488]/10 to-[#0B3C5D]/10 flex items-center justify-center text-lg">
-                              {testimonial.name.charAt(0)}
-                            </div>
-                            <div>
-                              <div className="text-sm font-bold text-[#0F172A]">
-                                {testimonial.name}
-                              </div>
-                              <div className="text-xs text-[#94A3B8]">
-                                {testimonial.role} • {testimonial.location}
-                              </div>
-                              <div className="text-[10px] text-[#0D9488] font-medium mt-0.5">
-                                {testimonial.program} • {testimonial.college}
-                              </div>
-                            </div>
+                          <div className="text-xs text-[#94A3B8]">
+                            {testimonial.role} • {testimonial.location}
                           </div>
-
-                          {/* Tags */}
-                          <motion.div
-                            className="mt-3 flex flex-wrap gap-1"
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{
-                              opacity: isHovered ? 1 : 0,
-                              y: isHovered ? 0 : 10,
-                            }}
-                            transition={{ duration: 0.3 }}
-                          >
-                            {testimonial.tags.map((tag) => (
-                              <span
-                                key={tag}
-                                className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#F8FAFC] text-[#475569] border border-[#E2E8F0]"
-                              >
-                                {tag}
-                              </span>
-                            ))}
-                          </motion.div>
+                          <div className="text-[10px] text-[#0D9488] font-medium mt-0.5">
+                            {testimonial.program} • {testimonial.college}
+                          </div>
                         </div>
+                      </div>
 
-                        {/* Featured Badge */}
-                        {testimonial.featured && (
-                          <motion.div
-                            className="absolute top-3 left-3 z-10"
-                            initial={{ scale: 0, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                      {/* Tags — CSS hover reveal */}
+                      <div className="mt-3 flex flex-wrap gap-1 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                        {testimonial.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#F8FAFC] text-[#475569] border border-[#E2E8F0]"
                           >
-                            <div className="flex items-center gap-1 px-2 py-0.5 bg-gradient-to-r from-[#F97316] to-[#ea6c0c] rounded-full shadow-lg">
-                              <Sparkles size={10} className="text-white" />
-                              <span className="text-[8px] font-bold text-white">Featured</span>
-                            </div>
-                          </motion.div>
-                        )}
+                            {tag}
+                          </span>
+                        ))}
                       </div>
                     </div>
-                  </ScrollReveal>
-                </motion.div>
-              );
-            })}
+
+                    {/* Featured Badge */}
+                    {testimonial.featured && (
+                      <motion.div
+                        className="absolute top-3 left-3 z-10"
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                      >
+                        <div className="flex items-center gap-1 px-2 py-0.5 bg-gradient-to-r from-[#F97316] to-[#ea6c0c] rounded-full shadow-lg">
+                          <Sparkles size={10} className="text-white" />
+                          <span className="text-[8px] font-bold text-white">Featured</span>
+                        </div>
+                      </motion.div>
+                    )}
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
           </motion.div>
         </AnimatePresence>
 
@@ -475,24 +379,9 @@ export default function Testimonials() {
 
         {/* Bottom CTA */}
         <ScrollReveal direction="up" delay={0.6}>
-          <motion.div
-            className="mt-12 text-center"
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 400, damping: 15 }}
-          >
+          <div className="mt-12 text-center">
             <div className="relative inline-block">
-              <motion.div
-                className="absolute -inset-2 blur-2xl rounded-2xl bg-[#0D9488]/20"
-                animate={{
-                  scale: [1, 1.1, 1],
-                  opacity: [0.5, 0.8, 0.5],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
+              <div className="absolute -inset-2 blur-2xl rounded-2xl bg-[#0D9488]/20 animate-ambient-center" />
               <div className="relative">
                 <Button
                   as="a"
@@ -504,29 +393,15 @@ export default function Testimonials() {
                   <span className="relative z-10 flex items-center gap-2">
                     <MessageCircle size={18} />
                     Share Your Story
-                    <motion.span
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
+                    <span className="animate-bounce-x">
                       <ArrowRight size={18} />
-                    </motion.span>
+                    </span>
                   </span>
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-[#0B3C5D] via-[#0D9488] to-[#F97316] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{ backgroundSize: "200% 100%" }}
-                    animate={{
-                      backgroundPosition: ["0% 0%", "100% 0%"],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#0B3C5D] via-[#0D9488] to-[#F97316] opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-gradient-shift" />
                 </Button>
               </div>
             </div>
-          </motion.div>
+          </div>
         </ScrollReveal>
 
         {/* Disclosure note */}

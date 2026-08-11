@@ -1,13 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
   Sparkles,
   TrendingUp,
-  Award,
-  Clock,
   Users,
   ChevronRight,
   Star,
@@ -17,8 +14,6 @@ import {
 import { motion } from "framer-motion";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
-import CourseCard from "@/components/cards/CourseCard";
-import { getFeaturedCourses } from "@/lib/data/courses";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
 // Enhanced course data with additional fields
@@ -35,7 +30,7 @@ const enhancedCourses = [
     rating: 4.8,
     students: 1200,
     tags: ["CSE", "Mechanical", "Civil"],
-    accentColor: "#0B3C5D",
+    accentColor: "#147CC1",
     featured: true,
     icon: "⚡",
     startDate: "August 2024",
@@ -53,7 +48,7 @@ const enhancedCourses = [
     rating: 4.9,
     students: 850,
     tags: ["Nursing", "Healthcare", "Clinical"],
-    accentColor: "#0D9488",
+    accentColor: "#159447",
     featured: true,
     icon: "🏥",
     startDate: "September 2024",
@@ -71,7 +66,7 @@ const enhancedCourses = [
     rating: 4.7,
     students: 950,
     tags: ["Programming", "Web Dev", "Database"],
-    accentColor: "#F97316",
+    accentColor: "#F36C21",
     featured: true,
     icon: "💻",
     startDate: "August 2024",
@@ -86,59 +81,29 @@ const floatingStats = [
 ];
 
 export default function FeaturedCourses() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
   return (
     <section
       className="relative overflow-hidden py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#F8FAFC] via-white to-[#F8FAFC]"
       aria-labelledby="featured-courses-heading"
     >
-      {/* Ambient Background */}
+      {/* Ambient Background — CSS */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
-        <motion.div
-          className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-[#0B3C5D]/5 blur-3xl"
-          animate={{
-            x: [0, 30, -20, 0],
-            y: [0, -20, 30, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-[#0D9488]/5 blur-3xl"
-          animate={{
-            x: [0, -30, 20, 0],
-            y: [0, 30, -20, 0],
-          }}
-          transition={{
-            duration: 22,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2,
-          }}
+        <div className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-[#0B3C5D]/5 blur-3xl animate-ambient-slow" />
+        <div
+          className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-[#0D9488]/5 blur-3xl animate-ambient-slow-reverse"
+          style={{ animationDelay: "2s" }}
         />
 
-        {/* Floating Stats Background */}
+        {/* Floating Stats Background — CSS */}
         {floatingStats.map((stat, idx) => (
-          <motion.div
+          <div
             key={stat.label}
-            className="absolute hidden xl:block"
+            className="absolute hidden xl:block animate-fade-float"
             style={{
               top: `${20 + idx * 30}%`,
               right: `${5 + idx * 8}%`,
-            }}
-            animate={{
-              y: [0, -15, 0],
-              opacity: [0.3, 0.6, 0.3],
-            }}
-            transition={{
-              duration: 4 + idx * 1.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: idx * 0.5,
+              animationDelay: `${idx * 0.5}s`,
+              animationDuration: `${4 + idx * 1.5}s`,
             }}
           >
             <div className="bg-white/60 backdrop-blur-sm rounded-xl px-4 py-2 border border-[#E2E8F0] shadow-sm">
@@ -150,7 +115,7 @@ export default function FeaturedCourses() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
 
@@ -166,21 +131,13 @@ export default function FeaturedCourses() {
                 id="featured-courses-heading"
               />
 
-              {/* Decorative element */}
-              <motion.div
-                className="absolute -top-4 -left-8 text-3xl opacity-20"
-                animate={{
-                  rotate: [0, 10, -5, 0],
-                  scale: [1, 1.1, 1],
-                }}
-                transition={{
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
+              {/* Decorative element — CSS animation */}
+              <div
+                className="absolute -top-4 -left-8 text-3xl opacity-20 animate-float-y-rotate"
+                style={{ animationDuration: "6s" }}
               >
                 ✨
-              </motion.div>
+              </div>
             </div>
 
             <motion.div
@@ -194,201 +151,155 @@ export default function FeaturedCourses() {
                 aria-label="View all available courses"
               >
                 <span>View All Courses</span>
-                <motion.span
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
+                <span className="animate-bounce-x">
                   <ArrowRight size={16} />
-                </motion.span>
+                </span>
               </Link>
             </motion.div>
           </div>
         </ScrollReveal>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
-          {enhancedCourses.map((course, idx) => {
-            const isHovered = hoveredIndex === idx;
+          {enhancedCourses.map((course, idx) => (
+            <ScrollReveal key={course.slug} delay={idx * 0.08} direction="up">
+              <div className="h-full group">
+                <div className="relative h-full">
+                  {/* Glow Effect — CSS */}
+                  <div
+                    className="absolute -inset-0.5 blur-2xl rounded-2xl transition-opacity duration-500 opacity-0 group-hover:opacity-15"
+                    style={{ background: course.accentColor }}
+                  />
 
-            return (
-              <ScrollReveal key={course.slug} delay={idx * 0.08} direction="up">
-                <motion.div
-                  onHoverStart={() => setHoveredIndex(idx)}
-                  onHoverEnd={() => setHoveredIndex(null)}
-                  className="h-full"
-                >
-                  <div className="relative group h-full">
-                    {/* Glow Effect */}
-                    <motion.div
-                      className="absolute -inset-0.5 blur-2xl rounded-2xl transition-opacity duration-500"
-                      style={{
-                        background: course.accentColor,
-                        opacity: isHovered ? 0.15 : 0,
-                      }}
-                    />
+                  <div className="relative bg-white rounded-2xl border transition-all duration-500 h-full flex flex-col overflow-hidden border-[#E2E8F0] shadow-sm group-hover:shadow-2xl group-hover:border-transparent">
+                    {/* Top Gradient Bar */}
+                    <div className="h-1 w-full relative overflow-hidden flex-shrink-0">
+                      <div
+                        className="absolute inset-0"
+                        style={{ backgroundColor: course.accentColor }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
+                    </div>
 
-                    <div className={`
-                      relative bg-white rounded-2xl border transition-all duration-500 h-full flex flex-col overflow-hidden
-                      ${isHovered ? 'shadow-2xl border-transparent' : 'border-[#E2E8F0] shadow-sm hover:shadow-xl'}
-                    `}>
-                      {/* Top Gradient Bar */}
-                      <div className="h-1 w-full relative overflow-hidden flex-shrink-0">
-                        <div
-                          className="absolute inset-0"
-                          style={{ backgroundColor: course.accentColor }}
-                        />
-                        <motion.div
-                          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent"
-                          initial={{ x: '-100%' }}
-                          animate={{ x: isHovered ? '100%' : '-100%' }}
-                          transition={{ duration: 1, ease: "easeInOut" }}
-                        />
-                      </div>
-
-                      <div className="p-6 flex flex-col flex-1">
-                        {/* Header with Icon and Badge */}
-                        <div className="flex items-start justify-between mb-4">
-                          <div className="flex items-center gap-3">
-                            <motion.div
-                              className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl bg-gradient-to-br from-[#F8FAFC] to-white border border-[#E2E8F0]"
-                              animate={{
-                                scale: isHovered ? 1.1 : 1,
-                                rotate: isHovered ? -5 : 0,
-                              }}
-                              transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                            >
-                              {course.icon}
-                            </motion.div>
-                            <div>
-                              <span
-                                className="text-xs font-semibold"
-                                style={{ color: course.accentColor }}
-                              >
-                                {course.category}
-                              </span>
-                              <div className="text-[10px] text-[#94A3B8]">{course.level}</div>
-                            </div>
+                    <div className="p-6 flex flex-col flex-1">
+                      {/* Header with Icon and Badge */}
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl bg-gradient-to-br from-[#F8FAFC] to-white border border-[#E2E8F0] transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-5">
+                            {course.icon}
                           </div>
-
-                          <motion.div
-                            className="flex items-center gap-1 bg-[#F8FAFC] px-2 py-1 rounded-lg"
-                            initial={{ scale: 0 }}
-                            animate={{ scale: isHovered ? 1 : 0 }}
-                            transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                          >
-                            <Star size={12} className="fill-[#F97316] text-[#F97316]" />
-                            <span className="text-xs font-bold text-[#0F172A]">{course.rating}</span>
-                          </motion.div>
-                        </div>
-
-                        {/* Title */}
-                        <motion.h3
-                          className="text-lg font-bold text-[#0F172A] mb-2 leading-tight"
-                          animate={{
-                            color: isHovered ? course.accentColor : '#0F172A',
-                          }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          {course.title}
-                        </motion.h3>
-
-                        {/* Description */}
-                        <p className="text-sm text-[#475569] leading-relaxed flex-grow">
-                          {course.description}
-                        </p>
-
-                        {/* Course Details Grid */}
-                        <motion.div
-                          className="grid grid-cols-2 gap-2 mt-4"
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{
-                            opacity: isHovered ? 1 : 0.6,
-                            y: 0,
-                          }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          <div className="bg-[#F8FAFC] rounded-lg p-2 text-center">
-                            <div className="flex items-center justify-center gap-1">
-                              <Calendar size={12} className="text-[#0D9488]" />
-                              <span className="text-[10px] font-medium text-[#0F172A]">{course.duration}</span>
-                            </div>
-                            <div className="text-[8px] text-[#94A3B8]">Duration</div>
-                          </div>
-                          <div className="bg-[#F8FAFC] rounded-lg p-2 text-center">
-                            <div className="flex items-center justify-center gap-1">
-                              <Users size={12} className="text-[#0B3C5D]" />
-                              <span className="text-[10px] font-medium text-[#0F172A]">{course.students}+</span>
-                            </div>
-                            <div className="text-[8px] text-[#94A3B8]">Students</div>
-                          </div>
-                        </motion.div>
-
-                        {/* Tags */}
-                        <div className="mt-4 flex flex-wrap gap-1.5">
-                          {course.tags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="text-[10px] font-medium px-2.5 py-1 rounded-full bg-[#F8FAFC] text-[#475569] border border-[#E2E8F0]"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-
-                        {/* Bottom Section */}
-                        <div className="mt-4 pt-4 border-t border-[#E2E8F0] flex items-center justify-between">
                           <div>
-                            <div className="text-[10px] text-[#94A3B8]">Placement Rate</div>
-                            <div className="text-sm font-bold" style={{ color: course.accentColor }}>
-                              {course.placements}
-                            </div>
-                          </div>
-                          <motion.div
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                          >
-                            <Link
-                              href={`/courses/${course.slug}`}
-                              className={`
-                                inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold 
-                                rounded-xl transition-all duration-300
-                                ${isHovered
-                                  ? 'text-white shadow-lg'
-                                  : 'text-[#0B3C5D] hover:text-[#0D9488]'
-                                }
-                              `}
-                              style={{
-                                backgroundColor: isHovered ? course.accentColor : 'transparent',
-                              }}
-                              aria-label={`View ${course.title} details`}
+                            <span
+                              className="text-xs font-semibold"
+                              style={{ color: course.accentColor }}
                             >
-                              View Details
-                              <ChevronRight size={14} />
-                            </Link>
-                          </motion.div>
+                              {course.category}
+                            </span>
+                            <div className="text-[10px] text-[#94A3B8]">{course.level}</div>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-1 bg-[#F8FAFC] px-2 py-1 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300">
+                          <Star size={12} className="fill-[#F97316] text-[#F97316]" />
+                          <span className="text-xs font-bold text-[#0F172A]">{course.rating}</span>
                         </div>
                       </div>
 
-                      {/* Featured Badge */}
-                      {course.featured && (
+                      {/* Title */}
+                      <h3
+                        className="text-lg font-bold text-[#0F172A] mb-2 leading-tight transition-colors duration-300 group-hover:text-[var(--accent)]"
+                        style={{ '--accent': course.accentColor } as React.CSSProperties}
+                      >
+                        {course.title}
+                      </h3>
+
+                      {/* Description */}
+                      <p className="text-sm text-[#475569] leading-relaxed flex-grow">
+                        {course.description}
+                      </p>
+
+                      {/* Course Details Grid */}
+                      <div className="grid grid-cols-2 gap-2 mt-4 opacity-60 group-hover:opacity-100 transition-opacity duration-300">
+                        <div className="bg-[#F8FAFC] rounded-lg p-2 text-center">
+                          <div className="flex items-center justify-center gap-1">
+                            <Calendar size={12} className="text-[#0D9488]" />
+                            <span className="text-[10px] font-medium text-[#0F172A]">{course.duration}</span>
+                          </div>
+                          <div className="text-[8px] text-[#94A3B8]">Duration</div>
+                        </div>
+                        <div className="bg-[#F8FAFC] rounded-lg p-2 text-center">
+                          <div className="flex items-center justify-center gap-1">
+                            <Users size={12} className="text-[#0B3C5D]" />
+                            <span className="text-[10px] font-medium text-[#0F172A]">{course.students}+</span>
+                          </div>
+                          <div className="text-[8px] text-[#94A3B8]">Students</div>
+                        </div>
+                      </div>
+
+                      {/* Tags */}
+                      <div className="mt-4 flex flex-wrap gap-1.5">
+                        {course.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="text-[10px] font-medium px-2.5 py-1 rounded-full bg-[#F8FAFC] text-[#475569] border border-[#E2E8F0]"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Bottom Section */}
+                      <div className="mt-4 pt-4 border-t border-[#E2E8F0] flex items-center justify-between">
+                        <div>
+                          <div className="text-[10px] text-[#94A3B8]">Placement Rate</div>
+                          <div className="text-sm font-bold" style={{ color: course.accentColor }}>
+                            {course.placements}
+                          </div>
+                        </div>
                         <motion.div
-                          className="absolute top-4 right-4 z-10"
-                          initial={{ scale: 0, opacity: 0 }}
-                          animate={{ scale: 1, opacity: 1 }}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
                           transition={{ type: "spring", stiffness: 400, damping: 15 }}
                         >
-                          <div className="flex items-center gap-1 px-2.5 py-1 bg-gradient-to-r from-[#F97316] to-[#ea6c0c] rounded-full shadow-lg">
-                            <Sparkles size={10} className="text-white" />
-                            <span className="text-[8px] font-bold text-white tracking-wider">Featured</span>
-                          </div>
+                          <Link
+                            href={`/courses/${course.slug}`}
+                            className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-xl transition-all duration-300 text-[#0B3C5D] hover:text-[#0D9488] group-hover:text-white group-hover:shadow-lg"
+                            style={{
+                              backgroundColor: 'transparent',
+                            }}
+                            aria-label={`View ${course.title} details`}
+                          >
+                            <span
+                              className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                              style={{ backgroundColor: course.accentColor }}
+                            />
+                            <span className="relative z-10 flex items-center gap-1.5">
+                              View Details
+                              <ChevronRight size={14} />
+                            </span>
+                          </Link>
                         </motion.div>
-                      )}
+                      </div>
                     </div>
+
+                    {/* Featured Badge */}
+                    {course.featured && (
+                      <motion.div
+                        className="absolute top-4 right-4 z-10"
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                      >
+                        <div className="flex items-center gap-1 px-2.5 py-1 bg-gradient-to-r from-[#F97316] to-[#ea6c0c] rounded-full shadow-lg">
+                          <Sparkles size={10} className="text-white" />
+                          <span className="text-[8px] font-bold text-white tracking-wider">Featured</span>
+                        </div>
+                      </motion.div>
+                    )}
                   </div>
-                </motion.div>
-              </ScrollReveal>
-            );
-          })}
+                </div>
+              </div>
+            </ScrollReveal>
+          ))}
         </div>
 
         {/* Bottom Stats Bar */}

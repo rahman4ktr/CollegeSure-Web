@@ -115,11 +115,10 @@ export default function Navbar() {
 
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
           <div className="flex items-center justify-between gap-4">
-            {/* Logo with 3D hover effect */}
+            {/* Logo */}
             <motion.div
-              whileHover={{ scale: 1.05, rotateZ: -2 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
               className="relative"
             >
               <Link
@@ -128,21 +127,16 @@ export default function Navbar() {
                 aria-label="CollegeSure — Home"
               >
                 <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#0B3C5D] to-[#0D9488] rounded-xl blur-md opacity-50 group-hover:opacity-75 transition-opacity duration-300" />
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0B3C5D] to-[#0D9488] flex items-center justify-center shadow-lg group-hover:shadow-[#0D9488]/30 relative z-10 transition-all duration-300">
-                    <GraduationCap size={20} className="text-white" />
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#591084] to-[#B30F66] flex items-center justify-center shadow-md shadow-[#B30F66]/20 relative z-10 transition-transform group-hover:scale-105">
+                    <GraduationCap size={22} className="text-white" />
                   </div>
                 </div>
                 <div className="relative">
-                  <motion.span
-                    className="font-bold text-xl text-[#0B3C5D] leading-none block tracking-tight"
-                    whileHover={{ color: "#0D9488" }}
-                    transition={{ duration: 0.3 }}
-                  >
+                  <span className="font-extrabold text-xl text-[#04164B] leading-none block tracking-tight">
                     CollegeSure
-                  </motion.span>
-                  <span className="text-[10px] text-[#0D9488] font-semibold leading-none tracking-[0.15em] uppercase flex items-center gap-1">
-                    <Sparkles size={10} className="text-[#0D9488]" />
+                  </span>
+                  <span className="text-[10px] text-[#B30F66] font-bold leading-none tracking-[0.15em] uppercase flex items-center gap-1 mt-0.5">
+                    <Sparkles size={9} className="text-[#B30F66]" />
                     by Brainzima
                   </span>
                 </div>

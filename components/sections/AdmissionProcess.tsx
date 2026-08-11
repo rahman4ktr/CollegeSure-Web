@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import {
@@ -79,72 +78,32 @@ const floatingElements = [
 ];
 
 export default function AdmissionProcess() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
   return (
     <section
       className="relative overflow-hidden py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-white via-[#F8FAFC] to-white"
       aria-labelledby="process-heading"
     >
-      {/* Ambient Background */}
+      {/* Ambient Background — CSS */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
-        <motion.div
-          className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#0D9488]/5 blur-3xl"
-          animate={{
-            x: [0, -30, 20, 0],
-            y: [0, 20, -30, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#0D9488]/5 blur-3xl animate-ambient-slow" />
+        <div
+          className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#F97316]/5 blur-3xl animate-ambient-slow-reverse"
+          style={{ animationDelay: "2s" }}
         />
-        <motion.div
-          className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#F97316]/5 blur-3xl"
-          animate={{
-            x: [0, 30, -20, 0],
-            y: [0, -20, 30, 0],
-          }}
-          transition={{
-            duration: 22,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2,
-          }}
-        />
-        <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#6366F1]/5 blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.6, 0.3],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#6366F1]/5 blur-3xl animate-ambient-center" />
 
-        {/* Floating Elements */}
+        {/* Floating Elements — CSS */}
         {floatingElements.map((item, idx) => (
-          <motion.div
+          <div
             key={idx}
-            className={`absolute ${item.position} hidden lg:block`}
-            animate={{
-              y: [0, -20, 0],
-              rotate: [0, 10, -5, 0],
-              scale: [1, 1.1, 1],
-            }}
-            transition={{
-              duration: 6 + idx * 1.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: item.delay,
+            className={`absolute ${item.position} hidden lg:block animate-float-y-rotate`}
+            style={{
+              animationDelay: `${item.delay}s`,
+              animationDuration: `${6 + idx * 1.5}s`,
             }}
           >
             <item.icon size={28} className="text-[#0D9488]/20" />
-          </motion.div>
+          </div>
         ))}
       </div>
 
@@ -165,15 +124,8 @@ export default function AdmissionProcess() {
           <div className="hidden lg:block absolute top-16 left-[12.5%] right-[12.5%] h-0.5" aria-hidden>
             <div className="relative w-full h-full">
               <div className="absolute inset-0 bg-gradient-to-r from-[#0B3C5D]/20 via-[#0D9488]/40 to-[#F97316]/20" />
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-[#0D9488] via-[#F97316] to-[#0D9488]"
-                initial={{ x: '-100%' }}
-                animate={{ x: '100%' }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
+              <div
+                className="absolute inset-0 bg-gradient-to-r from-[#0D9488] via-[#F97316] to-[#0D9488] animate-shimmer-slide"
               />
             </div>
           </div>
@@ -181,107 +133,50 @@ export default function AdmissionProcess() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {steps.map((step, index) => {
               const Icon = step.icon;
-              const isHovered = hoveredIndex === index;
 
               return (
                 <ScrollReveal key={step.number} delay={index * 0.12} direction="up">
-                  <motion.div
-                    onHoverStart={() => setHoveredIndex(index)}
-                    onHoverEnd={() => setHoveredIndex(null)}
-                    className="h-full"
-                  >
+                  <div className="h-full group">
                     <Card3DTilt glowColor={`${step.color}25`} className="h-full">
                       <div
-                        className={`
-                          relative flex flex-col items-center text-center lg:items-start lg:text-left 
-                          p-6 rounded-2xl transition-all duration-500 h-full
-                          ${isHovered ? 'shadow-2xl border-transparent' : 'shadow-sm hover:shadow-xl'}
-                          border ${isHovered ? 'border-transparent' : 'border-[#E2E8F0]'}
-                        `}
-                        style={{
-                          background: isHovered
-                            ? `linear-gradient(135deg, #ffffff, ${step.color}05)`
-                            : '#ffffff',
-                        }}
+                        className="relative flex flex-col items-center text-center lg:items-start lg:text-left p-6 rounded-2xl transition-all duration-500 h-full shadow-sm hover:shadow-2xl border border-[#E2E8F0] hover:border-transparent bg-white group-hover:bg-gradient-to-br"
                       >
-                        {/* Animated Background Gradient */}
-                        <motion.div
-                          className={`absolute inset-0 bg-gradient-to-br ${step.gradient} opacity-0 transition-opacity duration-500 rounded-2xl`}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: isHovered ? 1 : 0 }}
-                        />
+                        {/* Animated Background Gradient — CSS */}
+                        <div className={`absolute inset-0 bg-gradient-to-br ${step.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl`} />
 
-                        {/* Glow Effect */}
-                        <motion.div
-                          className="absolute -inset-1 blur-2xl opacity-0 transition-opacity duration-500 rounded-2xl"
-                          style={{
-                            background: step.color,
-                            opacity: isHovered ? 0.1 : 0,
-                          }}
+                        {/* Glow Effect — CSS */}
+                        <div
+                          className="absolute -inset-1 blur-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl"
+                          style={{ background: step.color }}
                         />
 
                         {/* Step Number - Desktop */}
-                        <motion.div
-                          className="hidden lg:block absolute top-4 right-4 z-10"
-                          animate={{
-                            scale: isHovered ? 1.1 : 1,
-                            rotate: isHovered ? -5 : 0,
-                          }}
-                          transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                        >
+                        <div className="hidden lg:block absolute top-4 right-4 z-10 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-5">
                           <span
-                            className="text-5xl font-black leading-none"
-                            style={{
-                              color: isHovered ? step.color : '#E2E8F0',
-                              opacity: isHovered ? 0.3 : 1,
-                            }}
+                            className="text-5xl font-black leading-none transition-all duration-300"
+                            style={{ color: '#E2E8F0' }}
                           >
                             {step.number}
                           </span>
-                        </motion.div>
+                        </div>
 
                         {/* Icon Section */}
                         <div className="relative z-10 flex flex-col items-center lg:items-start w-full">
-                          <motion.div
-                            className="relative"
-                            whileHover={{ rotate: -5 }}
-                            transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                          >
+                          <div className="relative">
                             <div
                               className={`
                                 w-16 h-16 rounded-2xl flex items-center justify-center 
                                 transition-all duration-500 relative
                                 ${step.iconBg} 
-                                ${isHovered ? 'scale-110 shadow-lg' : 'shadow-md'}
+                                shadow-md group-hover:scale-110 group-hover:shadow-lg
                               `}
                               style={{
-                                backgroundColor: isHovered ? step.color : step.color,
-                                boxShadow: isHovered ? `0 20px 40px ${step.color}40` : undefined,
+                                backgroundColor: step.color,
                               }}
                             >
                               <Icon
                                 size={28}
-                                className="text-white transition-all duration-500"
-                                style={{
-                                  transform: isHovered ? 'scale(1.1)' : 'scale(1)',
-                                }}
-                              />
-
-                              {/* Pulse Ring */}
-                              <motion.div
-                                className="absolute inset-0 rounded-2xl"
-                                animate={{
-                                  scale: isHovered ? [1, 1.2, 1] : 1,
-                                  opacity: isHovered ? [0.5, 0, 0.5] : 0,
-                                }}
-                                transition={{
-                                  duration: 1.5,
-                                  repeat: isHovered ? Infinity : 0,
-                                  ease: "easeInOut",
-                                }}
-                                style={{
-                                  border: `2px solid ${step.color}`,
-                                }}
+                                className="text-white transition-all duration-500 group-hover:scale-110"
                               />
                             </div>
 
@@ -294,40 +189,24 @@ export default function AdmissionProcess() {
                                 {step.number}
                               </span>
                             </div>
-                          </motion.div>
+                          </div>
                         </div>
 
                         {/* Content */}
                         <div className="relative z-10 mt-4 w-full">
-                          <motion.h3
-                            className="text-lg font-bold text-[#0F172A] mb-2 leading-snug"
-                            animate={{
-                              color: isHovered ? step.color : '#0F172A',
-                            }}
-                            transition={{ duration: 0.3 }}
+                          <h3
+                            className="text-lg font-bold text-[#0F172A] mb-2 leading-snug transition-colors duration-300 group-hover:text-[var(--accent)]"
+                            style={{ '--accent': step.color } as React.CSSProperties}
                           >
                             {step.title}
-                          </motion.h3>
+                          </h3>
 
-                          <motion.p
-                            className="text-sm text-[#475569] leading-relaxed"
-                            animate={{
-                              opacity: isHovered ? 1 : 0.85,
-                            }}
-                          >
+                          <p className="text-sm text-[#475569] leading-relaxed opacity-85 group-hover:opacity-100 transition-opacity duration-300">
                             {step.description}
-                          </motion.p>
+                          </p>
 
-                          {/* Stats Card */}
-                          <motion.div
-                            className="mt-4 pt-4 border-t border-[#E2E8F0]"
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{
-                              opacity: isHovered ? 1 : 0,
-                              y: isHovered ? 0 : 10,
-                            }}
-                            transition={{ duration: 0.3 }}
-                          >
+                          {/* Stats Card — CSS hover reveal */}
+                          <div className="mt-4 pt-4 border-t border-[#E2E8F0] opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
                             <div className="flex items-center gap-3">
                               <div
                                 className="w-10 h-10 rounded-xl flex items-center justify-center"
@@ -349,20 +228,17 @@ export default function AdmissionProcess() {
                                 </div>
                               </div>
                             </div>
-                          </motion.div>
+                          </div>
                         </div>
 
-                        {/* Bottom Border Animation */}
-                        <motion.div
-                          className="absolute bottom-0 left-0 h-1 rounded-b-2xl"
+                        {/* Bottom Border Animation — CSS */}
+                        <div
+                          className="absolute bottom-0 left-0 h-1 rounded-b-2xl w-0 group-hover:w-full transition-all duration-500"
                           style={{ backgroundColor: step.color }}
-                          initial={{ width: '0%' }}
-                          animate={{ width: isHovered ? '100%' : '0%' }}
-                          transition={{ duration: 0.5 }}
                         />
                       </div>
                     </Card3DTilt>
-                  </motion.div>
+                  </div>
                 </ScrollReveal>
               );
             })}
@@ -371,25 +247,10 @@ export default function AdmissionProcess() {
 
         {/* Enhanced CTA Section */}
         <ScrollReveal delay={0.4} direction="up">
-          <motion.div
-            className="mt-16 text-center"
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 400, damping: 15 }}
-          >
+          <div className="mt-16 text-center">
             <div className="relative inline-block">
-              {/* Glow behind CTA */}
-              <motion.div
-                className="absolute -inset-2 blur-2xl rounded-2xl bg-[#0D9488]/20"
-                animate={{
-                  scale: [1, 1.1, 1],
-                  opacity: [0.5, 0.8, 0.5],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
+              {/* Glow behind CTA — CSS */}
+              <div className="absolute -inset-2 blur-2xl rounded-2xl bg-[#0D9488]/20 animate-ambient-center" />
 
               <div className="relative">
                 <Button
@@ -402,24 +263,12 @@ export default function AdmissionProcess() {
                   <span className="relative z-10 flex items-center gap-2">
                     <Sparkles size={18} />
                     Start Your Journey
-                    <motion.span
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
+                    <span className="animate-bounce-x">
                       <ArrowRight size={18} />
-                    </motion.span>
+                    </span>
                   </span>
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-[#0B3C5D] via-[#0D9488] to-[#F97316] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{ backgroundSize: "200% 100%" }}
-                    animate={{
-                      backgroundPosition: ["0% 0%", "100% 0%"],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
+                  <div
+                    className="absolute inset-0 bg-gradient-to-r from-[#0B3C5D] via-[#0D9488] to-[#F97316] opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-gradient-shift"
                   />
                 </Button>
               </div>
@@ -449,7 +298,7 @@ export default function AdmissionProcess() {
                 <span className="text-xs text-[#94A3B8]">Trusted by 15,000+ students</span>
               </div>
             </motion.div>
-          </motion.div>
+          </div>
         </ScrollReveal>
       </Container>
 

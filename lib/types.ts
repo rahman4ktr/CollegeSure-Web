@@ -28,6 +28,16 @@ export interface University {
   courses: string[];
   description: string;
   highlights: string[];
+  image?: string;
+  rating?: number;
+  students?: number | string;
+  programs?: number;
+  placement?: string;
+  established?: string;
+  accentColor?: string;
+  tags?: string[];
+  featured?: boolean;
+  gallery?: string[];
 }
 
 export interface Testimonial {

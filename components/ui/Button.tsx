@@ -71,17 +71,17 @@ export type ButtonProps = ButtonAsButton | ButtonAsLink | ButtonAsAnchor;
 
 const variantStyles: Record<Variant, string> = {
   primary:
-    "bg-[#F97316] text-white hover:bg-[#ea6c0c] shadow-[0_2px_8px_rgba(249,115,22,0.3)] hover:shadow-[0_4px_16px_rgba(249,115,22,0.4)] border border-transparent",
+    "bg-[#B30F66] text-white hover:bg-[#591084] shadow-[0_2px_8px_rgba(179,15,102,0.3)] hover:shadow-[0_4px_16px_rgba(89,16,132,0.4)] border border-transparent",
   secondary:
-    "bg-[#0B3C5D] text-white hover:bg-[#082d45] shadow-[0_2px_8px_rgba(11,60,93,0.2)] hover:shadow-[0_4px_16px_rgba(11,60,93,0.3)] border border-transparent",
+    "bg-[#04164B] text-white hover:bg-[#040943] shadow-[0_2px_8px_rgba(4,22,75,0.2)] hover:shadow-[0_4px_16px_rgba(4,22,75,0.3)] border border-transparent",
   teal:
-    "bg-[#0D9488] text-white hover:bg-[#0a7a6f] shadow-[0_2px_8px_rgba(13,148,136,0.25)] hover:shadow-[0_4px_16px_rgba(13,148,136,0.35)] border border-transparent",
+    "bg-[#159447] text-white hover:bg-[#0f6b33] shadow-[0_2px_8px_rgba(21,148,71,0.25)] hover:shadow-[0_4px_16px_rgba(21,148,71,0.35)] border border-transparent",
   orange:
-    "bg-[#F97316] text-white hover:bg-[#ea6c0c] shadow-[0_2px_8px_rgba(249,115,22,0.3)] hover:shadow-[0_4px_16px_rgba(249,115,22,0.4)] border border-transparent",
+    "bg-[#F36C21] text-white hover:bg-[#d85810] shadow-[0_2px_8px_rgba(243,108,33,0.3)] hover:shadow-[0_4px_16px_rgba(243,108,33,0.4)] border border-transparent",
   navy:
-    "bg-[#0B3C5D] text-white hover:bg-[#082d45] shadow-[0_2px_8px_rgba(11,60,93,0.2)] hover:shadow-[0_4px_16px_rgba(11,60,93,0.3)] border border-transparent",
+    "bg-[#04164B] text-white hover:bg-[#040943] shadow-[0_2px_8px_rgba(4,22,75,0.2)] hover:shadow-[0_4px_16px_rgba(4,22,75,0.3)] border border-transparent",
   outline:
-    "bg-transparent border-2 border-[#0B3C5D] text-[#0B3C5D] hover:bg-[#0B3C5D] hover:text-white",
+    "bg-transparent border-2 border-[#04164B] text-[#04164B] hover:bg-[#04164B] hover:text-white",
   ghost:
     "bg-transparent text-[#475569] hover:bg-[#F8FAFC] hover:text-[#0F172A] border border-transparent",
   gradient:

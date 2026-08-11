@@ -66,16 +66,16 @@ export default function MedicalCoursesPage() {
   const courses = getCoursesByCategory("medical");
 
   return (
-    <div ref={containerRef} className="relative overflow-hidden bg-[#F8FAFC]">
+    <div ref={containerRef} className="relative overflow-hidden bg-[#FDFDFD]">
       {/* Enhanced Hero Section */}
       <motion.div
-        className="relative overflow-hidden bg-gradient-to-br from-[#0B3C5D] via-[#082d45] to-[#1a5276] pt-8 pb-16 sm:pt-12 sm:pb-20"
+        className="relative overflow-hidden bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084] pt-8 pb-16 sm:pt-12 sm:pb-20"
         style={{ opacity: heroOpacity, y: heroY }}
       >
         {/* Animated Background */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
           <motion.div
-            className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#0D9488]/20 blur-3xl"
+            className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#159447]/20 blur-3xl"
             animate={{
               x: [0, -30, 20, 0],
               y: [0, 20, -30, 0],
@@ -87,7 +87,7 @@ export default function MedicalCoursesPage() {
             }}
           />
           <motion.div
-            className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#3B82F6]/15 blur-3xl"
+            className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#B30F66]/20 blur-3xl"
             animate={{
               x: [0, 30, -20, 0],
               y: [0, -20, 30, 0],
@@ -97,18 +97,6 @@ export default function MedicalCoursesPage() {
               repeat: Infinity,
               ease: "easeInOut",
               delay: 2,
-            }}
-          />
-          <motion.div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#F97316]/10 blur-3xl"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.5, 0.3],
-            }}
-            transition={{
-              duration: 18,
-              repeat: Infinity,
-              ease: "easeInOut",
             }}
           />
 
@@ -178,7 +166,7 @@ export default function MedicalCoursesPage() {
                   <Badge
                     variant="teal"
                     icon={<Sparkles size={12} />}
-                    className="bg-white/10 backdrop-blur-sm border-white/20 text-white"
+                    className="bg-[#159447]/20 border-[#159447]/40 text-white"
                   >
                     Healthcare Programs
                   </Badge>
@@ -187,10 +175,10 @@ export default function MedicalCoursesPage() {
                     Nursing & Paramedical
                   </Badge>
                 </div>
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight mb-4">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-tight mb-4">
                   Medical &
                   <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0D9488] via-[#3B82F6] to-[#F97316]">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#159447] via-[#B30F66] to-[#F7D51A]">
                     Paramedical Courses
                   </span>
                 </h1>
@@ -202,15 +190,15 @@ export default function MedicalCoursesPage() {
                 {/* Quick Stats */}
                 <div className="flex flex-wrap gap-3 mt-6">
                   <div className="flex items-center gap-2 text-sm text-white/90 font-medium bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/10">
-                    <Clock size={16} className="text-[#0D9488]" />
+                    <Clock size={16} className="text-[#159447]" />
                     3-4 Years
                   </div>
                   <div className="flex items-center gap-2 text-sm text-white/90 font-medium bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/10">
-                    <GraduationCap size={16} className="text-[#3B82F6]" />
+                    <GraduationCap size={16} className="text-[#B30F66]" />
                     10+2 with PCB
                   </div>
                   <div className="flex items-center gap-2 text-sm text-white/90 font-medium bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/10">
-                    <MapPin size={16} className="text-[#F97316]" />
+                    <MapPin size={16} className="text-[#F36C21]" />
                     Multiple Cities
                   </div>
                 </div>
@@ -222,7 +210,7 @@ export default function MedicalCoursesPage() {
               <div className="flex flex-col sm:flex-row lg:flex-col gap-3">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#0D9488] to-[#0a7a6f] hover:from-[#0a7a6f] hover:to-[#086b61] text-white font-bold px-8 py-4 rounded-2xl shadow-[0_4px_24px_rgba(13,148,136,0.35)] transition-all duration-200 hover:scale-[1.03] hover:shadow-[0_8px_32px_rgba(13,148,136,0.45)]"
+                  className="inline-flex items-center justify-center gap-2 bg-[#B30F66] hover:bg-[#591084] text-white font-bold px-8 py-4 rounded-2xl shadow-xl shadow-[#B30F66]/30 transition-all duration-200 hover:scale-[1.03]"
                 >
                   <MessageCircle size={18} />
                   <span>Request Free Counselling</span>
@@ -274,15 +262,15 @@ export default function MedicalCoursesPage() {
       </div>
 
       {/* Specializations Section */}
-      <div id="specializations" className="bg-[#F8FAFC] border-b border-[#E2E8F0] py-12">
+      <div id="specializations" className="bg-[#FEF2F7]/50 border-b border-[#E2E8F0] py-12">
         <Container>
           <ScrollReveal direction="up">
             <div className="text-center mb-10">
               <Badge variant="teal" className="mb-3">Healthcare Specializations</Badge>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#0B3C5D] mb-3">
-                Popular <span className="text-[#0D9488]">Medical</span> Programs
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#04164B] mb-3">
+                Popular <span className="text-[#159447]">Medical</span> Programs
               </h2>
-              <p className="text-[#475569] max-w-2xl mx-auto">
+              <p className="text-[#475569] max-w-2xl mx-auto font-medium">
                 Choose from a wide range of nursing and paramedical programs offered at top healthcare institutions.
               </p>
             </div>
@@ -293,7 +281,7 @@ export default function MedicalCoursesPage() {
                 return (
                   <motion.div
                     key={idx}
-                    className="flex items-center gap-3 p-4 bg-white rounded-xl border border-[#E2E8F0] hover:shadow-md hover:border-[#0D9488]/30 transition-all duration-300 group"
+                    className="flex items-center gap-3 p-4 bg-white rounded-xl border border-[#E2E8F0] hover:shadow-md hover:border-[#159447]/40 transition-all duration-300 group"
                     whileHover={{ x: 4, scale: 1.02 }}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -305,7 +293,7 @@ export default function MedicalCoursesPage() {
                     >
                       <Icon size={14} style={{ color: spec.color }} />
                     </div>
-                    <span className="text-sm font-medium text-[#475569] group-hover:text-[#0B3C5D] transition-colors">
+                    <span className="text-sm font-semibold text-[#475569] group-hover:text-[#04164B] transition-colors">
                       {spec.name}
                     </span>
                   </motion.div>
@@ -317,15 +305,15 @@ export default function MedicalCoursesPage() {
       </div>
 
       {/* Main Grid */}
-      <div className="bg-[#F8FAFC] section-py">
+      <div className="bg-[#FDFDFD] section-py">
         <Container>
           <div className="flex items-center justify-between mb-8">
             <div>
               <div className="flex items-center gap-3 mb-1">
-                <div className="w-10 h-10 rounded-xl bg-[#0D9488]/10 flex items-center justify-center">
-                  <Stethoscope size={20} className="text-[#0D9488]" />
+                <div className="w-10 h-10 rounded-xl bg-[#159447]/10 flex items-center justify-center">
+                  <Stethoscope size={20} className="text-[#159447]" />
                 </div>
-                <h2 className="text-2xl font-bold text-[#0B3C5D]">
+                <h2 className="text-2xl font-extrabold text-[#04164B]">
                   All Medical & Paramedical Courses
                 </h2>
               </div>
