@@ -34,10 +34,11 @@ export const defaultMetadata: Metadata = {
   manifest: "/manifest.json",
   icons: {
     icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon.png", type: "image/png" },
       { url: "/images/faviconLogo.png", type: "image/png" },
-      { url: "/faviconLogo.png", type: "image/png" },
     ],
-    shortcut: "/images/faviconLogo.png",
+    shortcut: "/favicon.ico",
     apple: "/images/faviconLogo.png",
   },
   openGraph: {
