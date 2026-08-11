@@ -65,14 +65,30 @@ export default function FreeCounsellingPage() {
     formRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate instant fast submission
-    setTimeout(() => {
+    try {
+      await fetch("/api/send-counselling", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          phone: formData.phone,
+          email: formData.email,
+          course: formData.course,
+          preferredContact: formData.preferredContact,
+          message: formData.helpNote,
+          sourcePage: "Free Counselling Page",
+        }),
+      });
       setIsSubmitting(false);
       setIsSubmitted(true);
-    }, 600);
+    } catch (err) {
+      console.error(err);
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+    }
   };
 
   return (

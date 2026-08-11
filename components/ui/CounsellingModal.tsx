@@ -113,7 +113,7 @@ export default function CounsellingModal({
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitError(null);
 
@@ -121,11 +121,31 @@ export default function CounsellingModal({
 
     setIsSubmitting(true);
 
-    // Fast instant submission feeling (<400ms)
-    setTimeout(() => {
+    try {
+      const res = await fetch("/api/send-counselling", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName,
+          phone,
+          email,
+          interestedIn,
+          message,
+          sourcePage: "Counselling Modal",
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to send message. Please try again.");
+      }
+
       setIsSubmitting(false);
       setIsSubmitted(true);
-    }, 350);
+    } catch (err) {
+      console.error(err);
+      setIsSubmitting(false);
+      setSubmitError("Something went wrong while sending message. Please try again.");
+    }
   };
 
   const handleChipSelect = (topic: string) => {

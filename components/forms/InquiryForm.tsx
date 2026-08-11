@@ -198,9 +198,22 @@ export default function InquiryForm({
     setSubmitError(null);
     setIsTyping(false);
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      console.log("Form submission:", data);
+      const res = await fetch("/api/send-counselling", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: data.fullName,
+          phone: data.phone,
+          course: data.course,
+          message: `City/State: ${data.cityState}${data.message ? ` | Message: ${data.message}` : ''}`,
+          sourcePage: "Contact Inquiry Form",
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to submit form");
+      }
+
       setSubmitted(true);
     } catch {
       setSubmitError(
