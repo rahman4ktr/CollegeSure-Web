@@ -15,7 +15,6 @@ import {
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import Card3DTilt from "@/components/ui/Card3DTilt";
 import { useCounsellingModal } from "@/components/providers/CounsellingModalProvider";
 
 interface TrustItem {
@@ -126,7 +125,7 @@ export default function TrustSection() {
           />
         </ScrollReveal>
 
-        {/* Comfortable 3-column / 2-column grid layout preventing any squishing */}
+        {/* Comfortable 3-column / 2-column grid layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {trustItems.map((item, idx) => {
             const Icon = item.icon;
@@ -137,63 +136,59 @@ export default function TrustSection() {
                 delay={idx * 0.08}
                 direction="up"
               >
-                <div className="h-full group">
-                  <Card3DTilt glowColor={`${item.color.replace('text-', '')}/20`} className="h-full">
-                    <div
-                      onClick={() => openModal(item.title)}
-                      className="relative p-6 sm:p-7 flex flex-col justify-between h-full cursor-pointer bg-white border border-[#E2E8F0] rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1.5 hover:border-[#B30F66]/30 transition-all duration-300 overflow-hidden space-y-6"
-                    >
-                      {/* Top Row: Icon + Badge */}
-                      <div className="space-y-4">
-                        <div className="flex items-center justify-between gap-3">
-                          <div
-                            className={`w-13 h-13 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-105 ${item.bgColor}`}
-                          >
-                            <Icon size={24} />
-                          </div>
-
-                          {item.stats && (
-                            <span className="px-3 py-1 rounded-full text-xs font-extrabold text-[#04164B] bg-[#F8FAFC] border border-[#E2E8F0] shadow-2xs whitespace-nowrap">
-                              {item.stats}
-                            </span>
-                          )}
-                        </div>
-
-                        {/* Title */}
-                        <h3 className="font-extrabold text-[#04164B] text-lg leading-snug group-hover:text-[#B30F66] transition-colors">
-                          {item.title}
-                        </h3>
-
-                        {/* Description */}
-                        <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">
-                          {item.description}
-                        </p>
-
-                        {/* Features List */}
-                        {item.features && (
-                          <div className="space-y-2 pt-3 border-t border-[#E2E8F0]/80">
-                            {item.features.map((feature) => (
-                              <div
-                                key={feature}
-                                className="flex items-center gap-2 text-xs font-semibold text-[#04164B]"
-                              >
-                                <CheckCircle size={14} className={`${item.color} flex-shrink-0`} />
-                                <span>{feature}</span>
-                              </div>
-                            ))}
-                          </div>
-                        )}
+                <div
+                  onClick={() => openModal(item.title)}
+                  className="group relative p-6 sm:p-7 flex flex-col justify-between h-full cursor-pointer bg-white border border-[#E2E8F0] rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1.5 hover:border-[#B30F66]/30 transition-all duration-300 overflow-hidden space-y-6"
+                >
+                  {/* Top Row: Icon + Badge */}
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between gap-3">
+                      <div
+                        className={`w-13 h-13 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-105 ${item.bgColor}`}
+                      >
+                        <Icon size={24} />
                       </div>
 
-                      {/* Learn More Link */}
-                      <div className="pt-4 border-t border-[#E2E8F0]/80 flex items-center justify-between">
-                        <span className={`inline-flex items-center gap-1.5 text-xs font-extrabold ${item.color} group-hover:translate-x-1 transition-transform`}>
-                          <span>Learn More</span>
-                          <ArrowRight size={14} />
+                      {item.stats && (
+                        <span className="px-3 py-1 rounded-full text-xs font-extrabold text-[#04164B] bg-[#F8FAFC] border border-[#E2E8F0] shadow-2xs whitespace-nowrap">
+                          {item.stats}
                         </span>
-                      </div>
+                      )}
                     </div>
-                  </Card3DTilt>
+
+                    {/* Title */}
+                    <h3 className="font-extrabold text-[#04164B] text-lg leading-snug group-hover:text-[#B30F66] transition-colors">
+                      {item.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">
+                      {item.description}
+                    </p>
+
+                    {/* Features List */}
+                    {item.features && (
+                      <div className="space-y-2 pt-3 border-t border-[#E2E8F0]/80">
+                        {item.features.map((feature) => (
+                          <div
+                            key={feature}
+                            className="flex items-center gap-2 text-xs font-semibold text-[#04164B]"
+                          >
+                            <CheckCircle size={14} className={`${item.color} flex-shrink-0`} />
+                            <span>{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Learn More Link */}
+                  <div className="pt-4 border-t border-[#E2E8F0]/80 flex items-center justify-between">
+                    <span className={`inline-flex items-center gap-1.5 text-xs font-extrabold ${item.color} group-hover:translate-x-1 transition-transform`}>
+                      <span>Learn More</span>
+                      <ArrowRight size={14} />
+                    </span>
+                  </div>
                 </div>
               </ScrollReveal>
             );
