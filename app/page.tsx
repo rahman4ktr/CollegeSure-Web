@@ -1,9 +1,10 @@
 import Hero from "@/components/sections/Hero";
+import UniversityMarquee from "@/components/sections/UniversityMarquee";
+import PlacementMarquee from "@/components/sections/PlacementMarquee";
 import TrustSection from "@/components/sections/TrustSection";
 import CourseCategories from "@/components/sections/CourseCategories";
 import FeaturedCourses from "@/components/sections/FeaturedCourses";
 import AdmissionProcess from "@/components/sections/AdmissionProcess";
-import UniversitiesSection from "@/components/sections/UniversitiesSection";
 import WhyCollegeSure from "@/components/sections/WhyCollegeSure";
 import Testimonials from "@/components/sections/Testimonials";
 import CTASection from "@/components/sections/CTASection";
@@ -65,9 +66,14 @@ export default function HomePage() {
         <AdmissionProcess />
       </ScrollReveal>
 
-      {/* 6. Partner Universities */}
+      {/* 6. Colleges We Work With - University Logo Marquee */}
       <ScrollReveal direction="up" distance={25} duration={0.6}>
-        <UniversitiesSection />
+        <UniversityMarquee />
+      </ScrollReveal>
+
+      {/* 6b. Placement Assistance & Top Recruiters Marquee */}
+      <ScrollReveal direction="up" distance={25} duration={0.6}>
+        <PlacementMarquee />
       </ScrollReveal>
 
       {/* 7. Why CollegeSure Comparison */}

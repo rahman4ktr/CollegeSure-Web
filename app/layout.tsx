@@ -6,6 +6,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
+import { CounsellingModalProvider } from "@/components/providers/CounsellingModalProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -65,10 +66,12 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col antialiased">
         <SmoothScrollProvider>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <WhatsAppButton />
+          <CounsellingModalProvider>
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <WhatsAppButton />
+          </CounsellingModalProvider>
         </SmoothScrollProvider>
       </body>
     </html>

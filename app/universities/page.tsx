@@ -44,28 +44,28 @@ export default function UniversitiesPage() {
   const priv = universities.filter((u) => u.type === "private");
 
   return (
-    <div className="relative overflow-hidden bg-[#F8FAFC]">
+    <div className="relative overflow-hidden bg-[#FDFDFD]">
       {/* Enhanced Hero Section */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-[#0B3C5D] via-[#082d45] to-[#1a5276] pt-8 pb-16 sm:pt-12 sm:pb-20">
+      <div className="relative overflow-hidden bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084] pt-8 pb-16 sm:pt-12 sm:pb-20">
         {/* Animated Background */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
-          <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#0D9488]/20 blur-3xl animate-pulse" />
-          <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#3B82F6]/15 blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#F97316]/10 blur-3xl animate-pulse" style={{ animationDelay: "2s" }} />
+          <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#159447]/20 blur-3xl animate-pulse" />
+          <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#B30F66]/20 blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#F7D51A]/10 blur-3xl animate-pulse" style={{ animationDelay: "2s" }} />
         </div>
 
         <Container className="relative z-10">
           <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-flex items-center gap-2 text-[#0D9488] text-xs font-bold uppercase tracking-widest bg-white/10 backdrop-blur-md px-4 py-2 rounded-full mb-6 border border-white/10">
-              <Sparkles size={14} />
+            <div className="inline-flex items-center gap-2 text-[#159447] text-xs font-bold uppercase tracking-widest bg-white/10 backdrop-blur-md px-4 py-2 rounded-full mb-6 border border-white/10 text-white">
+              <Sparkles size={14} className="text-[#F7D51A]" />
               Our College Network
-              <span className="w-1.5 h-1.5 rounded-full bg-[#0D9488] animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#159447] animate-pulse" />
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight mb-6">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-tight mb-6">
               Partner Colleges &
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0D9488] via-[#3B82F6] to-[#F97316]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#159447] via-[#B30F66] to-[#F7D51A]">
                 Institutions
               </span>
             </h1>
@@ -79,7 +79,7 @@ export default function UniversitiesPage() {
             <div className="flex flex-wrap justify-center gap-3 mt-8">
               <Link
                 href="#government"
-                className="group inline-flex items-center gap-2 px-6 py-3 bg-white text-[#0B3C5D] font-semibold rounded-xl hover:shadow-xl transition-all duration-300 hover:scale-105"
+                className="group inline-flex items-center gap-2 px-6 py-3.5 bg-[#B30F66] text-white font-bold rounded-xl shadow-xl shadow-[#B30F66]/30 hover:bg-[#591084] transition-all duration-300 hover:scale-105"
               >
                 <Landmark size={18} />
                 Government Colleges
@@ -87,7 +87,7 @@ export default function UniversitiesPage() {
               </Link>
               <Link
                 href="#private"
-                className="group inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-xl border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105"
+                className="group inline-flex items-center gap-2 px-6 py-3.5 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-xl border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105"
               >
                 <Building size={18} />
                 Private Colleges

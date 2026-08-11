@@ -24,7 +24,10 @@ const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
+import { useCounsellingModal } from "@/components/providers/CounsellingModalProvider";
+
 export default function Navbar() {
+  const { openModal } = useCounsellingModal();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -251,11 +254,11 @@ export default function Navbar() {
                 transition={{ type: "spring", stiffness: 400, damping: 15 }}
               >
                 <Button
-                  as="link"
-                  href="/contact"
+                  as="button"
+                  onClick={() => openModal()}
                   variant="primary"
                   size="md"
-                  className="relative overflow-hidden group"
+                  className="relative overflow-hidden group cursor-pointer"
                 >
                   <span className="relative z-10 flex items-center gap-2">
                     <Sparkles size={16} />
@@ -428,12 +431,14 @@ export default function Navbar() {
                   whileTap={{ scale: 0.98 }}
                 >
                   <Button
-                    as="link"
-                    href="/contact"
+                    as="button"
+                    onClick={() => {
+                      setMobileOpen(false);
+                      openModal();
+                    }}
                     variant="primary"
                     size="lg"
-                    className="w-full justify-center relative overflow-hidden group"
-                    onClick={() => setMobileOpen(false)}
+                    className="w-full justify-center relative overflow-hidden group cursor-pointer"
                   >
                     <span className="relative z-10 flex items-center gap-2">
                       <Sparkles size={16} />

@@ -141,16 +141,13 @@ export default function AboutPageClient() {
     <div ref={containerRef}>
       {/* Hero Section */}
       <motion.div
-        className="relative overflow-hidden min-h-[70vh] flex items-center"
+        className="relative overflow-hidden min-h-[70vh] flex items-center bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084]"
         style={{ opacity: heroOpacity, y: heroY }}
       >
-        {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0B3C5D] via-[#082d45] to-[#1a5276]" />
-
         {/* Animated Background Elements */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
           <motion.div
-            className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#0D9488]/15 blur-3xl"
+            className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#159447]/20 blur-3xl"
             animate={{
               x: [0, -30, 20, 0],
               y: [0, 20, -30, 0],
@@ -162,7 +159,7 @@ export default function AboutPageClient() {
             }}
           />
           <motion.div
-            className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#F97316]/10 blur-3xl"
+            className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#B30F66]/20 blur-3xl"
             animate={{
               x: [0, 30, -20, 0],
               y: [0, -20, 30, 0],
@@ -175,7 +172,7 @@ export default function AboutPageClient() {
             }}
           />
           <motion.div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#6366F1]/10 blur-3xl"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#F7D51A]/10 blur-3xl"
             animate={{
               scale: [1, 1.2, 1],
               opacity: [0.3, 0.6, 0.3],
@@ -223,29 +220,29 @@ export default function AboutPageClient() {
           <ScrollReveal direction="up">
             <div className="max-w-3xl">
               <motion.div
-                className="inline-flex items-center gap-2 text-[#0D9488] text-xs font-bold uppercase tracking-widest bg-white/10 backdrop-blur-md px-4 py-2 rounded-full mb-6 border border-white/10"
+                className="inline-flex items-center gap-2 text-[#159447] text-xs font-bold uppercase tracking-widest bg-white/10 backdrop-blur-md px-4 py-2 rounded-full mb-6 border border-white/10 text-white"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 400 }}
               >
-                <Sparkles size={14} />
+                <Sparkles size={14} className="text-[#F7D51A]" />
                 About Us
                 <motion.span
-                  className="w-1.5 h-1.5 rounded-full bg-[#0D9488]"
+                  className="w-1.5 h-1.5 rounded-full bg-[#159447]"
                   animate={{ scale: [1, 1.5, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
               </motion.div>
 
               <motion.h1
-                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight mb-6"
+                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-tight mb-6"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.6 }}
               >
                 Your College.
                 <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0D9488] via-[#F97316] to-[#EC4899]">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#159447] via-[#B30F66] to-[#F7D51A]">
                   Our Assurance.
                 </span>
               </motion.h1>
