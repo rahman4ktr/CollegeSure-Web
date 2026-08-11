@@ -12,7 +12,7 @@ interface CounsellingEmailPayload {
 }
 
 export async function sendCounsellingEmail(payload: CounsellingEmailPayload) {
-  const host = process.env.SMTP_HOST || "mail.brainzima.com";
+  const host = process.env.SMTP_HOST || "smtp.hostinger.com";
   const port = parseInt(process.env.SMTP_PORT || "465", 10);
   const user = process.env.SMTP_USER || "no-reply@brainzima.com";
   const pass = process.env.SMTP_PASS || "Noreply$2023";
