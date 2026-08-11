@@ -16,7 +16,6 @@ import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import Card3DTilt from "@/components/ui/Card3DTilt";
-import Link from "next/link";
 import { useCounsellingModal } from "@/components/providers/CounsellingModalProvider";
 
 interface TrustItem {
@@ -25,7 +24,6 @@ interface TrustItem {
   description: string;
   color: string;
   bgColor: string;
-  gradient: string;
   stats?: string;
   features?: string[];
 }
@@ -38,7 +36,6 @@ const trustItems: TrustItem[] = [
       "We provide honest, unbiased information about colleges and courses — no hidden agendas, no misleading promises.",
     color: "text-[#04164B]",
     bgColor: "bg-[#04164B]/10 text-[#04164B]",
-    gradient: "from-[#04164B]/5 to-[#04164B]/10",
     stats: "100% Honest",
     features: ["No hidden fees", "Unbiased advice", "Complete transparency"],
   },
@@ -49,7 +46,6 @@ const trustItems: TrustItem[] = [
       "Every student is different. We listen to your goals, budget, and preferences before recommending anything.",
     color: "text-[#B30F66]",
     bgColor: "bg-[#B30F66]/10 text-[#B30F66]",
-    gradient: "from-[#B30F66]/5 to-[#B30F66]/10",
     stats: "1-on-1 Sessions",
     features: ["Tailored advice", "Goal-oriented", "Budget conscious"],
   },
@@ -60,7 +56,6 @@ const trustItems: TrustItem[] = [
       "From Medical and Nursing to Engineering and BCA — we cover a wide range of programs to match your interests.",
     color: "text-[#159447]",
     bgColor: "bg-[#159447]/10 text-[#159447]",
-    gradient: "from-[#159447]/5 to-[#159447]/10",
     stats: "50+ Courses",
     features: ["Medical", "Engineering", "Graduation"],
   },
@@ -71,20 +66,18 @@ const trustItems: TrustItem[] = [
       "We work with both students and parents, ensuring every stakeholder is informed and comfortable with the decision.",
     color: "text-[#147CC1]",
     bgColor: "bg-[#147CC1]/10 text-[#147CC1]",
-    gradient: "from-[#147CC1]/5 to-[#147CC1]/10",
     stats: "5,000+ Families",
     features: ["Student focused", "Parent included", "Family centered"],
   },
   {
     icon: MessageSquare,
-    title: "Admission Support",
+    title: "End-to-End Admission Support",
     description:
-      "We don't just guide — we support you through the documentation, applications, and entire admission process.",
+      "We don't just guide — we support you through the documentation, applications, and confirmation process.",
     color: "text-[#F36C21]",
     bgColor: "bg-[#F36C21]/10 text-[#F36C21]",
-    gradient: "from-[#F36C21]/5 to-[#F36C21]/10",
-    stats: "End-to-End Support",
-    features: ["Documentation", "Application help", "Follow-up support"],
+    stats: "100% Support",
+    features: ["Documentation", "Application help", "Follow-up guidance"],
   },
 ];
 
@@ -110,25 +103,6 @@ export default function TrustSection() {
           style={{ animationDelay: "2s" }}
         />
 
-        {/* Grid Pattern */}
-        <svg
-          className="absolute inset-0 w-full h-full opacity-[0.02]"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <pattern
-              id="trust-grid"
-              width="80"
-              height="80"
-              patternUnits="userSpaceOnUse"
-            >
-              <circle cx="80" cy="80" r="1" fill="#0B3C5D" />
-              <circle cx="0" cy="0" r="1" fill="#0B3C5D" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#trust-grid)" />
-        </svg>
-
         {/* Floating Orbs */}
         {floatingDecorations.map((dec, idx) => (
           <div
@@ -152,7 +126,8 @@ export default function TrustSection() {
           />
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+        {/* Comfortable 3-column / 2-column grid layout preventing any squishing */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {trustItems.map((item, idx) => {
             const Icon = item.icon;
 
@@ -165,54 +140,44 @@ export default function TrustSection() {
                 <div className="h-full group">
                   <Card3DTilt glowColor={`${item.color.replace('text-', '')}/20`} className="h-full">
                     <div
-                      className={`
-                        relative card-base p-6 flex flex-col justify-between h-full cursor-pointer 
-                        bg-white border rounded-2xl 
-                        transition-all duration-300 overflow-hidden
-                        border-[#E2E8F0] shadow-sm hover:shadow-xl hover:-translate-y-1.5 hover:border-[#B30F66]/30
-                      `}
                       onClick={() => openModal(item.title)}
+                      className="relative p-6 sm:p-7 flex flex-col justify-between h-full cursor-pointer bg-white border border-[#E2E8F0] rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1.5 hover:border-[#B30F66]/30 transition-all duration-300 overflow-hidden space-y-6"
                     >
-                      {/* Top Header: Icon + Badge */}
-                      <div>
-                        <div className="flex items-center justify-between gap-2 mb-4">
+                      {/* Top Row: Icon + Badge */}
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between gap-3">
                           <div
-                            className={`
-                              w-12 h-12 rounded-xl flex items-center justify-center 
-                              transition-transform duration-300 group-hover:scale-110
-                              ${item.bgColor}
-                            `}
+                            className={`w-13 h-13 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-105 ${item.bgColor}`}
                           >
                             <Icon size={24} />
                           </div>
 
-                          {/* Stats Badge — Always Visible */}
                           {item.stats && (
-                            <span className="px-2.5 py-1 rounded-full text-[11px] font-extrabold text-[#04164B] bg-[#F8FAFC] border border-[#E2E8F0] shadow-2xs">
+                            <span className="px-3 py-1 rounded-full text-xs font-extrabold text-[#04164B] bg-[#F8FAFC] border border-[#E2E8F0] shadow-2xs whitespace-nowrap">
                               {item.stats}
                             </span>
                           )}
                         </div>
 
                         {/* Title */}
-                        <h3 className="font-extrabold text-[#04164B] text-base mb-2 leading-snug group-hover:text-[#B30F66] transition-colors duration-200">
+                        <h3 className="font-extrabold text-[#04164B] text-lg leading-snug group-hover:text-[#B30F66] transition-colors">
                           {item.title}
                         </h3>
 
                         {/* Description */}
-                        <p className="text-xs sm:text-sm text-[#475569] leading-relaxed mb-4">
+                        <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">
                           {item.description}
                         </p>
 
-                        {/* Features List — Always Visible */}
+                        {/* Features List */}
                         {item.features && (
-                          <div className="space-y-1.5 pt-2 border-t border-[#E2E8F0]/70">
+                          <div className="space-y-2 pt-3 border-t border-[#E2E8F0]/80">
                             {item.features.map((feature) => (
                               <div
                                 key={feature}
-                                className="flex items-center gap-1.5 text-xs text-[#04164B] font-medium"
+                                className="flex items-center gap-2 text-xs font-semibold text-[#04164B]"
                               >
-                                <CheckCircle size={13} className={`${item.color} flex-shrink-0`} />
+                                <CheckCircle size={14} className={`${item.color} flex-shrink-0`} />
                                 <span>{feature}</span>
                               </div>
                             ))}
@@ -220,11 +185,11 @@ export default function TrustSection() {
                         )}
                       </div>
 
-                      {/* Learn More Link — Always Visible */}
-                      <div className="pt-4 mt-4 border-t border-[#E2E8F0]/70 flex items-center justify-between">
-                        <span className={`inline-flex items-center gap-1.5 text-xs font-bold ${item.color} group-hover:translate-x-1 transition-transform`}>
-                          Learn More
-                          <ArrowRight size={13} />
+                      {/* Learn More Link */}
+                      <div className="pt-4 border-t border-[#E2E8F0]/80 flex items-center justify-between">
+                        <span className={`inline-flex items-center gap-1.5 text-xs font-extrabold ${item.color} group-hover:translate-x-1 transition-transform`}>
+                          <span>Learn More</span>
+                          <ArrowRight size={14} />
                         </span>
                       </div>
                     </div>
@@ -236,17 +201,18 @@ export default function TrustSection() {
         </div>
 
         {/* Bottom CTA */}
-        <ScrollReveal direction="up" delay={0.6}>
+        <ScrollReveal direction="up" delay={0.5}>
           <div className="mt-14 text-center">
             <div
               onClick={() => openModal()}
-              className="inline-flex items-center gap-3 bg-white border border-[#E2E8F0] rounded-full px-6 py-3 shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-[1.02] cursor-pointer"
+              className="inline-flex items-center gap-3 bg-white border border-[#E2E8F0] rounded-full px-6 py-3.5 shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-[1.02] cursor-pointer"
             >
               <span className="text-xs sm:text-sm text-[#475569]">
-                <span className="font-bold text-[#04164B]">5,000+</span> students have found their path with CollegeSure
+                <span className="font-extrabold text-[#04164B]">5,000+</span> students have found their path with CollegeSure
               </span>
-              <span className="text-[#B30F66] font-bold text-xs flex items-center gap-1">
-                Talk to Us <ArrowRight size={14} />
+              <span className="text-[#B30F66] font-extrabold text-xs flex items-center gap-1">
+                <span>Talk to Us</span>
+                <ArrowRight size={14} />
               </span>
             </div>
           </div>
