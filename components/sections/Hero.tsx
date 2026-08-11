@@ -241,6 +241,7 @@ export default function Hero() {
                   width={900}
                   height={920}
                   priority
+                  unoptimized
                   className="h-[440px] w-full object-cover object-top sm:h-[500px] lg:h-[540px] transition-transform duration-700 hover:scale-103"
                 />
               </div>
