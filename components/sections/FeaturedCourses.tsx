@@ -16,7 +16,6 @@ import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
-// Enhanced course data with additional fields
 const enhancedCourses = [
   {
     id: 1,
@@ -86,7 +85,7 @@ export default function FeaturedCourses() {
       className="relative overflow-hidden py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#F8FAFC] via-white to-[#F8FAFC]"
       aria-labelledby="featured-courses-heading"
     >
-      {/* Ambient Background — CSS */}
+      {/* Ambient Background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
         <div className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-[#0B3C5D]/5 blur-3xl animate-ambient-slow" />
         <div
@@ -94,7 +93,7 @@ export default function FeaturedCourses() {
           style={{ animationDelay: "2s" }}
         />
 
-        {/* Floating Stats Background — CSS */}
+        {/* Floating Stats Background */}
         {floatingStats.map((stat, idx) => (
           <div
             key={stat.label}
@@ -131,7 +130,6 @@ export default function FeaturedCourses() {
                 id="featured-courses-heading"
               />
 
-              {/* Decorative element — CSS animation */}
               <div
                 className="absolute -top-4 -left-8 text-3xl opacity-20 animate-float-y-rotate"
                 style={{ animationDuration: "6s" }}
@@ -141,19 +139,16 @@ export default function FeaturedCourses() {
             </div>
 
             <motion.div
-              whileHover={{ scale: 1.05, x: -5 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
             >
               <Link
                 href="/courses"
-                className="flex-shrink-0 inline-flex items-center gap-2 text-sm font-semibold text-[#0D9488] hover:text-[#0a7a6f] transition-colors group bg-white/80 backdrop-blur-sm px-5 py-2.5 rounded-xl border border-[#E2E8F0] shadow-sm hover:shadow-lg"
+                className="flex-shrink-0 inline-flex items-center gap-2 text-xs font-extrabold text-[#04164B] hover:text-[#B30F66] transition-colors group bg-white px-5 py-3 rounded-xl border border-[#E2E8F0] shadow-sm hover:shadow-md"
                 aria-label="View all available courses"
               >
                 <span>View All Courses</span>
-                <span className="animate-bounce-x">
-                  <ArrowRight size={16} />
-                </span>
+                <ArrowRight size={15} />
               </Link>
             </motion.div>
           </div>
@@ -164,137 +159,98 @@ export default function FeaturedCourses() {
             <ScrollReveal key={course.slug} delay={idx * 0.08} direction="up">
               <div className="h-full group">
                 <div className="relative h-full">
-                  {/* Glow Effect — CSS */}
-                  <div
-                    className="absolute -inset-0.5 blur-2xl rounded-2xl transition-opacity duration-500 opacity-0 group-hover:opacity-15"
-                    style={{ background: course.accentColor }}
-                  />
+                  <div className="relative bg-white rounded-2xl border transition-all duration-300 h-full flex flex-col justify-between overflow-hidden border-[#E2E8F0] shadow-sm hover:shadow-xl hover:-translate-y-1.5 hover:border-[#B30F66]/30">
+                    {/* Top Accent Bar */}
+                    <div className="h-1.5 w-full flex-shrink-0" style={{ backgroundColor: course.accentColor }} />
 
-                  <div className="relative bg-white rounded-2xl border transition-all duration-500 h-full flex flex-col overflow-hidden border-[#E2E8F0] shadow-sm group-hover:shadow-2xl group-hover:border-transparent">
-                    {/* Top Gradient Bar */}
-                    <div className="h-1 w-full relative overflow-hidden flex-shrink-0">
-                      <div
-                        className="absolute inset-0"
-                        style={{ backgroundColor: course.accentColor }}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
-                    </div>
-
-                    <div className="p-6 flex flex-col flex-1">
-                      {/* Header with Icon and Badge */}
-                      <div className="flex items-start justify-between mb-4">
-                        <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl bg-gradient-to-br from-[#F8FAFC] to-white border border-[#E2E8F0] transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-5">
-                            {course.icon}
+                    <div className="p-6 flex flex-col flex-1 justify-between space-y-4">
+                      <div>
+                        {/* Header Row: Icon + Rating */}
+                        <div className="flex items-start justify-between mb-4">
+                          <div className="flex items-center gap-3">
+                            <div className="w-13 h-13 rounded-xl flex items-center justify-center text-2xl bg-[#F8FAFC] border border-[#E2E8F0]">
+                              {course.icon}
+                            </div>
+                            <div>
+                              <span
+                                className="text-xs font-extrabold"
+                                style={{ color: course.accentColor }}
+                              >
+                                {course.category}
+                              </span>
+                              <div className="text-[10px] text-[#94A3B8] font-bold uppercase tracking-wider">{course.level}</div>
+                            </div>
                           </div>
-                          <div>
+
+                          {/* Rating Badge — Always Visible */}
+                          <div className="flex items-center gap-1 bg-[#FEF3C7] border border-[#FDE68A] px-2.5 py-1 rounded-full text-xs font-extrabold text-[#92400E]">
+                            <Star size={13} className="fill-[#F59E0B] text-[#F59E0B]" />
+                            <span>{course.rating}</span>
+                          </div>
+                        </div>
+
+                        {/* Title */}
+                        <h3 className="text-lg font-extrabold text-[#04164B] mb-2 leading-snug group-hover:text-[#B30F66] transition-colors">
+                          {course.title}
+                        </h3>
+
+                        {/* Description */}
+                        <p className="text-xs sm:text-sm text-[#475569] leading-relaxed mb-4">
+                          {course.description}
+                        </p>
+
+                        {/* Details Grid — Always Visible */}
+                        <div className="grid grid-cols-2 gap-2 mb-4">
+                          <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-2.5 text-center">
+                            <div className="flex items-center justify-center gap-1.5">
+                              <Calendar size={13} className="text-[#0D9488]" />
+                              <span className="text-xs font-extrabold text-[#04164B]">{course.duration}</span>
+                            </div>
+                            <div className="text-[9px] text-[#94A3B8] font-bold uppercase tracking-wider mt-0.5">Duration</div>
+                          </div>
+
+                          <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-2.5 text-center">
+                            <div className="flex items-center justify-center gap-1.5">
+                              <Users size={13} className="text-[#04164B]" />
+                              <span className="text-xs font-extrabold text-[#04164B]">{course.students}+</span>
+                            </div>
+                            <div className="text-[9px] text-[#94A3B8] font-bold uppercase tracking-wider mt-0.5">Students</div>
+                          </div>
+                        </div>
+
+                        {/* Tags */}
+                        <div className="flex flex-wrap gap-1.5 mb-4">
+                          {course.tags.map((tag) => (
                             <span
-                              className="text-xs font-semibold"
-                              style={{ color: course.accentColor }}
+                              key={tag}
+                              className="text-[11px] font-extrabold px-2.5 py-1 rounded-lg bg-[#F8FAFC] text-[#04164B] border border-[#E2E8F0]"
                             >
-                              {course.category}
+                              {tag}
                             </span>
-                            <div className="text-[10px] text-[#94A3B8]">{course.level}</div>
-                          </div>
-                        </div>
-
-                        <div className="flex items-center gap-1 bg-[#F8FAFC] px-2 py-1 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300">
-                          <Star size={12} className="fill-[#F97316] text-[#F97316]" />
-                          <span className="text-xs font-bold text-[#0F172A]">{course.rating}</span>
+                          ))}
                         </div>
                       </div>
 
-                      {/* Title */}
-                      <h3
-                        className="text-lg font-bold text-[#0F172A] mb-2 leading-tight transition-colors duration-300 group-hover:text-[var(--accent)]"
-                        style={{ '--accent': course.accentColor } as React.CSSProperties}
-                      >
-                        {course.title}
-                      </h3>
-
-                      {/* Description */}
-                      <p className="text-sm text-[#475569] leading-relaxed flex-grow">
-                        {course.description}
-                      </p>
-
-                      {/* Course Details Grid */}
-                      <div className="grid grid-cols-2 gap-2 mt-4 opacity-60 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="bg-[#F8FAFC] rounded-lg p-2 text-center">
-                          <div className="flex items-center justify-center gap-1">
-                            <Calendar size={12} className="text-[#0D9488]" />
-                            <span className="text-[10px] font-medium text-[#0F172A]">{course.duration}</span>
-                          </div>
-                          <div className="text-[8px] text-[#94A3B8]">Duration</div>
-                        </div>
-                        <div className="bg-[#F8FAFC] rounded-lg p-2 text-center">
-                          <div className="flex items-center justify-center gap-1">
-                            <Users size={12} className="text-[#0B3C5D]" />
-                            <span className="text-[10px] font-medium text-[#0F172A]">{course.students}+</span>
-                          </div>
-                          <div className="text-[8px] text-[#94A3B8]">Students</div>
-                        </div>
-                      </div>
-
-                      {/* Tags */}
-                      <div className="mt-4 flex flex-wrap gap-1.5">
-                        {course.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-[10px] font-medium px-2.5 py-1 rounded-full bg-[#F8FAFC] text-[#475569] border border-[#E2E8F0]"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* Bottom Section */}
-                      <div className="mt-4 pt-4 border-t border-[#E2E8F0] flex items-center justify-between">
+                      {/* Bottom Section: Placement + View Details CTA */}
+                      <div className="pt-4 border-t border-[#E2E8F0] flex items-center justify-between gap-3">
                         <div>
-                          <div className="text-[10px] text-[#94A3B8]">Placement Rate</div>
-                          <div className="text-sm font-bold" style={{ color: course.accentColor }}>
+                          <div className="text-[10px] text-[#94A3B8] font-bold uppercase tracking-wider">Placement Rate</div>
+                          <div className="text-sm font-extrabold" style={{ color: course.accentColor }}>
                             {course.placements}
                           </div>
                         </div>
-                        <motion.div
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          transition={{ type: "spring", stiffness: 400, damping: 15 }}
+
+                        <Link
+                          href={`/courses/${course.slug}`}
+                          className="inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-extrabold rounded-xl text-white shadow-md transition-all duration-200"
+                          style={{ backgroundColor: course.accentColor }}
+                          aria-label={`View ${course.title} details`}
                         >
-                          <Link
-                            href={`/courses/${course.slug}`}
-                            className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-xl transition-all duration-300 text-[#0B3C5D] hover:text-[#0D9488] group-hover:text-white group-hover:shadow-lg"
-                            style={{
-                              backgroundColor: 'transparent',
-                            }}
-                            aria-label={`View ${course.title} details`}
-                          >
-                            <span
-                              className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                              style={{ backgroundColor: course.accentColor }}
-                            />
-                            <span className="relative z-10 flex items-center gap-1.5">
-                              View Details
-                              <ChevronRight size={14} />
-                            </span>
-                          </Link>
-                        </motion.div>
+                          <span>View Details</span>
+                          <ChevronRight size={14} />
+                        </Link>
                       </div>
                     </div>
-
-                    {/* Featured Badge */}
-                    {course.featured && (
-                      <motion.div
-                        className="absolute top-4 right-4 z-10"
-                        initial={{ scale: 0, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                      >
-                        <div className="flex items-center gap-1 px-2.5 py-1 bg-gradient-to-r from-[#F97316] to-[#ea6c0c] rounded-full shadow-lg">
-                          <Sparkles size={10} className="text-white" />
-                          <span className="text-[8px] font-bold text-white tracking-wider">Featured</span>
-                        </div>
-                      </motion.div>
-                    )}
                   </div>
                 </div>
               </div>
@@ -304,52 +260,39 @@ export default function FeaturedCourses() {
 
         {/* Bottom Stats Bar */}
         <ScrollReveal direction="up" delay={0.6}>
-          <motion.div
-            className="mt-16 bg-white/80 backdrop-blur-sm rounded-2xl border border-[#E2E8F0] p-6 shadow-sm"
-            whileHover={{ y: -3, boxShadow: "0 20px 40px rgba(0,0,0,0.08)" }}
-            transition={{ type: "spring", stiffness: 400, damping: 15 }}
-          >
+          <div className="mt-14 bg-white rounded-2xl border border-[#E2E8F0] p-6 shadow-sm">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="flex items-center justify-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#0B3C5D]/10 flex items-center justify-center">
-                  <BookOpen size={18} className="text-[#0B3C5D]" />
+                <div className="w-10 h-10 rounded-xl bg-[#04164B]/10 flex items-center justify-center">
+                  <BookOpen size={18} className="text-[#04164B]" />
                 </div>
                 <div>
-                  <div className="text-sm font-bold text-[#0B3C5D]">50+ Programs</div>
-                  <div className="text-xs text-[#94A3B8]">Across 3 streams</div>
+                  <div className="text-sm font-extrabold text-[#04164B]">50+ Programs</div>
+                  <div className="text-xs text-[#94A3B8] font-medium">Across 3 major streams</div>
                 </div>
               </div>
               <div className="flex items-center justify-center gap-3 border-t border-b sm:border-t-0 sm:border-b-0 border-[#E2E8F0] py-3 sm:py-0">
-                <div className="w-10 h-10 rounded-full bg-[#0D9488]/10 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-[#0D9488]/10 flex items-center justify-center">
                   <Users size={18} className="text-[#0D9488]" />
                 </div>
                 <div>
-                  <div className="text-sm font-bold text-[#0B3C5D]">15,000+ Students</div>
-                  <div className="text-xs text-[#94A3B8]">Guided to success</div>
+                  <div className="text-sm font-extrabold text-[#04164B]">15,000+ Students</div>
+                  <div className="text-xs text-[#94A3B8] font-medium">Guided to success</div>
                 </div>
               </div>
               <div className="flex items-center justify-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#F97316]/10 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-[#F97316]/10 flex items-center justify-center">
                   <TrendingUp size={18} className="text-[#F97316]" />
                 </div>
                 <div>
-                  <div className="text-sm font-bold text-[#0B3C5D]">92% Placement</div>
-                  <div className="text-xs text-[#94A3B8]">Average placement rate</div>
+                  <div className="text-sm font-extrabold text-[#04164B]">92% Placement</div>
+                  <div className="text-xs text-[#94A3B8] font-medium">Average placement rate</div>
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </ScrollReveal>
       </Container>
-
-      {/* Decorative Bottom Wave */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-12 bg-[#F8FAFC]"
-        style={{
-          clipPath: "polygon(0 100%, 100% 100%, 100% 20%, 0 100%)",
-        }}
-        aria-hidden
-      />
     </section>
   );
 }
