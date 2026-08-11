@@ -17,7 +17,7 @@ export async function sendCounsellingEmail(payload: CounsellingEmailPayload) {
   const user = process.env.SMTP_USER || "no-reply@brainzima.com";
   const pass = process.env.SMTP_PASS || "Noreply$2023";
   const from = process.env.SMTP_FROM || `"CollegeSure Admissions" <${user}>`;
-  const to = process.env.SMTP_TO || "contact@brainzima.com";
+  const to = process.env.SMTP_TO || "brainzimainnovation@gmail.com";
 
   const transporter = nodemailer.createTransport({
     host,
