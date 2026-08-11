@@ -339,7 +339,7 @@ export default function Hero() {
                     <span className="text-[10px] text-[#94A3B8]">(2.4k reviews)</span>
                   </div>
                   <Link
-                    href="/courses/btech-computer-science"
+                    href="/courses/engineering"
                     className="text-[11px] font-bold text-[#591084] hover:text-[#B30F66] flex items-center gap-0.5"
                   >
                     Details <ArrowRight size={10} />

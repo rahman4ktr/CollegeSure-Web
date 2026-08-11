@@ -3,18 +3,19 @@
 import Link from "next/link";
 import {
   ArrowRight,
-  Sparkles,
   TrendingUp,
   Users,
   ChevronRight,
   Star,
   Calendar,
-  BookOpen
+  BookOpen,
+  Send
 } from "lucide-react";
 import { motion } from "framer-motion";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { useCounsellingModal } from "@/components/providers/CounsellingModalProvider";
 
 const enhancedCourses = [
   {
@@ -25,7 +26,8 @@ const enhancedCourses = [
     duration: "4 Years",
     description: "Comprehensive engineering program with specializations in Computer Science, Mechanical, Civil, and more.",
     image: "/images/courses/btech.jpg",
-    slug: "btech",
+    slug: "engineering",
+    href: "/courses/engineering",
     rating: 4.8,
     students: 1200,
     tags: ["CSE", "Mechanical", "Civil"],
@@ -43,7 +45,8 @@ const enhancedCourses = [
     duration: "4 Years",
     description: "Professional nursing program with clinical training at top hospitals and healthcare facilities.",
     image: "/images/courses/nursing.jpg",
-    slug: "bsc-nursing",
+    slug: "medical",
+    href: "/courses/medical",
     rating: 4.9,
     students: 850,
     tags: ["Nursing", "Healthcare", "Clinical"],
@@ -61,7 +64,8 @@ const enhancedCourses = [
     duration: "3 Years",
     description: "Industry-focused program covering programming, web development, databases, and software engineering.",
     image: "/images/courses/bca.jpg",
-    slug: "bca",
+    slug: "graduation",
+    href: "/courses/graduation",
     rating: 4.7,
     students: 950,
     tags: ["Programming", "Web Dev", "Database"],
@@ -80,6 +84,8 @@ const floatingStats = [
 ];
 
 export default function FeaturedCourses() {
+  const { openModal } = useCounsellingModal();
+
   return (
     <section
       className="relative overflow-hidden py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#F8FAFC] via-white to-[#F8FAFC]"
@@ -159,7 +165,7 @@ export default function FeaturedCourses() {
             <ScrollReveal key={course.slug} delay={idx * 0.08} direction="up">
               <div className="h-full group">
                 <div className="relative h-full">
-                  <div className="relative bg-white rounded-2xl border transition-all duration-300 h-full flex flex-col justify-between overflow-hidden border-[#E2E8F0] shadow-sm hover:shadow-xl hover:-translate-y-1.5 hover:border-[#B30F66]/30">
+                  <div className="relative bg-white rounded-2xl border transition-all duration-300 h-full flex flex-col justify-between overflow-hidden border-[#E2E8F0] shadow-sm hover:shadow-xl hover:-translate-y-1.5">
                     {/* Top Accent Bar */}
                     <div className="h-1.5 w-full flex-shrink-0" style={{ backgroundColor: course.accentColor }} />
 
@@ -231,8 +237,8 @@ export default function FeaturedCourses() {
                         </div>
                       </div>
 
-                      {/* Bottom Section: Placement + View Details CTA */}
-                      <div className="pt-4 border-t border-[#E2E8F0] flex items-center justify-between gap-3">
+                      {/* Bottom Section: Placement + Useful Action Links */}
+                      <div className="pt-4 border-t border-[#E2E8F0] flex items-center justify-between gap-2">
                         <div>
                           <div className="text-[10px] text-[#94A3B8] font-bold uppercase tracking-wider">Placement Rate</div>
                           <div className="text-sm font-extrabold" style={{ color: course.accentColor }}>
@@ -240,15 +246,26 @@ export default function FeaturedCourses() {
                           </div>
                         </div>
 
-                        <Link
-                          href={`/courses/${course.slug}`}
-                          className="inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-extrabold rounded-xl text-white shadow-md transition-all duration-200"
-                          style={{ backgroundColor: course.accentColor }}
-                          aria-label={`View ${course.title} details`}
-                        >
-                          <span>View Details</span>
-                          <ChevronRight size={14} />
-                        </Link>
+                        <div className="flex items-center gap-2">
+                          <Link
+                            href={course.href}
+                            className="inline-flex items-center gap-1 px-3 py-2 text-xs font-extrabold rounded-xl border border-[#E2E8F0] text-[#04164B] hover:bg-[#F8FAFC] transition-colors"
+                          >
+                            <span>Overview</span>
+                            <ChevronRight size={13} />
+                          </Link>
+
+                          <button
+                            type="button"
+                            onClick={() => openModal(course.title)}
+                            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-extrabold rounded-xl text-white shadow-md transition-all duration-200 cursor-pointer hover:opacity-90"
+                            style={{ backgroundColor: course.accentColor }}
+                            aria-label={`Get counselling for ${course.title}`}
+                          >
+                            <span>Inquire Now</span>
+                            <Send size={12} />
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
