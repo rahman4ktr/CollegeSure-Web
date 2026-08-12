@@ -2,26 +2,29 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { X, Menu, ChevronDown, GraduationCap, Phone, MessageCircle, Sparkles, ArrowRight } from "lucide-react";
+import {
+  X,
+  Menu,
+  ChevronDown,
+  GraduationCap,
+  Phone,
+  MessageCircle,
+  Sparkles,
+  ArrowRight,
+  Home,
+  Stethoscope,
+  Cpu,
+  Mail,
+} from "lucide-react";
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
 import Button from "@/components/ui/Button";
 
 const navLinks = [
-  { label: "Home", href: "/" },
-  {
-    label: "Courses",
-    href: "/courses",
-    children: [
-      { label: "Medical & Paramedical", href: "/courses/medical", icon: "🏥" },
-      { label: "Engineering", href: "/courses/engineering", icon: "⚡" },
-      { label: "Graduation", href: "/courses/graduation", icon: "🎓" },
-    ],
-  },
-  { label: "Universities", href: "/universities" },
-  { label: "Admission Process", href: "/admission-process" },
-  { label: "About", href: "/about" },
-  { label: "Success Stories", href: "/success-stories" },
-  { label: "Contact", href: "/contact" },
+  { label: "Home", href: "/", icon: Home },
+  { label: "Medical", href: "/courses/medical", icon: Stethoscope },
+  { label: "Engineering", href: "/courses/engineering", icon: Cpu },
+  { label: "Graduation", href: "/courses/graduation", icon: GraduationCap },
+  { label: "Contact", href: "/contact", icon: Mail },
 ];
 
 import { useCounsellingModal } from "@/components/providers/CounsellingModalProvider";
@@ -149,99 +152,37 @@ export default function Navbar() {
             {/* Desktop Nav */}
             <nav
               aria-label="Main navigation"
-              className="hidden lg:flex items-center gap-0.5"
+              className="hidden lg:flex items-center gap-3 sm:gap-4"
               ref={dropdownRef}
             >
-              {navLinks.map((link) => (
-                <motion.div
-                  key={link.label}
-                  className="relative"
-                  onHoverStart={() => setHoveredLink(link.label)}
-                  onHoverEnd={() => setHoveredLink(null)}
-                >
-                  {link.children ? (
-                    <>
-                      <motion.button
-                        onClick={() =>
-                          setOpenDropdown(
-                            openDropdown === link.label ? null : link.label
-                          )
-                        }
-                        className={`flex items-center gap-1 px-4 py-2.5 text-sm font-medium rounded-xl transition-all duration-300 ${openDropdown === link.label
-                            ? "text-[#0B3C5D] bg-gradient-to-r from-[#0B3C5D]/10 to-[#0D9488]/10"
-                            : "text-[#475569] hover:text-[#0B3C5D] hover:bg-[#0B3C5D]/5"
-                          }`}
-                        aria-expanded={openDropdown === link.label}
-                        aria-haspopup="true"
-                        whileHover={{ scale: 1.05, y: -2 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        {link.label}
-                        <motion.div
-                          animate={{ rotate: openDropdown === link.label ? 180 : 0 }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          <ChevronDown size={14} />
-                        </motion.div>
-                      </motion.button>
-                      <AnimatePresence>
-                        {openDropdown === link.label && (
-                          <motion.div
-                            initial={{ opacity: 0, y: -10, scale: 0.95, rotateX: -10 }}
-                            animate={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
-                            exit={{ opacity: 0, y: -10, scale: 0.95, rotateX: -10 }}
-                            transition={{
-                              type: "spring",
-                              damping: 20,
-                              stiffness: 300,
-                              duration: 0.2
-                            }}
-                            className="absolute top-full left-0 mt-2 w-64 bg-white/90 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/50 overflow-hidden"
-                            style={{ transformStyle: "preserve-3d" }}
-                            role="menu"
-                          >
-                            <div className="p-2">
-                              {link.children.map((child) => (
-                                <motion.div
-                                  key={child.href}
-                                  whileHover={{ x: 5, scale: 1.02 }}
-                                  whileTap={{ scale: 0.98 }}
-                                >
-                                  <Link
-                                    href={child.href}
-                                    className="flex items-center gap-3 px-4 py-3 text-sm text-[#475569] hover:text-[#0B3C5D] rounded-xl hover:bg-gradient-to-r hover:from-[#0B3C5D]/5 hover:to-[#0D9488]/5 transition-all duration-300"
-                                    role="menuitem"
-                                    onClick={() => setOpenDropdown(null)}
-                                  >
-                                    <span className="text-xl">{child.icon}</span>
-                                    <span className="font-medium">{child.label}</span>
-                                    <ArrowRight size={14} className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
-                                  </Link>
-                                </motion.div>
-                              ))}
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </>
-                  ) : (
+              {navLinks.map((link) => {
+                const Icon = link.icon;
+                return (
+                  <motion.div
+                    key={link.label}
+                    className="relative"
+                    onHoverStart={() => setHoveredLink(link.label)}
+                    onHoverEnd={() => setHoveredLink(null)}
+                  >
                     <motion.div
                       whileHover={{ scale: 1.05, y: -2 }}
                       whileTap={{ scale: 0.95 }}
                     >
                       <Link
                         href={link.href}
-                        className={`px-4 py-2.5 text-sm font-medium rounded-xl transition-all duration-300 ${hoveredLink === link.label
+                        className={`flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-xl transition-all duration-300 ${
+                          hoveredLink === link.label
                             ? "text-[#0B3C5D] bg-gradient-to-r from-[#0B3C5D]/5 to-[#0D9488]/5"
                             : "text-[#475569] hover:text-[#0B3C5D] hover:bg-[#0B3C5D]/5"
-                          }`}
+                        }`}
                       >
-                        {link.label}
+                        <Icon size={18} className="text-[#0D9488]" />
+                        <span>{link.label}</span>
                       </Link>
                     </motion.div>
-                  )}
-                </motion.div>
-              ))}
+                  </motion.div>
+                );
+              })}
             </nav>
 
             {/* Desktop CTAs */}
@@ -373,40 +314,15 @@ export default function Navbar() {
 
               {/* Mobile Links */}
               <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1 relative z-10">
-                {navLinks.map((link, idx) => (
-                  <motion.div
-                    key={link.label}
-                    initial={{ opacity: 0, x: 30, rotateY: -20 }}
-                    animate={{ opacity: 1, x: 0, rotateY: 0 }}
-                    transition={{ delay: idx * 0.05, duration: 0.3 }}
-                  >
-                    {link.children ? (
-                      <>
-                        <div className="px-3 py-2 text-xs font-bold uppercase tracking-widest text-[#94A3B8] flex items-center gap-2">
-                          <div className="h-px flex-1 bg-gradient-to-r from-[#0D9488]/20 to-transparent" />
-                          {link.label}
-                        </div>
-                        <div className="space-y-1 mt-1">
-                          {link.children.map((child) => (
-                            <motion.div
-                              key={child.href}
-                              whileHover={{ x: 5, scale: 1.02 }}
-                              whileTap={{ scale: 0.98 }}
-                            >
-                              <Link
-                                href={child.href}
-                                onClick={() => setMobileOpen(false)}
-                                className="flex items-center gap-3 px-3 py-3 text-sm font-medium text-[#475569] hover:text-[#0B3C5D] rounded-xl hover:bg-gradient-to-r hover:from-[#0B3C5D]/5 hover:to-[#0D9488]/5 transition-all duration-300"
-                              >
-                                <span className="text-xl">{child.icon}</span>
-                                <span>{child.label}</span>
-                                <ArrowRight size={14} className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
-                              </Link>
-                            </motion.div>
-                          ))}
-                        </div>
-                      </>
-                    ) : (
+                {navLinks.map((link, idx) => {
+                  const Icon = link.icon;
+                  return (
+                    <motion.div
+                      key={link.label}
+                      initial={{ opacity: 0, x: 30, rotateY: -20 }}
+                      animate={{ opacity: 1, x: 0, rotateY: 0 }}
+                      transition={{ delay: idx * 0.05, duration: 0.3 }}
+                    >
                       <motion.div
                         whileHover={{ x: 5, scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
@@ -414,14 +330,17 @@ export default function Navbar() {
                         <Link
                           href={link.href}
                           onClick={() => setMobileOpen(false)}
-                          className="block px-3 py-3 text-sm font-medium text-[#475569] hover:text-[#0B3C5D] rounded-xl hover:bg-gradient-to-r hover:from-[#0B3C5D]/5 hover:to-[#0D9488]/5 transition-all duration-300"
+                          className="flex items-center gap-3 px-3 py-3 text-sm font-semibold text-[#475569] hover:text-[#0B3C5D] rounded-xl hover:bg-gradient-to-r hover:from-[#0B3C5D]/5 hover:to-[#0D9488]/5 transition-all duration-300"
                         >
-                          {link.label}
+                          <div className="w-8 h-8 rounded-lg bg-[#0D9488]/10 flex items-center justify-center text-[#0D9488]">
+                            <Icon size={18} />
+                          </div>
+                          <span>{link.label}</span>
                         </Link>
                       </motion.div>
-                    )}
-                  </motion.div>
-                ))}
+                    </motion.div>
+                  );
+                })}
               </div>
 
               {/* Mobile CTA */}

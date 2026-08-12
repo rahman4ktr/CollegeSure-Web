@@ -63,7 +63,7 @@ export default function GraduationCoursesPage() {
     <div ref={containerRef} className="relative overflow-hidden bg-[#FDFDFD]">
       {/* Enhanced Hero Section */}
       <motion.div
-        className="relative overflow-hidden bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084] pt-8 pb-16 sm:pt-12 sm:pb-20"
+        className="relative overflow-hidden py-12 sm:py-16 flex items-center bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084]"
         style={{ opacity: heroOpacity, y: heroY }}
       >
         {/* Animated Background */}
@@ -126,21 +126,21 @@ export default function GraduationCoursesPage() {
           </div>
         </div>
 
-        <Container className="relative z-10">
+        <Container className="relative z-10 py-6 sm:py-8">
           <ScrollReveal direction="down" distance={20}>
             <Breadcrumbs
               items={[
                 { label: "Courses", href: "/courses" },
                 { label: "Graduation" },
               ]}
-              className="text-white/70 [&>span]:text-white/40"
+              className="text-white/70 [&>span]:text-white/40 mb-3"
             />
           </ScrollReveal>
 
-          <div className="mt-8 flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
-            <ScrollReveal direction="left" className="flex-1">
+          <div className="flex flex-col gap-4">
+            <ScrollReveal direction="left">
               <div>
-                <div className="flex items-center gap-3 mb-4">
+                <div className="flex items-center gap-3 mb-3">
                   <Badge 
                     variant="orange" 
                     icon={<Sparkles size={12} />}
@@ -153,54 +153,32 @@ export default function GraduationCoursesPage() {
                     UG Programs
                   </Badge>
                 </div>
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-tight mb-4">
-                  Graduation
-                  <br />
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug mb-3">
+                  Graduation{" "}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F36C21] via-[#B30F66] to-[#F7D51A]">
                     Programs
                   </span>
                 </h1>
-                <p className="text-white/80 text-base sm:text-lg leading-relaxed max-w-3xl font-medium">
+                <p className="text-white/80 text-sm sm:text-base leading-relaxed max-w-3xl font-medium">
                   BCA, BBA, B.Com and other undergraduate programs — diverse options 
                   for students looking for versatile and rewarding careers.
                 </p>
 
                 {/* Quick Stats */}
-                <div className="flex flex-wrap gap-3 mt-6">
-                  <div className="flex items-center gap-2 text-sm text-white/90 font-medium bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/10">
-                    <Clock size={16} className="text-[#F36C21]" />
+                <div className="flex flex-wrap gap-3 mt-4">
+                  <div className="flex items-center gap-2 text-xs text-white/90 font-medium bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-xl border border-white/10">
+                    <Clock size={14} className="text-[#F36C21]" />
                     3 Years
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-white/90 font-medium bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/10">
-                    <GraduationCap size={16} className="text-[#B30F66]" />
+                  <div className="flex items-center gap-2 text-xs text-white/90 font-medium bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-xl border border-white/10">
+                    <GraduationCap size={14} className="text-[#B30F66]" />
                     10+2 in Any Stream
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-white/90 font-medium bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl border border-white/10">
-                    <MapPin size={16} className="text-[#147CC1]" />
+                  <div className="flex items-center gap-2 text-xs text-white/90 font-medium bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-xl border border-white/10">
+                    <MapPin size={14} className="text-[#147CC1]" />
                     Multiple Cities
                   </div>
                 </div>
-              </div>
-            </ScrollReveal>
-
-            {/* Quick Action Buttons */}
-            <ScrollReveal direction="right" className="flex-shrink-0">
-              <div className="flex flex-col sm:flex-row lg:flex-col gap-3">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center gap-2 bg-[#B30F66] hover:bg-[#591084] text-white font-bold px-8 py-4 rounded-2xl shadow-xl shadow-[#B30F66]/30 transition-all duration-200 hover:scale-[1.03]"
-                >
-                  <MessageCircle size={18} />
-                  <span>Talk to a Counsellor</span>
-                  <ArrowRight size={18} />
-                </Link>
-                <Link
-                  href="#programs"
-                  className="inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-semibold px-8 py-4 rounded-2xl border border-white/20 transition-all duration-200"
-                >
-                  <Sparkles size={18} />
-                  <span>Explore Programs</span>
-                </Link>
               </div>
             </ScrollReveal>
           </div>
@@ -208,7 +186,7 @@ export default function GraduationCoursesPage() {
 
         {/* Decorative Shape */}
         <div
-          className="absolute bottom-0 left-0 right-0 h-16 bg-[#FDFDFD]"
+          className="absolute bottom-0 left-0 right-0 h-10 bg-[#FDFDFD]"
           style={{
             clipPath: "polygon(0 100%, 100% 100%, 100% 30%, 0 100%)",
           }}

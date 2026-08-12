@@ -4,7 +4,7 @@ import { createContext, useContext, useState, useEffect, ReactNode } from "react
 import CounsellingModal from "@/components/ui/CounsellingModal";
 
 const STORAGE_KEY = "counselling_modal_auto_triggered";
-const AUTO_OPEN_DELAY_MS = 5000;
+const AUTO_OPEN_DELAY_MS = 30000;
 
 interface OpenOptions {
   topic?: string;
@@ -53,32 +53,19 @@ export function CounsellingModalProvider({ children }: { children: ReactNode }) 
     setIsOpen(false);
   };
 
-  // Automatic 15-second session timer logic
+  // Global 30-second recurring timer logic
   useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    try {
-      const alreadyTriggered = sessionStorage.getItem(STORAGE_KEY);
-      if (alreadyTriggered === "true") {
-        return;
-      }
-    } catch {
-      // ignore storage errors
-    }
-
-    const timer = setTimeout(() => {
-      try {
-        const alreadyTriggered = sessionStorage.getItem(STORAGE_KEY);
-        if (alreadyTriggered === "true") return;
-
-        sessionStorage.setItem(STORAGE_KEY, "true");
-      } catch {
-        // ignore storage errors
-      }
-      setIsOpen(true);
+    const interval = setInterval(() => {
+      setIsOpen((prev) => {
+        if (prev) {
+          // If modal is already open, do not re-open or duplicate
+          return true;
+        }
+        return true;
+      });
     }, AUTO_OPEN_DELAY_MS);
 
-    return () => clearTimeout(timer);
+    return () => clearInterval(interval);
   }, []);
 
   return (
