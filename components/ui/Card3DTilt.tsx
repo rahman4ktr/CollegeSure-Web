@@ -186,15 +186,21 @@ export default function Card3DTilt({
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      style={{
-        rotateX: disabled ? 0 : rotateXSpring,
-        rotateY: disabled ? 0 : rotateYSpring,
-        scale: disabled ? 1 : scaleSpring,
-        y: disabled ? 0 : ySpring,
-        transformStyle: "preserve-3d",
-        perspective: perspective,
-        boxShadow: shadowOnHover ? (boxShadowStyle as any) : undefined,
-      }}
+      style={
+        isHovered && !disabled
+          ? {
+              rotateX: rotateXSpring,
+              rotateY: rotateYSpring,
+              scale: scaleSpring,
+              y: ySpring,
+              transformStyle: "preserve-3d",
+              perspective: perspective,
+              boxShadow: shadowOnHover ? (boxShadowStyle as any) : undefined,
+            }
+          : {
+              boxShadow: shadowOnHover ? "0 2px 12px rgba(4, 22, 75, 0.04)" : undefined,
+            }
+      }
       transition={
         transitionType === "spring"
           ? {

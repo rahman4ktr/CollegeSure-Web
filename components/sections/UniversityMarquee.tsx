@@ -19,7 +19,7 @@ const universitiesRow1: UniversityItem[] = [
   {
     id: "iit-delhi",
     name: "IIT Delhi",
-    image: "/images/universities/iit.jpg",
+    image: "/images/universities/iit.webp",
     logoColor: "#04164B",
     logoBg: "#E0F2FE",
     logoSymbol: "IITD",
@@ -27,7 +27,7 @@ const universitiesRow1: UniversityItem[] = [
   {
     id: "aiims-delhi",
     name: "AIIMS New Delhi",
-    image: "/images/universities/aiims.jpg",
+    image: "/images/universities/aiims.webp",
     logoColor: "#0D9488",
     logoBg: "#CCFBF1",
     logoSymbol: "AIIMS",
@@ -35,7 +35,7 @@ const universitiesRow1: UniversityItem[] = [
   {
     id: "du-delhi",
     name: "University of Delhi",
-    image: "/images/universities/du.jpg",
+    image: "/images/universities/du.webp",
     logoColor: "#591084",
     logoBg: "#F3E8FF",
     logoSymbol: "DU",
@@ -43,7 +43,7 @@ const universitiesRow1: UniversityItem[] = [
   {
     id: "nit-trichy",
     name: "NIT Trichy",
-    image: "/images/universities/nit.jpg",
+    image: "/images/universities/nit.webp",
     logoColor: "#F97316",
     logoBg: "#FFEDD5",
     logoSymbol: "NITT",
@@ -51,7 +51,7 @@ const universitiesRow1: UniversityItem[] = [
   {
     id: "christ-university",
     name: "Christ University",
-    image: "/images/universities/christ.jpg",
+    image: "/images/universities/christ.webp",
     logoColor: "#2563EB",
     logoBg: "#DBEAFE",
     logoSymbol: "CU",
@@ -59,7 +59,7 @@ const universitiesRow1: UniversityItem[] = [
   {
     id: "manipal-academy",
     name: "Manipal Academy",
-    image: "/images/universities/manipal.jpg",
+    image: "/images/universities/manipal.webp",
     logoColor: "#B30F66",
     logoBg: "#FEE8F5",
     logoSymbol: "MAHE",
@@ -67,7 +67,7 @@ const universitiesRow1: UniversityItem[] = [
   {
     id: "bits-pilani",
     name: "BITS Pilani",
-    image: "/images/universities/iit.jpg",
+    image: "/images/universities/iit.webp",
     logoColor: "#DC2626",
     logoBg: "#FEE2E2",
     logoSymbol: "BITS",
@@ -75,7 +75,7 @@ const universitiesRow1: UniversityItem[] = [
   {
     id: "vit-vellore",
     name: "VIT Vellore",
-    image: "/images/universities/nit.jpg",
+    image: "/images/universities/nit.webp",
     logoColor: "#7C3AED",
     logoBg: "#EDE9FE",
     logoSymbol: "VIT",
@@ -86,7 +86,7 @@ const universitiesRow2: UniversityItem[] = [
   {
     id: "srm-institute",
     name: "SRM Institute",
-    image: "/images/universities/christ.jpg",
+    image: "/images/universities/christ.webp",
     logoColor: "#0284C7",
     logoBg: "#E0F2FE",
     logoSymbol: "SRM",
@@ -94,7 +94,7 @@ const universitiesRow2: UniversityItem[] = [
   {
     id: "chandigarh-univ",
     name: "Chandigarh University",
-    image: "/images/universities/manipal.jpg",
+    image: "/images/universities/manipal.webp",
     logoColor: "#059669",
     logoBg: "#D1FAE5",
     logoSymbol: "CU",
@@ -102,7 +102,7 @@ const universitiesRow2: UniversityItem[] = [
   {
     id: "symbiosis-pune",
     name: "Symbiosis Pune",
-    image: "/images/universities/du.jpg",
+    image: "/images/universities/du.webp",
     logoColor: "#D97706",
     logoBg: "#FEF3C7",
     logoSymbol: "SIU",
@@ -110,7 +110,7 @@ const universitiesRow2: UniversityItem[] = [
   {
     id: "amity-university",
     name: "Amity University",
-    image: "/images/universities/iit.jpg",
+    image: "/images/universities/iit.webp",
     logoColor: "#16A34A",
     logoBg: "#DCFCE7",
     logoSymbol: "AMITY",
@@ -118,7 +118,7 @@ const universitiesRow2: UniversityItem[] = [
   {
     id: "bhu-varanasi",
     name: "BHU Varanasi",
-    image: "/images/universities/aiims.jpg",
+    image: "/images/universities/aiims.webp",
     logoColor: "#9333EA",
     logoBg: "#F3E8FF",
     logoSymbol: "BHU",
@@ -126,7 +126,7 @@ const universitiesRow2: UniversityItem[] = [
   {
     id: "jamia-millia",
     name: "Jamia Millia Islamia",
-    image: "/images/universities/du.jpg",
+    image: "/images/universities/du.webp",
     logoColor: "#15803D",
     logoBg: "#DCFCE7",
     logoSymbol: "JMI",
@@ -134,7 +134,7 @@ const universitiesRow2: UniversityItem[] = [
   {
     id: "jadavpur-univ",
     name: "Jadavpur University",
-    image: "/images/universities/nit.jpg",
+    image: "/images/universities/nit.webp",
     logoColor: "#059669",
     logoBg: "#D1FAE5",
     logoSymbol: "JU",
@@ -142,7 +142,7 @@ const universitiesRow2: UniversityItem[] = [
   {
     id: "lpu-punjab",
     name: "LPU Punjab",
-    image: "/images/universities/christ.jpg",
+    image: "/images/universities/christ.webp",
     logoColor: "#EA580C",
     logoBg: "#FFEDD5",
     logoSymbol: "LPU",

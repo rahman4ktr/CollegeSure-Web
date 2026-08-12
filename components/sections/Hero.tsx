@@ -84,9 +84,8 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, 80]);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  const springY = useSpring(y, { damping: 30, stiffness: 200 });
 
   useEffect(() => {
     if (headlineRef.current) {
@@ -131,7 +130,7 @@ export default function Hero() {
         <div className="absolute bottom-10 -left-20 w-[480px] h-[480px] rounded-full bg-gradient-to-tr from-[#FEF7F3] to-transparent blur-3xl opacity-60" />
       </div>
 
-      <motion.div style={{ y: springY, opacity }} className="relative z-10">
+      <motion.div style={{ y, opacity }} className="relative z-10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-4 pb-12">
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left column — message */}
@@ -237,12 +236,12 @@ export default function Hero() {
               {/* Main Photo Frame */}
               <div className="relative overflow-hidden rounded-[2.5rem] border-4 border-white bg-white shadow-2xl shadow-[#591084]/15">
                 <Image
-                  src="/images/heroSection1.png"
+                  src="/images/heroSection1.webp"
                   alt="Students ready for college admissions"
                   width={900}
                   height={920}
                   priority
-                  unoptimized
+                  fetchPriority="high"
                   className="h-[440px] w-full object-cover object-top sm:h-[500px] lg:h-[540px] transition-transform duration-700 hover:scale-103"
                 />
               </div>
