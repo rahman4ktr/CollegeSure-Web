@@ -29,6 +29,8 @@ import {
   MessageSquare
 } from "lucide-react";
 
+import { submitCounsellingForm } from "@/lib/api";
+
 // WhatsApp Link & Phone Constants
 const PHONE_NUMBER = "+91 79798 64304";
 const PHONE_HREF = "tel:+917979864304";
@@ -69,18 +71,14 @@ export default function FreeCounsellingPage() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await fetch("/api/send-counselling", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fullName: formData.fullName,
-          phone: formData.phone,
-          email: formData.email,
-          course: formData.course,
-          preferredContact: formData.preferredContact,
-          message: formData.helpNote,
-          sourcePage: "Free Counselling Page",
-        }),
+      await submitCounsellingForm({
+        fullName: formData.fullName,
+        phone: formData.phone,
+        email: formData.email,
+        course: formData.course,
+        preferredContact: formData.preferredContact,
+        message: formData.helpNote,
+        sourcePage: "Free Counselling Page",
       });
       setIsSubmitting(false);
       setIsSubmitted(true);

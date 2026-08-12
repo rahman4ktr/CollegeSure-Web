@@ -20,6 +20,7 @@ import {
   X
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { submitCounsellingForm } from "@/lib/api";
 import Button from "@/components/ui/Button";
 
 const courseOptions = [
@@ -198,21 +199,13 @@ export default function InquiryForm({
     setSubmitError(null);
     setIsTyping(false);
     try {
-      const res = await fetch("/api/send-counselling", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fullName: data.fullName,
-          phone: data.phone,
-          course: data.course,
-          message: `City/State: ${data.cityState}${data.message ? ` | Message: ${data.message}` : ''}`,
-          sourcePage: "Contact Inquiry Form",
-        }),
+      await submitCounsellingForm({
+        fullName: data.fullName,
+        phone: data.phone,
+        course: data.course,
+        message: `City/State: ${data.cityState}${data.message ? ` | Message: ${data.message}` : ''}`,
+        sourcePage: "Contact Inquiry Form",
       });
-
-      if (!res.ok) {
-        throw new Error("Failed to submit form");
-      }
 
       setSubmitted(true);
     } catch {

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { submitCounsellingForm } from "@/lib/api";
 import {
   X,
   Send,
@@ -122,22 +123,14 @@ export default function CounsellingModal({
     setIsSubmitting(true);
 
     try {
-      const res = await fetch("/api/send-counselling", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fullName,
-          phone,
-          email,
-          interestedIn,
-          message,
-          sourcePage: "Counselling Modal",
-        }),
+      await submitCounsellingForm({
+        fullName,
+        phone,
+        email,
+        interestedIn,
+        message,
+        sourcePage: "Counselling Modal",
       });
-
-      if (!res.ok) {
-        throw new Error("Failed to send message. Please try again.");
-      }
 
       setIsSubmitting(false);
       setIsSubmitted(true);
