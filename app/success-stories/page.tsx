@@ -44,7 +44,7 @@ export default function SuccessStoriesPage() {
   return (
     <div className="relative overflow-hidden bg-[#FDFDFD]">
       {/* Enhanced Hero Section */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084] pt-8 pb-16 sm:pt-12 sm:pb-20">
+      <div className="relative overflow-hidden py-12 sm:py-16 flex items-center bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084]">
         {/* Animated Background */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
           <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#159447]/20 blur-3xl animate-pulse" />
@@ -60,52 +60,31 @@ export default function SuccessStoriesPage() {
           </div>
         </div>
 
-        <Container className="relative z-10">
+        <Container className="relative z-10 py-6 sm:py-8">
           <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-flex items-center gap-2 text-[#159447] text-xs font-bold uppercase tracking-widest bg-white/10 backdrop-blur-md px-4 py-2 rounded-full mb-6 border border-white/10 text-white">
-              <Sparkles size={14} className="text-[#F7D51A]" />
+            <div className="inline-flex items-center gap-2 text-[#159447] text-xs font-bold uppercase tracking-widest bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-full mb-4 border border-white/10 text-white">
+              <Sparkles size={13} className="text-[#F7D51A]" />
               Student Stories
               <span className="w-1.5 h-1.5 rounded-full bg-[#159447] animate-pulse" />
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-tight mb-6">
-              Experiences That
-              <br />
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug mb-4">
+              Experiences That{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#159447] via-[#B30F66] to-[#F7D51A]">
                 Matter
               </span>
             </h1>
 
-            <p className="text-white/80 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+            <p className="text-white/80 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
               Here&apos;s what students and parents who worked with CollegeSure have
               to say about their admissions journey.
             </p>
-
-            {/* Quick Action Button */}
-            <div className="flex flex-wrap justify-center gap-3 mt-8">
-              <Link
-                href="#testimonials"
-                className="group inline-flex items-center gap-2 px-6 py-3 bg-white text-[#0B3C5D] font-semibold rounded-xl hover:shadow-xl transition-all duration-300 hover:scale-105"
-              >
-                <MessageCircle size={18} />
-                Read Stories
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link
-                href="/contact"
-                className="group inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-xl border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105"
-              >
-                <Heart size={18} />
-                Share Your Story
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
           </div>
         </Container>
 
         {/* Decorative Shape */}
         <div
-          className="absolute bottom-0 left-0 right-0 h-16 bg-[#F8FAFC]"
+          className="absolute bottom-0 left-0 right-0 h-10 bg-[#F8FAFC]"
           style={{
             clipPath: "polygon(0 100%, 100% 100%, 100% 30%, 0 100%)",
           }}

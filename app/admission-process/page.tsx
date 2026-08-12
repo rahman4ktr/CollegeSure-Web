@@ -106,7 +106,7 @@ export default function AdmissionProcessPageClient() {
     <div ref={containerRef}>
       {/* Enhanced Header Banner */}
       <motion.div
-        className="relative overflow-hidden bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084] py-16 sm:py-20 lg:py-28"
+        className="relative overflow-hidden py-12 sm:py-16 flex items-center bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084]"
         style={{ opacity: heroOpacity, y: heroY }}
       >
         {/* Animated Background */}
@@ -181,16 +181,16 @@ export default function AdmissionProcessPageClient() {
           </div>
         </div>
 
-        <Container className="relative z-10">
+        <Container className="relative z-10 py-6 sm:py-8">
           <ScrollReveal direction="up">
             <div className="max-w-3xl mx-auto text-center">
               <motion.div
-                className="inline-flex items-center gap-2 text-[#159447] text-xs font-bold uppercase tracking-widest bg-white/10 backdrop-blur-md px-4 py-2 rounded-full mb-6 border border-white/10 text-white"
+                className="inline-flex items-center gap-2 text-[#159447] text-xs font-bold uppercase tracking-widest bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-full mb-4 border border-white/10 text-white"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 400 }}
               >
-                <Sparkles size={14} className="text-[#F7D51A]" />
+                <Sparkles size={13} className="text-[#F7D51A]" />
                 Transparent Journey
                 <motion.span
                   className="w-1.5 h-1.5 rounded-full bg-[#159447]"
@@ -200,20 +200,19 @@ export default function AdmissionProcessPageClient() {
               </motion.div>
 
               <motion.h1
-                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-tight mb-6"
+                className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug mb-4"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.6 }}
               >
-                Your Path to
-                <br />
+                Your Path to{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#159447] via-[#B30F66] to-[#F7D51A]">
                   College Admission
                 </span>
               </motion.h1>
 
               <motion.p
-                className="text-white/80 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto"
+                className="text-white/80 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
@@ -221,39 +220,13 @@ export default function AdmissionProcessPageClient() {
                 A transparent, step-by-step process to help you go from confusion to confirmed
                 college admission — with our guidance every step of the way.
               </motion.p>
-
-              <motion.div
-                className="flex flex-col sm:flex-row gap-4 mt-8 justify-center"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.6 }}
-              >
-                <Button
-                  as="link"
-                  href="/contact"
-                  variant="primary"
-                  size="lg"
-                  rightIcon={<ArrowRight size={18} />}
-                >
-                  Start Your Journey
-                </Button>
-                <Button
-                  as="link"
-                  href="#process"
-                  variant="outline"
-                  size="lg"
-                  className="border-white/20 text-white hover:bg-white/10"
-                >
-                  Learn More
-                </Button>
-              </motion.div>
             </div>
           </ScrollReveal>
         </Container>
 
         {/* Decorative Shape at Bottom */}
         <div
-          className="absolute bottom-0 left-0 right-0 h-16 bg-white"
+          className="absolute bottom-0 left-0 right-0 h-10 bg-white"
           style={{
             clipPath: "polygon(0 100%, 100% 100%, 100% 30%, 0 100%)",
           }}

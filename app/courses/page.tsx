@@ -96,7 +96,7 @@ export default function CoursesPage() {
     <div ref={containerRef} className="relative overflow-hidden bg-[#FDFDFD]">
       {/* Hero Section */}
       <motion.div
-        className="relative overflow-hidden bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084] pt-20 pb-16 sm:pt-28 sm:pb-20"
+        className="relative overflow-hidden py-12 sm:py-16 flex items-center bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084]"
         style={{ opacity: heroOpacity, y: heroY }}
       >
         {/* Animated Background Elements */}
@@ -159,34 +159,33 @@ export default function CoursesPage() {
           </div>
         </div>
 
-        <Container className="relative z-10">
+        <Container className="relative z-10 py-6 sm:py-8">
           <ScrollReveal direction="up">
             <div className="text-center max-w-4xl mx-auto">
               <motion.div
-                className="inline-flex items-center gap-2 text-[#FEF2F7] text-xs font-bold uppercase tracking-widest bg-white/10 backdrop-blur-md px-4 py-2 rounded-full mb-6 border border-white/10"
+                className="inline-flex items-center gap-2 text-[#FEF2F7] text-xs font-bold uppercase tracking-widest bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-full mb-4 border border-white/10 text-white"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 400 }}
               >
-                <Sparkles size={14} className="text-[#F7D51A]" />
+                <Sparkles size={13} className="text-[#F7D51A]" />
                 Discover Your Future
               </motion.div>
 
               <motion.h1
-                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-tight mb-6"
+                className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug mb-4"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.6 }}
               >
-                Explore Our
-                <br />
+                Explore Our{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B30F66] via-[#147CC1] to-[#F7D51A]">
                   Premium Courses
                 </span>
               </motion.h1>
 
               <motion.p
-                className="text-white/80 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto font-medium"
+                className="text-white/80 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-medium"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
@@ -194,35 +193,13 @@ export default function CoursesPage() {
                 We help students get admitted to top programs across Medical,
                 Engineering, and Graduation streams. Browse all verified options.
               </motion.p>
-
-              <motion.div
-                className="flex flex-wrap justify-center gap-3 mt-8"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.6 }}
-              >
-                <Link
-                  href="#courses"
-                  className="group inline-flex items-center gap-2 px-6 py-3 bg-[#B30F66] hover:bg-[#591084] text-white font-bold rounded-xl shadow-lg shadow-[#B30F66]/20 transition-all duration-300 hover:scale-105"
-                >
-                  Browse Courses
-                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                </Link>
-                <Link
-                  href="/contact"
-                  className="group inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-xl border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105"
-                >
-                  Get Free Guidance
-                  <Sparkles size={16} className="group-hover:rotate-180 transition-transform duration-300" />
-                </Link>
-              </motion.div>
             </div>
           </ScrollReveal>
         </Container>
 
         {/* Decorative Shape at Bottom */}
         <div
-          className="absolute bottom-0 left-0 right-0 h-16 bg-[#F8FAFC]"
+          className="absolute bottom-0 left-0 right-0 h-10 bg-[#F8FAFC]"
           style={{
             clipPath: "polygon(0 100%, 100% 100%, 100% 30%, 0 100%)",
           }}

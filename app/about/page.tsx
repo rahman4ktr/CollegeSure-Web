@@ -141,7 +141,7 @@ export default function AboutPageClient() {
     <div ref={containerRef}>
       {/* Hero Section */}
       <motion.div
-        className="relative overflow-hidden min-h-[70vh] flex items-center bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084]"
+        className="relative overflow-hidden py-12 sm:py-16 flex items-center bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084]"
         style={{ opacity: heroOpacity, y: heroY }}
       >
         {/* Animated Background Elements */}
@@ -216,16 +216,16 @@ export default function AboutPageClient() {
           </div>
         </div>
 
-        <Container className="relative z-10 py-16">
+        <Container className="relative z-10 py-6 sm:py-8">
           <ScrollReveal direction="up">
             <div className="max-w-3xl">
               <motion.div
-                className="inline-flex items-center gap-2 text-[#159447] text-xs font-bold uppercase tracking-widest bg-white/10 backdrop-blur-md px-4 py-2 rounded-full mb-6 border border-white/10 text-white"
+                className="inline-flex items-center gap-2 text-[#159447] text-xs font-bold uppercase tracking-widest bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-full mb-4 border border-white/10 text-white"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 400 }}
               >
-                <Sparkles size={14} className="text-[#F7D51A]" />
+                <Sparkles size={13} className="text-[#F7D51A]" />
                 About Us
                 <motion.span
                   className="w-1.5 h-1.5 rounded-full bg-[#159447]"
@@ -235,20 +235,19 @@ export default function AboutPageClient() {
               </motion.div>
 
               <motion.h1
-                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-tight mb-6"
+                className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug mb-4"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.6 }}
               >
-                Your College.
-                <br />
+                Your College.{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#159447] via-[#B30F66] to-[#F7D51A]">
                   Our Assurance.
                 </span>
               </motion.h1>
 
               <motion.p
-                className="text-white/80 text-lg sm:text-xl leading-relaxed max-w-2xl"
+                className="text-white/80 text-sm sm:text-base leading-relaxed max-w-2xl"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
@@ -257,76 +256,19 @@ export default function AboutPageClient() {
                 Institute, built to help students and parents navigate college
                 admissions with clarity, confidence, and complete honesty.
               </motion.p>
-
-              <motion.div
-                className="flex flex-col sm:flex-row gap-4 mt-8"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.6 }}
-              >
-                <Button
-                  as="link"
-                  href="/contact"
-                  variant="primary"
-                  size="lg"
-                  rightIcon={<ArrowRight size={18} />}
-                >
-                  Get Started
-                </Button>
-                <Button
-                  as="link"
-                  href="/courses"
-                  variant="outline"
-                  size="lg"
-                  className="border-white/20 text-white hover:bg-white/10"
-                >
-                  Explore Courses
-                </Button>
-              </motion.div>
             </div>
           </ScrollReveal>
         </Container>
 
         {/* Decorative Shape at Bottom */}
         <div
-          className="absolute bottom-0 left-0 right-0 h-16 bg-white"
+          className="absolute bottom-0 left-0 right-0 h-10 bg-white"
           style={{
             clipPath: "polygon(0 100%, 100% 100%, 100% 30%, 0 100%)",
           }}
           aria-hidden
         />
       </motion.div>
-
-      {/* Stats Section */}
-      <div className="bg-white border-b border-[#E2E8F0] py-8">
-        <Container>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {teamStats.map((stat, idx) => (
-              <ScrollReveal key={stat.label} delay={idx * 0.08} direction="up">
-                <motion.div
-                  className="text-center"
-                  whileHover={{ y: -5, scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                >
-                  <div className="flex items-center justify-center mb-2">
-                    <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center"
-                      style={{ backgroundColor: `${stat.color}15` }}
-                    >
-                      <stat.icon size={18} style={{ color: stat.color }} />
-                    </div>
-                  </div>
-                  <div className="text-2xl font-bold text-[#0B3C5D]">{stat.value}</div>
-                  <div className="text-xs text-[#94A3B8]">{stat.label}</div>
-                  <div className="text-[10px] font-medium" style={{ color: stat.color }}>
-                    {stat.change}
-                  </div>
-                </motion.div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </Container>
-      </div>
 
       {/* Mission Section */}
       <div className="bg-white section-py relative overflow-hidden">
@@ -606,6 +548,37 @@ export default function AboutPageClient() {
                     </div>
                   </div>
                 </Card3DTilt>
+              </ScrollReveal>
+            ))}
+          </div>
+        </Container>
+      </div>
+
+      {/* Stats Section at Bottom */}
+      <div className="bg-white border-t border-[#E2E8F0] py-10">
+        <Container>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {teamStats.map((stat, idx) => (
+              <ScrollReveal key={stat.label} delay={idx * 0.08} direction="up">
+                <motion.div
+                  className="text-center p-4 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] hover:shadow-md transition-all"
+                  whileHover={{ y: -5, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                >
+                  <div className="flex items-center justify-center mb-2">
+                    <div
+                      className="w-10 h-10 rounded-xl flex items-center justify-center"
+                      style={{ backgroundColor: `${stat.color}15` }}
+                    >
+                      <stat.icon size={18} style={{ color: stat.color }} />
+                    </div>
+                  </div>
+                  <div className="text-2xl font-bold text-[#0B3C5D]">{stat.value}</div>
+                  <div className="text-xs text-[#94A3B8] font-medium mt-0.5">{stat.label}</div>
+                  <div className="text-[10px] font-bold mt-1" style={{ color: stat.color }}>
+                    {stat.change}
+                  </div>
+                </motion.div>
               </ScrollReveal>
             ))}
           </div>
