@@ -90,19 +90,20 @@ export default function Hero() {
 
   useEffect(() => {
     if (headlineRef.current) {
-      const lines = headlineRef.current.querySelectorAll(".line");
-      gsap.fromTo(
-        lines,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          stagger: 0.1,
-          delay: 0.15,
-          ease: "power3.out",
-        }
-      );
+      const lines = headlineRef.current.children;
+      if (lines.length > 0) {
+        gsap.fromTo(
+          lines,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            stagger: 0.08,
+            ease: "power2.out",
+          }
+        );
+      }
     }
   }, []);
 

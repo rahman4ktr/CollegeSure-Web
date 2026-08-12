@@ -47,42 +47,42 @@ export default function HomePage() {
       <Hero />
 
       {/* 2. Trust Metrics Section */}
-      <ScrollReveal direction="up" distance={25} duration={0.6}>
+      <ScrollReveal direction="up" distance={15} duration={0.4}>
         <TrustSection />
       </ScrollReveal>
 
       {/* 3. Course Categories */}
-      <ScrollReveal direction="up" distance={25} duration={0.6}>
+      <ScrollReveal direction="up" distance={15} duration={0.4}>
         <CourseCategories />
       </ScrollReveal>
 
       {/* 4. Featured Courses */}
-      <ScrollReveal direction="up" distance={25} duration={0.6}>
+      <ScrollReveal direction="up" distance={15} duration={0.4}>
         <FeaturedCourses />
       </ScrollReveal>
 
       {/* 5. Admission Process Timeline */}
-      <ScrollReveal direction="up" distance={25} duration={0.6}>
+      <ScrollReveal direction="up" distance={15} duration={0.4}>
         <AdmissionProcess />
       </ScrollReveal>
 
       {/* 6. Colleges We Work With - University Logo Marquee */}
-      <ScrollReveal direction="up" distance={25} duration={0.6}>
+      <ScrollReveal direction="up" distance={15} duration={0.4}>
         <UniversityMarquee />
       </ScrollReveal>
 
       {/* 6b. Placement Assistance & Top Recruiters Marquee */}
-      <ScrollReveal direction="up" distance={25} duration={0.6}>
+      <ScrollReveal direction="up" distance={15} duration={0.4}>
         <PlacementMarquee />
       </ScrollReveal>
 
       {/* 7. Why CollegeSure Comparison */}
-      <ScrollReveal direction="up" distance={25} duration={0.6}>
+      <ScrollReveal direction="up" distance={15} duration={0.4}>
         <WhyCollegeSure />
       </ScrollReveal>
 
       {/* 8. Testimonials & Student Reviews */}
-      <ScrollReveal direction="up" distance={25} duration={0.6}>
+      <ScrollReveal direction="up" distance={15} duration={0.4}>
         <Testimonials />
       </ScrollReveal>
 
