@@ -26,7 +26,7 @@ const categoryGlow: Record<Course["category"], string> = {
 
 export default function CourseCard({ course, compact = false }: CourseCardProps) {
   return (
-    <Card3DTilt glowColor={categoryGlow[course.category]} className="h-full">
+    <Card3DTilt glowColor={categoryGlow[course.category]} borderGlow={false} maxTilt={4} scaleOnHover={1.01} liftOnHover={-3} className="h-full">
       <article className="card-base group flex flex-col h-full overflow-hidden bg-white border border-[#E2E8F0] rounded-2xl transition-all duration-300">
         {/* Top accent bar */}
         <div
@@ -48,7 +48,7 @@ export default function CourseCard({ course, compact = false }: CourseCardProps)
           </div>
 
           {/* Title */}
-          <h3 className="text-base sm:text-lg font-bold text-[#04164B] leading-snug mb-2 group-hover:text-[#B30F66] transition-colors">
+          <h3 className="text-base sm:text-lg font-bold text-[#04164B] leading-snug mb-2 group-hover:text-[#B30F66] transition-colors duration-200">
             {course.name}
           </h3>
 

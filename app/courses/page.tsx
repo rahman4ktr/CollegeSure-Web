@@ -207,29 +207,6 @@ export default function CoursesPage() {
         />
       </motion.div>
 
-      {/* Stats Section with Simple Hover */}
-      <div className="bg-white border-b border-[#E2E8F0] py-8">
-        <Container>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            {stats.map((stat, idx) => (
-              <ScrollReveal key={stat.label} delay={idx * 0.08} direction="up">
-                <motion.div
-                  className="text-center p-4 rounded-2xl bg-[#F8FAFC] hover:bg-white hover:shadow-md transition-all duration-300 border border-transparent hover:border-[#E2E8F0]"
-                  whileHover={{ y: -4 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                >
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: `${stat.color}15` }}>
-                    <stat.icon size={20} style={{ color: stat.color }} />
-                  </div>
-                  <div className="text-2xl font-bold text-[#0B3C5D]">{stat.value}</div>
-                  <div className="text-xs text-[#94A3B8] font-medium">{stat.label}</div>
-                </motion.div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </Container>
-      </div>
-
       {/* Category Filter */}
       <div className="bg-white border-b border-[#E2E8F0] py-4 sticky top-0 z-30 backdrop-blur-md bg-white/90">
         <Container>
@@ -451,15 +428,34 @@ export default function CoursesPage() {
         </Container>
       </div>
 
+      {/* Stats Section — Bottom Set */}
+      <div className="bg-white border-y border-[#E2E8F0] py-8">
+        <Container>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {stats.map((stat, idx) => (
+              <ScrollReveal key={stat.label} delay={idx * 0.08} direction="up">
+                <motion.div
+                  className="text-center p-4 rounded-2xl bg-[#F8FAFC] hover:bg-white hover:shadow-md transition-all duration-300 border border-[#E2E8F0]"
+                  whileHover={{ y: -4 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                >
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: `${stat.color}15` }}>
+                    <stat.icon size={20} style={{ color: stat.color }} />
+                  </div>
+                  <div className="text-2xl font-bold text-[#0B3C5D]">{stat.value}</div>
+                  <div className="text-xs text-[#94A3B8] font-medium">{stat.label}</div>
+                </motion.div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </Container>
+      </div>
+
       {/* CTA Section */}
       <ScrollReveal direction="up">
         <CTASection
           title="Ready to Enroll?"
           description="Get personalized guidance and secure your seat in the best colleges."
-          primaryButtonText="Get Free Counselling"
-          primaryButtonLink="/contact"
-          secondaryButtonText="Explore All Courses"
-          secondaryButtonLink="#courses"
         />
       </ScrollReveal>
     </div>

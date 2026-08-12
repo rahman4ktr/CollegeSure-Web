@@ -201,12 +201,10 @@ body {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
-  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+  transition: box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
 }
 .card-base:hover {
   box-shadow: var(--shadow-card-hover);
-  transform: translateY(-3px);
-  border-color: color-mix(in srgb, var(--color-teal) 30%, var(--color-border));
 }
 
 /* ── Animated underline ──────────────────────────────── */

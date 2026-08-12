@@ -140,16 +140,19 @@ export default function GraduationCoursesPage() {
           <div className="flex flex-col gap-4">
             <ScrollReveal direction="left">
               <div>
-                <div className="flex items-center gap-3 mb-3">
+                <div className="flex flex-wrap items-center gap-2.5 mb-3">
                   <Badge 
                     variant="orange" 
-                    icon={<Sparkles size={12} />}
-                    className="bg-[#F36C21]/20 border-[#F36C21]/40 text-white"
+                    icon={<Sparkles size={12} className="text-[#F7D51A]" />}
+                    className="bg-[#F36C21]/35 border-[#F36C21]/60 text-white font-bold shadow-sm"
                   >
                     Commerce & IT Programs
                   </Badge>
-                  <Badge variant="teal" className="bg-white/10 backdrop-blur-sm border-white/20 text-white">
-                    <GraduationCap size={10} className="mr-1" />
+                  <Badge
+                    variant="teal"
+                    icon={<GraduationCap size={12} className="text-[#F36C21]" />}
+                    className="bg-white/15 backdrop-blur-md border-white/30 text-white font-semibold shadow-sm"
+                  >
                     UG Programs
                   </Badge>
                 </div>
@@ -167,16 +170,16 @@ export default function GraduationCoursesPage() {
                 {/* Quick Stats */}
                 <div className="flex flex-wrap gap-3 mt-4">
                   <div className="flex items-center gap-2 text-xs text-white/90 font-medium bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-xl border border-white/10">
-                    <Clock size={14} className="text-[#F36C21]" />
-                    3 Years
+                    <Clock size={14} className="text-[#F36C21] flex-shrink-0" />
+                    <span>3 Years</span>
                   </div>
                   <div className="flex items-center gap-2 text-xs text-white/90 font-medium bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-xl border border-white/10">
-                    <GraduationCap size={14} className="text-[#B30F66]" />
-                    10+2 in Any Stream
+                    <GraduationCap size={14} className="text-[#EC4899] flex-shrink-0" />
+                    <span>10+2 in Any Stream</span>
                   </div>
                   <div className="flex items-center gap-2 text-xs text-white/90 font-medium bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-xl border border-white/10">
-                    <MapPin size={14} className="text-[#147CC1]" />
-                    Multiple Cities
+                    <MapPin size={14} className="text-[#3B82F6] flex-shrink-0" />
+                    <span>Multiple Cities</span>
                   </div>
                 </div>
               </div>
@@ -193,29 +196,6 @@ export default function GraduationCoursesPage() {
           aria-hidden
         />
       </motion.div>
-
-      {/* Stats Section */}
-      <div className="bg-white border-b border-[#E2E8F0] py-8">
-        <Container>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            {stats.map((stat, idx) => (
-              <ScrollReveal key={stat.label} delay={idx * 0.08} direction="up">
-                <motion.div
-                  className="text-center p-4 rounded-2xl bg-[#FEF7F3] hover:bg-white hover:shadow-md transition-all duration-300 border border-transparent hover:border-[#E2E8F0]"
-                  whileHover={{ y: -4 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                >
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: `${stat.color}15` }}>
-                    <stat.icon size={20} style={{ color: stat.color }} />
-                  </div>
-                  <div className="text-2xl font-bold text-[#04164B]">{stat.value}</div>
-                  <div className="text-xs text-[#94A3B8] font-medium">{stat.label}</div>
-                </motion.div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </Container>
-      </div>
 
       {/* Popular Programs Section */}
       <div id="programs" className="bg-[#FEF7F3]/50 border-b border-[#E2E8F0] py-12">
@@ -305,15 +285,34 @@ export default function GraduationCoursesPage() {
         </Container>
       </div>
 
+      {/* Stats Section — Bottom Set */}
+      <div className="bg-white border-y border-[#E2E8F0] py-8">
+        <Container>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {stats.map((stat, idx) => (
+              <ScrollReveal key={stat.label} delay={idx * 0.08} direction="up">
+                <motion.div
+                  className="text-center p-4 rounded-2xl bg-[#FEF7F3] hover:bg-white hover:shadow-md transition-all duration-300 border border-[#E2E8F0]"
+                  whileHover={{ y: -4 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                >
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: `${stat.color}15` }}>
+                    <stat.icon size={20} style={{ color: stat.color }} />
+                  </div>
+                  <div className="text-2xl font-bold text-[#04164B]">{stat.value}</div>
+                  <div className="text-xs text-[#94A3B8] font-medium">{stat.label}</div>
+                </motion.div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </Container>
+      </div>
+
       {/* CTA Section */}
       <ScrollReveal direction="up">
         <CTASection
           title="Not Sure Between BCA, BBA, or B.Com?"
           description="Our counsellors can help you understand the differences and choose the graduation program that best fits your career goals."
-          primaryButtonText="Get Free Counselling"
-          primaryButtonLink="/contact"
-          secondaryButtonText="Explore All Courses"
-          secondaryButtonLink="/courses"
         />
       </ScrollReveal>
     </div>

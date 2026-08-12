@@ -41,22 +41,22 @@ interface Card3DTiltProps {
 export default function Card3DTilt({
   children,
   className = "",
-  maxTilt = 6,
+  maxTilt = 5,
   glowColor = "rgba(13, 148, 136, 0.15)",
   glowSize = 350,
   disabled = false,
   perspective = 1000,
-  scaleOnHover = 1.015,
-  liftOnHover = -4,
+  scaleOnHover = 1.01,
+  liftOnHover = -3,
   transitionType = "spring",
   transitionConfig = {},
   glare = true,
   glareColor = "rgba(255, 255, 255, 0.1)",
   glareOpacity = 0.5,
-  borderGlow = true,
+  borderGlow = false,
   borderGlowColor = "rgba(13, 148, 136, 0.3)",
   shadowOnHover = true,
-  shadowIntensity = 0.2,
+  shadowIntensity = 0.12,
   onHoverStart,
   onHoverEnd,
   onTilt,
@@ -103,7 +103,7 @@ export default function Card3DTilt({
 
   // Transform shadow spring to shadow string
   const boxShadowStyle = useTransform(shadowSpring, (val) =>
-    val > 0 ? `0 20px 60px rgba(0,0,0,${val})` : "0 4px 20px rgba(0,0,0,0.05)"
+    val > 0 ? `0 16px 36px rgba(4, 22, 75, ${val})` : "0 2px 12px rgba(4, 22, 75, 0.04)"
   );
 
   // Top-level transform for radial spotlight background

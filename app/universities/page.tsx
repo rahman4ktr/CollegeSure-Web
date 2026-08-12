@@ -260,8 +260,6 @@ export default function UniversitiesPage() {
         description="Get personalized guidance to find the right college based on your goals, eligibility, and preferences."
         primaryButtonText="Get Free Counselling"
         primaryButtonLink="/contact"
-        secondaryButtonText="Explore All Courses"
-        secondaryButtonLink="/courses"
       />
     </div>
   );

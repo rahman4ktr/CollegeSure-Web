@@ -150,21 +150,22 @@ export default async function CourseDetailPage({ params }: Props) {
               ]}
               className="text-white/70 [&>span]:text-white/40 mb-3"
             />
-          </ScrollReveal>
-
-          <div className="flex flex-col gap-4">
+          </ScrollReveal>          <div className="flex flex-col gap-4">
             <ScrollReveal direction="left">
               <div>
-                <div className="flex items-center gap-3 mb-3">
+                <div className="flex flex-wrap items-center gap-2.5 mb-3">
                   <Badge
                     variant={categoryBadge[course.category]}
                     icon={<Sparkles size={12} />}
-                    className="bg-white/10 backdrop-blur-sm border-white/20 text-white"
+                    className="bg-white/10 backdrop-blur-sm border-white/20 text-white font-semibold"
                   >
                     {course.categoryLabel}
                   </Badge>
-                  <Badge variant="teal" className="bg-white/10 backdrop-blur-sm border-white/20 text-white">
-                    <Clock size={10} className="mr-1" />
+                  <Badge
+                    variant="teal"
+                    icon={<Clock size={12} />}
+                    className="bg-white/10 backdrop-blur-sm border-white/20 text-white font-semibold"
+                  >
                     {course.duration}
                   </Badge>
                 </div>
@@ -175,19 +176,19 @@ export default async function CourseDetailPage({ params }: Props) {
                   {course.description}
                 </p>
 
-                {/* Quick Stats - Enhanced */}
+                {/* Quick Stats */}
                 <div className="flex flex-wrap gap-3 mt-4">
                   <div className="flex items-center gap-2 text-xs text-white/90 font-medium bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-xl border border-white/10">
-                    <GraduationCap size={14} className="text-[#147CC1]" />
-                    {course.eligibility}
+                    <GraduationCap size={14} className="text-[#3B82F6] flex-shrink-0" />
+                    <span>{course.eligibility}</span>
                   </div>
                   <div className="flex items-center gap-2 text-xs text-white/90 font-medium bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-xl border border-white/10">
-                    <MapPin size={14} className="text-[#F36C21]" />
-                    {course.location}
+                    <MapPin size={14} className="text-[#F36C21] flex-shrink-0" />
+                    <span>{course.location}</span>
                   </div>
                   <div className="flex items-center gap-2 text-xs text-white/90 font-medium bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-xl border border-white/10">
-                    <Building2 size={14} className="text-[#159447]" />
-                    {course.availableColleges.length} Colleges
+                    <Building2 size={14} className="text-[#159447] flex-shrink-0" />
+                    <span>{course.availableColleges.length} Colleges Available</span>
                   </div>
                 </div>
               </div>
@@ -510,10 +511,6 @@ export default async function CourseDetailPage({ params }: Props) {
         <CTASection
           title={`Ready to Start Your ${course.name} Journey?`}
           description="Get personalized guidance and secure your seat in the best colleges."
-          primaryButtonText="Get Free Counselling"
-          primaryButtonLink="/contact"
-          secondaryButtonText="Explore All Courses"
-          secondaryButtonLink="/courses"
         />
       </ScrollReveal>
     </div>
