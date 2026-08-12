@@ -53,19 +53,32 @@ export function CounsellingModalProvider({ children }: { children: ReactNode }) 
     setIsOpen(false);
   };
 
-  // Global 30-second recurring timer logic
+  // Global 5-scheduled popups from initial website entry
+  // Popup 1 -> 30 sec (30,000 ms)
+  // Popup 2 -> 1 min 30 sec (90,000 ms)
+  // Popup 3 -> 3 min (180,000 ms)
+  // Popup 4 -> 4 min 30 sec (270,000 ms)
+  // Popup 5 -> 6 min (360,000 ms)
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIsOpen((prev) => {
-        if (prev) {
-          // If modal is already open, do not re-open or duplicate
-          return true;
-        }
-        return true;
-      });
-    }, AUTO_OPEN_DELAY_MS);
+    const popupSchedule = [30_000, 90_000, 180_000, 270_000, 360_000];
+    const timers: NodeJS.Timeout[] = [];
 
-    return () => clearInterval(interval);
+    popupSchedule.forEach((delay) => {
+      const timer = setTimeout(() => {
+        setIsOpen((prev) => {
+          if (prev) {
+            // If modal is already open, keep open without stacking/resetting
+            return true;
+          }
+          return true;
+        });
+      }, delay);
+      timers.push(timer);
+    });
+
+    return () => {
+      timers.forEach((t) => clearTimeout(t));
+    };
   }, []);
 
   return (
