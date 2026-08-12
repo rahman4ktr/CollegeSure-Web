@@ -191,14 +191,14 @@ export default function Breadcrumbs({
                   <span
                     className={`
                       flex items-center gap-1.5
-                      ${!isLast ? 'text-[#475569]' : 'text-[#0F172A] font-semibold'}
+                      ${!isLast ? 'text-white/80' : 'text-white font-bold'}
                       ${isLast ? 'pointer-events-none' : ''}
                       ${item.icon ? 'gap-1.5' : ''}
                       ${size === 'lg' ? 'gap-2' : ''}
                     `}
                     aria-current={isLast ? "page" : undefined}
                   >
-                    {item.icon && <span className="text-[#94A3B8]">{item.icon}</span>}
+                    {item.icon && <span className="text-white/70">{item.icon}</span>}
                     {item.label}
                   </span>
                 ) : (
@@ -207,7 +207,7 @@ export default function Breadcrumbs({
                     onClick={handleClick}
                     className={`
                       flex items-center gap-1.5
-                      hover:text-[#0B3C5D] transition-colors duration-200
+                      text-white/80 hover:text-white transition-colors duration-200
                       hover:underline underline-offset-2
                       ${item.icon ? 'gap-1.5' : ''}
                       ${size === 'lg' ? 'gap-2' : ''}
@@ -215,7 +215,7 @@ export default function Breadcrumbs({
                     `}
                     aria-label={`Navigate to ${item.label}`}
                   >
-                    {item.icon && <span className="text-[#94A3B8]">{item.icon}</span>}
+                    {item.icon && <span className="text-white/70">{item.icon}</span>}
                     {item.label}
                   </Link>
                 )}

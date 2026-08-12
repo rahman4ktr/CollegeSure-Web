@@ -15,16 +15,17 @@ import {
   Stethoscope,
   Cpu,
   Mail,
+  FileCheck2,
 } from "lucide-react";
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
 import Button from "@/components/ui/Button";
 
 const navLinks = [
-  { label: "Home", href: "/", icon: Home },
-  { label: "Medical", href: "/courses/medical", icon: Stethoscope },
-  { label: "Engineering", href: "/courses/engineering", icon: Cpu },
-  { label: "Graduation", href: "/courses/graduation", icon: GraduationCap },
-  { label: "Contact", href: "/contact", icon: Mail },
+  { label: "Home", href: "/", icon: Home, gradient: "from-[#159447] to-[#0B3C5D]" },
+  { label: "Medical", href: "/courses/medical", icon: Stethoscope, gradient: "from-[#159447] to-[#147CC1]" },
+  { label: "Engineering", href: "/courses/engineering", icon: Cpu, gradient: "from-[#147CC1] to-[#B30F66]" },
+  { label: "Graduation", href: "/courses/graduation", icon: GraduationCap, gradient: "from-[#B30F66] to-[#F7D51A]" },
+  { label: "Admission Process", href: "/admission-process", icon: FileCheck2, gradient: "from-[#159447] to-[#B30F66]" },
 ];
 
 import { useCounsellingModal } from "@/components/providers/CounsellingModalProvider";
@@ -152,7 +153,7 @@ export default function Navbar() {
             {/* Desktop Nav */}
             <nav
               aria-label="Main navigation"
-              className="hidden lg:flex items-center gap-3 sm:gap-4"
+              className="hidden lg:flex items-center gap-2 sm:gap-3"
               ref={dropdownRef}
             >
               {navLinks.map((link) => {
@@ -170,13 +171,15 @@ export default function Navbar() {
                     >
                       <Link
                         href={link.href}
-                        className={`flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-xl transition-all duration-300 ${
+                        className={`flex items-center gap-2 px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-xl transition-all duration-300 ${
                           hoveredLink === link.label
-                            ? "text-[#0B3C5D] bg-gradient-to-r from-[#0B3C5D]/5 to-[#0D9488]/5"
-                            : "text-[#475569] hover:text-[#0B3C5D] hover:bg-[#0B3C5D]/5"
+                            ? "text-[#04164B] bg-gradient-to-r from-[#0B3C5D]/5 to-[#0D9488]/5 shadow-sm"
+                            : "text-[#475569] hover:text-[#04164B] hover:bg-[#0B3C5D]/5"
                         }`}
                       >
-                        <Icon size={18} className="text-[#0D9488]" />
+                        <div className={`w-7 h-7 rounded-lg bg-gradient-to-br ${link.gradient} flex items-center justify-center shadow-sm text-white flex-shrink-0`}>
+                          <Icon size={14} />
+                        </div>
                         <span>{link.label}</span>
                       </Link>
                     </motion.div>
@@ -330,10 +333,10 @@ export default function Navbar() {
                         <Link
                           href={link.href}
                           onClick={() => setMobileOpen(false)}
-                          className="flex items-center gap-3 px-3 py-3 text-sm font-semibold text-[#475569] hover:text-[#0B3C5D] rounded-xl hover:bg-gradient-to-r hover:from-[#0B3C5D]/5 hover:to-[#0D9488]/5 transition-all duration-300"
+                          className="flex items-center gap-3 px-3 py-3 text-sm font-semibold text-[#475569] hover:text-[#04164B] rounded-xl hover:bg-gradient-to-r hover:from-[#0B3C5D]/5 hover:to-[#0D9488]/5 transition-all duration-300"
                         >
-                          <div className="w-8 h-8 rounded-lg bg-[#0D9488]/10 flex items-center justify-center text-[#0D9488]">
-                            <Icon size={18} />
+                          <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${link.gradient} flex items-center justify-center text-white shadow-sm flex-shrink-0`}>
+                            <Icon size={16} />
                           </div>
                           <span>{link.label}</span>
                         </Link>
