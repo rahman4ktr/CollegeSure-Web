@@ -1,7 +1,3 @@
-"use client";
-
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import InquiryForm from "@/components/forms/InquiryForm";
@@ -23,8 +19,19 @@ import {
 } from "lucide-react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import Card3DTilt from "@/components/ui/Card3DTilt";
-import Button from "@/components/ui/Button";
 import Link from "next/link";
+import JsonLd from "@/components/seo/JsonLd";
+import {
+  getCollegeSureOrganizationSchema,
+  getCollegeSureWebSiteSchema,
+  getWebPageSchema,
+  getBreadcrumbSchema,
+} from "@/lib/schema";
+
+export const metadata = {
+  title: "Contact Us — CollegeSure by Brainzima",
+  description: "Get in touch with CollegeSure counsellors by phone, WhatsApp, email, or visit our campus in Katihar, Bihar.",
+};
 
 // ─── Shared constants ────────────────────────────────────────────────────────
 const PHONE = "+91 79798 64304";
@@ -87,204 +94,109 @@ function ContactCard({
   delay?: number;
 }) {
   return (
-    <ScrollReveal delay={delay} direction="up">
-      <Card3DTilt glowColor="rgba(13, 148, 136, 0.14)" className="h-full">
-        <div className="group relative bg-white rounded-2xl p-6 border border-[#E2E8F0] shadow-sm hover:shadow-xl transition-all duration-500 h-full overflow-hidden">
-          {/* Animated Background Gradient */}
-          <div
-            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-            style={{
-              background: `linear-gradient(135deg, ${iconColor}08, transparent 70%)`
-            }}
-          />
+    <Card3DTilt glowColor="rgba(13, 148, 136, 0.14)" className="h-full">
+      <div className="group relative bg-white rounded-2xl p-6 border border-[#E2E8F0] shadow-sm hover:shadow-xl transition-all duration-500 h-full overflow-hidden">
+        {/* Animated Background Gradient */}
+        <div
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          style={{
+            background: `linear-gradient(135deg, ${iconColor}08, transparent 70%)`
+          }}
+        />
 
-          <div className="relative z-10">
-            {/* Icon */}
-            <motion.div
-              className={`w-12 h-12 rounded-xl ${iconBg} flex items-center justify-center mb-4`}
-              whileHover={{ rotate: -5, scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 400, damping: 15 }}
-            >
-              <span className={iconColor}>{icon}</span>
-            </motion.div>
-
-            {/* Label */}
-            <p className="text-xs font-bold uppercase tracking-widest text-[#94A3B8] mb-1">
-              {label}
-            </p>
-
-            {/* Description */}
-            <p className="text-sm text-[#475569] leading-relaxed mb-3">{description}</p>
-
-            {/* Detail value */}
-            <div className="mb-5 flex-1">
-              {detailHref ? (
-                <a
-                  href={detailHref}
-                  className="text-base font-bold text-[#0F172A] hover:text-[#0D9488] transition-colors break-all"
-                >
-                  {detail}
-                </a>
-              ) : (
-                <p className="text-base font-bold text-[#0F172A] leading-snug">{detail}</p>
-              )}
-            </div>
-
-            {/* Action buttons */}
-            <div className="flex flex-wrap gap-2 mt-auto">
-              {actions.map((action) => (
-                <motion.a
-                  key={action.label}
-                  href={action.href}
-                  target={action.external ? "_blank" : undefined}
-                  rel={action.external ? "noopener noreferrer" : undefined}
-                  className={`inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${action.style}`}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  {action.icon}
-                  {action.label}
-                  {action.external && <ExternalLink size={11} className="opacity-60" />}
-                </motion.a>
-              ))}
-            </div>
+        <div className="relative z-10">
+          {/* Icon */}
+          <div className={`w-12 h-12 rounded-xl ${iconBg} flex items-center justify-center mb-4 transition-transform group-hover:scale-105`}>
+            <span className={iconColor}>{icon}</span>
           </div>
-        </div>
-      </Card3DTilt>
-    </ScrollReveal>
-  );
-}
 
-export default function ContactPageClient() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
+          {/* Label */}
+          <p className="text-xs font-bold uppercase tracking-widest text-[#94A3B8] mb-1">
+            {label}
+          </p>
 
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0.8]);
-  const heroY = useTransform(scrollYProgress, [0, 0.4], [0, -50]);
+          {/* Description */}
+          <p className="text-sm text-[#475569] leading-relaxed mb-3">{description}</p>
 
-  return (
-    <div ref={containerRef}>
-      {/* Enhanced Page Header */}
-      <motion.div
-        className="relative overflow-hidden py-12 sm:py-16 flex items-center bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084]"
-        style={{ opacity: heroOpacity, y: heroY }}
-      >
-        {/* Animated Background */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
-          <motion.div
-            className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#159447]/20 blur-3xl"
-            animate={{
-              x: [0, -30, 20, 0],
-              y: [0, 20, -30, 0],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-          <motion.div
-            className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#B30F66]/20 blur-3xl"
-            animate={{
-              x: [0, 30, -20, 0],
-              y: [0, -20, 30, 0],
-            }}
-            transition={{
-              duration: 22,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2,
-            }}
-          />
-          <motion.div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#F7D51A]/10 blur-3xl"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.6, 0.3],
-            }}
-            transition={{
-              duration: 18,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
+          {/* Detail value */}
+          <div className="mb-5 flex-1">
+            {detailHref ? (
+              <a
+                href={detailHref}
+                className="text-base font-bold text-[#0F172A] hover:text-[#0D9488] transition-colors break-all"
+              >
+                {detail}
+              </a>
+            ) : (
+              <p className="text-base font-bold text-[#0F172A] leading-snug">{detail}</p>
+            )}
+          </div>
 
-          {/* Floating Particles */}
-          <div className="absolute inset-0 overflow-hidden">
-            {[...Array(15)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-1 h-1 bg-white/10 rounded-full"
-                initial={{
-                  x: (i * 7.31) % 100 + "%",
-                  y: (i * 13.97) % 100 + "%",
-                }}
-                animate={{
-                  x: [
-                    (i * 7.31) % 100 + "%",
-                    ((i * 7.31 + 20) % 100) + "%",
-                    ((i * 7.31 + 40) % 100) + "%",
-                  ],
-                  y: [
-                    (i * 13.97) % 100 + "%",
-                    ((i * 13.97 + 15) % 100) + "%",
-                    ((i * 13.97 + 30) % 100) + "%",
-                  ],
-                }}
-                transition={{
-                  duration: 15 + i * 2,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              />
+          {/* Action buttons */}
+          <div className="flex flex-wrap gap-2 mt-auto">
+            {actions.map((action) => (
+              <a
+                key={action.label}
+                href={action.href}
+                target={action.external ? "_blank" : undefined}
+                rel={action.external ? "noopener noreferrer" : undefined}
+                className={`inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5 ${action.style}`}
+              >
+                {action.icon}
+                {action.label}
+                {action.external && <ExternalLink size={11} className="opacity-60" />}
+              </a>
             ))}
           </div>
         </div>
+      </div>
+    </Card3DTilt>
+  );
+}
+
+export default function ContactPage() {
+  const contactGraphNodes = [
+    getCollegeSureOrganizationSchema(),
+    getCollegeSureWebSiteSchema(),
+    getWebPageSchema("/contact", metadata.title, metadata.description, "ContactPage"),
+    getBreadcrumbSchema("/contact", [
+      { name: "Home", url: "/" },
+      { name: "Contact Us", url: "/contact" },
+    ]),
+  ];
+
+  return (
+    <div>
+      <JsonLd nodes={contactGraphNodes} />
+      {/* Enhanced Page Header */}
+      <div className="relative overflow-hidden py-12 sm:py-16 flex items-center bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084]">
+        {/* Animated Background */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
+          <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#159447]/20 blur-3xl animate-ambient-slow" />
+          <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#B30F66]/20 blur-3xl animate-ambient-slow-reverse" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#F7D51A]/10 blur-3xl animate-ambient-center" />
+        </div>
 
         <Container className="relative z-10 py-6 sm:py-8">
-          <ScrollReveal direction="up">
-            <div className="max-w-3xl mx-auto text-center">
-              <motion.div
-                className="inline-flex items-center gap-2 text-[#159447] text-xs font-bold uppercase tracking-widest bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-full mb-4 border border-white/10 text-white"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2, type: "spring", stiffness: 400 }}
-              >
-                <Sparkles size={13} className="text-[#F7D51A]" />
-                Get in Touch
-                <motion.span
-                  className="w-1.5 h-1.5 rounded-full bg-[#159447]"
-                  animate={{ scale: [1, 1.5, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-              </motion.div>
-
-              <motion.h1
-                className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug mb-4"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.6 }}
-              >
-                Let's Start Your{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#159447] via-[#B30F66] to-[#F7D51A]">
-                  College Journey
-                </span>
-              </motion.h1>
-
-              <motion.p
-                className="text-white/80 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
-              >
-                Have questions about college admissions, courses, or eligibility?
-                Reach us by phone, WhatsApp, email, or visit our campus in Katihar, Bihar.
-              </motion.p>
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 text-[#159447] text-xs font-bold uppercase tracking-widest bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-full mb-4 border border-white/10 text-white">
+              <Sparkles size={13} className="text-[#F7D51A]" />
+              Get in Touch
+              <span className="w-1.5 h-1.5 rounded-full bg-[#159447] animate-pulse" />
             </div>
-          </ScrollReveal>
+
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug mb-4">
+              Let's Start Your{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#159447] via-[#B30F66] to-[#F7D51A]">
+                College Journey
+              </span>
+            </h1>
+
+            <p className="text-white/80 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+              Have questions about college admissions, courses, or eligibility?
+              Reach us by phone, WhatsApp, email, or visit our campus in Katihar, Bihar.
+            </p>
+          </div>
         </Container>
 
         {/* Decorative Shape at Bottom */}
@@ -295,7 +207,7 @@ export default function ContactPageClient() {
           }}
           aria-hidden
         />
-      </motion.div>
+      </div>
 
       {/* Trust Badges */}
       <div className="bg-white border-b border-[#E2E8F0] py-6">
@@ -307,16 +219,13 @@ export default function ContactPageClient() {
               { icon: Users, text: "Expert Counsellors" },
               { icon: CheckCircle2, text: "Trusted by 15,000+" },
             ].map((item, idx) => (
-              <motion.div
+              <div
                 key={idx}
-                className="flex items-center gap-2 text-xs text-[#475569]"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 + idx * 0.05 }}
+                className="flex items-center gap-2 text-xs text-[#475569] font-medium"
               >
                 <item.icon size={14} className="text-[#0D9488]" />
                 <span>{item.text}</span>
-              </motion.div>
+              </div>
             ))}
           </div>
         </Container>

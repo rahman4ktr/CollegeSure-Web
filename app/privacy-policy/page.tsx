@@ -2,6 +2,13 @@ import type { Metadata } from "next";
 import { generatePageMetadata } from "@/lib/seo";
 import Container from "@/components/ui/Container";
 import { Scale } from "lucide-react";
+import JsonLd from "@/components/seo/JsonLd";
+import {
+  getCollegeSureOrganizationSchema,
+  getCollegeSureWebSiteSchema,
+  getWebPageSchema,
+  getBreadcrumbSchema,
+} from "@/lib/schema";
 
 export const metadata: Metadata = generatePageMetadata(
   "Privacy Policy — CollegeSure by Brainzima",
@@ -10,8 +17,19 @@ export const metadata: Metadata = generatePageMetadata(
 );
 
 export default function PrivacyPolicyPage() {
+  const privacyGraphNodes = [
+    getCollegeSureOrganizationSchema(),
+    getCollegeSureWebSiteSchema(),
+    getWebPageSchema("/privacy-policy", "Privacy Policy — CollegeSure by Brainzima", "Read CollegeSure's privacy policy to understand how we collect, use, and protect your personal information.", "WebPage"),
+    getBreadcrumbSchema("/privacy-policy", [
+      { name: "Home", url: "/" },
+      { name: "Privacy Policy", url: "/privacy-policy" },
+    ]),
+  ];
+
   return (
     <>
+      <JsonLd nodes={privacyGraphNodes} />
       {/* Header Banner */}
       <div className="relative overflow-hidden bg-gradient-to-b from-[#F8FAFC] via-white to-white border-b border-[#E2E8F0] py-14 sm:py-16">
         <div className="absolute inset-0 pointer-events-none" aria-hidden>

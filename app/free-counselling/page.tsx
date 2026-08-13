@@ -29,6 +29,14 @@ import {
   MessageSquare
 } from "lucide-react";
 
+import JsonLd from "@/components/seo/JsonLd";
+import {
+  getCollegeSureOrganizationSchema,
+  getCollegeSureWebSiteSchema,
+  getWebPageSchema,
+  getBreadcrumbSchema,
+} from "@/lib/schema";
+
 import { submitCounsellingForm } from "@/lib/api";
 
 // WhatsApp Link & Phone Constants
@@ -40,6 +48,21 @@ const WA_HREF =
 export default function FreeCounsellingPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
+
+  const freeCounsellingGraphNodes = [
+    getCollegeSureOrganizationSchema(),
+    getCollegeSureWebSiteSchema(),
+    getWebPageSchema(
+      "/free-counselling",
+      "Free College Counselling — CollegeSure by Brainzima",
+      "Book a free, 1-on-1 personalized college counselling session with expert advisors. 100% confidential and transparent.",
+      "WebPage"
+    ),
+    getBreadcrumbSchema("/free-counselling", [
+      { name: "Home", url: "/" },
+      { name: "Free Counselling", url: "/free-counselling" },
+    ]),
+  ];
 
   // Form State
   const [formData, setFormData] = useState({
@@ -91,6 +114,7 @@ export default function FreeCounsellingPage() {
 
   return (
     <div ref={containerRef} className="relative overflow-hidden bg-[#FDFDFD]">
+      <JsonLd nodes={freeCounsellingGraphNodes} />
       {/* ── 1. HERO SECTION — INSTANT SUPPORT FEEL ────────────────────────── */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084] pt-8 pb-16 sm:pt-12 sm:pb-24 text-white">
         {/* Ambient Glows */}

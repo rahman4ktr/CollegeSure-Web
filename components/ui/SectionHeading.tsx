@@ -1,7 +1,4 @@
-"use client";
-
 import { ReactNode } from "react";
-import { motion } from "framer-motion";
 
 interface SectionHeadingProps {
   eyebrow?: string;
@@ -84,7 +81,7 @@ export default function SectionHeading({
   id,
   size = "md",
   variant = "default",
-  animated = true,
+  animated = false,
   delay = 0,
   duration = 0.6,
   separator = "line",
@@ -143,15 +140,12 @@ export default function SectionHeading({
     );
 
     return (
-      <motion.div
+      <div
         className={`
           inline-flex items-center gap-3 font-semibold uppercase tracking-widest
           ${sizeClasses.eyebrow}
           ${eyebrowClassName}
         `}
-        initial={animated ? { opacity: 0, y: 10 } : undefined}
-        animate={animated ? { opacity: 1, y: 0 } : undefined}
-        transition={{ duration: 0.4, delay: delay }}
       >
         {icon && iconPosition === "left" && (
           <span className="flex-shrink-0">{icon}</span>
@@ -160,7 +154,7 @@ export default function SectionHeading({
         {icon && iconPosition === "right" && (
           <span className="flex-shrink-0">{icon}</span>
         )}
-      </motion.div>
+      </div>
     );
   };
 
@@ -175,7 +169,7 @@ export default function SectionHeading({
       ${titleColor ? `text-[${titleColor}]` : `text-[#04164B]`}
     `.trim();
 
-    const titleContent = (
+    return (
       <Tag
         id={id}
         className={titleClasses}
@@ -183,29 +177,10 @@ export default function SectionHeading({
       >
         {title}
         {variant === 'underlined' && (
-          <motion.span
-            className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-[#0D9488] to-[#0B3C5D] rounded-full"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.6, delay: delay + 0.2 }}
-          />
+          <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-[#0D9488] to-[#0B3C5D] rounded-full" />
         )}
       </Tag>
     );
-
-    if (animated) {
-      return (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration, delay: delay + 0.1 }}
-        >
-          {titleContent}
-        </motion.div>
-      );
-    }
-
-    return titleContent;
   };
 
   const renderDescription = () => {
@@ -218,19 +193,6 @@ export default function SectionHeading({
       ${descriptionColor ? `text-[${descriptionColor}]` : 'text-[#475569]'}
       ${align === 'center' ? 'mx-auto' : ''}
     `.trim();
-
-    if (animated) {
-      return (
-        <motion.div
-          className={descClasses}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: delay + 0.2 }}
-        >
-          {description}
-        </motion.div>
-      );
-    }
 
     return <div className={descClasses}>{description}</div>;
   };
@@ -245,14 +207,9 @@ export default function SectionHeading({
     `;
 
     return (
-      <motion.span
-        className={badgeClasses}
-        initial={animated ? { scale: 0, opacity: 0 } : undefined}
-        animate={animated ? { scale: 1, opacity: 1 } : undefined}
-        transition={{ type: "spring", stiffness: 400, damping: 15, delay: delay + 0.3 }}
-      >
+      <span className={badgeClasses}>
         {badge}
-      </motion.span>
+      </span>
     );
   };
 

@@ -1,7 +1,4 @@
-"use client";
-
 import { ReactNode, forwardRef } from "react";
-import { motion } from "framer-motion";
 
 interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   children: ReactNode;
@@ -76,7 +73,6 @@ const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
     href,
     ...props
   }, ref) => {
-    // Combine classes manually instead of using cn
     const baseStyles = `
       inline-flex items-center gap-1.5 font-semibold
       border transition-all duration-200
@@ -84,7 +80,7 @@ const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       ${sizeStyles[size]}
       ${roundedStyles[rounded]}
       ${clickable ? 'cursor-pointer hover:scale-105 hover:shadow-md' : ''}
-      ${animated ? 'animate-in fade-in slide-in-from-top-2 duration-300' : ''}
+      ${animated ? 'animate-pulse-scale-subtle' : ''}
       ${pulse ? 'animate-pulse' : ''}
       ${glow ? `shadow-[0_0_20px_${variant === 'teal' ? '#0D9488' : variant === 'navy' ? '#0B3C5D' : variant === 'orange' ? '#F97316' : 'rgba(0,0,0,0.1)'}40]` : ''}
       ${className}
@@ -98,46 +94,6 @@ const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       </>
     );
 
-    // Animated badge with motion
-    if (animated) {
-      const motionProps: any = {
-        initial: { opacity: 0, scale: 0.8 },
-        animate: { opacity: 1, scale: 1 },
-        transition: { type: "spring", stiffness: 400, damping: 25 },
-        className: `${baseStyles} ${clickable ? 'cursor-pointer' : ''}`,
-        ...props,
-      };
-
-      if (as === "a" && href) {
-        return (
-          <motion.a href={href} {...motionProps} ref={ref as any}>
-            {content}
-          </motion.a>
-        );
-      }
-
-      if (clickable && onClick) {
-        return (
-          <motion.button
-            {...motionProps}
-            onClick={onClick}
-            ref={ref as any}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            {content}
-          </motion.button>
-        );
-      }
-
-      return (
-        <motion.span {...motionProps} ref={ref as any}>
-          {content}
-        </motion.span>
-      );
-    }
-
-    // Non-animated badge
     const commonProps = {
       className: baseStyles,
       onClick: clickable ? onClick : undefined,
@@ -152,7 +108,7 @@ const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       );
     }
 
-    if (as === "div") {
+    if (as === "div" || clickable) {
       return (
         <div ref={ref as any} {...commonProps}>
           {content}

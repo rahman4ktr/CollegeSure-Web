@@ -1,32 +1,34 @@
-"use client";
-
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
 import Container from "@/components/ui/Container";
 import CourseCard from "@/components/cards/CourseCard";
 import CTASection from "@/components/sections/CTASection";
-import SectionHeading from "@/components/ui/SectionHeading";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import { getCoursesByCategory } from "@/lib/data/courses";
-import ScrollReveal, { StaggerContainer, StaggerItem } from "@/components/ui/ScrollReveal";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 import Badge from "@/components/ui/Badge";
-import Card3DTilt from "@/components/ui/Card3DTilt";
+import JsonLd from "@/components/seo/JsonLd";
+import {
+  getCollegeSureOrganizationSchema,
+  getCollegeSureWebSiteSchema,
+  getWebPageSchema,
+  getBreadcrumbSchema,
+} from "@/lib/schema";
 import {
   Cpu,
   Sparkles,
-  ArrowRight,
   TrendingUp,
-  Award,
   Users,
   BookOpen,
-  Zap,
   CheckCircle2,
   Building2,
   GraduationCap,
   MapPin,
   Clock
 } from "lucide-react";
-import Link from "next/link";
+
+export const metadata = {
+  title: "Engineering & B.Tech Courses — CollegeSure by Brainzima",
+  description: "Browse verified B.Tech CSE, Mechanical, Civil, ECE, and Engineering Diplomas with expert admission guidance.",
+};
 
 // Stats Data
 const stats = [
@@ -47,142 +49,84 @@ const specializations = [
 ];
 
 export default function EngineeringCoursesPage() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0.9]);
-  const heroY = useTransform(scrollYProgress, [0, 0.4], [0, -30]);
-
   const courses = getCoursesByCategory("engineering");
+  const engineeringGraphNodes = [
+    getCollegeSureOrganizationSchema(),
+    getCollegeSureWebSiteSchema(),
+    getWebPageSchema("/courses/engineering", metadata.title, metadata.description, "WebPage"),
+    getBreadcrumbSchema("/courses/engineering", [
+      { name: "Home", url: "/" },
+      { name: "Courses", url: "/courses" },
+      { name: "Engineering", url: "/courses/engineering" },
+    ]),
+  ];
 
   return (
-    <div ref={containerRef} className="relative overflow-hidden bg-[#FDFDFD]">
+    <div className="relative overflow-hidden bg-[#FDFDFD]">
+      <JsonLd nodes={engineeringGraphNodes} />
       {/* Enhanced Hero Section */}
-      <motion.div
-        className="relative overflow-hidden py-12 sm:py-16 flex items-center bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084]"
-        style={{ opacity: heroOpacity, y: heroY }}
-      >
+      <div className="relative overflow-hidden py-12 sm:py-16 flex items-center bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084]">
         {/* Animated Background */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
-          <motion.div
-            className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#147CC1]/20 blur-3xl"
-            animate={{
-              x: [0, -30, 20, 0],
-              y: [0, 20, -30, 0],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-          <motion.div
-            className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#B30F66]/20 blur-3xl"
-            animate={{
-              x: [0, 30, -20, 0],
-              y: [0, -20, 30, 0],
-            }}
-            transition={{
-              duration: 22,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2,
-            }}
-          />
-
-          {/* Floating Particles */}
-          <div className="absolute inset-0 overflow-hidden">
-            {[...Array(15)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-1 h-1 bg-white/10 rounded-full"
-                initial={{
-                  x: Math.random() * 100 + "%",
-                  y: Math.random() * 100 + "%",
-                }}
-                animate={{
-                  x: [
-                    Math.random() * 100 + "%",
-                    Math.random() * 100 + "%",
-                    Math.random() * 100 + "%",
-                  ],
-                  y: [
-                    Math.random() * 100 + "%",
-                    Math.random() * 100 + "%",
-                    Math.random() * 100 + "%",
-                  ],
-                }}
-                transition={{
-                  duration: 20 + Math.random() * 10,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              />
-            ))}
-          </div>
+          <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#147CC1]/20 blur-3xl animate-ambient-slow" />
+          <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#B30F66]/20 blur-3xl animate-ambient-slow-reverse" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#F7D51A]/10 blur-3xl animate-ambient-center" />
         </div>
 
         <Container className="relative z-10">
-          <ScrollReveal direction="down" distance={20}>
-            <Breadcrumbs
-              items={[
-                { label: "Courses", href: "/courses" },
-                { label: "Engineering" },
-              ]}
-              className="text-white/70 [&>span]:text-white/40"
-            />
-          </ScrollReveal>
+          <Breadcrumbs
+            items={[
+              { label: "Courses", href: "/courses" },
+              { label: "Engineering" },
+            ]}
+            className="text-white/70 [&>span]:text-white/40 mb-3"
+          />
 
           <div className="flex flex-col gap-4">
-            <ScrollReveal direction="left">
-              <div>
-                <div className="flex flex-wrap items-center gap-2.5 mb-3">
-                  <Badge
-                    variant="blue"
-                    icon={<Sparkles size={12} className="text-[#147CC1]" />}
-                    className="bg-white border-white/60 text-black font-bold shadow-sm"
-                  >
-                    Technology Programs
-                  </Badge>
-                  <Badge
-                    variant="teal"
-                    icon={<Cpu size={12} className="text-[#3B82F6]" />}
-                    className="bg-white/15 backdrop-blur-md border-white/30 text-white font-semibold shadow-sm"
-                  >
-                    B.Tech & Diplomas
-                  </Badge>
-                </div>
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug mb-3">
-                  Engineering{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#147CC1] via-[#B30F66] to-[#F7D51A]">
-                    Courses
-                  </span>
-                </h1>
-                <p className="text-white/80 text-sm sm:text-base leading-relaxed max-w-3xl font-medium">
-                  B.Tech programs across Computer Science, Mechanical, Civil and other disciplines.
-                  We help you find the right engineering college.
-                </p>
+            <div>
+              <div className="flex flex-wrap items-center gap-2.5 mb-3">
+                <Badge
+                  variant="blue"
+                  icon={<Sparkles size={12} className="text-[#147CC1]" />}
+                  className="bg-white border-white/60 text-black font-bold shadow-sm"
+                >
+                  Technology Programs
+                </Badge>
+                <Badge
+                  variant="teal"
+                  icon={<Cpu size={12} className="text-[#3B82F6]" />}
+                  className="bg-white/15 backdrop-blur-md border-white/30 text-white font-semibold shadow-sm"
+                >
+                  B.Tech & Diplomas
+                </Badge>
+              </div>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug mb-3">
+                Engineering{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#147CC1] via-[#B30F66] to-[#F7D51A]">
+                  Courses
+                </span>
+              </h1>
+              <p className="text-white/80 text-sm sm:text-base leading-relaxed max-w-3xl font-medium">
+                B.Tech programs across Computer Science, Mechanical, Civil and other disciplines.
+                We help you find the right engineering college.
+              </p>
 
-                {/* Quick Stats */}
-                <div className="flex flex-wrap gap-3 mt-4">
-                  <div className="flex items-center gap-2 text-xs text-white/90 font-medium bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-xl border border-white/10">
-                    <Clock size={14} className="text-[#3B82F6] flex-shrink-0" />
-                    <span>4 Years</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs text-white/90 font-medium bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-xl border border-white/10">
-                    <GraduationCap size={14} className="text-[#EC4899] flex-shrink-0" />
-                    <span>10+2 with PCM</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs text-white/90 font-medium bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-xl border border-white/10">
-                    <MapPin size={14} className="text-[#F36C21] flex-shrink-0" />
-                    <span>Multiple Cities</span>
-                  </div>
+              {/* Quick Stats */}
+              <div className="flex flex-wrap gap-3 mt-4">
+                <div className="flex items-center gap-2 text-xs text-white/90 font-medium bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-xl border border-white/10">
+                  <Clock size={14} className="text-[#3B82F6] flex-shrink-0" />
+                  <span>4 Years</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs text-white/90 font-medium bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-xl border border-white/10">
+                  <GraduationCap size={14} className="text-[#EC4899] flex-shrink-0" />
+                  <span>10+2 with PCM</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs text-white/90 font-medium bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-xl border border-white/10">
+                  <MapPin size={14} className="text-[#F36C21] flex-shrink-0" />
+                  <span>Multiple Cities</span>
                 </div>
               </div>
-            </ScrollReveal>
+            </div>
           </div>
         </Container>
 
@@ -194,7 +138,7 @@ export default function EngineeringCoursesPage() {
           }}
           aria-hidden
         />
-      </motion.div>
+      </div>
 
       {/* Specializations Section */}
       <div id="specializations" className="bg-[#F8FAFC] border-b border-[#E2E8F0] py-12">
@@ -212,13 +156,9 @@ export default function EngineeringCoursesPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {specializations.map((spec, idx) => (
-                <motion.div
+                <div
                   key={idx}
-                  className="flex items-center gap-3 p-4 bg-white rounded-xl border border-[#E2E8F0] hover:shadow-md hover:border-[#3B82F6]/30 transition-all duration-300 group"
-                  whileHover={{ x: 4, scale: 1.02 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.05 }}
+                  className="flex items-center gap-3 p-4 bg-white rounded-xl border border-[#E2E8F0] hover:shadow-md hover:border-[#3B82F6]/30 transition-all duration-300 hover:translate-x-1 group"
                 >
                   <div className="w-8 h-8 rounded-lg bg-[#3B82F6]/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                     <CheckCircle2 size={14} className="text-[#3B82F6]" />
@@ -226,7 +166,7 @@ export default function EngineeringCoursesPage() {
                   <span className="text-sm font-medium text-[#475569] group-hover:text-[#0B3C5D] transition-colors">
                     {spec}
                   </span>
-                </motion.div>
+                </div>
               ))}
             </div>
           </ScrollReveal>
@@ -255,15 +195,11 @@ export default function EngineeringCoursesPage() {
             </Badge>
           </div>
 
-          <StaggerContainer>
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-              {courses.map((course) => (
-                <StaggerItem key={course.slug}>
-                  <CourseCard course={course} />
-                </StaggerItem>
-              ))}
-            </div>
-          </StaggerContainer>
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+            {courses.map((course) => (
+              <CourseCard key={course.slug} course={course} />
+            ))}
+          </div>
 
           {/* Empty State */}
           {courses.length === 0 && (
@@ -282,35 +218,24 @@ export default function EngineeringCoursesPage() {
       <div className="bg-white border-y border-[#E2E8F0] py-8">
         <Container>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            {stats.map((stat, idx) => (
-              <ScrollReveal key={stat.label} delay={idx * 0.08} direction="up">
-                <motion.div
-                  className="text-center p-4 rounded-2xl bg-[#F8FAFC] hover:bg-white hover:shadow-md transition-all duration-300 border border-[#E2E8F0]"
-                  whileHover={{ y: -4 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                >
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: `${stat.color}15` }}>
-                    <stat.icon size={20} style={{ color: stat.color }} />
-                  </div>
-                  <div className="text-2xl font-bold text-[#0B3C5D]">{stat.value}</div>
-                  <div className="text-xs text-[#94A3B8] font-medium">{stat.label}</div>
-                </motion.div>
-              </ScrollReveal>
+            {stats.map((stat) => (
+              <div key={stat.label} className="text-center p-4 rounded-2xl bg-[#F8FAFC] hover:bg-white hover:shadow-md transition-all duration-300 border border-[#E2E8F0] hover:-translate-y-1">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: `${stat.color}15` }}>
+                  <stat.icon size={20} style={{ color: stat.color }} />
+                </div>
+                <div className="text-2xl font-bold text-[#0B3C5D]">{stat.value}</div>
+                <div className="text-xs text-[#94A3B8] font-medium">{stat.label}</div>
+              </div>
             ))}
           </div>
         </Container>
       </div>
 
       {/* CTA Section */}
-      <ScrollReveal direction="up">
-        <CTASection
-          title="Looking for the Right Engineering College?"
-          description="Let our counsellors help you compare B.Tech options based on fees, eligibility, location, and career prospects."
-        />
-      </ScrollReveal>
+      <CTASection
+        title="Looking for the Right Engineering College?"
+        description="Let our counsellors help you compare B.Tech options based on fees, eligibility, location, and career prospects."
+      />
     </div>
   );
 }
-
-// Missing import for MessageCircle
-import { MessageCircle } from "lucide-react";

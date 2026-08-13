@@ -1,5 +1,3 @@
-"use client";
-
 import { ReactNode, forwardRef, HTMLAttributes } from "react";
 
 interface ContainerProps extends HTMLAttributes<HTMLElement> {

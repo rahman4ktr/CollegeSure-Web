@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: SITE_URL,
       lastModified: new Date(),
       changeFrequency: "weekly",
-      priority: 1,
+      priority: 1.0,
     },
     {
       url: `${SITE_URL}/courses`,
@@ -47,6 +47,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/free-counselling`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.85,
     },
     {
       url: `${SITE_URL}/about`,

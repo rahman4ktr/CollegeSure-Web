@@ -87,21 +87,13 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.header
+      <header
         ref={navbarRef}
-        className={`fixed top-4 left-4 right-4 z-50 transition-all duration-500 ${scrolled
-            ? "bg-white/70 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] border border-white/30 rounded-2xl py-2"
-            : "bg-white/60 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.06)] border border-white/20 rounded-2xl py-3"
+        className={`fixed top-4 left-4 right-4 z-50 transition-all duration-300 ${scrolled
+            ? "bg-white/80 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] border border-white/30 rounded-2xl py-2"
+            : "bg-white/70 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.06)] border border-white/20 rounded-2xl py-3"
           }`}
         role="banner"
-        initial={{ y: -100, opacity: 0, scale: 0.9 }}
-        animate={{ y: 0, opacity: 1, scale: 1 }}
-        transition={{
-          type: "spring",
-          damping: 25,
-          stiffness: 200,
-          duration: 0.6
-        }}
       >
         {/* Animated gradient border */}
         <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#0B3C5D]/10 via-[#0D9488]/10 to-[#0B3C5D]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -109,14 +101,10 @@ export default function Navbar() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
           <div className="flex items-center justify-between gap-4">
             {/* Logo */}
-            <motion.div
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              className="relative"
-            >
+            <div className="relative">
               <Link
                 href="/"
-                className="flex items-center gap-2.5 flex-shrink-0 group"
+                className="flex items-center gap-2.5 flex-shrink-0 group hover:scale-[1.02] transition-transform duration-200"
                 aria-label="CollegeSure — Home"
               >
                 <div className="relative">
@@ -134,7 +122,7 @@ export default function Navbar() {
                   </span>
                 </div>
               </Link>
-            </motion.div>
+            </div>
 
             {/* Desktop Nav */}
             <nav
@@ -145,83 +133,56 @@ export default function Navbar() {
               {navLinks.map((link) => {
                 const Icon = link.icon;
                 return (
-                  <motion.div
+                  <div
                     key={link.label}
                     className="relative"
-                    onHoverStart={() => setHoveredLink(link.label)}
-                    onHoverEnd={() => setHoveredLink(null)}
+                    onMouseEnter={() => setHoveredLink(link.label)}
+                    onMouseLeave={() => setHoveredLink(null)}
                   >
-                    <motion.div
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
+                    <Link
+                      href={link.href}
+                      className={`flex items-center gap-2 px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-xl transition-all duration-200 hover:-translate-y-0.5 ${
+                        hoveredLink === link.label
+                          ? "text-[#04164B] bg-gradient-to-r from-[#0B3C5D]/5 to-[#0D9488]/5 shadow-sm"
+                          : "text-[#475569] hover:text-[#04164B] hover:bg-[#0B3C5D]/5"
+                      }`}
                     >
-                      <Link
-                        href={link.href}
-                        className={`flex items-center gap-2 px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-xl transition-all duration-300 ${
-                          hoveredLink === link.label
-                            ? "text-[#04164B] bg-gradient-to-r from-[#0B3C5D]/5 to-[#0D9488]/5 shadow-sm"
-                            : "text-[#475569] hover:text-[#04164B] hover:bg-[#0B3C5D]/5"
-                        }`}
-                      >
-                        <div className={`w-7 h-7 rounded-lg bg-gradient-to-br ${link.gradient} flex items-center justify-center shadow-sm text-white flex-shrink-0`}>
-                          <Icon size={14} />
-                        </div>
-                        <span>{link.label}</span>
-                      </Link>
-                    </motion.div>
-                  </motion.div>
+                      <div className={`w-7 h-7 rounded-lg bg-gradient-to-br ${link.gradient} flex items-center justify-center shadow-sm text-white flex-shrink-0`}>
+                        <Icon size={14} />
+                      </div>
+                      <span>{link.label}</span>
+                    </Link>
+                  </div>
                 );
               })}
             </nav>
 
             {/* Desktop CTAs */}
             <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
-          
-
-              <motion.div
-                whileHover={{ y: -3, scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 400, damping: 15 }}
+              <Button
+                as="button"
+                onClick={() => openModal()}
+                variant="primary"
+                size="md"
+                className="relative overflow-hidden group cursor-pointer hover:-translate-y-0.5 transition-transform"
               >
-                <Button
-                  as="button"
-                  onClick={() => openModal()}
-                  variant="primary"
-                  size="md"
-                  className="relative overflow-hidden group cursor-pointer"
-                >
-                  <span className="relative z-10 flex items-center gap-2">
-                    <Sparkles size={16} />
-                    Free Counselling
-                  </span>
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-[#0B3C5D] via-[#0D9488] to-[#0B3C5D] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{ backgroundSize: "200% 100%" }}
-                    animate={{
-                      backgroundPosition: ["0% 0%", "100% 0%"],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                  />
-                </Button>
-              </motion.div>
+                <span className="relative z-10 flex items-center gap-2">
+                  <Sparkles size={16} />
+                  Free Counselling
+                </span>
+              </Button>
             </div>
 
             {/* Mobile action icons + Hamburger */}
             <div className="lg:hidden flex items-center gap-1">
-              <motion.a
-                whileTap={{ scale: 0.9 }}
+              <a
                 href="tel:+917979864304"
                 className="p-2.5 rounded-xl text-[#0B3C5D] hover:bg-[#0B3C5D]/10 transition-colors"
                 aria-label="Call CollegeSure"
               >
                 <Phone size={20} />
-              </motion.a>
-              <motion.a
-                whileTap={{ scale: 0.9 }}
+              </a>
+              <a
                 href="https://wa.me/917979864304?text=Hello%20Brainzima%2C%20I%20would%20like%20to%20know%20more%20about%20your%20courses%20and%20admissions."
                 target="_blank"
                 rel="noopener noreferrer"
@@ -229,9 +190,8 @@ export default function Navbar() {
                 aria-label="WhatsApp CollegeSure"
               >
                 <MessageCircle size={20} />
-              </motion.a>
-              <motion.button
-                whileTap={{ scale: 0.9 }}
+              </a>
+              <button
                 onClick={() => setMobileOpen(!mobileOpen)}
                 className={`p-2.5 rounded-xl transition-colors ${mobileOpen
                     ? "text-white bg-gradient-to-r from-[#0B3C5D] to-[#0D9488]"
@@ -242,11 +202,11 @@ export default function Navbar() {
                 aria-controls="mobile-nav"
               >
                 {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-              </motion.button>
+              </button>
             </div>
           </div>
         </div>
-      </motion.header>
+      </header>
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>

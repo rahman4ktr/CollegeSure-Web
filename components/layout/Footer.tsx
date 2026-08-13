@@ -1,7 +1,4 @@
-"use client";
-
 import Link from "next/link";
-import { motion } from "framer-motion";
 import {
   GraduationCap,
   Phone,
@@ -43,7 +40,7 @@ export default function Footer() {
 
       {/* Main footer */}
       <div className="bg-gradient-to-b from-[#04164B] to-[#040943] text-white relative">
-        {/* Animated gradient orbs */}
+        {/* Ambient gradient orbs */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
           <div className="absolute -top-40 right-0 w-[600px] h-[600px] rounded-full bg-[#B30F66]/10 blur-3xl animate-ambient-slow" />
           <div
@@ -56,15 +53,9 @@ export default function Footer() {
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
             {/* Brand */}
-            <motion.div
-              className="sm:col-span-2 lg:col-span-1"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
+            <div className="sm:col-span-2 lg:col-span-1">
               <div className="hover:scale-[1.02] transition-transform duration-300">
-                <Link href="/" className="flex items-center gap-2.5 mb-5 group">
+                <Link href="/" className="flex items-center gap-2.5 mb-5 group" aria-label="CollegeSure - Home">
                   <div className="relative">
                     <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#591084] to-[#B30F66] flex items-center justify-center shadow-lg relative z-10 transition-all duration-300">
                       <GraduationCap size={22} className="text-white" />
@@ -82,16 +73,10 @@ export default function Footer() {
                 </Link>
               </div>
 
-              <motion.p
-                className="text-[#94A3B8] text-sm leading-relaxed mb-6"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-              >
+              <p className="text-[#94A3B8] text-sm leading-relaxed mb-6">
                 Your College. Our Assurance. Expert admissions guidance for Medical,
                 Engineering, and Graduation programs.
-              </motion.p>
+              </p>
 
               <div className="space-y-3 text-sm">
                 {[
@@ -120,28 +105,17 @@ export default function Footer() {
                   <span className="pt-2 leading-relaxed">Anathalaya Rd, near Bachcha Hospital,<br />Katihar, Bihar 854105</span>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Courses */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-            >
+            <div>
               <h3 className="font-bold text-white mb-5 text-xs uppercase tracking-widest flex items-center gap-2">
-                <span className="w-6 h-px bg-[#0D9488] animate-pulse-scale" style={{ transformOrigin: 'left' }} />
+                <span className="w-6 h-px bg-[#0D9488]" />
                 Courses
               </h3>
               <ul className="space-y-3">
-                {courseLinks.map((link, idx) => (
-                  <motion.li
-                    key={link.href}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: idx * 0.05 }}
-                  >
+                {courseLinks.map((link) => (
+                  <li key={link.href}>
                     <Link
                       href={link.href}
                       className="text-sm text-[#94A3B8] hover:text-white transition-all duration-300 flex items-center gap-2 group"
@@ -151,31 +125,20 @@ export default function Footer() {
                       </span>
                       {link.label}
                     </Link>
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
 
             {/* Quick Links */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-            >
+            <div>
               <h3 className="font-bold text-white mb-5 text-xs uppercase tracking-widest flex items-center gap-2">
-                <span className="w-6 h-px bg-[#0D9488] animate-pulse-scale" style={{ transformOrigin: 'left', animationDelay: '0.5s' }} />
+                <span className="w-6 h-px bg-[#0D9488]" />
                 Quick Links
               </h3>
               <ul className="space-y-3">
-                {quickLinks.map((link, idx) => (
-                  <motion.li
-                    key={link.href}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: idx * 0.05 + 0.1 }}
-                  >
+                {quickLinks.map((link) => (
+                  <li key={link.href}>
                     <Link
                       href={link.href}
                       className="text-sm text-[#94A3B8] hover:text-white transition-all duration-300 flex items-center gap-2 group"
@@ -185,43 +148,26 @@ export default function Footer() {
                       </span>
                       {link.label}
                     </Link>
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
 
             {/* CTA Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-            >
+            <div>
               <h3 className="font-bold text-white mb-5 text-xs uppercase tracking-widest flex items-center gap-2">
-                <span className="w-6 h-px bg-[#0D9488] animate-pulse-scale" style={{ transformOrigin: 'left', animationDelay: '1s' }} />
+                <span className="w-6 h-px bg-[#0D9488]" />
                 Get Guidance
               </h3>
 
-              <motion.div
-                className="bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-sm rounded-2xl p-5 border border-white/10 shadow-lg relative overflow-hidden group"
-                whileHover={{
-                  y: -5,
-                  boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
-                }}
-                transition={{ type: "spring", stiffness: 400, damping: 15 }}
-              >
-                {/* Animated gradient overlay — CSS */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#0D9488]/0 via-[#0D9488]/5 to-[#0D9488]/0 animate-shimmer-slide" style={{ animationDelay: '2s' }} />
+              <div className="bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-sm rounded-2xl p-5 border border-white/10 shadow-lg relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0D9488]/0 via-[#0D9488]/5 to-[#0D9488]/0 animate-shimmer-slide" />
 
                 <p className="text-[#E2E8F0] text-sm leading-relaxed mb-5 relative z-10">
                   Not sure which college or course is right for you? Talk to our counsellors today.
                 </p>
 
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                >
+                <div>
                   <Link
                     href="/free-counselling"
                     className="inline-flex items-center gap-2 bg-[#B30F66] hover:bg-[#591084] shadow-lg shadow-[#B30F66]/20 text-white text-sm font-bold px-5 py-3 rounded-xl transition-all duration-300 w-full justify-center group relative overflow-hidden"
@@ -231,16 +177,14 @@ export default function Footer() {
                       Free Counselling
                     </span>
                   </Link>
-                </motion.div>
-              </motion.div>
+                </div>
+              </div>
 
-              <motion.a
+              <a
                 href="https://wa.me/917979864304?text=Hello%20Brainzima%2C%20I%20would%20like%20to%20know%20more%20about%20your%20courses%20and%20admissions."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#25D366]/15 hover:bg-[#25D366] text-[#25D366] hover:text-white text-sm font-semibold px-5 py-3 rounded-xl border border-[#25D366]/30 hover:border-transparent transition-all duration-300 w-full justify-center mt-3 group"
-                whileHover={{ y: -2, scale: 1.02 }}
-                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center gap-2 bg-[#25D366]/15 hover:bg-[#25D366] text-[#25D366] hover:text-white text-sm font-semibold px-5 py-3 rounded-xl border border-[#25D366]/30 hover:border-transparent transition-all duration-300 w-full justify-center mt-3 group hover:-translate-y-0.5"
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -253,8 +197,8 @@ export default function Footer() {
                 </svg>
                 Chat on WhatsApp
                 <ExternalLink size={12} className="opacity-60" />
-              </motion.a>
-            </motion.div>
+              </a>
+            </div>
           </div>
         </div>
 

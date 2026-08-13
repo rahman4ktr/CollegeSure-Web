@@ -25,6 +25,15 @@ import {
 } from "lucide-react";
 import { getCourseBySlug, getAllSlugs, getRelatedCourses } from "@/lib/data/courses";
 import { SITE_URL } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
+import {
+  getCollegeSureOrganizationSchema,
+  getCollegeSureWebSiteSchema,
+  getWebPageSchema,
+  getBreadcrumbSchema,
+  getCourseSchema,
+  getFAQPageSchema,
+} from "@/lib/schema";
 import Container from "@/components/ui/Container";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Badge from "@/components/ui/Badge";
@@ -106,28 +115,28 @@ export default async function CourseDetailPage({ params }: Props) {
   const relatedCourses = getRelatedCourses(course.relatedSlugs);
   const colors = categoryColors[course.category] || categoryColors.graduation;
 
-  // Course JSON-LD structured data
-  const courseSchema = {
-    "@context": "https://schema.org",
-    "@type": "Course",
-    name: course.name,
-    description: course.description,
-    provider: {
-      "@type": "Organization",
-      name: "CollegeSure by Brainzima",
-      sameAs: SITE_URL,
-    },
-    educationalLevel: "Undergraduate",
-    timeRequired: course.duration,
-    url: `${SITE_URL}/courses/${course.slug}`,
-  };
+  const courseGraphNodes = [
+    getCollegeSureOrganizationSchema(),
+    getCollegeSureWebSiteSchema(),
+    getWebPageSchema(
+      `/courses/${course.slug}`,
+      `${course.name} — Admissions Guidance | CollegeSure`,
+      course.description,
+      "ItemPage"
+    ),
+    getBreadcrumbSchema(`/courses/${course.slug}`, [
+      { name: "Home", url: "/" },
+      { name: "Courses", url: "/courses" },
+      { name: course.categoryLabel, url: `/courses/${course.category}` },
+      { name: course.name, url: `/courses/${course.slug}` },
+    ]),
+    getCourseSchema(course),
+    getFAQPageSchema(course.faqs),
+  ];
 
   return (
     <div className="relative overflow-hidden bg-[#FDFDFD]">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }}
-      />
+      <JsonLd nodes={courseGraphNodes} />
 
       {/* Enhanced Hero Section */}
       <div className="relative overflow-hidden py-12 sm:py-16 flex items-center bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084]">

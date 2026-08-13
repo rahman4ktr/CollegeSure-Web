@@ -1,7 +1,3 @@
-"use client";
-
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import CTASection from "@/components/sections/CTASection";
@@ -14,11 +10,8 @@ import {
   Sparkles,
   Shield,
   CheckCircle2,
-  ArrowRight,
-  Quote,
   Building2,
   Star,
-  TrendingUp,
   Lightbulb,
   PenTool,
   Briefcase,
@@ -26,16 +19,26 @@ import {
   MessageCircle,
   Users,
   Compass,
-  Globe,
   ExternalLink,
   Laptop,
   Search,
-  Check,
-  Calendar,
 } from "lucide-react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import Card3DTilt from "@/components/ui/Card3DTilt";
 import Link from "next/link";
+
+import JsonLd from "@/components/seo/JsonLd";
+import {
+  getCollegeSureOrganizationSchema,
+  getCollegeSureWebSiteSchema,
+  getWebPageSchema,
+  getBreadcrumbSchema,
+} from "@/lib/schema";
+
+export const metadata = {
+  title: "About Us — CollegeSure by Brainzima",
+  description: "Learn about CollegeSure by Brainzima Innovation Institute — honest, transparent guidance for college admissions, courses, and career paths.",
+};
 
 const values = [
   {
@@ -247,132 +250,50 @@ const testimonials = [
   },
 ];
 
-export default function AboutPageClient() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const heroY = useTransform(scrollYProgress, [0, 0.5], [0, -100]);
+export default function AboutPage() {
+  const featuredVenture = ecosystemVentures.find((v) => v.isFeatured);
+  const aboutGraphNodes = [
+    getCollegeSureOrganizationSchema(),
+    getCollegeSureWebSiteSchema(),
+    getWebPageSchema("/about", metadata.title, metadata.description, "AboutPage"),
+    getBreadcrumbSchema("/about", [
+      { name: "Home", url: "/" },
+      { name: "About Us", url: "/about" },
+    ]),
+  ];
 
   return (
-    <div ref={containerRef}>
+    <div>
+      <JsonLd nodes={aboutGraphNodes} />
       {/* Hero Section */}
-      <motion.div
-        className="relative overflow-hidden py-12 sm:py-16 flex items-center bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084]"
-        style={{ opacity: heroOpacity, y: heroY }}
-      >
+      <div className="relative overflow-hidden py-12 sm:py-16 flex items-center bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084]">
         {/* Animated Background Elements */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
-          <motion.div
-            className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#159447]/20 blur-3xl"
-            animate={{
-              x: [0, -30, 20, 0],
-              y: [0, 20, -30, 0],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-          <motion.div
-            className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#B30F66]/20 blur-3xl"
-            animate={{
-              x: [0, 30, -20, 0],
-              y: [0, -20, 30, 0],
-            }}
-            transition={{
-              duration: 22,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2,
-            }}
-          />
-          <motion.div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#F7D51A]/10 blur-3xl"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.6, 0.3],
-            }}
-            transition={{
-              duration: 18,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-
-          {/* Floating Particles */}
-          <div className="absolute inset-0 overflow-hidden">
-            {[...Array(15)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-1 h-1 bg-white/10 rounded-full"
-                initial={{
-                  x: (i * 7.31) % 100 + "%",
-                  y: (i * 13.97) % 100 + "%",
-                }}
-                animate={{
-                  x: [
-                    (i * 7.31) % 100 + "%",
-                    ((i * 7.31 + 20) % 100) + "%",
-                    ((i * 7.31 + 40) % 100) + "%",
-                  ],
-                  y: [
-                    (i * 13.97) % 100 + "%",
-                    ((i * 13.97 + 15) % 100) + "%",
-                    ((i * 13.97 + 30) % 100) + "%",
-                  ],
-                }}
-                transition={{
-                  duration: 15 + i * 2,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              />
-            ))}
-          </div>
+          <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#159447]/20 blur-3xl animate-ambient-slow" />
+          <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#B30F66]/20 blur-3xl animate-ambient-slow-reverse" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#F7D51A]/10 blur-3xl animate-ambient-center" />
         </div>
 
         <Container className="relative z-10 py-6 sm:py-8">
-          <ScrollReveal direction="up">
-            <div className="max-w-3xl">
-              <motion.div
-                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-full mb-4 border border-white/10 text-white"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2, type: "spring", stiffness: 400 }}
-              >
-                <Sparkles size={13} className="text-[#F7D51A]" />
-                About CollegeSure & Brainzima
-              </motion.div>
-
-              <motion.h1
-                className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug mb-4"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.6 }}
-              >
-                Your College.{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#159447] via-[#B30F66] to-[#F7D51A]">
-                  Our Assurance.
-                </span>
-              </motion.h1>
-
-              <motion.p
-                className="text-white/80 text-sm sm:text-base leading-relaxed max-w-2xl font-medium"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
-              >
-                CollegeSure is an admissions guidance platform by Brainzima Innovation
-                Institute, built to help students and parents navigate college
-                admissions with clarity, confidence, and complete honesty.
-              </motion.p>
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-full mb-4 border border-white/10 text-white">
+              <Sparkles size={13} className="text-[#F7D51A]" />
+              About CollegeSure & Brainzima
             </div>
-          </ScrollReveal>
+
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug mb-4">
+              Your College.{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#159447] via-[#B30F66] to-[#F7D51A]">
+                Our Assurance.
+              </span>
+            </h1>
+
+            <p className="text-white/80 text-sm sm:text-base leading-relaxed max-w-2xl font-medium">
+              CollegeSure is an admissions guidance platform by Brainzima Innovation
+              Institute, built to help students and parents navigate college
+              admissions with clarity, confidence, and complete honesty.
+            </p>
+          </div>
         </Container>
 
         {/* Decorative Shape at Bottom */}
@@ -383,38 +304,18 @@ export default function AboutPageClient() {
           }}
           aria-hidden
         />
-      </motion.div>
+      </div>
 
       {/* Mission Section */}
       <div className="bg-white section-py relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none" aria-hidden>
-          <motion.div
-            className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#0D9488]/5 blur-3xl"
-            animate={{
-              x: [0, -30, 20, 0],
-              y: [0, 20, -30, 0],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        </div>
-
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <ScrollReveal direction="left">
               <div>
-                <motion.div
-                  className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#0D9488] mb-4"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5 }}
-                >
+                <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#0D9488] mb-4">
                   <span className="w-6 h-px bg-[#0D9488]" />
                   Our Mission
-                </motion.div>
+                </div>
                 <h2 className="text-3xl sm:text-4xl font-bold text-[#0B3C5D] leading-tight mb-5">
                   Honest Admissions Guidance for Every Student
                 </h2>
@@ -457,18 +358,6 @@ export default function AboutPageClient() {
             <ScrollReveal direction="right">
               <Card3DTilt borderGlow={false} maxTilt={4}>
                 <div className="relative bg-gradient-to-br from-white to-[#F8FAFC] rounded-2xl p-8 border border-[#E2E8F0] shadow-md overflow-hidden">
-                  <motion.div
-                    className="absolute -top-20 -right-20 w-40 h-40 bg-[#0D9488]/10 rounded-full blur-2xl"
-                    animate={{
-                      scale: [1, 1.2, 1],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  />
-
                   <div className="relative">
                     <div className="flex items-center gap-4 mb-6">
                       <div className="w-14 h-14 bg-gradient-to-br from-[#0B3C5D] to-[#1a5276] rounded-2xl flex items-center justify-center shadow-lg">
@@ -494,16 +383,15 @@ export default function AboutPageClient() {
                         { icon: MessageCircle, text: "Guidance: Personalized, honest, free" },
                         { icon: CheckCircle2, text: "Support: End-to-end admission assistance" },
                       ].map((item) => (
-                        <motion.div
+                        <div
                           key={item.text}
-                          className="flex items-center gap-3 text-sm font-medium text-[#475569]"
-                          whileHover={{ x: 5 }}
+                          className="flex items-center gap-3 text-sm font-medium text-[#475569] hover:translate-x-1 transition-transform"
                         >
                           <div className="w-6 h-6 rounded-full bg-[#0D9488]/10 flex items-center justify-center flex-shrink-0">
                             <item.icon size={14} className="text-[#0D9488]" />
                           </div>
                           {item.text}
-                        </motion.div>
+                        </div>
                       ))}
                     </div>
 
@@ -524,34 +412,64 @@ export default function AboutPageClient() {
         </Container>
       </div>
 
-      {/* Brainzima Ecosystem & Our Ventures Section */}
-      <div className="bg-[#F8FAFC] section-py border-t border-[#E2E8F0] relative overflow-hidden">
+      {/* Values Section */}
+      <div className="bg-[#F8FAFC] section-py">
         <Container>
           <ScrollReveal direction="up">
-            <div className="text-center max-w-4xl mx-auto mb-16">
-              <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#147CC1] bg-[#147CC1]/10 px-3.5 py-1.5 rounded-full mb-4 border border-[#147CC1]/20">
-                <Globe size={13} className="text-[#147CC1]" />
-                Brainzima Innovation Ecosystem
-              </div>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0B3C5D] leading-snug mb-4">
-                One Vision, Multiple Ventures — Building an Ecosystem Across Education, Technology & Digital Innovation.
-              </h2>
-              <div className="mt-4 p-5 rounded-2xl bg-white border border-[#E2E8F0] shadow-sm max-w-3xl mx-auto">
-                <h3 className="text-sm font-bold text-[#0D9488] uppercase tracking-wide mb-1">
-                  From Digital Education to Digital Empowerment
-                </h3>
-                <p className="text-sm text-[#475569] leading-relaxed">
-                  Brainzima's ventures address different stages of the digital journey — from learning technology and building digital solutions to discovering tools, preparing for competitive exams, and helping students make better higher-education decisions.
-                </p>
-              </div>
-            </div>
+            <SectionHeading
+              eyebrow="Our Core Principles"
+              title="What Drives CollegeSure"
+              description="These values shape every interaction, recommendation, and piece of advice we share."
+              className="mb-12"
+            />
           </ScrollReveal>
 
-          {/* Ecosystem Ventures Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {values.map((val, idx) => {
+              const Icon = val.icon;
+              return (
+                <ScrollReveal key={val.title} delay={idx * 0.08} direction="up">
+                  <Card3DTilt glowColor={`${val.color}25`}>
+                    <div className="group relative bg-white rounded-2xl p-6 sm:p-7 border border-[#E2E8F0] shadow-sm hover:shadow-xl transition-all duration-500 h-full overflow-hidden flex flex-col justify-between">
+                      <div>
+                        <div
+                          className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110"
+                          style={{ backgroundColor: `${val.color}15` }}
+                        >
+                          <Icon size={22} style={{ color: val.color }} />
+                        </div>
+                        <h3 className="font-bold text-[#0F172A] text-lg mb-2">
+                          {val.title}
+                        </h3>
+                        <p className="text-sm text-[#475569] leading-relaxed">
+                          {val.description}
+                        </p>
+                      </div>
+                    </div>
+                  </Card3DTilt>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+        </Container>
+      </div>
+
+      {/* Ecosystem Ventures Grid */}
+      <div className="bg-white section-py">
+        <Container>
+          <ScrollReveal direction="up">
+            <SectionHeading
+              eyebrow="The Brainzima Ecosystem"
+              title="Ventures Under Brainzima"
+              description="Exploring digital solutions, software, tools, and testing technology across multiple domains."
+              className="mb-12"
+            />
+          </ScrollReveal>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch mb-12">
             {ecosystemVentures.map((venture) => {
               const Icon = venture.icon;
-              if (venture.isFeatured) return null; // Featured card rendered full-width below
+              if (venture.isFeatured) return null;
               return (
                 <ScrollReveal key={venture.id} direction="up">
                   <Card3DTilt borderGlow={false} maxTilt={4} className="h-full">
@@ -600,291 +518,43 @@ export default function AboutPageClient() {
             })}
           </div>
 
-          {/* Featured Venture — CollegeSure by Brainzima */}
-          {(() => {
-            const cs = ecosystemVentures.find((v) => v.id === "collegesure");
-            if (!cs) return null;
-            const Icon = cs.icon;
-            return (
-              <ScrollReveal direction="up">
-                <Card3DTilt borderGlow={false} maxTilt={3} className="w-full">
-                  <div className="bg-gradient-to-br from-white via-[#F8FAFC] to-[#F1F5F9] rounded-3xl p-6 sm:p-10 border border-[#E2E8F0] shadow-lg relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-[#0D9488]/10 rounded-bl-full blur-3xl pointer-events-none" />
-
-                    <div className="relative z-10">
-                      {/* Category Badge & Status */}
-                      <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-                        <div className="flex items-center gap-2">
-                          <span className="bg-[#0D9488]/15 border border-[#0D9488]/30 text-[#0D9488] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                            {cs.category}
-                          </span>
-                          <span className="bg-[#F36C21]/15 border border-[#F36C21]/30 text-[#F36C21] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                            {cs.status}
-                          </span>
-                        </div>
-                        <div className="text-xs font-semibold text-[#94A3B8] flex items-center gap-1.5">
-                          <Globe size={14} className="text-[#0D9488]" />
-                          <span>collegesure.brainzima.com</span>
-                        </div>
-                      </div>
-
-                      {/* Header */}
-                      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-6">
-                        <div>
-                          <div className="flex items-center gap-3 mb-2">
-                            <div className="w-12 h-12 rounded-2xl bg-[#0D9488]/15 flex items-center justify-center">
-                              <Icon size={24} className="text-[#0D9488]" />
-                            </div>
-                            <div>
-                              <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0B3C5D]">
-                                {cs.name} <span className="text-sm font-bold text-[#0D9488]">by Brainzima</span>
-                              </h3>
-                              <p className="text-sm font-semibold text-[#475569]">
-                                {cs.subtitle}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-
-                        <a
-                          href={cs.ctaLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#0D9488] hover:bg-[#0a7a6f] text-white font-bold text-sm rounded-xl shadow-md transition-all duration-300 group"
-                        >
-                          {cs.ctaText}
-                          <ExternalLink size={16} className="group-hover:translate-x-0.5 transition-transform" />
-                        </a>
-                      </div>
-
-                      {/* Description */}
-                      <p className="text-base text-[#475569] leading-relaxed mb-6">
-                        {cs.description}
-                      </p>
-
-                      {/* Quote Banner */}
-                      {cs.quote && (
-                        <blockquote className="p-4 bg-white rounded-2xl border border-[#E2E8F0] text-sm italic font-medium text-[#0B3C5D] mb-8 flex items-center gap-3">
-                          <Quote size={20} className="text-[#0D9488] flex-shrink-0" />
-                          <span>"{cs.quote}"</span>
-                        </blockquote>
-                      )}
-
-                      {/* Features List */}
-                      <div className="mb-8">
-                        <h4 className="text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-3">
-                          What CollegeSure Offers
-                        </h4>
-                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                          {cs.features?.map((ft) => (
-                            <div key={ft} className="flex items-center gap-2 p-2.5 rounded-xl bg-white border border-[#E2E8F0] text-xs font-semibold text-[#0B3C5D]">
-                              <Check size={14} className="text-[#0D9488] flex-shrink-0" />
-                              <span>{ft}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Platform Verified Highlights */}
-                      <div>
-                        <h4 className="text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-3">
-                          Platform Verified Highlights
-                        </h4>
-                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                          {cs.stats.map((st) => (
-                            <div key={st.label} className="bg-white p-4 rounded-2xl border border-[#E2E8F0] text-center shadow-sm">
-                              <div className="text-2xl font-extrabold text-[#0B3C5D]">{st.value}</div>
-                              <div className="text-xs font-medium text-[#94A3B8] mt-1">{st.label}</div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </Card3DTilt>
-              </ScrollReveal>
-            );
-          })()}
-        </Container>
-      </div>
-
-      {/* Journey & Timeline Section */}
-      <div className="bg-white section-py relative overflow-hidden">
-        <Container>
-          <ScrollReveal direction="up">
-            <SectionHeading
-              eyebrow="Our History & Growth"
-              title="Our Journey & Evolution"
-              description="From humble beginnings in computer education to building Eastern India's leading education, web, and admissions technology ecosystem."
-              className="mb-12"
-            />
-          </ScrollReveal>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {timelineEvents.map((event, idx) => (
-              <ScrollReveal key={event.year} delay={idx * 0.08} direction="up">
-                <Card3DTilt borderGlow={false} maxTilt={4}>
-                  <div className={`relative bg-white rounded-2xl p-6 border ${event.isHighlight ? 'border-[#0D9488]' : 'border-[#E2E8F0]'} shadow-sm hover:shadow-md transition-all duration-300 h-full group`}>
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="text-2xl font-black" style={{ color: event.color }}>
-                        {event.year}
-                      </span>
-                      <Calendar size={18} className="text-[#94A3B8]" />
-                    </div>
-
-                    <h3 className="font-bold text-[#0F172A] text-lg mb-2">
-                      {event.title}
+          {/* Featured CollegeSure Card */}
+          {featuredVenture && (
+            <ScrollReveal direction="up">
+              <div className="bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084] text-white rounded-3xl p-8 sm:p-10 shadow-2xl relative overflow-hidden">
+                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                  <div className="lg:col-span-8">
+                    <Badge variant="teal" size="sm" className="mb-4">
+                      {featuredVenture.category}
+                    </Badge>
+                    <h3 className="text-2xl sm:text-3xl font-extrabold mb-2">
+                      {featuredVenture.name}
                     </h3>
-                    <p className="text-sm text-[#475569] leading-relaxed">
-                      {event.description}
+                    <p className="text-white/80 text-sm sm:text-base leading-relaxed mb-6">
+                      {featuredVenture.description}
                     </p>
-                  </div>
-                </Card3DTilt>
-              </ScrollReveal>
-            ))}
-          </div>
-        </Container>
-      </div>
-
-      {/* How We Work Section */}
-      <div className="bg-[#F8FAFC] section-py relative overflow-hidden">
-        <Container>
-          <ScrollReveal direction="up">
-            <SectionHeading
-              eyebrow="How We Work"
-              title="Your Journey With Us"
-              description="We follow a structured, student-first approach to ensure you get the best guidance possible."
-              className="mb-12"
-            />
-          </ScrollReveal>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {journeySteps.map((step, idx) => {
-              const Icon = step.icon;
-              return (
-                <ScrollReveal key={step.number} delay={idx * 0.08} direction="up">
-                  <Card3DTilt borderGlow={false} maxTilt={4}>
-                    <div className="relative bg-white rounded-2xl p-6 border border-[#E2E8F0] shadow-sm hover:shadow-md transition-all duration-300 h-full group">
-                      <div className="absolute top-4 right-4 text-3xl font-black text-[#E2E8F0]">
-                        {step.number}
-                      </div>
-
-                      <div className="relative">
-                        <div
-                          className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
-                          style={{ backgroundColor: `${step.color}15` }}
-                        >
-                          <Icon size={22} style={{ color: step.color }} />
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-white/15">
+                      {featuredVenture.stats.map((st) => (
+                        <div key={st.label}>
+                          <div className="text-xl font-bold text-white">{st.value}</div>
+                          <div className="text-xs text-white/70">{st.label}</div>
                         </div>
-                        <h3 className="font-bold text-[#0F172A] text-lg mb-2">
-                          {step.title}
-                        </h3>
-                        <p className="text-sm text-[#475569] leading-relaxed">
-                          {step.description}
-                        </p>
-                      </div>
-                    </div>
-                  </Card3DTilt>
-                </ScrollReveal>
-              );
-            })}
-          </div>
-        </Container>
-      </div>
-
-      {/* Values Section */}
-      <div className="bg-white section-py relative overflow-hidden">
-        <Container>
-          <ScrollReveal direction="up">
-            <SectionHeading
-              eyebrow="What We Stand For"
-              title="Our Core Values"
-              description="These values guide every decision we make and every conversation we have with students and parents."
-              className="mb-12"
-            />
-          </ScrollReveal>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((value, idx) => {
-              const Icon = value.icon;
-              return (
-                <ScrollReveal key={value.title} delay={idx * 0.08} direction="up">
-                  <Card3DTilt borderGlow={false} maxTilt={4}>
-                    <div className="group relative bg-white rounded-2xl p-6 border border-[#E2E8F0] shadow-sm hover:shadow-md transition-all duration-300 h-full overflow-hidden">
-                      <div className="relative z-10">
-                        <div
-                          className="w-14 h-14 rounded-xl flex items-center justify-center mb-4"
-                          style={{ backgroundColor: `${value.color}15` }}
-                        >
-                          <Icon size={24} style={{ color: value.color }} />
-                        </div>
-                        <h3
-                          className="font-bold text-[#0F172A] text-lg mb-2"
-                          style={{ color: value.color }}
-                        >
-                          {value.title}
-                        </h3>
-                        <p className="text-sm text-[#475569] leading-relaxed">
-                          {value.description}
-                        </p>
-                      </div>
-                    </div>
-                  </Card3DTilt>
-                </ScrollReveal>
-              );
-            })}
-          </div>
-        </Container>
-      </div>
-
-      {/* Testimonials Section */}
-      <div className="bg-[#F8FAFC] section-py relative overflow-hidden">
-        <Container>
-          <ScrollReveal direction="up">
-            <SectionHeading
-              eyebrow="Trusted by Students & Parents"
-              title="What People Say About Us"
-              description="Real experiences from students and parents who received guidance from CollegeSure."
-              className="mb-12"
-            />
-          </ScrollReveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((testimonial, idx) => (
-              <ScrollReveal key={testimonial.name} delay={idx * 0.08} direction="up">
-                <Card3DTilt borderGlow={false} maxTilt={4}>
-                  <div className="bg-white rounded-2xl p-6 border border-[#E2E8F0] shadow-sm hover:shadow-md transition-all duration-300 h-full">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#0D9488]/20 to-[#0B3C5D]/20 flex items-center justify-center text-2xl">
-                        {testimonial.image}
-                      </div>
-                      <div>
-                        <div className="font-bold text-[#0F172A]">{testimonial.name}</div>
-                        <div className="text-xs text-[#94A3B8]">{testimonial.role}</div>
-                      </div>
-                    </div>
-
-                    <div className="flex gap-0.5 mb-3">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} size={14} className="fill-[#F97316] text-[#F97316]" />
                       ))}
                     </div>
-
-                    <p className="text-sm text-[#475569] leading-relaxed">
-                      "{testimonial.content}"
-                    </p>
-
-                    <div className="mt-4 pt-4 border-t border-[#E2E8F0]">
-                      <div className="flex items-center gap-2 text-xs text-[#94A3B8]">
-                        <Quote size={12} className="text-[#0D9488]" />
-                        <span>Verified student</span>
-                      </div>
-                    </div>
                   </div>
-                </Card3DTilt>
-              </ScrollReveal>
-            ))}
-          </div>
+
+                  <div className="lg:col-span-4 flex justify-center lg:justify-end">
+                    <Link
+                      href="/contact"
+                      className="inline-flex items-center gap-2 bg-[#0D9488] hover:bg-[#0a7a6f] text-white font-bold px-6 py-3.5 rounded-2xl shadow-xl transition-all hover:scale-105"
+                    >
+                      <span>Get Free Counselling</span>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+          )}
         </Container>
       </div>
 
@@ -894,17 +564,13 @@ export default function AboutPageClient() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {teamStats.map((stat, idx) => (
               <ScrollReveal key={stat.label} delay={idx * 0.08} direction="up">
-                <motion.div
-                  className="text-center p-4 rounded-2xl bg-[#F8FAFC] hover:bg-white hover:shadow-md transition-all duration-300 border border-[#E2E8F0]"
-                  whileHover={{ y: -4 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                >
+                <div className="text-center p-4 rounded-2xl bg-[#F8FAFC] hover:bg-white hover:shadow-md transition-all duration-300 border border-[#E2E8F0]">
                   <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: `${stat.color}15` }}>
                     <stat.icon size={20} style={{ color: stat.color }} />
                   </div>
                   <div className="text-2xl font-bold text-[#0B3C5D]">{stat.value}</div>
                   <div className="text-xs text-[#94A3B8] font-medium">{stat.label}</div>
-                </motion.div>
+                </div>
               </ScrollReveal>
             ))}
           </div>
@@ -912,12 +578,10 @@ export default function AboutPageClient() {
       </div>
 
       {/* CTA Section */}
-      <ScrollReveal direction="up">
-        <CTASection
-          title="Ready to Start Your College Journey?"
-          description="Get personalized guidance for your college admissions. No pressure, just genuine support."
-        />
-      </ScrollReveal>
+      <CTASection
+        title="Ready to Start Your College Journey?"
+        description="Get personalized guidance for your college admissions. No pressure, just genuine support."
+      />
     </div>
   );
 }

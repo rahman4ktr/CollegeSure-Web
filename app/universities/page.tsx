@@ -24,6 +24,13 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Badge from "@/components/ui/Badge";
+import JsonLd from "@/components/seo/JsonLd";
+import {
+  getCollegeSureOrganizationSchema,
+  getCollegeSureWebSiteSchema,
+  getWebPageSchema,
+  getBreadcrumbSchema,
+} from "@/lib/schema";
 
 export const metadata: Metadata = generatePageMetadata(
   "Colleges & Universities — CollegeSure Partner Institutions",
@@ -33,18 +40,37 @@ export const metadata: Metadata = generatePageMetadata(
 
 // Stats Data
 const stats = [
-  { label: "Partner Colleges", value: "50+", icon: Building2, color: "#0B3C5D" },
-  { label: "Government Colleges", value: "25+", icon: Landmark, color: "#0D9488" },
-  { label: "Private Colleges", value: "25+", icon: Building, color: "#F97316" },
-  { label: "Cities Covered", value: "10+", icon: MapPin, color: "#3B82F6" },
+  { label: "Partner Institutions", value: "50+", icon: Building2, color: "#159447" },
+  { label: "Cities Covered", value: "20+", icon: MapPin, color: "#147CC1" },
+  { label: "State Approvals", value: "100%", icon: Award, color: "#F36C21" },
+  { label: "Student Placements", value: "15,000+", icon: Users, color: "#B30F66" },
 ];
 
 export default function UniversitiesPage() {
+  const featuredUniversities = universities.filter((u) => u.featured);
+  const regularUniversities = universities.filter((u) => !u.featured);
+
+  const universitiesGraphNodes = [
+    getCollegeSureOrganizationSchema(),
+    getCollegeSureWebSiteSchema(),
+    getWebPageSchema(
+      "/universities",
+      "Colleges & Universities — CollegeSure Partner Institutions",
+      "Browse colleges and universities that CollegeSure provides admissions guidance for. Government and private colleges across various cities.",
+      "WebPage"
+    ),
+    getBreadcrumbSchema("/universities", [
+      { name: "Home", url: "/" },
+      { name: "Colleges & Universities", url: "/universities" },
+    ]),
+  ];
+
   const govt = universities.filter((u) => u.type === "government");
   const priv = universities.filter((u) => u.type === "private");
 
   return (
     <div className="relative overflow-hidden bg-[#FDFDFD]">
+      <JsonLd nodes={universitiesGraphNodes} />
       {/* Enhanced Hero Section */}
       <div className="relative overflow-hidden py-12 sm:py-16 flex items-center bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084]">
         {/* Animated Background */}

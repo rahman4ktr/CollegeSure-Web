@@ -1,12 +1,18 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { defaultMetadata, SITE_NAME, SITE_URL } from "@/lib/seo";
+import { defaultMetadata, SITE_NAME, SITE_DESCRIPTION } from "@/lib/seo";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import { CounsellingModalProvider } from "@/components/providers/CounsellingModalProvider";
+import JsonLd from "@/components/seo/JsonLd";
+import {
+  getCollegeSureOrganizationSchema,
+  getCollegeSureWebSiteSchema,
+  getWebPageSchema,
+} from "@/lib/schema";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,42 +29,17 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
-const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: SITE_NAME,
-  url: SITE_URL,
-  logo: `${SITE_URL}/logo.png`,
-  description:
-    "CollegeSure by Brainzima — expert admissions guidance for Medical, Paramedical, Engineering, BCA, BBA, B.Com and other graduation programs.",
-  contactPoint: {
-    "@type": "ContactPoint",
-    contactType: "customer support",
-    availableLanguage: ["English", "Hindi"],
-  },
-  parentOrganization: {
-    "@type": "Organization",
-    name: "Brainzima Innovation Institute",
-  },
-};
-
-const websiteSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: SITE_NAME,
-  url: SITE_URL,
-  potentialAction: {
-    "@type": "SearchAction",
-    target: `${SITE_URL}/courses?q={search_term_string}`,
-    "query-input": "required name=search_term_string",
-  },
-};
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const rootGraphNodes = [
+    getCollegeSureOrganizationSchema(),
+    getCollegeSureWebSiteSchema(),
+    getWebPageSchema("/", "CollegeSure — College Admission & Career Guidance Platform", SITE_DESCRIPTION),
+  ];
+
   return (
     <html lang="en" className={`${inter.variable} h-full`}>
       <head>
@@ -68,14 +49,7 @@ export default function RootLayout({
         <link rel="alternate" type="application/rss+xml" title={`${SITE_NAME} RSS Feed`} href="/rss.xml" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-        />
+        <JsonLd nodes={rootGraphNodes} />
       </head>
       <body className="min-h-full flex flex-col antialiased">
         <SmoothScrollProvider>

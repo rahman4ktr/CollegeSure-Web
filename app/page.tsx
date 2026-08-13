@@ -15,76 +15,55 @@ import Card3DTilt from "@/components/ui/Card3DTilt";
 import Badge from "@/components/ui/Badge";
 import { CheckCircle2, MessageSquare, Sparkles } from "lucide-react";
 
+import JsonLd from "@/components/seo/JsonLd";
+import {
+  getCollegeSureOrganizationSchema,
+  getCollegeSureWebSiteSchema,
+  getWebPageSchema,
+} from "@/lib/schema";
+
 export const metadata = {
   title: "CollegeSure by Brainzima — Honest College Admissions Guidance",
   description: "Find the right Medical, Engineering, and Graduation colleges with 100% transparent guidance, personalized counselling, and complete admission support.",
 };
 
 export default function HomePage() {
-  // Structured Data for SEO
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
-    name: "CollegeSure by Brainzima",
-    url: "https://collegesure.com",
-    logo: "https://collegesure.com/logo.png",
-    description: "Honest, transparent guidance for Medical, Engineering, and Graduation college admissions.",
-    sameAs: [
-      "https://facebook.com",
-      "https://twitter.com",
-      "https://instagram.com",
-    ],
-  };
+  const homeGraphNodes = [
+    getCollegeSureOrganizationSchema(),
+    getCollegeSureWebSiteSchema(),
+    getWebPageSchema("/", metadata.title, metadata.description),
+  ];
 
   return (
     <div className="relative overflow-hidden bg-white text-[#0F172A] selection:bg-[#0D9488]/20 selection:text-[#0D9488]">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd nodes={homeGraphNodes} />
 
       {/* 1. Hero Section */}
       <Hero />
 
       {/* 2. Trust Metrics Section */}
-      <ScrollReveal direction="up" distance={15} duration={0.4}>
-        <TrustSection />
-      </ScrollReveal>
+      <TrustSection />
 
       {/* 3. Course Categories */}
-      <ScrollReveal direction="up" distance={15} duration={0.4}>
-        <CourseCategories />
-      </ScrollReveal>
+      <CourseCategories />
 
       {/* 4. Featured Courses */}
-      <ScrollReveal direction="up" distance={15} duration={0.4}>
-        <FeaturedCourses />
-      </ScrollReveal>
+      <FeaturedCourses />
 
       {/* 5. Admission Process Timeline */}
-      <ScrollReveal direction="up" distance={15} duration={0.4}>
-        <AdmissionProcess />
-      </ScrollReveal>
+      <AdmissionProcess />
 
       {/* 6. Colleges We Work With - University Logo Marquee */}
-      <ScrollReveal direction="up" distance={15} duration={0.4}>
-        <UniversityMarquee />
-      </ScrollReveal>
+      <UniversityMarquee />
 
       {/* 6b. Placement Assistance & Top Recruiters Marquee */}
-      <ScrollReveal direction="up" distance={15} duration={0.4}>
-        <PlacementMarquee />
-      </ScrollReveal>
+      <PlacementMarquee />
 
       {/* 7. Why CollegeSure Comparison */}
-      <ScrollReveal direction="up" distance={15} duration={0.4}>
-        <WhyCollegeSure />
-      </ScrollReveal>
+      <WhyCollegeSure />
 
       {/* 8. Testimonials & Student Reviews */}
-      <ScrollReveal direction="up" distance={15} duration={0.4}>
-        <Testimonials />
-      </ScrollReveal>
+      <Testimonials />
 
       {/* 9. Inquiry Form & CTA Section */}
       <section
@@ -181,9 +160,7 @@ export default function HomePage() {
       </section>
 
       {/* 10. Final Call to Action */}
-      <ScrollReveal direction="up" distance={25} duration={0.6}>
-        <CTASection />
-      </ScrollReveal>
+      <CTASection />
     </div>
   );
 }

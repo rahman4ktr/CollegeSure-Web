@@ -76,44 +76,13 @@ function fadeUpProps(delay: number) {
 }
 
 export default function Hero() {
-  const headlineRef = useRef<HTMLHeadingElement>(null);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-
-  useEffect(() => {
-    if (headlineRef.current) {
-      const lines = headlineRef.current.children;
-      if (lines.length > 0) {
-        gsap.fromTo(
-          lines,
-          { opacity: 0, y: 20 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            stagger: 0.08,
-            ease: "power2.out",
-          }
-        );
-      }
-    }
-  }, []);
-
   return (
     <section
-      ref={sectionRef}
       className="relative overflow-hidden bg-[#FDFDFD] pt-4"
       aria-label="CollegeSure Hero section"
     >
       {/* Top Banner Ribbon */}
-      <div className="bg-[#040943] text-white text-xs py-2 px-4 flex justify-between items-center max-w-7xl mx-auto rounded-full mb-6 font-medium">
+      <div className="bg-[#040943] text-white text-xs py-2 px-4 flex justify-between items-center max-w-7xl mx-auto rounded-full mb-6 font-medium shadow-sm">
         <span className="flex items-center gap-2">
           <GraduationCap size={14} className="text-[#F7D51A]" />
           Guiding Your Career Journey Since Day One
@@ -130,23 +99,17 @@ export default function Hero() {
         <div className="absolute bottom-10 -left-20 w-[480px] h-[480px] rounded-full bg-gradient-to-tr from-[#FEF7F3] to-transparent blur-3xl opacity-60" />
       </div>
 
-      <motion.div style={{ y, opacity }} className="relative z-10">
+      <div className="relative z-10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-4 pb-12">
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left column — message */}
             <div className="lg:col-span-6">
-              <motion.p
-                {...fadeUpProps(0.05)}
-                className="text-sm font-bold text-[#591084] tracking-wide mb-3 uppercase flex items-center gap-2"
-              >
+              <p className="text-sm font-bold text-[#591084] tracking-wide mb-3 uppercase flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#B30F66] animate-ping" />
                 Your Future, Our Priority
-              </motion.p>
+              </p>
 
-              <h1
-                ref={headlineRef}
-                className="text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-[3.85rem] font-extrabold text-[#04164B] leading-[1.1] tracking-tight mb-6"
-              >
+              <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-[3.85rem] font-extrabold text-[#04164B] leading-[1.1] tracking-tight mb-6">
                 <span className="line block">Discover Courses.</span>
                 <span className="line block">Choose Colleges.</span>
                 <span className="line block">
@@ -154,12 +117,9 @@ export default function Hero() {
                 </span>
               </h1>
 
-              <motion.p
-                {...fadeUpProps(0.32)}
-                className="text-base sm:text-lg text-[#475569] leading-relaxed mb-8 max-w-lg font-medium"
-              >
+              <p className="text-base sm:text-lg text-[#475569] leading-relaxed mb-8 max-w-lg font-medium">
                 Explore 1,000+ courses from top colleges across India. Find the perfect path to achieve your dreams.
-              </motion.p>
+              </p>
 
               <motion.div
                 {...fadeUpProps(0.42)}
@@ -350,8 +310,7 @@ export default function Hero() {
           </div>
 
           {/* Bottom Stream Banner Container */}
-          <motion.div
-            {...fadeUpProps(0.95)}
+          <div
             className="mt-16 sm:mt-20 rounded-3xl bg-gradient-to-r from-[#040943] via-[#04164B] to-[#591084] p-6 sm:p-8 text-white shadow-2xl relative overflow-hidden"
           >
             <div className="grid lg:grid-cols-12 gap-6 items-center">
@@ -399,9 +358,9 @@ export default function Hero() {
                 ))}
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

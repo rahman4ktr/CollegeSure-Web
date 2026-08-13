@@ -22,6 +22,13 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Badge from "@/components/ui/Badge";
+import JsonLd from "@/components/seo/JsonLd";
+import {
+  getCollegeSureOrganizationSchema,
+  getCollegeSureWebSiteSchema,
+  getWebPageSchema,
+  getBreadcrumbSchema,
+} from "@/lib/schema";
 
 export const metadata: Metadata = generatePageMetadata(
   "Success Stories — Student Experiences with CollegeSure",
@@ -31,18 +38,32 @@ export const metadata: Metadata = generatePageMetadata(
 
 // Stats Data
 const stats = [
-  { label: "Happy Students", value: "15,000+", icon: Users, color: "#0D9488" },
-  { label: "Success Rate", value: "92%", icon: TrendingUp, color: "#3B82F6" },
-  { label: "Average Rating", value: "4.9/5", icon: Star, color: "#F97316" },
-  { label: "Years of Trust", value: "5+", icon: Award, color: "#EC4899" },
+  { label: "Happy Students", value: "15,000+", icon: Users, color: "#159447" },
+  { label: "Success Rate", value: "92%", icon: TrendingUp, color: "#147CC1" },
+  { label: "Average Rating", value: "4.9/5", icon: Star, color: "#F36C21" },
+  { label: "Years of Trust", value: "5+", icon: Award, color: "#B30F66" },
 ];
 
-// Featured Testimonials (first 3)
-const featuredTestimonials = testimonials.slice(0, 3);
-
 export default function SuccessStoriesPage() {
+  const featuredTestimonials = testimonials.slice(0, 3);
+  const successGraphNodes = [
+    getCollegeSureOrganizationSchema(),
+    getCollegeSureWebSiteSchema(),
+    getWebPageSchema(
+      "/success-stories",
+      "Success Stories — Student Experiences with CollegeSure",
+      "Read what students and parents say about their experience with CollegeSure's personalized admissions guidance.",
+      "WebPage"
+    ),
+    getBreadcrumbSchema("/success-stories", [
+      { name: "Home", url: "/" },
+      { name: "Success Stories", url: "/success-stories" },
+    ]),
+  ];
+
   return (
     <div className="relative overflow-hidden bg-[#FDFDFD]">
+      <JsonLd nodes={successGraphNodes} />
       {/* Enhanced Hero Section */}
       <div className="relative overflow-hidden py-12 sm:py-16 flex items-center bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084]">
         {/* Animated Background */}
@@ -90,25 +111,6 @@ export default function SuccessStoriesPage() {
           }}
           aria-hidden
         />
-      </div>
-
-      {/* Stats Section */}
-      <div className="bg-white border-b border-[#E2E8F0] py-8">
-        <Container>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            {stats.map((stat, idx) => (
-              <ScrollReveal key={stat.label} delay={idx * 0.08} direction="up">
-                <div className="text-center p-4 rounded-2xl bg-[#F8FAFC] hover:bg-white hover:shadow-md hover:border-[#E2E8F0] transition-all duration-300 border border-transparent">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: `${stat.color}15` }}>
-                    <stat.icon size={20} style={{ color: stat.color }} />
-                  </div>
-                  <div className="text-2xl font-bold text-[#0B3C5D]">{stat.value}</div>
-                  <div className="text-xs text-[#94A3B8] font-medium">{stat.label}</div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </Container>
       </div>
 
       {/* Featured Testimonials Section */}
@@ -204,6 +206,25 @@ export default function SuccessStoriesPage() {
               </Link>
             </div>
           )}
+        </Container>
+      </div>
+
+      {/* Stats Section */}
+      <div className="bg-white border-y border-[#E2E8F0] py-8">
+        <Container>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {stats.map((stat, idx) => (
+              <ScrollReveal key={stat.label} delay={idx * 0.08} direction="up">
+                <div className="text-center p-4 rounded-2xl bg-[#F8FAFC] hover:bg-white hover:shadow-md hover:border-[#E2E8F0] transition-all duration-300 border border-transparent">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: `${stat.color}15` }}>
+                    <stat.icon size={20} style={{ color: stat.color }} />
+                  </div>
+                  <div className="text-2xl font-bold text-[#0B3C5D]">{stat.value}</div>
+                  <div className="text-xs text-[#94A3B8] font-medium">{stat.label}</div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
         </Container>
       </div>
 

@@ -167,14 +167,17 @@ export default function Card3DTilt({
     shadowSpring.set(0);
   }, [x, y, mouseX, mouseY, scaleSpring, ySpring, shadowSpring, onHoverEnd]);
 
-  // Mount effect for animations
+  // Mount effect for animations — only enable interactive 3D tilt on devices supporting hover
   useEffect(() => {
-    setIsMounted(true);
+    const supportsHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if (supportsHover) {
+      setIsMounted(true);
+    }
   }, []);
 
   if (!isMounted) {
     return (
-      <div className={`relative ${className}`}>
+      <div className={`relative transition-transform duration-300 hover:-translate-y-1 ${className}`}>
         <div className="relative z-0 h-full w-full">{children}</div>
       </div>
     );
