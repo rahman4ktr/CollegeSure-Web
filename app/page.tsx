@@ -159,8 +159,8 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* 10. Final Call to Action */}
-      <CTASection />
+      {/* 10. Final Call to Action (No Buttons) */}
+      <CTASection showButtons={false} />
     </div>
   );
 }
