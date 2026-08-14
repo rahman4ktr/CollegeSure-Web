@@ -239,10 +239,11 @@ export default function GraduationCoursesPage() {
         </Container>
       </div>
 
-      {/* CTA Section */}
+      {/* CTA Section (No Buttons) */}
       <CTASection
         title="Not Sure Between BCA, BBA, or B.Com?"
         description="Our counsellors can help you understand the differences and choose the graduation program that best fits your career goals."
+        showButtons={false}
       />
     </div>
   );
