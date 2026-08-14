@@ -112,27 +112,6 @@ export default function UniversitiesPage() {
         />
       </div>
 
-      {/* Stats Section */}
-      <div className="bg-white border-b border-[#E2E8F0] py-8">
-        <Container>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            {stats.map((stat, idx) => (
-              <ScrollReveal key={stat.label} delay={idx * 0.08} direction="up">
-                <div
-                  className="text-center p-4 rounded-2xl bg-[#F8FAFC] hover:bg-white hover:shadow-md hover:border-[#E2E8F0] transition-all duration-300 border border-transparent"
-                >
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: `${stat.color}15` }}>
-                    <stat.icon size={20} style={{ color: stat.color }} />
-                  </div>
-                  <div className="text-2xl font-bold text-[#0B3C5D]">{stat.value}</div>
-                  <div className="text-xs text-[#94A3B8] font-medium">{stat.label}</div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </Container>
-      </div>
-
       {/* Features Section */}
       <div className="bg-[#F8FAFC] border-b border-[#E2E8F0] py-12">
         <Container>
@@ -280,12 +259,32 @@ export default function UniversitiesPage() {
         </Container>
       </div>
 
-      {/* Enhanced CTA Section */}
+      {/* Stats Section at Bottom */}
+      <div className="bg-white border-t border-b border-[#E2E8F0] py-8">
+        <Container>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {stats.map((stat, idx) => (
+              <ScrollReveal key={stat.label} delay={idx * 0.08} direction="up">
+                <div
+                  className="text-center p-4 rounded-2xl bg-[#F8FAFC] hover:bg-white hover:shadow-md hover:border-[#E2E8F0] transition-all duration-300 border border-transparent"
+                >
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: `${stat.color}15` }}>
+                    <stat.icon size={20} style={{ color: stat.color }} />
+                  </div>
+                  <div className="text-2xl font-bold text-[#0B3C5D]">{stat.value}</div>
+                  <div className="text-xs text-[#94A3B8] font-medium">{stat.label}</div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </Container>
+      </div>
+
+      {/* Enhanced CTA Section at Bottom (No Buttons) */}
       <CTASection
         title="Find Your Perfect College Match"
         description="Get personalized guidance to find the right college based on your goals, eligibility, and preferences."
-        primaryButtonText="Get Free Counselling"
-        primaryButtonLink="/contact"
+        showButtons={false}
       />
     </div>
   );

@@ -228,14 +228,11 @@ export default function SuccessStoriesPage() {
         </Container>
       </div>
 
-      {/* Enhanced CTA Section */}
+      {/* Enhanced CTA Section (No Buttons) */}
       <CTASection
         title="Want to Share Your Experience?"
         description="If CollegeSure helped you with your college admission, we'd love to hear your story."
-        primaryButtonText="Share Your Story"
-        primaryButtonLink="/contact"
-        secondaryButtonText="Read More Stories"
-        secondaryButtonLink="#testimonials"
+        showButtons={false}
       />
     </div>
   );

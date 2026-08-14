@@ -153,32 +153,6 @@ export default function AdmissionProcessPage() {
         />
       </div>
 
-      {/* Stats Section */}
-      <div className="bg-white border-b border-[#E2E8F0] py-8">
-        <Container>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {stats.map((stat, idx) => (
-              <ScrollReveal key={stat.label} delay={idx * 0.08} direction="up">
-                <div
-                  className="text-center p-4 rounded-2xl bg-[#F8FAFC] hover:bg-white hover:shadow-md transition-all duration-300 border border-[#E2E8F0] hover:-translate-y-1"
-                >
-                  <div className="flex items-center justify-center mb-2">
-                    <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center"
-                      style={{ backgroundColor: `${stat.color}15` }}
-                    >
-                      <stat.icon size={18} style={{ color: stat.color }} />
-                    </div>
-                  </div>
-                  <div className="text-2xl font-bold text-[#0B3C5D]">{stat.value}</div>
-                  <div className="text-xs text-[#94A3B8] font-medium">{stat.label}</div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </Container>
-      </div>
-
       {/* Steps Section */}
       <div id="process">
         <AdmissionProcess />
@@ -350,9 +324,37 @@ export default function AdmissionProcessPage() {
         </Container>
       </div>
 
+      {/* Stats Section at Bottom */}
+      <div className="bg-white border-t border-b border-[#E2E8F0] py-8">
+        <Container>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {stats.map((stat, idx) => (
+              <ScrollReveal key={stat.label} delay={idx * 0.08} direction="up">
+                <div
+                  className="text-center p-4 rounded-2xl bg-[#F8FAFC] hover:bg-white hover:shadow-md transition-all duration-300 border border-[#E2E8F0] hover:-translate-y-1"
+                >
+                  <div className="flex items-center justify-center mb-2">
+                    <div
+                      className="w-10 h-10 rounded-xl flex items-center justify-center"
+                      style={{ backgroundColor: `${stat.color}15` }}
+                    >
+                      <stat.icon size={18} style={{ color: stat.color }} />
+                    </div>
+                  </div>
+                  <div className="text-2xl font-bold text-[#0B3C5D]">{stat.value}</div>
+                  <div className="text-xs text-[#94A3B8] font-medium">{stat.label}</div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </Container>
+      </div>
+
+      {/* CTA Section at Bottom (No Buttons) */}
       <CTASection
         title="Ready to Find Your Perfect College?"
         description="Get personalized, honest guidance for your college admissions. No pressure, just genuine support from our expert counsellors."
+        showButtons={false}
       />
     </div>
   );

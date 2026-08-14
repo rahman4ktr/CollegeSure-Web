@@ -248,11 +248,12 @@ export default function MedicalCoursesPage() {
         </Container>
       </div>
 
-      {/* CTA Section */}
+      {/* CTA Section (No Buttons) */}
       <ScrollReveal direction="up">
         <CTASection
           title="Interested in a Medical or Paramedical Program?"
           description="Our counsellors can help you find the right nursing or paramedical college based on your eligibility and location."
+          showButtons={false}
         />
       </ScrollReveal>
     </div>

@@ -515,11 +515,12 @@ export default async function CourseDetailPage({ params }: Props) {
         </div>
       )}
 
-      {/* CTA Section */}
+      {/* CTA Section (No Buttons) */}
       <ScrollReveal direction="up">
         <CTASection
           title={`Ready to Start Your ${course.name} Journey?`}
           description="Get personalized guidance and secure your seat in the best colleges."
+          showButtons={false}
         />
       </ScrollReveal>
     </div>

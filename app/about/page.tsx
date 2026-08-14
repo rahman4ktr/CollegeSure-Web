@@ -577,10 +577,11 @@ export default function AboutPage() {
         </Container>
       </div>
 
-      {/* CTA Section */}
+      {/* CTA Section (No Buttons) */}
       <CTASection
         title="Ready to Start Your College Journey?"
         description="Get personalized guidance for your college admissions. No pressure, just genuine support."
+        showButtons={false}
       />
     </div>
   );

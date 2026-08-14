@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { defaultMetadata, SITE_NAME, SITE_DESCRIPTION } from "@/lib/seo";
 import Navbar from "@/components/layout/Navbar";
@@ -60,6 +61,7 @@ export default function RootLayout({
             <WhatsAppButton />
           </CounsellingModalProvider>
         </SmoothScrollProvider>
+        <Analytics />
       </body>
     </html>
   );

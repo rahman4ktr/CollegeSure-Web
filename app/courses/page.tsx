@@ -105,10 +105,11 @@ export default function CoursesPage() {
         </Container>
       </div>
 
-      {/* CTA Section */}
+      {/* CTA Section (No Buttons) */}
       <CTASection
         title="Ready to Enroll?"
         description="Get personalized guidance and secure your seat in the best colleges."
+        showButtons={false}
       />
     </div>
   );

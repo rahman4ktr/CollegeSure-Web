@@ -231,10 +231,11 @@ export default function EngineeringCoursesPage() {
         </Container>
       </div>
 
-      {/* CTA Section */}
+      {/* CTA Section (No Buttons) */}
       <CTASection
         title="Looking for the Right Engineering College?"
         description="Let our counsellors help you compare B.Tech options based on fees, eligibility, location, and career prospects."
+        showButtons={false}
       />
     </div>
   );
