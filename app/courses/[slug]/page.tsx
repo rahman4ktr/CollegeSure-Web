@@ -23,7 +23,7 @@ import {
   Briefcase,
   School,
 } from "lucide-react";
-import { getCourseBySlug, getAllCourseSlugs, getCourses } from "@/lib/sanity/resolvers";
+import { getCourseBySlug, getAllCourseSlugs, getCourses } from "@/lib/resolvers";
 import { SITE_URL } from "@/lib/seo";
 import JsonLd from "@/components/seo/JsonLd";
 import {

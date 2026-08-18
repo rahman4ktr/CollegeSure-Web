@@ -7,7 +7,7 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import JsonLd from "@/components/seo/JsonLd";
 import CTASection from "@/components/sections/CTASection";
 import CourseCard from "@/components/cards/CourseCard";
-import { getDepartmentBySlug, getAllDepartmentSlugs } from "@/lib/sanity/resolvers";
+import { getDepartmentBySlug, getAllDepartmentSlugs } from "@/lib/resolvers";
 import { getCollegeSureOrganizationSchema, getCollegeSureWebSiteSchema } from "@/lib/schema";
 import { SITE_URL } from "@/lib/seo";
 import { BookOpen, Users, GraduationCap, ArrowLeft } from "lucide-react";

@@ -1,6 +1,6 @@
 import Container from "@/components/ui/Container";
 import CTASection from "@/components/sections/CTASection";
-import { getCourses } from "@/lib/sanity/resolvers";
+import { getCourses } from "@/lib/resolvers";
 import {
   BookOpen,
   Award,

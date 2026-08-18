@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/seo";
-import { getAllCourseSlugs, getAllNewsSlugs, getAllDepartmentSlugs } from "@/lib/sanity/resolvers";
+import { getAllCourseSlugs, getAllNewsSlugs, getAllDepartmentSlugs } from "@/lib/resolvers";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const courseSlugs = await getAllCourseSlugs();

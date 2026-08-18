@@ -6,7 +6,7 @@ import Badge from "@/components/ui/Badge";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import JsonLd from "@/components/seo/JsonLd";
 import CTASection from "@/components/sections/CTASection";
-import { getNewsBySlug, getAllNewsSlugs } from "@/lib/sanity/resolvers";
+import { getNewsBySlug, getAllNewsSlugs } from "@/lib/resolvers";
 import { getCollegeSureOrganizationSchema, getCollegeSureWebSiteSchema } from "@/lib/schema";
 import { SITE_URL } from "@/lib/seo";
 import { Calendar, User, ArrowLeft } from "lucide-react";

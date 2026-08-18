@@ -4,7 +4,7 @@ import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import UniversityCard from "@/components/cards/UniversityCard";
 import CTASection from "@/components/sections/CTASection";
-import { getUniversities } from "@/lib/sanity/resolvers";
+import { getUniversities } from "@/lib/resolvers";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import {
   Building2,

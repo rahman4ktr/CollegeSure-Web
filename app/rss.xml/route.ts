@@ -1,6 +1,6 @@
 import { NextResponse } from "next";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/seo";
-import { getNews } from "@/lib/sanity/resolvers";
+import { getNews } from "@/lib/resolvers";
 
 export async function GET() {
   const date = new Date().toUTCString();

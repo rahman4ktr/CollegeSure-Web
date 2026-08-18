@@ -5,8 +5,7 @@ import Badge from "@/components/ui/Badge";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import JsonLd from "@/components/seo/JsonLd";
 import { generatePageMetadata } from "@/lib/seo";
-import { getFaculty } from "@/lib/sanity/resolvers";
-import { getImageUrl } from "@/sanity/lib/image";
+import { getFaculty } from "@/lib/resolvers";
 import EmptyStatePage from "@/components/ui/EmptyStatePage";
 import {
   getCollegeSureOrganizationSchema,
@@ -82,7 +81,7 @@ export default async function FacultyPage() {
           {facultyMembers.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {facultyMembers.map((member, idx) => {
-                const imgUrl = getImageUrl(member.profileImage, { width: 400, height: 400 });
+                const imgUrl = null;
 
                 return (
                   <ScrollReveal key={member._id} delay={idx * 0.06} direction="up">

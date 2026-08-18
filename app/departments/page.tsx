@@ -5,8 +5,7 @@ import Badge from "@/components/ui/Badge";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import JsonLd from "@/components/seo/JsonLd";
 import { generatePageMetadata } from "@/lib/seo";
-import { getDepartments } from "@/lib/sanity/resolvers";
-import { getImageUrl } from "@/sanity/lib/image";
+import { getDepartments } from "@/lib/resolvers";
 import EmptyStatePage from "@/components/ui/EmptyStatePage";
 import {
   getCollegeSureOrganizationSchema,
@@ -83,7 +82,7 @@ export default async function DepartmentsPage() {
           {departments.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {departments.map((dept, idx) => {
-                const imgUrl = getImageUrl(dept.image, { width: 600, height: 400 });
+                const imgUrl = null;
 
                 return (
                   <ScrollReveal key={dept._id} delay={idx * 0.06} direction="up">

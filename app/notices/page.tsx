@@ -5,7 +5,7 @@ import Badge from "@/components/ui/Badge";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import JsonLd from "@/components/seo/JsonLd";
 import { generatePageMetadata } from "@/lib/seo";
-import { getActiveNotices } from "@/lib/sanity/resolvers";
+import { getActiveNotices } from "@/lib/resolvers";
 import EmptyStatePage from "@/components/ui/EmptyStatePage";
 import {
   getCollegeSureOrganizationSchema,

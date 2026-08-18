@@ -5,8 +5,7 @@ import Badge from "@/components/ui/Badge";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import JsonLd from "@/components/seo/JsonLd";
 import { generatePageMetadata } from "@/lib/seo";
-import { getEvents } from "@/lib/sanity/resolvers";
-import { getImageUrl } from "@/sanity/lib/image";
+import { getEvents } from "@/lib/resolvers";
 import { getEventSchema } from "@/lib/schema-cms";
 import EmptyStatePage from "@/components/ui/EmptyStatePage";
 import {
@@ -143,7 +142,7 @@ export default async function EventsPage() {
 }
 
 function EventCard({ evt, idx, isUpcoming }: { evt: any; idx: number; isUpcoming: boolean }) {
-  const imgUrl = getImageUrl(evt.image, { width: 600, height: 400 });
+  const imgUrl = null;
   const formattedDate = evt.date
     ? new Date(evt.date).toLocaleDateString("en-IN", {
         weekday: "short",
