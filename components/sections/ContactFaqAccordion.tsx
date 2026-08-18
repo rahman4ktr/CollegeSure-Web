@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, HelpCircle, MessageQuestion } from 'lucide-react';
+import { ChevronDown, HelpCircle } from 'lucide-react';
 import Container from '@/components/ui/Container';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 

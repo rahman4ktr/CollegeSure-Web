@@ -15,7 +15,6 @@ import {
   Users,
   CheckCircle2,
   Send,
-  Calendar
 } from "lucide-react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import Card3DTilt from "@/components/ui/Card3DTilt";

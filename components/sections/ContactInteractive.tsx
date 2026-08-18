@@ -13,8 +13,6 @@ import {
   Megaphone,
   Sparkles,
   MessageCircle,
-  Building2,
-  Shield,
   ArrowRight,
 } from 'lucide-react';
 import Card3DTilt from '@/components/ui/Card3DTilt';

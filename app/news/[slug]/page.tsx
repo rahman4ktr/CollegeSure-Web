@@ -11,7 +11,7 @@ import { getImageUrl } from "@/sanity/lib/image";
 import { getNewsArticleSchema } from "@/lib/schema-cms";
 import { getCollegeSureOrganizationSchema, getCollegeSureWebSiteSchema } from "@/lib/schema";
 import { SITE_URL } from "@/lib/seo";
-import { Calendar, User, ArrowLeft, Share2 } from "lucide-react";
+import { Calendar, User, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 let PortableTextComponent: any = null;
