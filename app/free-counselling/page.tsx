@@ -9,13 +9,10 @@ import {
   Paper,
   Card,
   Typography,
-  Chip,
-  Button as MuiButton,
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  TextField,
-  MenuItem,
+  Button as MuiButton,
   Alert,
   CircularProgress,
 } from "@mui/material";
@@ -196,7 +193,7 @@ export default function FreeCounsellingPage() {
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
                 <button
                   onClick={() => formRef.current?.scrollIntoView({ behavior: "smooth" })}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#B30F66] hover:bg-[#591084] text-white font-bold px-8 py-4 rounded-2xl shadow-xl shadow-[#B30F66]/30 transition-all duration-300 hover:scale-[1.03] text-base"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#B30F66] hover:bg-[#591084] text-white font-bold px-8 py-4 rounded-2xl shadow-xl shadow-[#B30F66]/30 transition-all duration-300 hover:scale-[1.03] text-base cursor-pointer"
                 >
                   <MessageSquare className="w-5 h-5" />
                   <span>Talk to a Counsellor</span>
@@ -280,7 +277,7 @@ export default function FreeCounsellingPage() {
                       <button
                         key={chip}
                         onClick={() => handleChipClick(chip)}
-                        className={`text-xs font-semibold px-3.5 py-2 rounded-xl border transition-all duration-200 flex items-center gap-1.5 ${
+                        className={`text-xs font-semibold px-3.5 py-2 rounded-xl border transition-all duration-200 flex items-center gap-1.5 cursor-pointer ${
                           activeChip === chip
                             ? "bg-[#B30F66] text-white border-[#B30F66] shadow-sm"
                             : "bg-[#F8FAFC] text-[#04164B] border-[#E2E8F0] hover:border-[#B30F66]/40 hover:bg-white"
@@ -445,68 +442,78 @@ export default function FreeCounsellingPage() {
                   </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <TextField
-                    id="fc-name"
-                    label="Full Name"
-                    placeholder="e.g. Rahul Sharma"
-                    fullWidth
-                    required
-                    value={formData.fullName}
-                    onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                    slotProps={{
-                      input: { className: "rounded-xl bg-white" },
-                    }}
-                  />
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <TextField
-                      id="fc-phone"
-                      label="Phone Number"
-                      placeholder="e.g. 9876543210"
-                      fullWidth
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  {/* Full Name */}
+                  <div>
+                    <label htmlFor="fc-fullname" className="block text-xs font-bold text-[#04164B] uppercase tracking-wider mb-1.5">
+                      Full Name *
+                    </label>
+                    <input
+                      id="fc-fullname"
+                      type="text"
                       required
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      slotProps={{
-                        input: { className: "rounded-xl bg-white" },
-                      }}
-                    />
-
-                    <TextField
-                      id="fc-email"
-                      label="Email Address"
-                      type="email"
-                      placeholder="e.g. rahul@example.com"
-                      fullWidth
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      slotProps={{
-                        input: { className: "rounded-xl bg-white" },
-                      }}
+                      placeholder="e.g. Rahul Sharma"
+                      value={formData.fullName}
+                      onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                      className="w-full px-4 py-3.5 rounded-xl border border-[#E2E8F0] focus:border-[#B30F66] focus:ring-2 focus:ring-[#B30F66]/20 text-sm outline-none transition-all bg-white text-[#04164B]"
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <TextField
-                      id="fc-course"
-                      select
-                      label="Interested Course Segment"
-                      fullWidth
-                      value={formData.course}
-                      onChange={(e) => setFormData({ ...formData, course: e.target.value })}
-                      slotProps={{
-                        input: { className: "rounded-xl bg-white" },
-                      }}
-                    >
-                      {courseOptions.map((opt) => (
-                        <MenuItem key={opt} value={opt}>
-                          {opt}
-                        </MenuItem>
-                      ))}
-                    </TextField>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    {/* Phone Number */}
+                    <div>
+                      <label htmlFor="fc-phone-input" className="block text-xs font-bold text-[#04164B] uppercase tracking-wider mb-1.5">
+                        Phone Number *
+                      </label>
+                      <input
+                        id="fc-phone-input"
+                        type="tel"
+                        required
+                        placeholder="e.g. 9876543210"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className="w-full px-4 py-3.5 rounded-xl border border-[#E2E8F0] focus:border-[#B30F66] focus:ring-2 focus:ring-[#B30F66]/20 text-sm outline-none transition-all bg-white text-[#04164B]"
+                      />
+                    </div>
 
+                    {/* Email */}
+                    <div>
+                      <label htmlFor="fc-email-input" className="block text-xs font-bold text-[#04164B] uppercase tracking-wider mb-1.5">
+                        Email Address *
+                      </label>
+                      <input
+                        id="fc-email-input"
+                        type="email"
+                        required
+                        placeholder="e.g. rahul@example.com"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full px-4 py-3.5 rounded-xl border border-[#E2E8F0] focus:border-[#B30F66] focus:ring-2 focus:ring-[#B30F66]/20 text-sm outline-none transition-all bg-white text-[#04164B]"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    {/* Course Segment */}
+                    <div>
+                      <label htmlFor="fc-course-select" className="block text-xs font-bold text-[#04164B] uppercase tracking-wider mb-1.5">
+                        Interested Course Segment
+                      </label>
+                      <select
+                        id="fc-course-select"
+                        value={formData.course}
+                        onChange={(e) => setFormData({ ...formData, course: e.target.value })}
+                        className="w-full px-4 py-3.5 rounded-xl border border-[#E2E8F0] focus:border-[#B30F66] focus:ring-2 focus:ring-[#B30F66]/20 text-sm outline-none transition-all bg-white text-[#04164B] cursor-pointer"
+                      >
+                        {courseOptions.map((opt) => (
+                          <option key={opt} value={opt}>
+                            {opt}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* Contact Method */}
                     <div>
                       <label className="block text-xs font-bold text-[#04164B] uppercase tracking-wider mb-1.5">
                         Preferred Contact Method
@@ -517,9 +524,9 @@ export default function FreeCounsellingPage() {
                             type="button"
                             key={method}
                             onClick={() => setFormData({ ...formData, preferredContact: method })}
-                            className={`py-3 px-2 text-xs font-bold rounded-xl border text-center transition-all ${
+                            className={`py-3 px-2 text-xs font-bold rounded-xl border text-center transition-all cursor-pointer ${
                               formData.preferredContact === method
-                                ? "bg-[#04164B] text-white border-[#04164B]"
+                                ? "bg-[#04164B] text-white border-[#04164B] shadow-sm"
                                 : "bg-white text-[#475569] border-[#E2E8F0] hover:border-[#04164B]/30"
                             }`}
                           >
@@ -530,19 +537,20 @@ export default function FreeCounsellingPage() {
                     </div>
                   </div>
 
-                  <TextField
-                    id="fc-help"
-                    label="What would you like help with? (Optional)"
-                    placeholder="Tell us any specific questions about college fees, eligibility, or course selection..."
-                    fullWidth
-                    multiline
-                    rows={3}
-                    value={formData.helpNote}
-                    onChange={(e) => setFormData({ ...formData, helpNote: e.target.value })}
-                    slotProps={{
-                      input: { className: "rounded-xl bg-white" },
-                    }}
-                  />
+                  {/* Optional Note */}
+                  <div>
+                    <label htmlFor="fc-help-note" className="block text-xs font-bold text-[#04164B] uppercase tracking-wider mb-1.5">
+                      What would you like help with? (Optional)
+                    </label>
+                    <textarea
+                      id="fc-help-note"
+                      rows={3}
+                      placeholder="Tell us any specific questions about college fees, eligibility, or course selection..."
+                      value={formData.helpNote}
+                      onChange={(e) => setFormData({ ...formData, helpNote: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl border border-[#E2E8F0] focus:border-[#B30F66] focus:ring-2 focus:ring-[#B30F66]/20 text-sm outline-none transition-all resize-none bg-white text-[#04164B]"
+                    />
+                  </div>
 
                   {submitError && (
                     <Alert severity="error" className="rounded-xl">
@@ -555,7 +563,7 @@ export default function FreeCounsellingPage() {
                     variant="contained"
                     fullWidth
                     disabled={isSubmitting}
-                    className="bg-[#B30F66] hover:bg-[#591084] text-white font-extrabold py-3.5 rounded-xl shadow-lg shadow-[#B30F66]/20 transition-all duration-300 text-base"
+                    className="bg-[#B30F66] hover:bg-[#591084] text-white font-extrabold py-3.5 rounded-xl shadow-lg shadow-[#B30F66]/20 transition-all duration-300 text-base normal-case"
                   >
                     {isSubmitting ? (
                       <span className="flex items-center gap-2">
