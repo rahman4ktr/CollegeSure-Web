@@ -14,15 +14,7 @@ import { SITE_URL } from "@/lib/seo";
 import { Calendar, User, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-let PortableTextComponent: any = null;
-
-try {
-  PortableTextComponent = require("@portabletext/react").PortableText;
-} catch {
-  PortableTextComponent = ({ value }: { value: any }) => (
-    <div>{typeof value === "string" ? value : JSON.stringify(value)}</div>
-  );
-}
+import { PortableText } from "@portabletext/react";
 
 export const revalidate = 1800;
 
@@ -151,7 +143,7 @@ export default async function NewsDetailPage({ params }: Props) {
 
               {news.content && (
                 <div className="prose prose-slate max-w-none text-[#475569] leading-relaxed">
-                  <PortableTextComponent value={news.content as any} />
+                  <PortableText value={news.content as any} />
                 </div>
               )}
 

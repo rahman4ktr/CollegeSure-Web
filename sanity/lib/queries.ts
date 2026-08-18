@@ -1,15 +1,4 @@
-let groqFn: (strings: TemplateStringsArray, ...values: any[]) => string;
-
-try {
-  const nextSanity = require('next-sanity');
-  groqFn = nextSanity.groq;
-} catch {
-  // Simple fallback template tag if next-sanity is not installed
-  groqFn = (strings: TemplateStringsArray, ...values: any[]) =>
-    strings.reduce((result, str, i) => result + str + (values[i] || ''), '');
-}
-
-export const groq = groqFn;
+import { groq } from 'next-sanity';
 
 // ═══════════════════════════════════════════════════════════════════════════
 // GROQ Queries — Centralized, typed, reusable

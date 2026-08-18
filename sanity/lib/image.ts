@@ -1,21 +1,14 @@
 import { client } from './client';
+import imageUrlBuilder from '@sanity/image-url';
 
-let imageUrlBuilder: any = null;
-
-try {
-  imageUrlBuilder = require('@sanity/image-url');
-} catch {
-  imageUrlBuilder = null;
-}
-
-const builder = imageUrlBuilder ? imageUrlBuilder(client) : null;
+const builder = imageUrlBuilder(client);
 
 /**
  * Generate a Sanity image URL with optional transformations.
- * Returns null if builder or source is missing.
+ * Returns null if source is missing.
  */
 export function urlForImage(source: any): any {
-  if (!source || !builder) return null;
+  if (!source) return null;
   try {
     return builder.image(source);
   } catch {
