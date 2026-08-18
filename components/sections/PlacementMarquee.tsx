@@ -1,5 +1,6 @@
 "use client";
 
+import { Box, Paper } from "@mui/material";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 
@@ -9,7 +10,6 @@ interface RecruiterItem {
   logoSvg: React.ReactNode;
 }
 
-// Row 1: Medical & Healthcare Recruiters
 const recruitersRow1: RecruiterItem[] = [
   {
     id: "apollo-hospitals",
@@ -87,7 +87,6 @@ const recruitersRow1: RecruiterItem[] = [
   },
 ];
 
-// Row 2: Tech & IT Giants
 const recruitersRow2: RecruiterItem[] = [
   {
     id: "tcs",
@@ -173,7 +172,6 @@ const recruitersRow2: RecruiterItem[] = [
   },
 ];
 
-// Row 3: Engineering, Core & Banking/Finance
 const recruitersRow3: RecruiterItem[] = [
   {
     id: "hdfc",
@@ -262,8 +260,10 @@ export default function PlacementMarquee() {
   const row3Items = [...recruitersRow3, ...recruitersRow3, ...recruitersRow3];
 
   return (
-    <section className="relative py-14 sm:py-18 bg-white border-b border-[#E2E8F0] overflow-hidden select-none">
-      {/* Section Heading */}
+    <Box
+      component="section"
+      className="relative py-14 sm:py-18 bg-white border-b border-[#E2E8F0] overflow-hidden select-none"
+    >
       <Container className="mb-8">
         <SectionHeading
           eyebrow="Career & Placements"
@@ -273,11 +273,9 @@ export default function PlacementMarquee() {
         />
       </Container>
 
-      {/* Edge Gradient Overlay Masks */}
       <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-36 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-36 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
 
-      {/* Row 1: Marquee Scroll Left (Medical & Healthcare) */}
       <div className="relative flex overflow-hidden mb-4 py-1">
         <div className="animate-marquee flex items-center gap-4 sm:gap-6">
           {row1Items.map((item, idx) => (
@@ -286,7 +284,6 @@ export default function PlacementMarquee() {
         </div>
       </div>
 
-      {/* Row 2: Marquee Scroll Right (Tech & IT Giants) */}
       <div className="relative flex overflow-hidden mb-4 py-1">
         <div className="animate-marquee-reverse flex items-center gap-4 sm:gap-6">
           {row2Items.map((item, idx) => (
@@ -295,7 +292,6 @@ export default function PlacementMarquee() {
         </div>
       </div>
 
-      {/* Row 3: Marquee Scroll Left (Engineering & Corporate) */}
       <div className="relative flex overflow-hidden py-1">
         <div className="animate-marquee flex items-center gap-4 sm:gap-6">
           {row3Items.map((item, idx) => (
@@ -303,24 +299,25 @@ export default function PlacementMarquee() {
           ))}
         </div>
       </div>
-    </section>
+    </Box>
   );
 }
 
 function PlacementCard({ item }: { item: RecruiterItem }) {
   return (
-    <div className="flex items-center gap-3.5 bg-white border border-[#E2E8F0] hover:border-[#0D9488]/30 rounded-xl px-4 py-2.5 shadow-sm hover:shadow-md transition-all duration-300 flex-shrink-0 group cursor-default">
-      {/* Company/Hospital Image Logo */}
+    <Paper
+      elevation={0}
+      className="flex items-center gap-3.5 bg-white border border-[#E2E8F0] hover:border-[#0D9488]/30 rounded-xl px-4 py-2.5 shadow-sm hover:shadow-md transition-all duration-300 flex-shrink-0 group cursor-default"
+    >
       <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0 border border-[#E2E8F0] bg-[#F8FAFC]">
         {item.logoSvg}
       </div>
 
-      {/* Recruiter Name Only */}
       <div className="flex flex-col justify-center">
         <span className="text-sm sm:text-base font-bold text-[#04164B] group-hover:text-[#0D9488] transition-colors whitespace-nowrap tracking-tight">
           {item.name}
         </span>
       </div>
-    </div>
+    </Paper>
   );
 }
