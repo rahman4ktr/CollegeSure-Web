@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Container from "@/components/ui/Container";
 import CTASection from "@/components/sections/CTASection";
 import Badge from "@/components/ui/Badge";
-import ScrollReveal from "@/components/ui/ScrollReveal";
 import JsonLd from "@/components/seo/JsonLd";
 import { generatePageMetadata } from "@/lib/seo";
 import { getActiveNotices } from "@/lib/resolvers";
@@ -13,7 +12,8 @@ import {
   getWebPageSchema,
   getBreadcrumbSchema,
 } from "@/lib/schema";
-import { Sparkles, BellRing, FileText, Download, Calendar, AlertCircle } from "lucide-react";
+import { BellRing, FileText, Download, Calendar, AlertCircle } from "lucide-react";
+import { Box, Paper, Typography, Button as MuiButton } from "@mui/material";
 
 export const revalidate = 1800; // ISR 30 mins
 
@@ -42,12 +42,12 @@ export default async function NoticesPage() {
   ];
 
   return (
-    <div className="relative overflow-hidden bg-[#FDFDFD]">
+    <Box className="relative overflow-hidden bg-[#FDFDFD]">
       <JsonLd nodes={noticesGraphNodes} />
 
       {/* Hero */}
-      <div className="relative overflow-hidden py-12 sm:py-16 flex items-center bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084]">
-        <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
+      <Box className="relative overflow-hidden py-12 sm:py-16 flex items-center bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084]">
+        <div className="absolute inset-0 pointer-events-none overflow-hidden select-none" aria-hidden>
           <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#F36C21]/20 blur-3xl animate-ambient-slow" />
           <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#B30F66]/20 blur-3xl animate-ambient-slow-reverse" />
         </div>
@@ -77,14 +77,14 @@ export default async function NoticesPage() {
           style={{ clipPath: "polygon(0 100%, 100% 100%, 100% 30%, 0 100%)" }}
           aria-hidden
         />
-      </div>
+      </Box>
 
       {/* Main Content */}
-      <div className="bg-[#F8FAFC] section-py">
+      <Box className="bg-[#F8FAFC] section-py">
         <Container narrow>
           {notices.length > 0 ? (
             <div className="space-y-4">
-              {notices.map((notice, idx) => {
+              {notices.map((notice) => {
                 const formattedDate = notice.publishedAt
                   ? new Date(notice.publishedAt).toLocaleDateString("en-IN", {
                       year: "numeric",
@@ -94,63 +94,75 @@ export default async function NoticesPage() {
                   : "";
 
                 return (
-                  <ScrollReveal key={notice._id} delay={idx * 0.05} direction="up">
-                    <div
-                      className={`bg-white rounded-2xl p-6 border transition-all duration-300 shadow-sm hover:shadow-md ${
-                        notice.important
-                          ? "border-amber-400/60 bg-gradient-to-r from-amber-50/40 via-white to-white"
-                          : "border-[#E2E8F0]"
-                      }`}
-                    >
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                        <div className="space-y-2 flex-1">
-                          <div className="flex flex-wrap items-center gap-2">
-                            {notice.important && (
-                              <Badge variant="orange" size="sm" className="bg-amber-100 text-amber-800 border-amber-300">
-                                <AlertCircle size={12} className="mr-1 inline" />
-                                Important
-                              </Badge>
-                            )}
-                            {notice.category && (
-                              <Badge variant="navy" size="sm">
-                                {notice.category}
-                              </Badge>
-                            )}
-                            {formattedDate && (
-                              <span className="text-xs text-[#94A3B8] flex items-center gap-1">
-                                <Calendar size={12} />
-                                {formattedDate}
-                              </span>
-                            )}
-                          </div>
-
-                          <h2 className="text-lg font-bold text-[#04164B]">
-                            {notice.title}
-                          </h2>
-
-                          {notice.description && (
-                            <p className="text-sm text-[#475569] leading-relaxed">
-                              {notice.description}
-                            </p>
+                  <Paper
+                    key={notice._id}
+                    elevation={0}
+                    className={`p-6 rounded-2xl border transition-all duration-300 shadow-sm hover:shadow-md ${
+                      notice.important
+                        ? "border-amber-400/60 bg-gradient-to-r from-amber-50/40 via-white to-white"
+                        : "border-[#E2E8F0] bg-white"
+                    }`}
+                  >
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                      <div className="space-y-2 flex-1">
+                        <div className="flex flex-wrap items-center gap-2">
+                          {notice.important && (
+                            <Badge variant="orange" size="sm" className="bg-amber-100 text-amber-800 border-amber-300">
+                              <AlertCircle size={12} className="mr-1 inline" />
+                              Important
+                            </Badge>
+                          )}
+                          {notice.category && (
+                            <Badge variant="navy" size="sm">
+                              {notice.category}
+                            </Badge>
+                          )}
+                          {formattedDate && (
+                            <span className="text-xs text-[#94A3B8] flex items-center gap-1">
+                              <Calendar size={12} />
+                              {formattedDate}
+                            </span>
                           )}
                         </div>
 
-                        {notice.documentUrl && (
-                          <div className="flex-shrink-0">
-                            <a
-                              href={notice.documentUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-2 bg-[#04164B] hover:bg-[#040943] text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all shadow-sm"
-                            >
-                              <Download size={14} />
-                              <span>Download PDF</span>
-                            </a>
-                          </div>
+                        <Typography variant="h6" className="text-lg font-bold text-[#04164B]">
+                          {notice.title}
+                        </Typography>
+
+                        {notice.description && (
+                          <Typography variant="body2" className="text-sm text-[#475569] leading-relaxed">
+                            {notice.description}
+                          </Typography>
                         )}
                       </div>
+
+                      {notice.documentUrl && (
+                        <div className="flex-shrink-0">
+                          <MuiButton
+                            component="a"
+                            href={notice.documentUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            variant="contained"
+                            startIcon={<Download size={14} />}
+                            sx={{
+                              backgroundColor: "#04164B",
+                              "&:hover": { backgroundColor: "#040943" },
+                              borderRadius: "12px",
+                              px: 2.5,
+                              py: 1,
+                              fontSize: "12px",
+                              fontWeight: 800,
+                              textTransform: "none",
+                              boxShadow: "0 2px 8px rgba(4, 22, 75, 0.2)",
+                            }}
+                          >
+                            Download PDF
+                          </MuiButton>
+                        </div>
+                      )}
                     </div>
-                  </ScrollReveal>
+                  </Paper>
                 );
               })}
             </div>
@@ -164,13 +176,13 @@ export default async function NoticesPage() {
             />
           )}
         </Container>
-      </div>
+      </Box>
 
       <CTASection
         title="Have Questions About a Notice?"
         description="Our counsellors can help explain requirements and deadlines for any official circular."
         showButtons={false}
       />
-    </div>
+    </Box>
   );
 }

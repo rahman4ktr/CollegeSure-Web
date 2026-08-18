@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Container from "@/components/ui/Container";
 import CTASection from "@/components/sections/CTASection";
 import Badge from "@/components/ui/Badge";
-import ScrollReveal from "@/components/ui/ScrollReveal";
 import JsonLd from "@/components/seo/JsonLd";
 import { generatePageMetadata } from "@/lib/seo";
 import { getEvents } from "@/lib/resolvers";
@@ -16,6 +15,7 @@ import {
 } from "@/lib/schema";
 import { Sparkles, Calendar, Clock, MapPin, ExternalLink, Ticket } from "lucide-react";
 import Image from "next/image";
+import { Box, Card, Typography, Button as MuiButton } from "@mui/material";
 
 export const revalidate = 3600;
 
@@ -44,12 +44,12 @@ export default async function EventsPage() {
   ];
 
   return (
-    <div className="relative overflow-hidden bg-[#FDFDFD]">
+    <Box className="relative overflow-hidden bg-[#FDFDFD]">
       <JsonLd nodes={eventsGraphNodes} />
 
       {/* Hero */}
-      <div className="relative overflow-hidden py-12 sm:py-16 flex items-center bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084]">
-        <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
+      <Box className="relative overflow-hidden py-12 sm:py-16 flex items-center bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084]">
+        <div className="absolute inset-0 pointer-events-none overflow-hidden select-none" aria-hidden>
           <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#147CC1]/20 blur-3xl animate-ambient-slow" />
           <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#B30F66]/20 blur-3xl animate-ambient-slow-reverse" />
         </div>
@@ -58,11 +58,11 @@ export default async function EventsPage() {
           <div className="text-center max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 text-[#FEF2F7] text-xs font-bold uppercase tracking-widest bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-full mb-4 border border-white/10 text-white">
               <Sparkles size={13} className="text-[#F7D51A]" />
-              Seminars & Expos
+              Seminars &amp; Expos
             </div>
 
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug mb-4">
-              Counselling & Admission{" "}
+              Counselling &amp; Admission{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#147CC1] via-[#B30F66] to-[#F7D51A]">
                 Events
               </span>
@@ -79,10 +79,10 @@ export default async function EventsPage() {
           style={{ clipPath: "polygon(0 100%, 100% 100%, 100% 30%, 0 100%)" }}
           aria-hidden
         />
-      </div>
+      </Box>
 
       {/* Main Content */}
-      <div className="bg-[#F8FAFC] section-py">
+      <Box className="bg-[#F8FAFC] section-py">
         <Container>
           {events.length > 0 ? (
             <div className="space-y-16">
@@ -95,8 +95,8 @@ export default async function EventsPage() {
 
                 {upcoming.length > 0 ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {upcoming.map((evt, idx) => (
-                      <EventCard key={evt._id} evt={evt} idx={idx} isUpcoming />
+                    {upcoming.map((evt) => (
+                      <EventCard key={evt._id} evt={evt} isUpcoming />
                     ))}
                   </div>
                 ) : (
@@ -113,8 +113,8 @@ export default async function EventsPage() {
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 opacity-75">
-                    {past.map((evt, idx) => (
-                      <EventCard key={evt._id} evt={evt} idx={idx} isUpcoming={false} />
+                    {past.map((evt) => (
+                      <EventCard key={evt._id} evt={evt} isUpcoming={false} />
                     ))}
                   </div>
                 </div>
@@ -130,18 +130,18 @@ export default async function EventsPage() {
             />
           )}
         </Container>
-      </div>
+      </Box>
 
       <CTASection
         title="Can't Wait for an Event?"
         description="Book a free 1-on-1 personal counselling session right away with our expert team."
         showButtons={false}
       />
-    </div>
+    </Box>
   );
 }
 
-function EventCard({ evt, idx, isUpcoming }: { evt: any; idx: number; isUpcoming: boolean }) {
+function EventCard({ evt, isUpcoming }: { evt: any; isUpcoming: boolean }) {
   const imgUrl = null;
   const formattedDate = evt.date
     ? new Date(evt.date).toLocaleDateString("en-IN", {
@@ -153,63 +153,76 @@ function EventCard({ evt, idx, isUpcoming }: { evt: any; idx: number; isUpcoming
     : "";
 
   return (
-    <ScrollReveal delay={idx * 0.08} direction="up">
-      <div className="bg-white rounded-2xl border border-[#E2E8F0] overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
-        {imgUrl && (
-          <div className="relative h-48 w-full overflow-hidden bg-[#F1F5F9]">
-            <Image src={imgUrl} alt={evt.image?.alt || evt.title} fill className="object-cover" />
-          </div>
+    <Card
+      elevation={0}
+      className="bg-white rounded-2xl border border-[#E2E8F0] overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col h-full hover:-translate-y-1"
+    >
+      {imgUrl && (
+        <div className="relative h-48 w-full overflow-hidden bg-[#F1F5F9]">
+          <Image src={imgUrl} alt={evt.image?.alt || evt.title} fill className="object-cover" />
+        </div>
+      )}
+
+      <div className="p-6 flex flex-col flex-1 space-y-3">
+        <div className="flex items-center justify-between">
+          <Badge variant={isUpcoming ? "teal" : "navy"} size="sm">
+            {isUpcoming ? "Upcoming" : "Completed"}
+          </Badge>
+          {formattedDate && (
+            <span className="text-xs text-[#94A3B8] flex items-center gap-1 font-medium">
+              <Calendar size={12} />
+              {formattedDate}
+            </span>
+          )}
+        </div>
+
+        <Typography variant="h6" className="text-lg font-bold text-[#04164B]">{evt.title}</Typography>
+
+        {evt.description && (
+          <Typography variant="body2" className="text-sm text-[#475569] leading-relaxed line-clamp-3">{evt.description}</Typography>
         )}
 
-        <div className="p-6 flex flex-col flex-1 space-y-3">
-          <div className="flex items-center justify-between">
-            <Badge variant={isUpcoming ? "teal" : "navy"} size="sm">
-              {isUpcoming ? "Upcoming" : "Completed"}
-            </Badge>
-            {formattedDate && (
-              <span className="text-xs text-[#94A3B8] flex items-center gap-1 font-medium">
-                <Calendar size={12} />
-                {formattedDate}
-              </span>
-            )}
-          </div>
-
-          <h3 className="text-lg font-bold text-[#04164B]">{evt.title}</h3>
-
-          {evt.description && (
-            <p className="text-sm text-[#475569] leading-relaxed line-clamp-3">{evt.description}</p>
+        <div className="space-y-1.5 pt-2 text-xs text-[#475569]">
+          {evt.startTime && (
+            <div className="flex items-center gap-2">
+              <Clock size={14} className="text-[#0D9488]" />
+              <span>{evt.startTime} {evt.endTime ? `- ${evt.endTime}` : ""}</span>
+            </div>
           )}
-
-          <div className="space-y-1.5 pt-2 text-xs text-[#475569]">
-            {evt.startTime && (
-              <div className="flex items-center gap-2">
-                <Clock size={14} className="text-[#0D9488]" />
-                <span>{evt.startTime} {evt.endTime ? `- ${evt.endTime}` : ""}</span>
-              </div>
-            )}
-            {evt.location && (
-              <div className="flex items-center gap-2">
-                <MapPin size={14} className="text-[#F36C21]" />
-                <span>{evt.location}</span>
-              </div>
-            )}
-          </div>
-
-          {isUpcoming && evt.registrationLink && (
-            <div className="pt-4 border-t border-[#E2E8F0] mt-auto">
-              <a
-                href={evt.registrationLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 bg-[#B30F66] hover:bg-[#591084] text-white text-xs font-bold py-3 rounded-xl transition-all shadow-md"
-              >
-                <span>Register Now</span>
-                <ExternalLink size={14} />
-              </a>
+          {evt.location && (
+            <div className="flex items-center gap-2">
+              <MapPin size={14} className="text-[#F36C21]" />
+              <span>{evt.location}</span>
             </div>
           )}
         </div>
+
+        {isUpcoming && evt.registrationLink && (
+          <div className="pt-4 border-t border-[#E2E8F0] mt-auto">
+            <MuiButton
+              component="a"
+              href={evt.registrationLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              fullWidth
+              variant="contained"
+              endIcon={<ExternalLink size={14} />}
+              sx={{
+                backgroundColor: "#B30F66",
+                "&:hover": { backgroundColor: "#591084" },
+                borderRadius: "12px",
+                py: 1.2,
+                fontSize: "12px",
+                fontWeight: 800,
+                textTransform: "none",
+                boxShadow: "0 4px 14px rgba(179, 15, 102, 0.3)",
+              }}
+            >
+              Register Now
+            </MuiButton>
+          </div>
+        )}
       </div>
-    </ScrollReveal>
+    </Card>
   );
 }
