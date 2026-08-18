@@ -1,24 +1,19 @@
 import type { Metadata } from "next";
 import { generatePageMetadata } from "@/lib/seo";
 import Container from "@/components/ui/Container";
-import SectionHeading from "@/components/ui/SectionHeading";
 import TestimonialCard from "@/components/cards/TestimonialCard";
 import CTASection from "@/components/sections/CTASection";
 import { testimonials } from "@/lib/data/testimonials";
-import ScrollReveal from "@/components/ui/ScrollReveal";
 import {
   AlertTriangle,
   Sparkles,
   Star,
   Users,
   Quote,
-  Heart,
   TrendingUp,
   Award,
-  MessageCircle,
   ArrowRight,
   CheckCircle2,
-  Crown
 } from "lucide-react";
 import Link from "next/link";
 import Badge from "@/components/ui/Badge";
@@ -29,6 +24,7 @@ import {
   getWebPageSchema,
   getBreadcrumbSchema,
 } from "@/lib/schema";
+import { Box, Paper, Typography } from "@mui/material";
 
 export const metadata: Metadata = generatePageMetadata(
   "Success Stories — Student Experiences with CollegeSure",
@@ -36,7 +32,6 @@ export const metadata: Metadata = generatePageMetadata(
   "/success-stories"
 );
 
-// Stats Data
 const stats = [
   { label: "Happy Students", value: "15,000+", icon: Users, color: "#159447" },
   { label: "Success Rate", value: "92%", icon: TrendingUp, color: "#147CC1" },
@@ -62,17 +57,16 @@ export default function SuccessStoriesPage() {
   ];
 
   return (
-    <div className="relative overflow-hidden bg-[#FDFDFD]">
+    <Box className="relative overflow-hidden bg-[#FDFDFD]">
       <JsonLd nodes={successGraphNodes} />
-      {/* Enhanced Hero Section */}
-      <div className="relative overflow-hidden py-12 sm:py-16 flex items-center bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084]">
-        {/* Animated Background */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
-          <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#159447]/20 blur-3xl animate-pulse" />
-          <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#B30F66]/20 blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#F7D51A]/10 blur-3xl animate-pulse" style={{ animationDelay: "2s" }} />
 
-          {/* Floating Quote Icons */}
+      {/* Enhanced Hero Section */}
+      <Box className="relative overflow-hidden py-12 sm:py-16 flex items-center bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084]">
+        <div className="absolute inset-0 pointer-events-none overflow-hidden select-none" aria-hidden>
+          <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#159447]/20 blur-3xl animate-ambient-slow" />
+          <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#B30F66]/20 blur-3xl animate-ambient-slow-reverse" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#F7D51A]/10 blur-3xl animate-ambient-center" />
+
           <div className="absolute top-20 left-10 text-white/5">
             <Quote size={80} />
           </div>
@@ -103,43 +97,36 @@ export default function SuccessStoriesPage() {
           </div>
         </Container>
 
-        {/* Decorative Shape */}
         <div
           className="absolute bottom-0 left-0 right-0 h-10 bg-[#F8FAFC]"
-          style={{
-            clipPath: "polygon(0 100%, 100% 100%, 100% 30%, 0 100%)",
-          }}
+          style={{ clipPath: "polygon(0 100%, 100% 100%, 100% 30%, 0 100%)" }}
           aria-hidden
         />
-      </div>
+      </Box>
 
       {/* Featured Testimonials Section */}
-      <div className="bg-[#F8FAFC] border-b border-[#E2E8F0] py-12">
+      <Box className="bg-[#F8FAFC] border-b border-[#E2E8F0] py-12">
         <Container>
-          <ScrollReveal direction="up">
-            <div className="text-center mb-10">
-              <Badge variant="teal" className="mb-3">Featured Stories</Badge>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#0B3C5D] mb-3">
-                What Our <span className="text-[#0D9488]">Students</span> Say
-              </h2>
-              <p className="text-[#475569] max-w-2xl mx-auto">
-                Real experiences from students and parents who found their perfect college with our guidance.
-              </p>
-            </div>
+          <div className="text-center mb-10">
+            <Badge variant="teal" className="mb-3">Featured Stories</Badge>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#0B3C5D] mb-3">
+              What Our <span className="text-[#0D9488]">Students</span> Say
+            </h2>
+            <p className="text-[#475569] max-w-2xl mx-auto">
+              Real experiences from students and parents who found their perfect college with our guidance.
+            </p>
+          </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {featuredTestimonials.map((testimonial, idx) => (
-                <ScrollReveal key={testimonial.id} delay={idx * 0.1} direction="up">
-                  <TestimonialCard testimonial={testimonial} />
-                </ScrollReveal>
-              ))}
-            </div>
-          </ScrollReveal>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {featuredTestimonials.map((testimonial) => (
+              <TestimonialCard key={testimonial.id} testimonial={testimonial} />
+            ))}
+          </div>
         </Container>
-      </div>
+      </Box>
 
       {/* Main Testimonials Grid */}
-      <div id="testimonials" className="bg-[#F8FAFC] section-py">
+      <Box id="testimonials" className="bg-[#F8FAFC] section-py">
         <Container>
           <div className="flex items-center justify-between mb-8">
             <div>
@@ -161,31 +148,27 @@ export default function SuccessStoriesPage() {
           </div>
 
           {/* Disclaimer */}
-          <ScrollReveal direction="up" className="mb-12">
-            <div className="bg-amber-50/80 backdrop-blur-sm border border-amber-200/60 rounded-2xl p-5 sm:p-6 flex items-start gap-3 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <div className="w-9 h-9 bg-amber-100 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5">
-                <AlertTriangle size={18} className="text-amber-600" />
-              </div>
-              <div>
-                <p className="text-sm text-amber-800 leading-relaxed">
-                  <span className="font-bold">Note:</span> The testimonials below are
-                  representative of student experiences. Individual outcomes may vary based on
-                  eligibility, college availability, and other factors. We do not fabricate
-                  testimonials or guaranteed outcomes.
-                </p>
-                <div className="flex items-center gap-1 mt-2">
-                  <CheckCircle2 size={14} className="text-amber-600" />
-                  <span className="text-xs text-amber-700 font-medium">100% Real Student Stories</span>
-                </div>
+          <Paper elevation={0} className="mb-12 bg-amber-50/80 backdrop-blur-sm border border-amber-200/60 rounded-2xl p-5 sm:p-6 flex items-start gap-3 shadow-sm hover:shadow-md transition-shadow duration-300">
+            <div className="w-9 h-9 bg-amber-100 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5">
+              <AlertTriangle size={18} className="text-amber-600" />
+            </div>
+            <div>
+              <p className="text-sm text-amber-800 leading-relaxed">
+                <span className="font-bold">Note:</span> The testimonials below are
+                representative of student experiences. Individual outcomes may vary based on
+                eligibility, college availability, and other factors. We do not fabricate
+                testimonials or guaranteed outcomes.
+              </p>
+              <div className="flex items-center gap-1 mt-2">
+                <CheckCircle2 size={14} className="text-amber-600" />
+                <span className="text-xs text-amber-700 font-medium">100% Real Student Stories</span>
               </div>
             </div>
-          </ScrollReveal>
+          </Paper>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {testimonials.map((testimonial, idx) => (
-              <ScrollReveal key={testimonial.id} delay={idx * 0.06} direction="up">
-                <TestimonialCard testimonial={testimonial} />
-              </ScrollReveal>
+            {testimonials.map((testimonial) => (
+              <TestimonialCard key={testimonial.id} testimonial={testimonial} />
             ))}
           </div>
 
@@ -207,33 +190,35 @@ export default function SuccessStoriesPage() {
             </div>
           )}
         </Container>
-      </div>
+      </Box>
 
       {/* Stats Section */}
-      <div className="bg-white border-y border-[#E2E8F0] py-8">
+      <Box className="bg-white border-y border-[#E2E8F0] py-8">
         <Container>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            {stats.map((stat, idx) => (
-              <ScrollReveal key={stat.label} delay={idx * 0.08} direction="up">
-                <div className="text-center p-4 rounded-2xl bg-[#F8FAFC] hover:bg-white hover:shadow-md hover:border-[#E2E8F0] transition-all duration-300 border border-transparent">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: `${stat.color}15` }}>
-                    <stat.icon size={20} style={{ color: stat.color }} />
-                  </div>
-                  <div className="text-2xl font-bold text-[#0B3C5D]">{stat.value}</div>
-                  <div className="text-xs text-[#94A3B8] font-medium">{stat.label}</div>
+            {stats.map((stat) => (
+              <Paper
+                key={stat.label}
+                elevation={0}
+                className="text-center p-4 rounded-2xl bg-[#F8FAFC] hover:bg-white hover:shadow-md transition-all duration-300 border border-[#E2E8F0] hover:-translate-y-1"
+              >
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3" style={{ backgroundColor: `${stat.color}15` }}>
+                  <stat.icon size={20} style={{ color: stat.color }} />
                 </div>
-              </ScrollReveal>
+                <div className="text-2xl font-bold text-[#0B3C5D]">{stat.value}</div>
+                <div className="text-xs text-[#94A3B8] font-medium">{stat.label}</div>
+              </Paper>
             ))}
           </div>
         </Container>
-      </div>
+      </Box>
 
-      {/* Enhanced CTA Section (No Buttons) */}
+      {/* CTA Section */}
       <CTASection
         title="Want to Share Your Experience?"
         description="If CollegeSure helped you with your college admission, we'd love to hear your story."
         showButtons={false}
       />
-    </div>
+    </Box>
   );
 }
