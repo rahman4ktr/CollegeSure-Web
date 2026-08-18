@@ -127,38 +127,49 @@ const universitiesRow2: UniversityItem[] = [
 ];
 
 export default function UniversityMarquee() {
-  const row1Duplicated = [...universitiesRow1, ...universitiesRow1, ...universitiesRow1];
-  const row2Duplicated = [...universitiesRow2, ...universitiesRow2, ...universitiesRow2];
-
   return (
     <Box
       component="section"
       className="relative py-14 sm:py-18 bg-gradient-to-b from-[#F8FAFC] via-white to-[#F8FAFC] border-y border-[#E2E8F0] overflow-hidden select-none"
+      style={{ contain: "paint" }}
     >
       <Container className="mb-8">
         <SectionHeading
           eyebrow="Partner Colleges"
-          title="Top Private & Deemed Universities We Work With"
+          title="Top Private &amp; Deemed Universities We Work With"
           description="We guide and assist students with admissions to top private and deemed universities across major educational hubs."
           align="center"
         />
       </Container>
 
+      {/* Gradient Vignette Edge Masks */}
       <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-36 bg-gradient-to-r from-[#F8FAFC] via-[#F8FAFC]/80 to-transparent z-10 pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-36 bg-gradient-to-l from-[#F8FAFC] via-[#F8FAFC]/80 to-transparent z-10 pointer-events-none" />
 
-      <div className="relative flex overflow-hidden mb-4 py-1">
-        <div className="animate-marquee flex items-center gap-4 sm:gap-6">
-          {row1Duplicated.map((uni, idx) => (
-            <MarqueeCard key={`r1-${uni.id}-${idx}`} uni={uni} />
+      {/* Row 1 — Forward Marquee */}
+      <div className="marquee-container relative flex overflow-hidden mb-4 py-1 w-full">
+        <div className="animate-marquee flex items-center justify-around gap-4 sm:gap-6 pr-4 sm:pr-6">
+          {universitiesRow1.map((uni, idx) => (
+            <MarqueeCard key={`r1-a-${uni.id}-${idx}`} uni={uni} />
+          ))}
+        </div>
+        <div className="animate-marquee flex items-center justify-around gap-4 sm:gap-6 pr-4 sm:pr-6" aria-hidden="true">
+          {universitiesRow1.map((uni, idx) => (
+            <MarqueeCard key={`r1-b-${uni.id}-${idx}`} uni={uni} />
           ))}
         </div>
       </div>
 
-      <div className="relative flex overflow-hidden py-1">
-        <div className="animate-marquee-reverse flex items-center gap-4 sm:gap-6">
-          {row2Duplicated.map((uni, idx) => (
-            <MarqueeCard key={`r2-${uni.id}-${idx}`} uni={uni} />
+      {/* Row 2 — Reverse Marquee */}
+      <div className="marquee-container relative flex overflow-hidden py-1 w-full">
+        <div className="animate-marquee-reverse flex items-center justify-around gap-4 sm:gap-6 pr-4 sm:pr-6">
+          {universitiesRow2.map((uni, idx) => (
+            <MarqueeCard key={`r2-a-${uni.id}-${idx}`} uni={uni} />
+          ))}
+        </div>
+        <div className="animate-marquee-reverse flex items-center justify-around gap-4 sm:gap-6 pr-4 sm:pr-6" aria-hidden="true">
+          {universitiesRow2.map((uni, idx) => (
+            <MarqueeCard key={`r2-b-${uni.id}-${idx}`} uni={uni} />
           ))}
         </div>
       </div>
@@ -170,10 +181,11 @@ function MarqueeCard({ uni }: { uni: UniversityItem }) {
   const [imgError, setImgError] = useState(false);
 
   return (
-    <Link href="/universities">
+    <Link href="/universities" tabIndex={-1}>
       <Paper
         elevation={0}
-        className="flex items-center gap-3.5 bg-white border border-[#E2E8F0] hover:border-[#04164B]/30 rounded-xl px-4 py-2.5 shadow-sm hover:shadow-md transition-all duration-300 flex-shrink-0 group cursor-pointer"
+        className="flex items-center gap-3.5 bg-white border border-[#E2E8F0] hover:border-[#04164B]/30 rounded-xl px-4 py-2.5 shadow-sm hover:shadow-md flex-shrink-0 group cursor-pointer"
+        style={{ willChange: "auto" }}
       >
         <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-lg overflow-hidden flex-shrink-0 border border-[#E2E8F0] bg-[#F8FAFC]">
           {uni.image && !imgError ? (

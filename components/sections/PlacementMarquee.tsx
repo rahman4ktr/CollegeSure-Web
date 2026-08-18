@@ -193,7 +193,7 @@ const recruitersRow3: RecruiterItem[] = [
       <svg viewBox="0 0 40 40" className="w-6 h-6">
         <rect width="40" height="40" rx="8" fill="#EA580C" />
         <text x="50%" y="58%" dominantBaseline="middle" textAnchor="middle" fill="#FFFFFF" fontWeight="900" fontSize="13" fontFamily="sans-serif">
-          L&T
+          L&amp;T
         </text>
       </svg>
     ),
@@ -255,47 +255,63 @@ const recruitersRow3: RecruiterItem[] = [
 ];
 
 export default function PlacementMarquee() {
-  const row1Items = [...recruitersRow1, ...recruitersRow1, ...recruitersRow1];
-  const row2Items = [...recruitersRow2, ...recruitersRow2, ...recruitersRow2];
-  const row3Items = [...recruitersRow3, ...recruitersRow3, ...recruitersRow3];
-
   return (
     <Box
       component="section"
       className="relative py-14 sm:py-18 bg-white border-b border-[#E2E8F0] overflow-hidden select-none"
+      style={{ contain: "paint" }}
     >
       <Container className="mb-8">
         <SectionHeading
-          eyebrow="Career & Placements"
-          title="Placement Assistance & Top Recruiters"
+          eyebrow="Career &amp; Placements"
+          title="Placement Assistance &amp; Top Recruiters"
           description="Our partner institutions feature top recruiters across Medical, Technical, Engineering, Healthcare, and Corporate sectors."
           align="center"
         />
       </Container>
 
+      {/* Gradient Vignette Edge Masks */}
       <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-36 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-36 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
 
-      <div className="relative flex overflow-hidden mb-4 py-1">
-        <div className="animate-marquee flex items-center gap-4 sm:gap-6">
-          {row1Items.map((item, idx) => (
-            <PlacementCard key={`p1-${item.id}-${idx}`} item={item} />
+      {/* Row 1 — Forward Marquee */}
+      <div className="marquee-container relative flex overflow-hidden mb-4 py-1 w-full">
+        <div className="animate-marquee flex items-center justify-around gap-4 sm:gap-6 pr-4 sm:pr-6">
+          {recruitersRow1.map((item, idx) => (
+            <PlacementCard key={`p1-a-${item.id}-${idx}`} item={item} />
+          ))}
+        </div>
+        <div className="animate-marquee flex items-center justify-around gap-4 sm:gap-6 pr-4 sm:pr-6" aria-hidden="true">
+          {recruitersRow1.map((item, idx) => (
+            <PlacementCard key={`p1-b-${item.id}-${idx}`} item={item} />
           ))}
         </div>
       </div>
 
-      <div className="relative flex overflow-hidden mb-4 py-1">
-        <div className="animate-marquee-reverse flex items-center gap-4 sm:gap-6">
-          {row2Items.map((item, idx) => (
-            <PlacementCard key={`p2-${item.id}-${idx}`} item={item} />
+      {/* Row 2 — Reverse Marquee */}
+      <div className="marquee-container relative flex overflow-hidden mb-4 py-1 w-full">
+        <div className="animate-marquee-reverse flex items-center justify-around gap-4 sm:gap-6 pr-4 sm:pr-6">
+          {recruitersRow2.map((item, idx) => (
+            <PlacementCard key={`p2-a-${item.id}-${idx}`} item={item} />
+          ))}
+        </div>
+        <div className="animate-marquee-reverse flex items-center justify-around gap-4 sm:gap-6 pr-4 sm:pr-6" aria-hidden="true">
+          {recruitersRow2.map((item, idx) => (
+            <PlacementCard key={`p2-b-${item.id}-${idx}`} item={item} />
           ))}
         </div>
       </div>
 
-      <div className="relative flex overflow-hidden py-1">
-        <div className="animate-marquee flex items-center gap-4 sm:gap-6">
-          {row3Items.map((item, idx) => (
-            <PlacementCard key={`p3-${item.id}-${idx}`} item={item} />
+      {/* Row 3 — Forward Marquee */}
+      <div className="marquee-container relative flex overflow-hidden py-1 w-full">
+        <div className="animate-marquee flex items-center justify-around gap-4 sm:gap-6 pr-4 sm:pr-6">
+          {recruitersRow3.map((item, idx) => (
+            <PlacementCard key={`p3-a-${item.id}-${idx}`} item={item} />
+          ))}
+        </div>
+        <div className="animate-marquee flex items-center justify-around gap-4 sm:gap-6 pr-4 sm:pr-6" aria-hidden="true">
+          {recruitersRow3.map((item, idx) => (
+            <PlacementCard key={`p3-b-${item.id}-${idx}`} item={item} />
           ))}
         </div>
       </div>
@@ -307,7 +323,8 @@ function PlacementCard({ item }: { item: RecruiterItem }) {
   return (
     <Paper
       elevation={0}
-      className="flex items-center gap-3.5 bg-white border border-[#E2E8F0] hover:border-[#0D9488]/30 rounded-xl px-4 py-2.5 shadow-sm hover:shadow-md transition-all duration-300 flex-shrink-0 group cursor-default"
+      className="flex items-center gap-3.5 bg-white border border-[#E2E8F0] hover:border-[#0D9488]/30 rounded-xl px-4 py-2.5 shadow-sm hover:shadow-md flex-shrink-0 group cursor-default"
+      style={{ willChange: "auto" }}
     >
       <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0 border border-[#E2E8F0] bg-[#F8FAFC]">
         {item.logoSvg}
