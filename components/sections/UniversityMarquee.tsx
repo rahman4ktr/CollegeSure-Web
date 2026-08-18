@@ -20,7 +20,7 @@ const universitiesRow1: UniversityItem[] = [
   {
     id: "christ-university",
     name: "Christ University",
-    image: "/images/universities/christ.webp",
+    image: "/images/universities/christ.jpg",
     logoColor: "#2563EB",
     logoBg: "#DBEAFE",
     logoSymbol: "CU",
@@ -28,7 +28,7 @@ const universitiesRow1: UniversityItem[] = [
   {
     id: "manipal-academy",
     name: "Manipal Academy",
-    image: "/images/universities/manipal.webp",
+    image: "/images/universities/manipal.jpg",
     logoColor: "#B30F66",
     logoBg: "#FEE8F5",
     logoSymbol: "MAHE",
@@ -36,7 +36,7 @@ const universitiesRow1: UniversityItem[] = [
   {
     id: "kiit-university",
     name: "KIIT University",
-    image: "/images/universities/christ.webp",
+    image: "/images/universities/kiit.jpg",
     logoColor: "#159447",
     logoBg: "#DCFCE7",
     logoSymbol: "KIIT",
@@ -44,7 +44,7 @@ const universitiesRow1: UniversityItem[] = [
   {
     id: "srm-institute",
     name: "SRM Institute",
-    image: "/images/universities/christ.webp",
+    image: "/images/universities/srm.jpg",
     logoColor: "#0284C7",
     logoBg: "#E0F2FE",
     logoSymbol: "SRM",
@@ -52,7 +52,7 @@ const universitiesRow1: UniversityItem[] = [
   {
     id: "chandigarh-univ",
     name: "Chandigarh University",
-    image: "/images/universities/manipal.webp",
+    image: "/images/universities/cu.jpg",
     logoColor: "#059669",
     logoBg: "#D1FAE5",
     logoSymbol: "CU",
@@ -60,7 +60,7 @@ const universitiesRow1: UniversityItem[] = [
   {
     id: "bits-pilani",
     name: "BITS Pilani",
-    image: "/images/universities/manipal.webp",
+    image: "/images/universities/iit.jpg",
     logoColor: "#DC2626",
     logoBg: "#FEE2E2",
     logoSymbol: "BITS",
@@ -68,7 +68,7 @@ const universitiesRow1: UniversityItem[] = [
   {
     id: "vit-vellore",
     name: "VIT Vellore",
-    image: "/images/universities/christ.webp",
+    image: "/images/universities/nit.jpg",
     logoColor: "#7C3AED",
     logoBg: "#EDE9FE",
     logoSymbol: "VIT",
@@ -79,7 +79,7 @@ const universitiesRow2: UniversityItem[] = [
   {
     id: "alliance-university",
     name: "Alliance University",
-    image: "/images/universities/christ.webp",
+    image: "/images/universities/alliance.jpg",
     logoColor: "#04164B",
     logoBg: "#E0F2FE",
     logoSymbol: "AU",
@@ -87,7 +87,7 @@ const universitiesRow2: UniversityItem[] = [
   {
     id: "lpu-punjab",
     name: "LPU Punjab",
-    image: "/images/universities/christ.webp",
+    image: "/images/universities/lpu.jpg",
     logoColor: "#EA580C",
     logoBg: "#FFEDD5",
     logoSymbol: "LPU",
@@ -95,7 +95,7 @@ const universitiesRow2: UniversityItem[] = [
   {
     id: "brainware-univ",
     name: "Brainware University",
-    image: "/images/universities/manipal.webp",
+    image: "/images/universities/brainware.jpg",
     logoColor: "#0D9488",
     logoBg: "#CCFBF1",
     logoSymbol: "BWU",
@@ -103,7 +103,7 @@ const universitiesRow2: UniversityItem[] = [
   {
     id: "symbiosis-pune",
     name: "Symbiosis Pune",
-    image: "/images/universities/manipal.webp",
+    image: "/images/universities/aiims.jpg",
     logoColor: "#D97706",
     logoBg: "#FEF3C7",
     logoSymbol: "SIU",
@@ -111,7 +111,7 @@ const universitiesRow2: UniversityItem[] = [
   {
     id: "amity-university",
     name: "Amity University",
-    image: "/images/universities/christ.webp",
+    image: "/images/universities/du.jpg",
     logoColor: "#16A34A",
     logoBg: "#DCFCE7",
     logoSymbol: "AMITY",
