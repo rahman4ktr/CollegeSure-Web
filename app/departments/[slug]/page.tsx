@@ -8,7 +8,6 @@ import JsonLd from "@/components/seo/JsonLd";
 import CTASection from "@/components/sections/CTASection";
 import CourseCard from "@/components/cards/CourseCard";
 import { getDepartmentBySlug, getAllDepartmentSlugs } from "@/lib/sanity/resolvers";
-import { getImageUrl } from "@/sanity/lib/image";
 import { getCollegeSureOrganizationSchema, getCollegeSureWebSiteSchema } from "@/lib/schema";
 import { SITE_URL } from "@/lib/seo";
 import { BookOpen, Users, GraduationCap, ArrowLeft } from "lucide-react";
@@ -50,7 +49,7 @@ export default async function DepartmentDetailPage({ params }: Props) {
 
   if (!dept) notFound();
 
-  const imgUrl = getImageUrl(dept.image, { width: 1200, height: 600 });
+  const imgUrl = null;
 
   const deptGraphNodes = [
     getCollegeSureOrganizationSchema(),
@@ -120,7 +119,7 @@ export default async function DepartmentDetailPage({ params }: Props) {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {dept.faculty.map((member) => {
-                  const facultyImg = getImageUrl(member.profileImage, { width: 300, height: 300 });
+                  const facultyImg = null;
                   return (
                     <div key={member._id} className="bg-white rounded-2xl p-6 border border-[#E2E8F0] shadow-sm flex items-center gap-4">
                       <div className="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0 bg-[#F1F5F9]">

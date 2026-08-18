@@ -6,7 +6,6 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import JsonLd from "@/components/seo/JsonLd";
 import { generatePageMetadata } from "@/lib/seo";
 import { getNews } from "@/lib/sanity/resolvers";
-import { getImageUrl } from "@/sanity/lib/image";
 import EmptyStatePage from "@/components/ui/EmptyStatePage";
 import {
   getCollegeSureOrganizationSchema,
@@ -88,7 +87,7 @@ export default async function NewsListingPage() {
           {newsItems.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {newsItems.map((item, idx) => {
-                const imgUrl = getImageUrl(item.featuredImage, { width: 600, height: 400 });
+                const imgUrl = null;
                 const formattedDate = item.publishedAt
                   ? new Date(item.publishedAt).toLocaleDateString("en-IN", {
                       year: "numeric",

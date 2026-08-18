@@ -7,14 +7,11 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import JsonLd from "@/components/seo/JsonLd";
 import CTASection from "@/components/sections/CTASection";
 import { getNewsBySlug, getAllNewsSlugs } from "@/lib/sanity/resolvers";
-import { getImageUrl } from "@/sanity/lib/image";
-import { getNewsArticleSchema } from "@/lib/schema-cms";
 import { getCollegeSureOrganizationSchema, getCollegeSureWebSiteSchema } from "@/lib/schema";
 import { SITE_URL } from "@/lib/seo";
 import { Calendar, User, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { PortableText } from "@portabletext/react";
 
 export const revalidate = 1800;
 
@@ -59,7 +56,7 @@ export default async function NewsDetailPage({ params }: Props) {
 
   if (!news) notFound();
 
-  const imgUrl = getImageUrl(news.featuredImage, { width: 1200, height: 630 });
+  const imgUrl = null;
   const formattedDate = news.publishedAt
     ? new Date(news.publishedAt).toLocaleDateString("en-IN", {
         year: "numeric",
@@ -143,7 +140,9 @@ export default async function NewsDetailPage({ params }: Props) {
 
               {news.content && (
                 <div className="prose prose-slate max-w-none text-[#475569] leading-relaxed">
-                  <PortableText value={news.content as any} />
+                  <p className="text-base text-[#475569] leading-relaxed whitespace-pre-line">
+                    {typeof news.content === "string" ? news.content : JSON.stringify(news.content)}
+                  </p>
                 </div>
               )}
 
