@@ -185,7 +185,7 @@ export default function CounsellingModal({
             borderRadius: { xs: "20px 20px 0 0", sm: "24px" },
             margin: { xs: "auto 0 0 0", sm: "auto" },
             width: { xs: "100%", sm: "calc(100% - 32px)" },
-            maxHeight: { xs: "90vh", sm: "88vh" },
+            maxHeight: { xs: "92vh", sm: "88vh" },
             overflow: "hidden",
             boxShadow: "0 25px 50px -12px rgba(4, 22, 75, 0.35)",
           },
@@ -209,7 +209,7 @@ export default function CounsellingModal({
           aria-label="Close modal"
           sx={{
             position: "absolute",
-            top: { xs: 10, sm: 14 },
+            top: { xs: 8, sm: 14 },
             right: { xs: 10, sm: 14 },
             zIndex: 40,
             color: "#475569",
@@ -237,8 +237,22 @@ export default function CounsellingModal({
         >
           {!isSubmitted ? (
             <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-full">
-              {/* ── LEFT SIDE — LIVE SUPPORT PANEL ─────────────────── */}
-              <div className="lg:col-span-5 bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084] p-5 sm:p-6 text-white relative overflow-hidden flex flex-col justify-between">
+              {/* ── MOBILE COMPACT HEADER (Visible on Mobile only) ───── */}
+              <div className="lg:hidden bg-gradient-to-r from-[#04164B] via-[#040943] to-[#591084] px-4 py-3 text-white flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                  </span>
+                  <span className="text-xs font-bold text-emerald-300">Counsellor Online &bull; Live</span>
+                </div>
+                <div className="flex items-center gap-2 pr-8 text-[11px] font-semibold text-white/80">
+                  <span>⚡ Instant Reply</span>
+                </div>
+              </div>
+
+              {/* ── LEFT SIDE — FULL LIVE SUPPORT PANEL (Desktop only) ───── */}
+              <div className="hidden lg:flex lg:col-span-5 bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084] p-6 text-white relative overflow-hidden flex-col justify-between">
                 {/* Ambient Glow Orbs */}
                 <div className="absolute top-0 right-0 w-40 h-40 bg-[#159447]/20 rounded-full blur-2xl pointer-events-none" />
                 <div className="absolute bottom-0 left-0 w-40 h-40 bg-[#B30F66]/20 rounded-full blur-2xl pointer-events-none" />
@@ -255,7 +269,7 @@ export default function CounsellingModal({
 
                   {/* Heading */}
                   <div>
-                    <Typography variant="h5" className="text-xl sm:text-2xl font-extrabold tracking-tight text-white">
+                    <Typography variant="h5" className="text-2xl font-extrabold tracking-tight text-white">
                       How can we help you?
                     </Typography>
                     <Typography variant="body2" className="text-xs text-white/80 mt-1.5 leading-relaxed font-medium">
@@ -307,20 +321,20 @@ export default function CounsellingModal({
                 </div>
               </div>
 
-              {/* ── RIGHT SIDE — MESSAGE FORM ───────────────────────── */}
-              <div className="lg:col-span-7 p-5 sm:p-6 bg-white flex flex-col justify-between">
+              {/* ── RIGHT SIDE — MESSAGE FORM (First on Mobile, Right on Desktop) ───── */}
+              <div className="lg:col-span-7 p-4 sm:p-6 bg-white flex flex-col justify-between">
                 <div>
-                  <div className="mb-4 pr-8">
+                  <div className="mb-3 pr-6">
                     <Typography variant="h6" className="text-lg sm:text-xl font-extrabold text-[#04164B]">
                       Send Us a Message
                     </Typography>
                     <Typography variant="body2" className="text-xs text-[#475569] mt-0.5 font-medium">
-                      Fill in the details below and we&apos;ll get back to you immediately.
+                      Fill in the details below and our counsellor will connect with you.
                     </Typography>
                   </div>
 
                   {/* Quick Interactive Chips */}
-                  <div className="mb-4">
+                  <div className="mb-3">
                     <Typography variant="caption" className="block text-[10px] font-extrabold uppercase tracking-wider text-[#94A3B8] mb-1.5">
                       Select Topic / Course:
                     </Typography>
@@ -336,7 +350,7 @@ export default function CounsellingModal({
                             color: "#fff",
                             fontWeight: 800,
                             fontSize: "11px",
-                            height: "28px",
+                            height: "26px",
                           }}
                         />
                       )}
@@ -351,7 +365,7 @@ export default function CounsellingModal({
                             color: interestedIn === chip ? "#fff" : "#04164B",
                             fontWeight: 800,
                             fontSize: "11px",
-                            height: "28px",
+                            height: "26px",
                             border: "1px solid",
                             borderColor: interestedIn === chip ? "#B30F66" : "#E2E8F0",
                             "&:hover": {
@@ -369,9 +383,9 @@ export default function CounsellingModal({
                     </Alert>
                   )}
 
-                  <form onSubmit={handleSubmit} className="space-y-3.5">
+                  <form onSubmit={handleSubmit} className="space-y-3">
                     {/* 2-Column Grid: Full Name & Phone */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
                         <label className="block text-[11px] font-extrabold uppercase tracking-wider text-[#04164B] mb-1">
                           Full Name <span className="text-red-500">*</span>
@@ -389,11 +403,11 @@ export default function CounsellingModal({
                           fullWidth
                           size="small"
                           slotProps={{
-                            htmlInput: { style: { fontSize: "12px", padding: "9px 12px" } },
+                            htmlInput: { style: { fontSize: "12px", padding: "8px 12px" } },
                           }}
                           sx={{
                             "& .MuiOutlinedInput-root": {
-                              borderRadius: "12px",
+                              borderRadius: "10px",
                               backgroundColor: "#F8FAFC",
                               "&:hover fieldset": { borderColor: "#B30F66" },
                               "&.Mui-focused fieldset": { borderColor: "#B30F66" },
@@ -418,7 +432,7 @@ export default function CounsellingModal({
                           fullWidth
                           size="small"
                           slotProps={{
-                            htmlInput: { style: { fontSize: "12px", padding: "9px 12px" } },
+                            htmlInput: { style: { fontSize: "12px", padding: "8px 12px" } },
                             input: {
                               startAdornment: (
                                 <span className="text-xs font-bold text-[#04164B] pr-1.5 flex items-center gap-1 select-none">
@@ -429,7 +443,7 @@ export default function CounsellingModal({
                           }}
                           sx={{
                             "& .MuiOutlinedInput-root": {
-                              borderRadius: "12px",
+                              borderRadius: "10px",
                               backgroundColor: "#F8FAFC",
                               "&:hover fieldset": { borderColor: "#B30F66" },
                               "&.Mui-focused fieldset": { borderColor: "#B30F66" },
@@ -440,7 +454,7 @@ export default function CounsellingModal({
                     </div>
 
                     {/* 2-Column Grid: Email & Interested In */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
                         <label className="block text-[11px] font-extrabold uppercase tracking-wider text-[#04164B] mb-1">
                           Email <span className="text-[10px] text-[#94A3B8] font-normal">(Optional)</span>
@@ -458,11 +472,11 @@ export default function CounsellingModal({
                           fullWidth
                           size="small"
                           slotProps={{
-                            htmlInput: { style: { fontSize: "12px", padding: "9px 12px" } },
+                            htmlInput: { style: { fontSize: "12px", padding: "8px 12px" } },
                           }}
                           sx={{
                             "& .MuiOutlinedInput-root": {
-                              borderRadius: "12px",
+                              borderRadius: "10px",
                               backgroundColor: "#F8FAFC",
                               "&:hover fieldset": { borderColor: "#B30F66" },
                               "&.Mui-focused fieldset": { borderColor: "#B30F66" },
@@ -482,11 +496,11 @@ export default function CounsellingModal({
                           fullWidth
                           size="small"
                           slotProps={{
-                            select: { style: { fontSize: "12px", fontWeight: 700, color: "#04164B", padding: "9px 12px" } },
+                            select: { style: { fontSize: "12px", fontWeight: 700, color: "#04164B", padding: "8px 12px" } },
                           }}
                           sx={{
                             "& .MuiOutlinedInput-root": {
-                              borderRadius: "12px",
+                              borderRadius: "10px",
                               backgroundColor: "#F8FAFC",
                               "&:hover fieldset": { borderColor: "#B30F66" },
                               "&.Mui-focused fieldset": { borderColor: "#B30F66" },
@@ -521,11 +535,11 @@ export default function CounsellingModal({
                         fullWidth
                         size="small"
                         slotProps={{
-                          htmlInput: { style: { fontSize: "12px", padding: "9px 12px" } },
+                          htmlInput: { style: { fontSize: "12px", padding: "8px 12px" } },
                         }}
                         sx={{
                           "& .MuiOutlinedInput-root": {
-                            borderRadius: "12px",
+                            borderRadius: "10px",
                             backgroundColor: "#F8FAFC",
                             "&:hover fieldset": { borderColor: "#B30F66" },
                             "&.Mui-focused fieldset": { borderColor: "#B30F66" },
@@ -543,8 +557,8 @@ export default function CounsellingModal({
                       sx={{
                         backgroundColor: "#B30F66",
                         "&:hover": { backgroundColor: "#591084" },
-                        borderRadius: "12px",
-                        py: 1.3,
+                        borderRadius: "10px",
+                        py: 1.2,
                         fontWeight: 800,
                         fontSize: "13px",
                         textTransform: "none",
@@ -566,7 +580,7 @@ export default function CounsellingModal({
                   </form>
                 </div>
 
-                <p className="text-center text-[10px] text-[#94A3B8] pt-3 font-medium flex items-center justify-center gap-1">
+                <p className="text-center text-[10px] text-[#94A3B8] pt-2 font-medium flex items-center justify-center gap-1">
                   <Lock size={12} className="text-emerald-600" />
                   <span>🔒 Your information is secure and confidential.</span>
                 </p>
