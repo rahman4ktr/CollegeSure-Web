@@ -185,7 +185,7 @@ export default function CounsellingModal({
             borderRadius: { xs: "20px 20px 0 0", sm: "24px" },
             margin: { xs: "auto 0 0 0", sm: "auto" },
             width: { xs: "100%", sm: "calc(100% - 32px)" },
-            maxHeight: { xs: "92vh", sm: "90vh" },
+            maxHeight: { xs: "90vh", sm: "88vh" },
             overflow: "hidden",
             boxShadow: "0 25px 50px -12px rgba(4, 22, 75, 0.35)",
           },
@@ -198,11 +198,11 @@ export default function CounsellingModal({
         },
       }}
     >
-      <Box className="relative flex flex-col h-full bg-white">
+      <Box className="relative flex flex-col h-full bg-white overflow-hidden">
         {/* Mobile Drag Pill */}
         <Box className="sm:hidden w-12 h-1 bg-[#E2E8F0] rounded-full mx-auto my-2 flex-shrink-0" />
 
-        {/* Close Button */}
+        {/* Floating Fixed Close Button */}
         <IconButton
           onClick={() => !isSubmitting && onClose()}
           disabled={isSubmitting}
@@ -211,9 +211,11 @@ export default function CounsellingModal({
             position: "absolute",
             top: { xs: 10, sm: 14 },
             right: { xs: 10, sm: 14 },
-            zIndex: 30,
+            zIndex: 40,
             color: "#475569",
-            backgroundColor: "rgba(248, 250, 252, 0.8)",
+            backgroundColor: "rgba(248, 250, 252, 0.9)",
+            backdropFilter: "blur(4px)",
+            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.08)",
             "&:hover": {
               backgroundColor: "#F1F5F9",
               color: "#04164B",
@@ -223,9 +225,18 @@ export default function CounsellingModal({
           <X size={18} />
         </IconButton>
 
-        <DialogContent sx={{ p: 0, display: "flex", flexDirection: "column", overflowY: "auto" }}>
+        <DialogContent
+          sx={{
+            p: 0,
+            display: "flex",
+            flexDirection: "column",
+            overflowY: "auto",
+            WebkitOverflowScrolling: "touch",
+            scrollBehavior: "smooth",
+          }}
+        >
           {!isSubmitted ? (
-            <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+            <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-full">
               {/* ── LEFT SIDE — LIVE SUPPORT PANEL ─────────────────── */}
               <div className="lg:col-span-5 bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084] p-5 sm:p-6 text-white relative overflow-hidden flex flex-col justify-between">
                 {/* Ambient Glow Orbs */}
@@ -299,7 +310,7 @@ export default function CounsellingModal({
               {/* ── RIGHT SIDE — MESSAGE FORM ───────────────────────── */}
               <div className="lg:col-span-7 p-5 sm:p-6 bg-white flex flex-col justify-between">
                 <div>
-                  <div className="mb-4">
+                  <div className="mb-4 pr-8">
                     <Typography variant="h6" className="text-lg sm:text-xl font-extrabold text-[#04164B]">
                       Send Us a Message
                     </Typography>
