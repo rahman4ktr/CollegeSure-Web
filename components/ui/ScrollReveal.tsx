@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import React, { useRef, useState, useEffect } from "react";
 import { ANIMATION_TIERS } from "@/lib/animations";
 
 interface ScrollRevealProps {
@@ -28,35 +27,6 @@ interface ScrollRevealProps {
   id?: string;
 }
 
-// Extracted initial/final position helpers (stable, no allocation per render)
-function getInitialPosition(direction: string, distance: number, scaleAmount: number, rotateAmount: number) {
-  const base = { opacity: 0 };
-  switch (direction) {
-    case "up": return { ...base, y: distance };
-    case "down": return { ...base, y: -distance };
-    case "left": return { ...base, x: distance };
-    case "right": return { ...base, x: -distance };
-    case "scale": return { ...base, scale: scaleAmount };
-    case "rotate": return { ...base, rotate: rotateAmount };
-    case "none": return { ...base };
-    default: return { ...base, y: distance };
-  }
-}
-
-function getFinalPosition(direction: string) {
-  const base = { opacity: 1 };
-  switch (direction) {
-    case "up":
-    case "down": return { ...base, y: 0 };
-    case "left":
-    case "right": return { ...base, x: 0 };
-    case "scale": return { ...base, scale: 1 };
-    case "rotate": return { ...base, rotate: 0 };
-    case "none": return { ...base };
-    default: return { ...base, y: 0 };
-  }
-}
-
 export default function ScrollReveal({
   children,
   className = "",
@@ -64,99 +34,96 @@ export default function ScrollReveal({
   direction = "up",
   distance = 30,
   duration = ANIMATION_TIERS.normal,
-  staggerChildren = 0,
-  staggerDirection = "forward",
   once = true,
-  amount = 0.2,
-  spring = false,
-  springConfig = { damping: 25, stiffness: 300, mass: 1 },
   disableMotion = false,
-  rootMargin = "-60px",
-  scale: scaleAmount = 1,
-  rotate: rotateAmount = 0,
-  blur: blurAmount = 0,
+  rootMargin = "-40px",
   id,
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
-  // If motion is disabled, render children directly (no hooks wasted)
-  if (disableMotion) {
-    return <div id={id} className={className}>{children}</div>;
-  }
-
-  // Spring variant — only used when spring=true (currently unused in codebase, but kept for API compat)
-  if (spring) {
-    return (
-      <motion.div
-        ref={ref}
-        id={id}
-        className={className}
-        initial={{
-          opacity: 0,
-          x: direction === "left" ? distance : direction === "right" ? -distance : 0,
-          y: direction === "up" ? distance : direction === "down" ? -distance : 0,
-          scale: direction === "scale" ? scaleAmount : 1,
-          rotate: direction === "rotate" ? rotateAmount : 0,
-          filter: blurAmount ? `blur(${blurAmount}px)` : 'none',
-        }}
-        whileInView={{
-          opacity: 1,
-          x: 0,
-          y: 0,
-          scale: 1,
-          rotate: 0,
-          filter: 'blur(0px)',
-        }}
-        viewport={{ once, amount: amount as any, margin: rootMargin as any }}
-        transition={{
-          type: "spring",
-          ...springConfig,
-          delay,
-        }}
-      >
-        {children}
-      </motion.div>
-    );
-  }
-
-  // Stagger variant
-  const hasStagger = staggerChildren > 0 && React.Children.count(children) > 1;
-
-  const staggerTransition = hasStagger ? (() => {
-    let staggerDirectionValue: number;
-    switch (staggerDirection) {
-      case "backward": staggerDirectionValue = -1; break;
-      case "random": staggerDirectionValue = 0; break;
-      default: staggerDirectionValue = 1; break;
+  useEffect(() => {
+    if (disableMotion || typeof window === "undefined") {
+      setIsVisible(true);
+      return;
     }
-    return { staggerChildren, staggerDirection: staggerDirectionValue };
-  })() : undefined;
 
-  const filterStyle = blurAmount ? { filter: `blur(${blurAmount}px)` } : undefined;
+    const element = ref.current;
+    if (!element) return;
+
+    // Check prefers-reduced-motion
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setIsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            if (once && element) {
+              observer.unobserve(element);
+              observer.disconnect();
+            }
+          } else if (!once) {
+            setIsVisible(false);
+          }
+        });
+      },
+      { rootMargin, threshold: 0.1 }
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [disableMotion, once, rootMargin]);
+
+  // Compute CSS transform styles
+  const getTransform = () => {
+    if (isVisible) return "translate3d(0, 0, 0) scale(1) rotate(0deg)";
+    switch (direction) {
+      case "up": return `translate3d(0, ${distance}px, 0)`;
+      case "down": return `translate3d(0, -${distance}px, 0)`;
+      case "left": return `translate3d(${distance}px, 0, 0)`;
+      case "right": return `translate3d(-${distance}px, 0, 0)`;
+      case "scale": return `translate3d(0, 0, 0) scale(0.95)`;
+      case "rotate": return `translate3d(0, 0, 0) rotate(5deg)`;
+      case "none": return "translate3d(0, 0, 0)";
+      default: return `translate3d(0, ${distance}px, 0)`;
+    }
+  };
 
   return (
-    <motion.div
+    <div
       ref={ref}
       id={id}
-      initial={getInitialPosition(direction, distance, scaleAmount, rotateAmount)}
-      whileInView={getFinalPosition(direction)}
-      viewport={{ once, amount: amount as any, margin: rootMargin as any }}
-      transition={{
-        duration,
-        ease: [0.22, 1, 0.36, 1],
-        delay,
-        ...staggerTransition,
-      }}
       className={className}
-      style={filterStyle}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: getTransform(),
+        transitionProperty: "opacity, transform",
+        transitionDuration: `${duration}s`,
+        transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
+        transitionDelay: `${delay}s`,
+        willChange: isVisible ? "auto" : "opacity, transform",
+      }}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 
-// Helper wrapper for stagger children
-interface StaggerContainerProps {
+// Stagger & Helper Components
+export function StaggerContainer({
+  children,
+  className = "",
+  delay = 0,
+  duration = 0.5,
+  once = true,
+}: {
   children: React.ReactNode;
   className?: string;
   staggerChildren?: number;
@@ -165,41 +132,12 @@ interface StaggerContainerProps {
   duration?: number;
   once?: boolean;
   amount?: number | "some" | "all";
-}
-
-export function StaggerContainer({
-  children,
-  className = "",
-  staggerChildren = 0.1,
-  staggerDirection = "forward",
-  delay = 0,
-  duration = 0.5,
-  once = true,
-  amount = 0.2,
-}: StaggerContainerProps) {
+}) {
   return (
-    <ScrollReveal
-      className={className}
-      staggerChildren={staggerChildren}
-      staggerDirection={staggerDirection}
-      delay={delay}
-      duration={duration}
-      once={once}
-      amount={amount}
-    >
+    <ScrollReveal className={className} delay={delay} duration={duration} once={once}>
       {children}
     </ScrollReveal>
   );
-}
-
-// Helper for individual items in a stagger
-interface StaggerItemProps {
-  children: React.ReactNode;
-  className?: string;
-  direction?: "up" | "down" | "left" | "right" | "none" | "scale" | "rotate";
-  distance?: number;
-  spring?: boolean;
-  springConfig?: { damping?: number; stiffness?: number; mass?: number };
 }
 
 export function StaggerItem({
@@ -207,99 +145,29 @@ export function StaggerItem({
   className = "",
   direction = "up",
   distance = 20,
-  spring = false,
-  springConfig = { damping: 25, stiffness: 300, mass: 1 },
-}: StaggerItemProps) {
+}: {
+  children: React.ReactNode;
+  className?: string;
+  direction?: "up" | "down" | "left" | "right" | "none" | "scale" | "rotate";
+  distance?: number;
+  spring?: boolean;
+  springConfig?: { damping?: number; stiffness?: number; mass?: number };
+}) {
   return (
-    <motion.div
-      className={className}
-      initial={{
-        opacity: 0,
-        y: direction === "up" ? distance : direction === "down" ? -distance : 0,
-        x: direction === "left" ? distance : direction === "right" ? -distance : 0,
-        scale: direction === "scale" ? 0.8 : 1,
-        rotate: direction === "rotate" ? 10 : 0,
-      }}
-      whileInView={{
-        opacity: 1,
-        y: 0,
-        x: 0,
-        scale: 1,
-        rotate: 0,
-      }}
-      viewport={{ once: true, margin: "-60px" as any }}
-      transition={{
-        ...(spring ? { type: "spring", ...springConfig } : { duration: 0.5, ease: [0.22, 1, 0.36, 1] }),
-      }}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-// Export a fade-in only variant
-export function FadeIn({
-  children,
-  className = "",
-  delay = 0,
-  duration = 0.5,
-  once = true,
-}: Omit<ScrollRevealProps, "direction" | "distance">) {
-  return (
-    <ScrollReveal
-      className={className}
-      direction="none"
-      delay={delay}
-      duration={duration}
-      once={once}
-    >
+    <ScrollReveal className={className} direction={direction} distance={distance} once>
       {children}
     </ScrollReveal>
   );
 }
 
-// Export a scale-in variant
-export function ScaleIn({
-  children,
-  className = "",
-  delay = 0,
-  duration = 0.5,
-  once = true,
-  scale = 0.8,
-}: Omit<ScrollRevealProps, "direction" | "distance" | "scale"> & { scale?: number }) {
-  return (
-    <ScrollReveal
-      className={className}
-      direction="scale"
-      scale={scale}
-      delay={delay}
-      duration={duration}
-      once={once}
-    >
-      {children}
-    </ScrollReveal>
-  );
+export function FadeIn(props: Omit<ScrollRevealProps, "direction" | "distance">) {
+  return <ScrollReveal {...props} direction="none" />;
 }
 
-// Export a rotate-in variant
-export function RotateIn({
-  children,
-  className = "",
-  delay = 0,
-  duration = 0.5,
-  once = true,
-  rotate = 10,
-}: Omit<ScrollRevealProps, "direction" | "distance" | "rotate"> & { rotate?: number }) {
-  return (
-    <ScrollReveal
-      className={className}
-      direction="rotate"
-      rotate={rotate}
-      delay={delay}
-      duration={duration}
-      once={once}
-    >
-      {children}
-    </ScrollReveal>
-  );
+export function ScaleIn(props: Omit<ScrollRevealProps, "direction" | "distance" | "scale"> & { scale?: number }) {
+  return <ScrollReveal {...props} direction="scale" />;
+}
+
+export function RotateIn(props: Omit<ScrollRevealProps, "direction" | "distance" | "rotate"> & { rotate?: number }) {
+  return <ScrollReveal {...props} direction="rotate" />;
 }

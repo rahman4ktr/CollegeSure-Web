@@ -39,15 +39,6 @@ export default function Navbar() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const navbarRef = useRef<HTMLElement>(null);
 
-  // 3D Tilt effect
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateX = useTransform(y, [-100, 100], [3, -3]);
-  const rotateY = useTransform(x, [-100, 100], [-3, 3]);
-  const springConfig = { damping: 25, stiffness: 300 };
-  const springRotateX = useSpring(rotateX, springConfig);
-  const springRotateY = useSpring(rotateY, springConfig);
-
   useEffect(() => {
     let prevScrolled = false;
     const handleScroll = () => {
