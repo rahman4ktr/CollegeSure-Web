@@ -70,15 +70,15 @@ export interface NavLink {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// CMS Content Types — Used with Sanity data
+// Content Types — Local Static Data
 // ═══════════════════════════════════════════════════════════════════════════
 
-export interface SanitySlug {
+export interface CMSSlug {
   _type: 'slug';
   current: string;
 }
 
-export interface SanityImage {
+export interface CMSImage {
   _type: 'image';
   asset: {
     _ref: string;
@@ -97,10 +97,10 @@ export interface SanityImage {
 export interface News {
   _id: string;
   title: string;
-  slug: SanitySlug;
+  slug: CMSSlug;
   excerpt?: string;
   content?: unknown[]; // Portable Text blocks
-  featuredImage?: SanityImage;
+  featuredImage?: CMSImage;
   category?: string;
   publishedAt?: string;
   author?: string;
@@ -108,7 +108,7 @@ export interface News {
   seo?: {
     title?: string;
     description?: string;
-    ogImage?: SanityImage;
+    ogImage?: CMSImage;
   };
 }
 
@@ -128,7 +128,7 @@ export interface EventItem {
   _id: string;
   title: string;
   description?: string;
-  image?: SanityImage;
+  image?: CMSImage;
   date: string;
   startTime?: string;
   endTime?: string;
@@ -144,10 +144,10 @@ export interface FacultyMember {
   department?: {
     _id: string;
     name: string;
-    slug: SanitySlug;
+    slug: CMSSlug;
   };
   qualification?: string;
-  profileImage?: SanityImage;
+  profileImage?: CMSImage;
   bio?: string;
   email?: string;
   socialLinks?: Array<{
@@ -159,9 +159,9 @@ export interface FacultyMember {
 export interface Department {
   _id: string;
   name: string;
-  slug: SanitySlug;
+  slug: CMSSlug;
   description?: string;
-  image?: SanityImage;
+  image?: CMSImage;
   facultyCount?: number;
   courseCount?: number;
 }

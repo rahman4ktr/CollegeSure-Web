@@ -8,6 +8,7 @@ import type {
   FacultyMember,
   Department,
   DepartmentDetail,
+  SiteSettings,
 } from '@/lib/types';
 
 import { courses as staticCourses, getCourseBySlug as getStaticCourseBySlug } from '@/lib/data/courses';
@@ -118,6 +119,6 @@ export async function getAllDepartmentSlugs(): Promise<string[]> {
 
 // ── Site Settings ─────────────────────────────────────────────────────────
 
-export async function getSiteSettings(): Promise<null> {
+export async function getSiteSettings(): Promise<SiteSettings | null> {
   return null;
 }

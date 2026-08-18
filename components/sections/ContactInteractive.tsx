@@ -63,7 +63,7 @@ export default function ContactInteractive({
 
   return (
     <>
-      {/* ── 1. SANITY CMS ANNOUNCEMENT BANNER ───────────────────────────────── */}
+      {/* ── 1. ANNOUNCEMENT BANNER ──────────────────────────────────────────── */}
       {banner?.enabled && (
         <div className="bg-gradient-to-r from-[#04164B] via-[#591084] to-[#B30F66] text-white py-3 px-4 shadow-md">
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left text-xs font-semibold">
