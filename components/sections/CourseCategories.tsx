@@ -169,6 +169,7 @@ export default function CourseCategories() {
                       <Link
                         href={cat.href}
                         className={`w-full flex items-center justify-center gap-2 py-3 text-xs font-extrabold rounded-xl shadow-md transition-all duration-200 ${cat.cta}`}
+                        aria-label={`Explore ${cat.label} courses`}
                       >
                         <span>Explore Courses</span>
                         <ArrowRight size={14} />

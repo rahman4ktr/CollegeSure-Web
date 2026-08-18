@@ -228,20 +228,24 @@ export default function Testimonials() {
               <ChevronLeft size={20} className="text-[#0B3C5D]" />
             </IconButton>
 
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1">
               {Array.from({ length: totalPages }).map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => setCurrentPage(idx)}
-                  className={`
-                    w-2.5 h-2.5 rounded-full transition-all duration-300
-                    ${currentPage === idx
-                      ? 'bg-[#0D9488] w-8'
-                      : 'bg-[#E2E8F0] hover:bg-[#94A3B8]'
-                    }
-                  `}
+                  className="min-w-[44px] min-h-[44px] inline-flex items-center justify-center p-2 cursor-pointer border-none bg-transparent"
                   aria-label={`Go to testimonial page ${idx + 1}`}
-                />
+                >
+                  <span
+                    className={`
+                      block h-2.5 rounded-full transition-all duration-300
+                      ${currentPage === idx
+                        ? 'bg-[#0D9488] w-8'
+                        : 'bg-[#E2E8F0] hover:bg-[#94A3B8] w-2.5'
+                      }
+                    `}
+                  />
+                </button>
               ))}
             </div>
 

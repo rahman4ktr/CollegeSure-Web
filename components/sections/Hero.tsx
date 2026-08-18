@@ -1,18 +1,8 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import {
   Box,
-  Container,
-  Grid,
-  Typography,
-  Chip,
-  Avatar,
   Paper,
-  Stack,
-  Button as MuiButton,
 } from "@mui/material";
 import {
   ArrowRight,
@@ -192,6 +182,7 @@ export default function Hero() {
                   height={920}
                   priority
                   fetchPriority="high"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="h-[440px] w-full object-cover object-top sm:h-[500px] lg:h-[540px] transition-transform duration-700 hover:scale-103"
                 />
               </div>
