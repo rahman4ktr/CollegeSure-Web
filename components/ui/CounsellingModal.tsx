@@ -62,8 +62,14 @@ export default function CounsellingModal({
 
   // Update defaultTopic when modal opens
   useEffect(() => {
-    if (defaultTopic) {
+    if (defaultTopic && isOpen) {
       setInterestedIn(defaultTopic);
+      setMessage((prev) => {
+        if (!prev || prev.startsWith("I am interested in admission guidance for") || prev.startsWith("I need assistance regarding")) {
+          return `I am interested in admission guidance for ${defaultTopic}.`;
+        }
+        return prev;
+      });
     }
   }, [defaultTopic, isOpen]);
 
@@ -291,9 +297,18 @@ export default function CounsellingModal({
                       {/* Quick Interactive Chips */}
                       <div className="mb-3">
                         <label className="block text-[10px] font-extrabold uppercase tracking-wider text-[#94A3B8] mb-1">
-                          Select Topic:
+                          Select Topic / Course:
                         </label>
                         <div className="flex flex-wrap gap-1">
+                          {interestedIn && !topicChips.includes(interestedIn) && (
+                            <button
+                              type="button"
+                              onClick={() => handleChipSelect(interestedIn)}
+                              className="text-[10px] font-extrabold px-2.5 py-1 rounded-lg border bg-[#B30F66] text-white border-[#B30F66] shadow-xs cursor-pointer"
+                            >
+                              🎯 {interestedIn}
+                            </button>
+                          )}
                           {topicChips.map((chip) => (
                             <button
                               type="button"
@@ -420,13 +435,16 @@ export default function CounsellingModal({
                           {/* Interested In Dropdown */}
                           <div>
                             <label className="block text-[11px] font-extrabold uppercase tracking-wider text-[#04164B] mb-0.5">
-                              Interested In <span className="text-red-500">*</span>
+                              Interested In / Course <span className="text-red-500">*</span>
                             </label>
                             <select
                               value={interestedIn}
                               onChange={(e) => setInterestedIn(e.target.value)}
                               className="w-full px-3 py-2 rounded-xl border border-[#E2E8F0] focus:border-[#B30F66] focus:ring-2 focus:ring-[#B30F66]/15 bg-[#F8FAFC]/50 text-xs outline-none font-semibold text-[#04164B]"
                             >
+                              {interestedIn && !["Course Information", "Admission Help", "Career Guidance", "Fees & Scholarships", "Placement Info", "Other"].includes(interestedIn) && (
+                                <option value={interestedIn}>🎯 {interestedIn}</option>
+                              )}
                               <option value="Course Information">Course Information</option>
                               <option value="Admission Help">Admission Help</option>
                               <option value="Career Guidance">Career Guidance</option>

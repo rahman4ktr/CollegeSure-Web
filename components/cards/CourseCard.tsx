@@ -7,6 +7,8 @@ import Badge from "@/components/ui/Badge";
 import Card3DTilt from "@/components/ui/Card3DTilt";
 import { motion } from "framer-motion";
 
+import { useCounsellingModal } from "@/components/providers/CounsellingModalProvider";
+
 interface CourseCardProps {
   course: Course;
   compact?: boolean;
@@ -25,6 +27,8 @@ const categoryGlow: Record<Course["category"], string> = {
 };
 
 export default function CourseCard({ course, compact = false }: CourseCardProps) {
+  const { openModal } = useCounsellingModal();
+
   return (
     <Card3DTilt glowColor={categoryGlow[course.category]} borderGlow={false} maxTilt={4} scaleOnHover={1.01} liftOnHover={-3} className="h-full">
       <article className="card-base group flex flex-col h-full overflow-hidden bg-white border border-[#E2E8F0] rounded-2xl transition-all duration-300">
@@ -91,13 +95,14 @@ export default function CourseCard({ course, compact = false }: CourseCardProps)
             </motion.div>
 
             <motion.div className="flex-1" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
-              <Link
-                href={`/contact?course=${encodeURIComponent(course.name)}`}
-                className="w-full flex items-center justify-center py-2 text-sm font-semibold bg-[#B30F66] text-white rounded-xl hover:bg-[#591084] transition-colors duration-200 shadow-sm"
+              <button
+                type="button"
+                onClick={() => openModal(course.name)}
+                className="w-full flex items-center justify-center py-2 text-sm font-semibold bg-[#B30F66] text-white rounded-xl hover:bg-[#591084] transition-colors duration-200 shadow-sm cursor-pointer"
                 aria-label={`Enquire about ${course.name}`}
               >
                 Enquire Now
-              </Link>
+              </button>
             </motion.div>
           </div>
         </div>

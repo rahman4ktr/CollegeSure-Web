@@ -1,10 +1,11 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from "next";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/seo";
+import { getNews } from "@/lib/sanity/resolvers";
 
 export async function GET() {
   const date = new Date().toUTCString();
 
-  const items = [
+  const staticItems = [
     {
       title: "Medical & Paramedical Admissions Guidance 2026",
       link: `${SITE_URL}/courses/medical`,
@@ -48,6 +49,16 @@ export async function GET() {
       pubDate: date,
     },
   ];
+
+  const news = await getNews();
+  const newsItems = news.map((item) => ({
+    title: item.title,
+    link: `${SITE_URL}/news/${item.slug?.current || item._id}`,
+    description: item.excerpt || item.title,
+    pubDate: item.publishedAt ? new Date(item.publishedAt).toUTCString() : date,
+  }));
+
+  const items = [...newsItems, ...staticItems];
 
   const rssItemsXml = items
     .map(

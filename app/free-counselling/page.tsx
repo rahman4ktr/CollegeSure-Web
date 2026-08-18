@@ -29,6 +29,7 @@ import {
   MessageSquare
 } from "lucide-react";
 
+import FeedbackSnackbar from "@/components/ui/FeedbackSnackbar";
 import JsonLd from "@/components/seo/JsonLd";
 import {
   getCollegeSureOrganizationSchema,
@@ -90,9 +91,12 @@ export default function FreeCounsellingPage() {
     formRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError(null);
     try {
       await submitCounsellingForm({
         fullName: formData.fullName,
@@ -105,10 +109,10 @@ export default function FreeCounsellingPage() {
       });
       setIsSubmitting(false);
       setIsSubmitted(true);
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
       setIsSubmitting(false);
-      setIsSubmitted(true);
+      setSubmitError(err.message || "Failed to submit enquiry. Please check your network and try again.");
     }
   };
 
@@ -833,6 +837,13 @@ export default function FreeCounsellingPage() {
           </span>
         </a>
       </div>
+
+      <FeedbackSnackbar
+        open={Boolean(submitError)}
+        message={submitError || ""}
+        severity="error"
+        onClose={() => setSubmitError(null)}
+      />
     </div>
   );
 }

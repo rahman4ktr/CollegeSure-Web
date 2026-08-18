@@ -68,3 +68,136 @@ export interface NavLink {
   label: string;
   href: string;
 }
+
+// ═══════════════════════════════════════════════════════════════════════════
+// CMS Content Types — Used with Sanity data
+// ═══════════════════════════════════════════════════════════════════════════
+
+export interface SanitySlug {
+  _type: 'slug';
+  current: string;
+}
+
+export interface SanityImage {
+  _type: 'image';
+  asset: {
+    _ref: string;
+    _type: 'reference';
+  };
+  alt?: string;
+  caption?: string;
+  hotspot?: {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  };
+}
+
+export interface News {
+  _id: string;
+  title: string;
+  slug: SanitySlug;
+  excerpt?: string;
+  content?: unknown[]; // Portable Text blocks
+  featuredImage?: SanityImage;
+  category?: string;
+  publishedAt?: string;
+  author?: string;
+  featured?: boolean;
+  seo?: {
+    title?: string;
+    description?: string;
+    ogImage?: SanityImage;
+  };
+}
+
+export interface Notice {
+  _id: string;
+  title: string;
+  description?: string;
+  documentUrl?: string;
+  documentName?: string;
+  category?: string;
+  publishedAt?: string;
+  important?: boolean;
+  expiryDate?: string;
+}
+
+export interface EventItem {
+  _id: string;
+  title: string;
+  description?: string;
+  image?: SanityImage;
+  date: string;
+  startTime?: string;
+  endTime?: string;
+  location?: string;
+  registrationLink?: string;
+  featured?: boolean;
+}
+
+export interface FacultyMember {
+  _id: string;
+  name: string;
+  designation?: string;
+  department?: {
+    _id: string;
+    name: string;
+    slug: SanitySlug;
+  };
+  qualification?: string;
+  profileImage?: SanityImage;
+  bio?: string;
+  email?: string;
+  socialLinks?: Array<{
+    platform: string;
+    url: string;
+  }>;
+}
+
+export interface Department {
+  _id: string;
+  name: string;
+  slug: SanitySlug;
+  description?: string;
+  image?: SanityImage;
+  facultyCount?: number;
+  courseCount?: number;
+}
+
+export interface DepartmentDetail extends Department {
+  faculty?: FacultyMember[];
+  courses?: Course[];
+}
+
+export interface GalleryAlbum {
+  _id: string;
+  title: string;
+  images?: Array<{
+    asset: unknown;
+    caption?: string;
+    alt?: string;
+  }>;
+  category?: string;
+  publishedAt?: string;
+}
+
+export interface SiteSettings {
+  _id: string;
+  contactEmail?: string;
+  contactPhone?: string;
+  whatsappNumber?: string;
+  address?: string;
+  socialLinks?: Array<{
+    platform: string;
+    url: string;
+  }>;
+  announcementBanner?: {
+    enabled: boolean;
+    text?: string;
+    link?: string;
+    variant?: 'info' | 'success' | 'warning' | 'important';
+  };
+}
+

@@ -4,7 +4,7 @@ import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import UniversityCard from "@/components/cards/UniversityCard";
 import CTASection from "@/components/sections/CTASection";
-import { universities } from "@/lib/data/universities";
+import { getUniversities } from "@/lib/sanity/resolvers";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import {
   Building2,
@@ -16,11 +16,8 @@ import {
   MapPin,
   Landmark,
   Building,
-  ChevronRight,
-  CheckCircle2,
-  GraduationCap,
   School,
-  Library
+  CheckCircle2,
 } from "lucide-react";
 import Link from "next/link";
 import Badge from "@/components/ui/Badge";
@@ -31,6 +28,8 @@ import {
   getWebPageSchema,
   getBreadcrumbSchema,
 } from "@/lib/schema";
+
+export const revalidate = 86400;
 
 export const metadata: Metadata = generatePageMetadata(
   "Colleges & Universities — CollegeSure Partner Institutions",
@@ -46,7 +45,8 @@ const stats = [
   { label: "Student Placements", value: "15,000+", icon: Users, color: "#B30F66" },
 ];
 
-export default function UniversitiesPage() {
+export default async function UniversitiesPage() {
+  const { data: universities } = await getUniversities();
   const featuredUniversities = universities.filter((u) => u.featured);
   const regularUniversities = universities.filter((u) => !u.featured);
 
@@ -56,7 +56,7 @@ export default function UniversitiesPage() {
     getWebPageSchema(
       "/universities",
       "Colleges & Universities — CollegeSure Partner Institutions",
-      "Browse colleges and universities that CollegeSure provides admissions guidance for. Government and private colleges across various cities.",
+      "Browse colleges and universities that CollegeSure provides admissions guidance for. Top private and deemed colleges across major education hubs.",
       "WebPage"
     ),
     getBreadcrumbSchema("/universities", [

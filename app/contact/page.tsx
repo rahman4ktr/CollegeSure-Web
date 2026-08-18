@@ -27,19 +27,25 @@ import {
   getWebPageSchema,
   getBreadcrumbSchema,
 } from "@/lib/schema";
+import { getSiteSettings } from "@/lib/sanity/resolvers";
+import ContactInteractive from "@/components/sections/ContactInteractive";
+import ContactFaqAccordion from "@/components/sections/ContactFaqAccordion";
+
+export const revalidate = 3600;
 
 export const metadata = {
   title: "Contact Us — CollegeSure by Brainzima",
   description: "Get in touch with CollegeSure counsellors by phone, WhatsApp, email, or visit our campus in Katihar, Bihar.",
 };
 
-// ─── Shared constants ────────────────────────────────────────────────────────
-const PHONE = "+91 79798 64304";
-const PHONE_HREF = "tel:+917979864304";
-const WA_HREF =
+// ─── Default Fallback Constants ─────────────────────────────────────────────
+const DEFAULT_PHONE = "+91 79798 64304";
+const DEFAULT_PHONE_HREF = "tel:+917979864304";
+const DEFAULT_WA_HREF =
   "https://wa.me/917979864304?text=Hello%20Brainzima%2C%20I%20would%20like%20to%20know%20more%20about%20your%20courses%20and%20admissions.";
-const EMAIL = "contact@brainzima.com";
-const EMAIL_HREF = "mailto:contact@brainzima.com";
+const DEFAULT_EMAIL = "contact@brainzima.com";
+const DEFAULT_EMAIL_HREF = "mailto:contact@brainzima.com";
+const DEFAULT_ADDRESS = "Anathalaya Rd, near Bachcha Hospital, Katihar, Bihar 854105";
 const MAPS_HREF =
   "https://www.google.com/maps/search/Brainzima+Innovation+Institute,+Anathalaya+Rd,+near+Bachcha+Hospital,+Katihar,+Bihar+854105";
 
@@ -104,7 +110,7 @@ function ContactCard({
           }}
         />
 
-        <div className="relative z-10">
+        <div className="relative z-10 flex flex-col h-full">
           {/* Icon */}
           <div className={`w-12 h-12 rounded-xl ${iconBg} flex items-center justify-center mb-4 transition-transform group-hover:scale-105`}>
             <span className={iconColor}>{icon}</span>
@@ -154,7 +160,18 @@ function ContactCard({
   );
 }
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const siteSettings = await getSiteSettings();
+
+  const phone = siteSettings?.contactPhone || DEFAULT_PHONE;
+  const phoneHref = siteSettings?.contactPhone ? `tel:${siteSettings.contactPhone.replace(/\s+/g, '')}` : DEFAULT_PHONE_HREF;
+  const email = siteSettings?.contactEmail || DEFAULT_EMAIL;
+  const emailHref = siteSettings?.contactEmail ? `mailto:${siteSettings.contactEmail}` : DEFAULT_EMAIL_HREF;
+  const address = siteSettings?.address || DEFAULT_ADDRESS;
+  const waHref = siteSettings?.whatsappNumber
+    ? `https://wa.me/${siteSettings.whatsappNumber}?text=Hello%20Brainzima%2C%20I%20would%20like%20to%20know%20more%20about%20your%20courses%20and%20admissions.`
+    : DEFAULT_WA_HREF;
+
   const contactGraphNodes = [
     getCollegeSureOrganizationSchema(),
     getCollegeSureWebSiteSchema(),
@@ -168,6 +185,16 @@ export default function ContactPage() {
   return (
     <div>
       <JsonLd nodes={contactGraphNodes} />
+      <ContactInteractive
+        siteSettings={siteSettings}
+        defaultPhone={DEFAULT_PHONE}
+        defaultPhoneHref={DEFAULT_PHONE_HREF}
+        defaultEmail={DEFAULT_EMAIL}
+        defaultEmailHref={DEFAULT_EMAIL_HREF}
+        defaultAddress={DEFAULT_ADDRESS}
+        defaultWaHref={DEFAULT_WA_HREF}
+        mapsHref={MAPS_HREF}
+      />
       {/* Enhanced Page Header */}
       <div className="relative overflow-hidden py-12 sm:py-16 flex items-center bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084]">
         {/* Animated Background */}
@@ -192,7 +219,7 @@ export default function ContactPage() {
               </span>
             </h1>
 
-            <p className="text-white/80 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+            <p className="text-white/80 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-medium">
               Have questions about college admissions, courses, or eligibility?
               Reach us by phone, WhatsApp, email, or visit our campus in Katihar, Bihar.
             </p>
@@ -241,7 +268,7 @@ export default function ContactPage() {
               iconColor="text-[#0B3C5D]"
               label="Visit Our Campus"
               description="Come meet us in person for a detailed counselling session."
-              detail="Anathalaya Rd, near Bachcha Hospital, Katihar, Bihar 854105"
+              detail={address}
               actions={[
                 {
                   label: "Get Directions",
@@ -261,19 +288,19 @@ export default function ContactPage() {
               iconColor="text-[#0D9488]"
               label="Call Us Directly"
               description="For admissions, course details, and immediate assistance."
-              detail={PHONE}
-              detailHref={PHONE_HREF}
+              detail={phone}
+              detailHref={phoneHref}
               actions={[
                 {
                   label: "Call Now",
-                  href: PHONE_HREF,
+                  href: phoneHref,
                   style:
                     "bg-[#0D9488] text-white hover:bg-[#0a7a6f] shadow-sm hover:shadow-md",
                   icon: <Phone size={13} />,
                 },
                 {
                   label: "WhatsApp",
-                  href: WA_HREF,
+                  href: waHref,
                   style:
                     "bg-[#25D366]/10 text-[#128C7E] border border-[#25D366]/30 hover:bg-[#25D366] hover:text-white hover:border-transparent",
                   external: true,
@@ -289,12 +316,12 @@ export default function ContactPage() {
               iconColor="text-[#F97316]"
               label="Send an Email"
               description="For detailed inquiries, partnerships, or franchise information."
-              detail={EMAIL}
-              detailHref={EMAIL_HREF}
+              detail={email}
+              detailHref={emailHref}
               actions={[
                 {
                   label: "Send Email",
-                  href: EMAIL_HREF,
+                  href: emailHref,
                   style:
                     "bg-[#F97316] text-white hover:bg-[#ea6c0c] shadow-sm hover:shadow-md",
                   icon: <Mail size={13} />,
@@ -313,7 +340,7 @@ export default function ContactPage() {
               actions={[
                 {
                   label: "Start Chat",
-                  href: WA_HREF,
+                  href: waHref,
                   style:
                     "bg-[#25D366] text-white hover:bg-[#1fb858] shadow-sm hover:shadow-md",
                   external: true,
@@ -357,10 +384,10 @@ export default function ContactPage() {
                     <div className="flex-1 min-w-0">
                       <p className="text-xs text-[#94A3B8] font-bold uppercase tracking-wider">Phone</p>
                       <a
-                        href={PHONE_HREF}
+                        href={phoneHref}
                         className="text-sm font-bold text-[#0F172A] hover:text-[#0D9488] transition-colors"
                       >
-                        {PHONE}
+                        {phone}
                       </a>
                     </div>
                   </div>
@@ -372,10 +399,10 @@ export default function ContactPage() {
                     <div className="flex-1 min-w-0">
                       <p className="text-xs text-[#94A3B8] font-bold uppercase tracking-wider">Email</p>
                       <a
-                        href={EMAIL_HREF}
+                        href={emailHref}
                         className="text-sm font-bold text-[#0F172A] hover:text-[#F97316] transition-colors"
                       >
-                        {EMAIL}
+                        {email}
                       </a>
                     </div>
                   </div>
@@ -451,6 +478,8 @@ export default function ContactPage() {
           </div>
         </Container>
       </div>
+
+      <ContactFaqAccordion />
     </div>
   );
 }

@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
-import SectionHeading from "@/components/ui/SectionHeading";
-import Container from "@/components/ui/Container";
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
+import SectionHeading from '@/components/ui/SectionHeading';
+import Container from '@/components/ui/Container';
 
 interface UniversityItem {
   id: string;
@@ -16,38 +16,6 @@ interface UniversityItem {
 }
 
 const universitiesRow1: UniversityItem[] = [
-  {
-    id: "iit-delhi",
-    name: "IIT Delhi",
-    image: "/images/universities/iit.webp",
-    logoColor: "#04164B",
-    logoBg: "#E0F2FE",
-    logoSymbol: "IITD",
-  },
-  {
-    id: "aiims-delhi",
-    name: "AIIMS New Delhi",
-    image: "/images/universities/aiims.webp",
-    logoColor: "#0D9488",
-    logoBg: "#CCFBF1",
-    logoSymbol: "AIIMS",
-  },
-  {
-    id: "du-delhi",
-    name: "University of Delhi",
-    image: "/images/universities/du.webp",
-    logoColor: "#591084",
-    logoBg: "#F3E8FF",
-    logoSymbol: "DU",
-  },
-  {
-    id: "nit-trichy",
-    name: "NIT Trichy",
-    image: "/images/universities/nit.webp",
-    logoColor: "#F97316",
-    logoBg: "#FFEDD5",
-    logoSymbol: "NITT",
-  },
   {
     id: "christ-university",
     name: "Christ University",
@@ -65,24 +33,13 @@ const universitiesRow1: UniversityItem[] = [
     logoSymbol: "MAHE",
   },
   {
-    id: "bits-pilani",
-    name: "BITS Pilani",
-    image: "/images/universities/iit.webp",
-    logoColor: "#DC2626",
-    logoBg: "#FEE2E2",
-    logoSymbol: "BITS",
+    id: "kiit-university",
+    name: "KIIT University",
+    image: "/images/universities/christ.webp",
+    logoColor: "#159447",
+    logoBg: "#DCFCE7",
+    logoSymbol: "KIIT",
   },
-  {
-    id: "vit-vellore",
-    name: "VIT Vellore",
-    image: "/images/universities/nit.webp",
-    logoColor: "#7C3AED",
-    logoBg: "#EDE9FE",
-    logoSymbol: "VIT",
-  },
-];
-
-const universitiesRow2: UniversityItem[] = [
   {
     id: "srm-institute",
     name: "SRM Institute",
@@ -100,44 +57,31 @@ const universitiesRow2: UniversityItem[] = [
     logoSymbol: "CU",
   },
   {
-    id: "symbiosis-pune",
-    name: "Symbiosis Pune",
-    image: "/images/universities/du.webp",
-    logoColor: "#D97706",
-    logoBg: "#FEF3C7",
-    logoSymbol: "SIU",
+    id: "bits-pilani",
+    name: "BITS Pilani",
+    image: "/images/universities/manipal.webp",
+    logoColor: "#DC2626",
+    logoBg: "#FEE2E2",
+    logoSymbol: "BITS",
   },
   {
-    id: "amity-university",
-    name: "Amity University",
-    image: "/images/universities/iit.webp",
-    logoColor: "#16A34A",
-    logoBg: "#DCFCE7",
-    logoSymbol: "AMITY",
+    id: "vit-vellore",
+    name: "VIT Vellore",
+    image: "/images/universities/christ.webp",
+    logoColor: "#7C3AED",
+    logoBg: "#EDE9FE",
+    logoSymbol: "VIT",
   },
+];
+
+const universitiesRow2: UniversityItem[] = [
   {
-    id: "bhu-varanasi",
-    name: "BHU Varanasi",
-    image: "/images/universities/aiims.webp",
-    logoColor: "#9333EA",
-    logoBg: "#F3E8FF",
-    logoSymbol: "BHU",
-  },
-  {
-    id: "jamia-millia",
-    name: "Jamia Millia Islamia",
-    image: "/images/universities/du.webp",
-    logoColor: "#15803D",
-    logoBg: "#DCFCE7",
-    logoSymbol: "JMI",
-  },
-  {
-    id: "jadavpur-univ",
-    name: "Jadavpur University",
-    image: "/images/universities/nit.webp",
-    logoColor: "#059669",
-    logoBg: "#D1FAE5",
-    logoSymbol: "JU",
+    id: "alliance-university",
+    name: "Alliance University",
+    image: "/images/universities/christ.webp",
+    logoColor: "#04164B",
+    logoBg: "#E0F2FE",
+    logoSymbol: "AU",
   },
   {
     id: "lpu-punjab",
@@ -147,10 +91,41 @@ const universitiesRow2: UniversityItem[] = [
     logoBg: "#FFEDD5",
     logoSymbol: "LPU",
   },
+  {
+    id: "brainware-univ",
+    name: "Brainware University",
+    image: "/images/universities/manipal.webp",
+    logoColor: "#0D9488",
+    logoBg: "#CCFBF1",
+    logoSymbol: "BWU",
+  },
+  {
+    id: "symbiosis-pune",
+    name: "Symbiosis Pune",
+    image: "/images/universities/manipal.webp",
+    logoColor: "#D97706",
+    logoBg: "#FEF3C7",
+    logoSymbol: "SIU",
+  },
+  {
+    id: "amity-university",
+    name: "Amity University",
+    image: "/images/universities/christ.webp",
+    logoColor: "#16A34A",
+    logoBg: "#DCFCE7",
+    logoSymbol: "AMITY",
+  },
+  {
+    id: "mit-adt",
+    name: "MIT ADT University",
+    image: "/images/universities/manipal.webp",
+    logoColor: "#9333EA",
+    logoBg: "#F3E8FF",
+    logoSymbol: "MIT",
+  },
 ];
 
 export default function UniversityMarquee() {
-  // Duplicate arrays to create continuous infinite scroll effect
   const row1Duplicated = [
     ...universitiesRow1,
     ...universitiesRow1,
@@ -168,8 +143,8 @@ export default function UniversityMarquee() {
       <Container className="mb-8">
         <SectionHeading
           eyebrow="Partner Colleges"
-          title="Colleges We Work With"
-          description="We help students gain admission to a range of government and private colleges across various cities."
+          title="Top Private & Deemed Universities We Work With"
+          description="We guide and assist students with admissions to top private and deemed universities across major educational hubs."
           align="center"
         />
       </Container>
@@ -207,7 +182,7 @@ function MarqueeCard({ uni }: { uni: UniversityItem }) {
       href="/universities"
       className="flex items-center gap-3.5 bg-white border border-[#E2E8F0] hover:border-[#04164B]/30 rounded-xl px-4 py-2.5 shadow-sm hover:shadow-md transition-all duration-300 flex-shrink-0 group cursor-pointer"
     >
-      {/* University Logo / Image */}
+      {/* University Logo / Symbol */}
       <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-lg overflow-hidden flex-shrink-0 border border-[#E2E8F0] bg-[#F8FAFC]">
         {uni.image && !imgError ? (
           <Image
@@ -228,7 +203,7 @@ function MarqueeCard({ uni }: { uni: UniversityItem }) {
         )}
       </div>
 
-      {/* University Name Only */}
+      {/* University Name */}
       <div className="flex flex-col justify-center">
         <span className="text-sm sm:text-base font-bold text-[#04164B] group-hover:text-[#B30F66] transition-colors whitespace-nowrap tracking-tight">
           {uni.name}

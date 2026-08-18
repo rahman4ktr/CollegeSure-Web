@@ -22,6 +22,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { submitCounsellingForm } from "@/lib/api";
 import Button from "@/components/ui/Button";
+import FeedbackSnackbar from "@/components/ui/FeedbackSnackbar";
 
 const courseOptions = [
   { value: "GNM Nursing", label: "GNM Nursing" },
@@ -516,6 +517,13 @@ export default function InquiryForm({
         By submitting, you agree to be contacted by CollegeSure regarding your
         college enquiry. We respect your privacy.
       </motion.p>
+
+      <FeedbackSnackbar
+        open={Boolean(submitError)}
+        message={submitError || ""}
+        severity="error"
+        onClose={() => setSubmitError(null)}
+      />
     </form>
   );
 }

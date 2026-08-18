@@ -1,9 +1,11 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/seo";
-import { getAllSlugs } from "@/lib/data/courses";
+import { getAllCourseSlugs, getAllNewsSlugs, getAllDepartmentSlugs } from "@/lib/sanity/resolvers";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const slugs = getAllSlugs();
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const courseSlugs = await getAllCourseSlugs();
+  const newsSlugs = await getAllNewsSlugs();
+  const deptSlugs = await getAllDepartmentSlugs();
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {
@@ -41,6 +43,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/news`,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 0.85,
+    },
+    {
+      url: `${SITE_URL}/notices`,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 0.85,
+    },
+    {
+      url: `${SITE_URL}/events`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/faculty`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/departments`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
     },
     {
       url: `${SITE_URL}/admission-process`,
@@ -86,12 +118,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const courseRoutes: MetadataRoute.Sitemap = slugs.map((slug) => ({
+  const courseRoutes: MetadataRoute.Sitemap = courseSlugs.map((slug) => ({
     url: `${SITE_URL}/courses/${slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly",
     priority: 0.8,
   }));
 
-  return [...staticRoutes, ...courseRoutes];
+  const newsRoutes: MetadataRoute.Sitemap = newsSlugs.map((slug) => ({
+    url: `${SITE_URL}/news/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly",
+    priority: 0.8,
+  }));
+
+  const deptRoutes: MetadataRoute.Sitemap = deptSlugs.map((slug) => ({
+    url: `${SITE_URL}/departments/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.75,
+  }));
+
+  return [...staticRoutes, ...courseRoutes, ...newsRoutes, ...deptRoutes];
 }

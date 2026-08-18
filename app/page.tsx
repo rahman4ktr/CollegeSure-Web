@@ -53,11 +53,11 @@ export default function HomePage() {
       {/* 5. Admission Process Timeline */}
       <AdmissionProcess />
 
-      {/* 6. Colleges We Work With - University Logo Marquee */}
-      <UniversityMarquee />
-
-      {/* 6b. Placement Assistance & Top Recruiters Marquee */}
+      {/* 6. Placement Assistance & Top Recruiters Marquee */}
       <PlacementMarquee />
+
+      {/* 6b. Colleges We Work With - University Logo Marquee */}
+      <UniversityMarquee />
 
       {/* 7. Why CollegeSure Comparison */}
       <WhyCollegeSure />

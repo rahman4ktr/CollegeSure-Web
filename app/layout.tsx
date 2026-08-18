@@ -15,6 +15,8 @@ import {
   getWebPageSchema,
 } from "@/lib/schema";
 
+import MuiProvider from "@/components/providers/MuiProvider";
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -53,14 +55,16 @@ export default function RootLayout({
         <JsonLd nodes={rootGraphNodes} />
       </head>
       <body className="min-h-full flex flex-col antialiased">
-        <SmoothScrollProvider>
-          <CounsellingModalProvider>
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
-            <WhatsAppButton />
-          </CounsellingModalProvider>
-        </SmoothScrollProvider>
+        <MuiProvider>
+          <SmoothScrollProvider>
+            <CounsellingModalProvider>
+              <Navbar />
+              <main className="flex-1">{children}</main>
+              <Footer />
+              <WhatsAppButton />
+            </CounsellingModalProvider>
+          </SmoothScrollProvider>
+        </MuiProvider>
         <Analytics />
       </body>
     </html>

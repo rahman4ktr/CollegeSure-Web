@@ -11,6 +11,7 @@ import {
   ArrowRight,
   CheckCircle,
   Star,
+  Award,
 } from "lucide-react";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -77,6 +78,16 @@ const trustItems: TrustItem[] = [
     bgColor: "bg-[#F36C21]/10 text-[#F36C21]",
     stats: "100% Support",
     features: ["Documentation", "Application help", "Follow-up guidance"],
+  },
+  {
+    icon: Award,
+    title: "Verified College Admissions",
+    description:
+      "Guaranteed admission assistance for government-approved colleges with direct seat allocation guidance.",
+    color: "text-[#591084]",
+    bgColor: "bg-[#591084]/10 text-[#591084]",
+    stats: "100% Verified",
+    features: ["Direct admission", "UGC & AICTE approved", "Post-admission help"],
   },
 ];
 

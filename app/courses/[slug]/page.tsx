@@ -23,7 +23,7 @@ import {
   Briefcase,
   School,
 } from "lucide-react";
-import { getCourseBySlug, getAllSlugs, getRelatedCourses } from "@/lib/data/courses";
+import { getCourseBySlug, getAllCourseSlugs, getCourses } from "@/lib/sanity/resolvers";
 import { SITE_URL } from "@/lib/seo";
 import JsonLd from "@/components/seo/JsonLd";
 import {
@@ -44,17 +44,20 @@ import CTASection from "@/components/sections/CTASection";
 import ScrollReveal, { StaggerContainer, StaggerItem } from "@/components/ui/ScrollReveal";
 import Card3DTilt from "@/components/ui/Card3DTilt";
 
+export const revalidate = 3600;
+
 interface Props {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
-  return getAllSlugs().map((slug) => ({ slug }));
+  const slugs = await getAllCourseSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const course = getCourseBySlug(slug);
+  const { data: course } = await getCourseBySlug(slug);
 
   if (!course) {
     return {
@@ -108,11 +111,12 @@ const categoryColors: Record<string, { bg: string; text: string; border: string;
 
 export default async function CourseDetailPage({ params }: Props) {
   const { slug } = await params;
-  const course = getCourseBySlug(slug);
+  const { data: course } = await getCourseBySlug(slug);
 
   if (!course) notFound();
 
-  const relatedCourses = getRelatedCourses(course.relatedSlugs);
+  const { data: allCourses } = await getCourses();
+  const relatedCourses = allCourses.filter((c) => course.relatedSlugs?.includes(c.slug));
   const colors = categoryColors[course.category] || categoryColors.graduation;
 
   const courseGraphNodes = [

@@ -1,6 +1,6 @@
 import Container from "@/components/ui/Container";
 import CTASection from "@/components/sections/CTASection";
-import { courses } from "@/lib/data/courses";
+import { getCourses } from "@/lib/sanity/resolvers";
 import {
   BookOpen,
   Award,
@@ -17,6 +17,8 @@ import {
   getBreadcrumbSchema,
 } from "@/lib/schema";
 
+export const revalidate = 3600;
+
 export const metadata = {
   title: "Explore Courses — CollegeSure by Brainzima",
   description: "Browse verified Medical, Engineering, Paramedical, and Graduation courses with expert admission guidance.",
@@ -29,7 +31,9 @@ const stats = [
   { label: "Success Rate", value: "92%", icon: Zap, color: "#B30F66" },
 ];
 
-export default function CoursesPage() {
+export default async function CoursesPage() {
+  const { data: courses } = await getCourses();
+
   const coursesGraphNodes = [
     getCollegeSureOrganizationSchema(),
     getCollegeSureWebSiteSchema(),
