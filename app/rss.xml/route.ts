@@ -38,7 +38,7 @@ export async function GET() {
       title: "Partner Universities & Colleges Directory",
       link: `${SITE_URL}/universities`,
       description:
-        "Browse top government and private colleges across Bihar, West Bengal, Karnataka, and major educational hubs.",
+        "Browse top private and deemed colleges across Bihar, West Bengal, Karnataka, and major educational hubs.",
       pubDate: date,
     },
     {
