@@ -26,7 +26,7 @@ import {
   getWebPageSchema,
   getBreadcrumbSchema,
 } from "@/lib/schema";
-import { getSiteSettings } from "@/lib/sanity/resolvers";
+import { getSiteSettings } from "@/lib/resolvers";
 import ContactInteractive from "@/components/sections/ContactInteractive";
 import ContactFaqAccordion from "@/components/sections/ContactFaqAccordion";
 
