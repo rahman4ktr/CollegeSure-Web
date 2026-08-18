@@ -1,3 +1,9 @@
+export const dynamic = 'force-dynamic';
+
+export const metadata = {
+  title: 'Sanity Studio — CollegeSure',
+};
+
 export default function StudioLayout({
   children,
 }: {
