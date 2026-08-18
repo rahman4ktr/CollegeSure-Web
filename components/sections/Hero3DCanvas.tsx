@@ -93,13 +93,17 @@ export default function Hero3DCanvas() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    let isMounted = true;
+    if (isMounted) setMounted(true);
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+      if (isMounted) setIsMobile(window.innerWidth < 768);
     };
     checkMobile();
     window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    return () => {
+      isMounted = false;
+      window.removeEventListener("resize", checkMobile);
+    };
   }, []);
 
   if (!mounted) {

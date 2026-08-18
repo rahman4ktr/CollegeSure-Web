@@ -400,25 +400,39 @@ export default function AboutPage() {
             })}
           </div>
 
-          {/* Featured CollegeSure Card */}
           {featuredVenture && (
-            <Paper elevation={0} className="bg-gradient-to-br from-[#04164B] via-[#040943] to-[#591084] text-white rounded-3xl p-8 sm:p-10 shadow-2xl relative overflow-hidden">
+            <Paper
+              elevation={0}
+              sx={{
+                background: "linear-gradient(135deg, #04164B 0%, #040943 50%, #591084 100%)",
+                color: "#FFFFFF",
+                borderRadius: "24px",
+                p: { xs: 4, sm: 5 },
+                boxShadow: "0 20px 40px rgba(4, 22, 75, 0.4)",
+                position: "relative",
+                overflow: "hidden",
+              }}
+            >
               <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 <div className="lg:col-span-8">
                   <Badge variant="teal" size="sm" className="mb-4">
                     {featuredVenture.category}
                   </Badge>
-                  <Typography variant="h4" className="text-2xl sm:text-3xl font-extrabold mb-2 text-white">
+                  <Typography variant="h4" sx={{ color: "#FFFFFF", fontSize: { xs: "1.5rem", sm: "1.875rem" }, fontWeight: 800, mb: 1 }}>
                     {featuredVenture.name}
                   </Typography>
-                  <Typography variant="body2" className="text-white/80 text-sm sm:text-base leading-relaxed mb-6">
+                  <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.85)", fontSize: { xs: "0.875rem", sm: "1rem" }, lineHeight: 1.6, mb: 3 }}>
                     {featuredVenture.description}
                   </Typography>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-white/15">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-white/20">
                     {featuredVenture.stats.map((st) => (
                       <div key={st.label}>
-                        <div className="text-xl font-bold text-white">{st.value}</div>
-                        <div className="text-xs text-white/70">{st.label}</div>
+                        <Typography sx={{ color: "#FFFFFF", fontSize: "1.25rem", fontWeight: 800 }}>
+                          {st.value}
+                        </Typography>
+                        <Typography sx={{ color: "rgba(255, 255, 255, 0.75)", fontSize: "0.75rem", fontWeight: 500 }}>
+                          {st.label}
+                        </Typography>
                       </div>
                     ))}
                   </div>

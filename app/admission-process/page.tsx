@@ -161,16 +161,27 @@ export default function AdmissionProcessPage() {
           </div>
 
           {/* Guarantee Banner */}
-          <Paper elevation={0} className="bg-gradient-to-r from-[#04164B] via-[#040943] to-[#591084] text-white p-8 rounded-3xl shadow-xl relative overflow-hidden">
+          <Paper
+            elevation={0}
+            sx={{
+              background: "linear-gradient(135deg, #04164B 0%, #040943 50%, #591084 100%)",
+              color: "#FFFFFF",
+              borderRadius: "24px",
+              p: 4,
+              boxShadow: "0 20px 40px rgba(4, 22, 75, 0.4)",
+              position: "relative",
+              overflow: "hidden",
+            }}
+          >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
               <div className="lg:col-span-8 space-y-2">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-xs font-bold text-emerald-300">
                   <ShieldCheck size={14} /> 100% Free Counselling Guarantee
                 </div>
-                <Typography variant="h5" className="text-xl sm:text-2xl font-extrabold text-white">
+                <Typography variant="h5" sx={{ color: "#FFFFFF", fontSize: { xs: "1.25rem", sm: "1.5rem" }, fontWeight: 800 }}>
                   No Hidden Charges. No Pressure Tactics.
                 </Typography>
-                <Typography variant="body2" className="text-xs sm:text-sm text-white/80 leading-relaxed max-w-xl">
+                <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.85)", fontSize: { xs: "0.75rem", sm: "0.875rem" }, lineHeight: 1.6, maxWidth: "36rem" }}>
                   We provide genuine advice matching your marks, budget, and goals — ensuring you make an informed decision for your career.
                 </Typography>
               </div>

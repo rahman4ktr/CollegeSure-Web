@@ -40,17 +40,23 @@ export default function Navbar() {
   const navbarRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    let isMounted = true;
     let prevScrolled = false;
     const handleScroll = () => {
       const isScrolled = window.scrollY > 20;
       if (isScrolled !== prevScrolled) {
         prevScrolled = isScrolled;
-        setScrolled(isScrolled);
+        if (isMounted) {
+          setScrolled(isScrolled);
+        }
       }
     };
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      isMounted = false;
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   useEffect(() => {

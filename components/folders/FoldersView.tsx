@@ -32,13 +32,18 @@ export default function FoldersView() {
   const [renameTarget, setRenameTarget] = useState<Folder | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<Folder | null>(null);
 
-  // Simulate initial load
   useEffect(() => {
+    let isMounted = true;
     const timer = setTimeout(() => {
-      setFolders(MOCK_FOLDERS);
-      setIsLoading(false);
+      if (isMounted) {
+        setFolders(MOCK_FOLDERS);
+        setIsLoading(false);
+      }
     }, 1200);
-    return () => clearTimeout(timer);
+    return () => {
+      isMounted = false;
+      clearTimeout(timer);
+    };
   }, []);
 
   // Filtered and sorted folders

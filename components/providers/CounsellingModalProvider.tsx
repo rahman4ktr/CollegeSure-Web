@@ -60,23 +60,21 @@ export function CounsellingModalProvider({ children }: { children: ReactNode }) 
   // Popup 4 -> 4 min 30 sec (270,000 ms)
   // Popup 5 -> 6 min (360,000 ms)
   useEffect(() => {
+    let isMounted = true;
     const popupSchedule = [30_000, 90_000, 180_000, 270_000, 360_000];
     const timers: NodeJS.Timeout[] = [];
 
     popupSchedule.forEach((delay) => {
       const timer = setTimeout(() => {
-        setIsOpen((prev) => {
-          if (prev) {
-            // If modal is already open, keep open without stacking/resetting
-            return true;
-          }
-          return true;
-        });
+        if (isMounted) {
+          setIsOpen(true);
+        }
       }, delay);
       timers.push(timer);
     });
 
     return () => {
+      isMounted = false;
       timers.forEach((t) => clearTimeout(t));
     };
   }, []);
