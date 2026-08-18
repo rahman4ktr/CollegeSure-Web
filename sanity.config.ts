@@ -9,7 +9,7 @@ import { apiVersion, dataset, projectId } from '@/sanity/env';
 export default defineConfig({
   name: 'collegesure-studio',
   title: 'CollegeSure CMS',
-  projectId: projectId || 'dummy_project_id',
+  projectId: projectId || 'dummy-project-id',
   dataset: dataset || 'production',
   plugins: [
     structureTool({
