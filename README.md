@@ -594,17 +594,7 @@ Areas of contribution:
 
 ## Related Platforms
 
-<<<<<<< HEAD
-| Platform                                          | Purpose                             |
-| --------------------------------------------------- | ------------------------------------ |
-| [CollegeSure](https://collegesure.brainzima.com/) | College & admission guidance        |
-| [Brainzima](https://www.brainzima.com/)           | Education & technology ecosystem    |
-| [Rexvel](https://rexvel.com/)                     | Digital solutions & web development |
-| Bifindr                                           | Digital tools & AI discovery        |
-| Trybook                                           | Exam preparation & testing          |
 
----
-=======
 | Platform | Purpose |
 |---|---|
 | [CollegeSure](https://collegesure.brainzima.com/) | College & admission guidance |
@@ -613,7 +603,6 @@ Areas of contribution:
 | [Bifindr](https://bifindr.com/) | Digital tools & AI discovery |
 | [Trybook](https://trybook.in/) | Exam preparation & testing |
 | [Ajit Dev](https://ajitdev.com/) | Developer portfolio & technology projects |
->>>>>>> ba319b5 (README.md make Better looking and SEO friendly)
 
 ## Our Vision
 
