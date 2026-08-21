@@ -655,8 +655,5 @@ Students and families should verify important information with the respective in
 
 ![Footer](https://capsule-render.vercel.app/api?type=waving&color=0:2563EB,100:0F172A&height=120&section=footer&animation=fadeIn)
 
-<<<<<<< HEAD
 </div>
-=======
 </div>
->>>>>>> ba319b5 (README.md make Better looking and SEO friendly)
